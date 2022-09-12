@@ -1,0 +1,8 @@
+null::sysinit:/etc/init.d/rcS
+null::respawn:/opt/rfpm/rfpm
+null::respawn:/opt/ip_rfp/ip_rfp
+null::respawn:/opt/wslay/wslay
+ttyS0::respawn:/sbin/getty -L 115200 ttyS0 vt102
+#ttyS0::askfirst:-/bin/sh
+null::restart:/sbin/init
+null::shutdown:/sbin/shutdown

@@ -1,0 +1,103 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+#
+# run basic test
+#
+
+if is_rfp4g; then
+##########################################################
+# PLATFORM RFP4G
+##########################################################
+# BOOT DEVICE
+    if grep "bi=usb" /proc/cmdline >/dev/null; then
+        bit_write "BOOTDEVICE:USB Stick"
+    elif grep "bi=image0" /proc/cmdline >/dev/null; then
+        bit_write "BOOTDEVICE:bootimage 0"
+    elif grep "bi=image1" /proc/cmdline >/dev/null; then
+        bit_write "BOOTDEVICE:bootimage 1"
+    elif grep "bi=image" /proc/cmdline >/dev/null; then
+        if ls -l /flash/boot/bootimage | grep bootimage0 >/dev/null; then
+            bit_write "BOOTDEVICE:bootimage 0 (via link)"
+        else
+            bit_write "BOOTDEVICE:bootimage 1 (via link)"
+        fi
+    elif grep "bi=dhcp" /proc/cmdline >/dev/null; then
+        bit_write "BOOTDEVICE:DHCP/TFTP"
+    else
+        bit_write "BOOTDEVICE:UNKNOWN-4G"
+    fi
+
+# WLAN MODULE
+    if rfp_has_wlan_module; then
+        bit_write "WLAN MODULE:FOUND"
+    else
+        bit_write "WLAN MODULE:NOT FOUND"
+    fi
+
+# RTC
+    if [ -e /sys/class/rtc/rtc0/date ]; then
+    
+    	# The date must be between 1. Januar 1970 and 19. Januar 2038
+    	# All other values are invalid
+    	# Values after 19. Januar 2038 result in 13 December 1901 caused by integer overflow of the 32-bit time variable
+    	# Make sure that invalid RTC values will be corrected  
+    
+    	year=`cat /sys/class/rtc/rtc0/date | cut -b 1-4`
+		if [[ $year -gt 2037 ]] || [[ $year -lt 2000 ]]; then
+   			date -s 2018.01.01-00:00
+			hwclock -w
+			print_console_always RTC has invalid time: Set time to 2018.01.01-00:00
+		fi
+		
+	    bit_write "RTC (Real Time Clock):OK (BOOTTIME: `date`)"
+    else
+        bit_write "RTC (Real Time Clock):FAILED"
+    fi 
+
+elif is_rfp43; then
+##########################################################
+# PLATFORM RFP43
+##########################################################
+
+# BOOT DEVICE
+    if grep "bi=usb" /proc/cmdline >/dev/null; then
+        bit_write "BOOTDEVICE:USB Stick"
+    elif grep "bi=ubi0" /proc/cmdline >/dev/null; then
+        bit_write "BOOTDEVICE:bootimage 0"
+    elif grep "bi=ubi1" /proc/cmdline >/dev/null; then
+        bit_write "BOOTDEVICE:bootimage 1"
+    elif grep "bi=ubi" /proc/cmdline >/dev/null; then
+        if ls -l /flash/boot/bootimage | grep bootimage0 >/dev/null; then
+            bit_write "BOOTDEVICE:bootimage 0 (via link)"
+        else
+            bit_write "BOOTDEVICE:bootimage 1 (via link)"
+        fi
+    elif grep "bi=dhcp" /proc/cmdline >/dev/null; then
+        bit_write "BOOTDEVICE:DHCP/TFTP"
+    else
+        bit_write "BOOTDEVICE:UNKNOWN"
+    fi
+
+# RTC
+    if [ -c /dev/rtc0 ]; then
+        bit_write "RTC (Real Time Clock):OK (BOOTTIME: `date`)"
+    else
+        bit_write "RTC (Real Time Clock):FAILED"
+    fi 
+
+# WLAN MODULE
+    if rfp_has_wlan_module; then
+        bit_write "WLAN MODULE:FOUND"
+    else
+        bit_write "WLAN MODULE:NOT FOUND"
+    fi
+    
+else
+##########################################################
+# PLATFORM RFP
+##########################################################
+    LAST_RESET=`cat /proc/avalanche/wdt_last_reset | sed -e 's/last reset cause: //g'`
+    bit_write "LAST RESET CAUSE:${LAST_RESET}"
+fi

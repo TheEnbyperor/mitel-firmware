@@ -1,0 +1,522 @@
+# shell functions
+#
+
+################################################################################
+# path of global interest
+export OM_TMP_DIR="/var/run"
+export OM_PID_DIR="/var/run"
+export OM_LIB_DIR="/var/lib"
+export OM_LOCK_DIR="/var/lock"
+export OM_LOG_DIR="/var/log"
+export OM_OPT_DIR="/var/opt"
+
+export SYSLOGD_TMP_DIR=/tmp
+
+export OM_BACKUP_DIR="/flash/backup"
+
+# WATCHDOG
+export OM_WDG_DISABLE_FILE=${OM_OPT_DIR}/watchdog/disable
+
+# WLAN
+HOSTAPD_CFG_FILE=${OM_TMP_DIR}/wlan/hostapd.conf
+HOSTAPD_ACL_FILE=${OM_TMP_DIR}/wlan/hostapd.access
+HOSTAPD_PID_FILE=${OM_TMP_DIR}/wlan/hostapd.pid
+WLAN_CFG_FILE=${OM_TMP_DIR}/wlan/wlan.conf
+WLAN_MESH_CFG_FILE=${OM_TMP_DIR}/wlan/mesh.conf
+
+# ENV
+export RCD_ENV_FILE="${OM_TMP_DIR}/env/rcD.env"
+export RCM_ENV_FILE="${OM_TMP_DIR}/env/rcM.env"
+export RCB_ENV_FILE="${OM_TMP_DIR}/env/rcB.env"
+export RFPM_CFG_FILE="${RCM_ENV_FILE}"
+export DHCP_ENV_FILE="${OM_TMP_DIR}/env/dhcpc.env"
+export OMCFG_ENV_FILE="${OM_TMP_DIR}/env/omcfg.env"
+export OMCFG_LAST_ENV_FILE=${OM_TMP_DIR}/env/omcfg_last.env
+
+# RFPM
+export RFPM_WORK_DIR="${OM_TMP_DIR}/rfpm/work"
+export RFPM_FIFO_PATH="${OM_TMP_DIR}/rfpm/rfpmFifo"
+export RFPM_NET_CFG_FILE=${RFPM_WORK_DIR}/net.cfg
+export RFPM_APP_CFG_FILE=${RFPM_WORK_DIR}/app.cfg
+export RFPM_NETWORK_CONFIG_FILE=${OM_OPT_DIR}/rfpm/local_net.cfg
+export RFPM_NETWORK_CONFIG_FILE_USB="/media/usbStick/local_net.cfg"
+export RFPM_VLAN_CONFIG_FILE="${RFPM_WORK_DIR}/local_vlan.cfg" # New file containing VLAN ID in SDC
+export RFPM_APPL_CONFIG_FILE=${OM_OPT_DIR}/rfpm/local_app.cfg
+export RFPM_APPL_CONFIG_FILE_USB="/media/usbStick/local_app.cfg"
+export RFPM_WORK_DIR_OMM_CONF="${RFPM_WORK_DIR}/omm_conf.txt"
+
+# OMM
+export OMM_CONFIG_FILE="${OM_OPT_DIR}/omm/omm_conf.txt"
+
+# IP RFP
+export IP_RFP_FIFO_PATH="${OM_TMP_DIR}/ip_rfp/rfpFifo"
+
+# misc
+export BANNER_FILE="${OM_TMP_DIR}/ip_rfp/banner.txt"
+export BIT_FILE="${OM_TMP_DIR}/bit/bit.txt"
+export BIT_DEFERRED_FILE="${OM_TMP_DIR}/bit/bit-deferred.txt"
+
+# syslogd
+export SYSLOGD_PRIO=50
+export SYSLOGD_VAR_DIR=/var/lib/syslogd
+export SYSLOGD_CONF=${SYSLOGD_VAR_DIR}/syslogd.conf
+export SYSLOGD_OMM_CONF=${SYSLOGD_VAR_DIR}/syslogd-omm.conf
+export SYSLOGD_PARAMS_FILE=${SYSLOGD_TMP_DIR}/syslogd.params
+export SYSLOGD_PID_FILE=${SYSLOGD_TMP_DIR}/syslogd.pid
+
+# SNTPC
+SNTPC_PID_FILE=${OM_TMP_DIR}/sntpc/sntpc.pid
+
+# SSH
+export SSH_PARAMS_FILE=${OM_TMP_DIR}/ssh.params
+
+# pci
+export WLAN_PROC_PCI="/tmp/pci"
+
+# env
+export SAVE_ENV_FILE="/tmp/save.env"
+
+# dhcp
+export DHCP_CHECK_VLAN_USAGE_DONE=/tmp/dhcp_check_vlan_usage_done
+
+# verbosity
+export VERBOSE="NO" # set to YES to enable script level console output
+
+#set -v  # Print shell input lines as they are read.
+#set -x  # Print commands and their arguments as they are executed.
+
+################################################################################
+# functions
+################################################################################
+
+
+################################################################################
+# identify platform
+is_rfp4g () {
+    [ -h /proc/device-tree ]
+}
+
+is_stream_omm_scsip () {
+	[ -e /var/opt/stream_omm_scsip ]
+}
+
+is_rfp43 () {
+    [ ! -d /proc/avalanche ]
+}
+
+is_rfp () {
+   [ -d /proc/avalanche ]
+}
+
+################################################################################
+# local_db
+
+local_db_check () {
+
+   if [ ! -z "${1}" ]; then
+      
+      /sbin/local_db | grep "${1}=" > /dev/null 2>&1
+      if [ $? -eq 0 ]; then
+         /sbin/local_db | grep "${1}=" | awk -F= '{print $2}'
+         return 0
+      else
+         return 1
+      fi
+      
+   fi
+
+}
+
+################################################################################
+# bit
+
+bit_early_write () {
+
+   mkdir -p `dirname ${BIT_DEFERRED_FILE}`
+   echo "BIT ENTRY $@" >> ${BIT_DEFERRED_FILE}
+
+}
+
+bit_write () {
+
+    if [ -S ${RFPM_FIFO_PATH} ]; then
+       ipc "BIT ENTRY $@"
+    else
+       bit_early_write $@
+    fi 
+
+}
+
+################################################################################
+# printing
+
+log () {
+    echo `basename $0` "$@" >> /dev/console
+    logger -s -t `basename $0` -p user.info $@
+}
+
+print_console_always () {
+	echo `basename $0` "[$$]: ********** $@" >> /dev/console
+}
+
+print_console () {
+    if [ -n "$VERBOSE" -a "$VERBOSE" = "YES" ]; then
+       echo `basename $0` "[$$]: ********** $@" >> /dev/console
+    fi
+}
+
+verbose () {
+	if [ -n "$VERBOSE" -a "$VERBOSE" = "YES" ]; then
+	   logger -s -t `basename $0` -p user.info "[$$]: ********** $@"
+	fi
+}
+
+info () {
+	logger -s -t `basename $0` -p user.info $@
+}
+
+error () {
+	logger -s -t `basename $0` -p user.emerg $@
+}
+
+fatal () {
+	logger -s -t `basename $0` -p user.emerg $@
+	sleep 1
+	reboot
+	exit 0
+}
+
+################################################################################
+# processes
+
+fastcheckproc () {
+	if [ -f ${OM_PID_DIR}/${1}.pid ]; then
+		kill -SIGCONT `cat ${OM_PID_DIR}/${1}.pid` >/dev/null 2>&1
+	else
+		killall -SIGCONT $1 >/dev/null 2>&1
+	fi
+}
+
+checkproc () {
+	fastcheckproc $1
+	usleep 100000
+	fastcheckproc $1
+}
+
+stopproc () {
+	num=0
+	while [ $num -lt 10 ]; do
+		num=`expr $num + 1`
+		if [ $? -le 3 ]; then
+			killall $1 > /dev/null 2>&1
+		else
+			killall -9 $1 > /dev/null 2>&1
+		fi
+		fastcheckproc $1
+		if [ $? -eq 1 ]; then
+			break
+		fi
+		usleep 100000
+	done
+}
+
+make_sure_no_proc () {
+   rm -f ${OM_PID_DIR}/${1}.pid
+   stopproc $1
+   fastcheckproc $1
+   if [ $? -eq 0 ]; then 
+      fatal "${1} is still running and cannot be killed ... rebooting"
+   fi
+}
+
+################################################################################
+# check for wlan module
+
+rfp_has_wlan_module() {
+
+   if is_rfp4g; then
+	    if [ ! -f ${WLAN_PROC_PCI} ]; then
+	       cat /proc/bus/pci/devices > ${WLAN_PROC_PCI}
+	    fi
+#	    grep ath10k_pci ${WLAN_PROC_PCI} > /dev/null 2>&1
+	    grep 168c003c ${WLAN_PROC_PCI} > /dev/null 2>&1
+	    return $?
+	elif is_rfp43; then
+	    PCIDEVICES=`cat /proc/bus/pci/devices | wc -l`
+	    if [ $PCIDEVICES -eq 2 ]; then
+           return 0
+	    else
+           return 1
+	    fi
+	else
+	    if [ ! -f ${WLAN_PROC_PCI} ]; then
+	       cat /proc/pci > ${WLAN_PROC_PCI}
+	    fi
+	    grep 104c:9066 ${WLAN_PROC_PCI} > /dev/null 2>&1
+	    return $?
+	fi
+}
+
+################################################################################
+# interface 
+
+interface_report_mac () {
+	if [ ! -z $1 ]; then
+		ifconfig $1 | grep HWaddr | \
+			while read a b c d MAC; do echo $MAC; done
+	else
+		echo "00:00:00:00:00:00"
+	fi
+}
+
+# list all interfaces that start with pattern from $1
+interface_list () {
+    grep "^ *${1}" /proc/net/dev | sed -e 's:^[ \t]*\(.*\)\:\(.*\):\1:'
+}
+
+interface_list_all () {
+    grep ":" /proc/net/dev | sed -e 's:^[ \t]*\(.*\)\:\(.*\):\1:'
+}
+
+
+# remove all created interfaces
+interface_mrproper () {
+    
+    ifconfig eth0 0.0.0.0
+    ifconfig eth0 down
+    
+    # remove all vlan interfaces
+    for vlanif in `interface_list vlan`
+    do
+        ifconfig $vlanif 0.0.0.0
+        ifconfig $vlanif down
+        vconfig rem $vlanif
+    done
+    
+    for vlanif in `interface_list "eth0\."`
+    do
+        ifconfig $vlanif 0.0.0.0
+        ifconfig $vlanif down
+        vconfig rem $vlanif
+    done
+    
+    for brif in `interface_list br`
+    do
+        ifconfig $brif 0.0.0.0
+        ifconfig $brif down
+        brctl delbr $brif
+    done
+
+    save_env_set MASTERIF   "eth0"
+    save_env_set NATIVE_IF  "eth0" # Native interface required do bind ODIP (new SDC VLAN support)
+	save_env_set MASTERVLAN ""
+    save_env_set VLAN_IF    "eth0" # VLAN interface required for VLAN priorisation (802.1p)
+    
+    ifconfig eth0 up
+
+}
+
+# setup the interfaces we need
+interface_setup () {
+
+# turn on eth0
+    print_console "ifconfig eth0 up"
+    ifconfig eth0 0.0.0.0
+    ifconfig eth0 up
+
+if rfp_has_wlan_module && [ -x /sbin/brctl ]; then
+
+    IFNAME="br0"
+    NATIVE_IFNAME="br0"
+    VLAN_IFNAME="br0"
+	
+    if ! ifconfig ${IFNAME} > /dev/null 2>&1; then
+    
+        print_console "brctl addbr ${IFNAME}"
+        brctl addbr ${IFNAME}
+
+		print_console "brctl addif ${IFNAME} eth0"
+		brctl addif ${IFNAME} eth0
+        
+        print_console "brctl setfd ${IFNAME} 0"
+        brctl setfd ${IFNAME} 0
+        
+        print_console "brctl stp ${IFNAME} off"
+        brctl stp ${IFNAME} off
+        
+        print_console "ifconfig ${IFNAME} up"
+        ifconfig ${IFNAME} up
+    
+    fi
+    
+    if [ -n "$VLAN" -a "$VLAN" != "no" ]; then
+    
+        print_console "vconfig set_name_type DEV_PLUS_VID_NO_PAD"
+        vconfig set_name_type DEV_PLUS_VID_NO_PAD
+
+        IFVLAN="${IFNAME}.${VLAN}"
+        BRVLANNAME="brvlan${VLAN}"
+        
+        print_console "vconfig add ${IFNAME} ${VLAN}"
+        vconfig add ${IFNAME} ${VLAN}
+        
+        print_console "ifconfig ${IFVLAN} up"
+        ifconfig ${IFVLAN} up
+                    
+        print_console "brctl addbr ${BRVLANNAME}"
+        brctl addbr ${BRVLANNAME}
+        
+        print_console "brctl addif ${BRVLANNAME} ${IFVLAN}"
+        brctl addif ${BRVLANNAME} ${IFVLAN}
+        
+        print_console "brctl setfd ${BRVLANNAME} 0"
+        brctl setfd ${BRVLANNAME} 0
+        
+        print_console "brctl stp ${BRVLANNAME} off"
+        brctl stp ${BRVLANNAME} off
+        
+        print_console "ifconfig ${BRVLANNAME} up"
+        ifconfig ${BRVLANNAME} up
+        
+        IFNAME="${BRVLANNAME}"
+        VLAN_IFNAME="${IFVLAN}"
+              
+    fi
+
+    mkdir -p `dirname ${WLAN_CFG_FILE}`
+    echo "interface=${IFNAME}" >> ${WLAN_CFG_FILE}.tmp
+    mv ${WLAN_CFG_FILE}.tmp ${WLAN_CFG_FILE}
+    
+    val=`local_db_check 80211s`
+    if [ $? -eq 0 ] && [ -n ${val} ]; then
+        mkdir -p `dirname ${WLAN_MESH_CFG_FILE}`
+        echo ${val} > ${WLAN_MESH_CFG_FILE}
+    fi
+
+else
+
+    # no wlan module
+
+    IFNAME="eth0"
+    NATIVE_IFNAME="eth0"
+    VLAN_IFNAME="eth0"
+    
+    if [ -n "$VLAN" -a "$VLAN" != "no" ]; then
+        print_console "vconfig add ${IFNAME} ${VLAN}"
+        vconfig add eth0 ${VLAN}
+        
+        IFNAME="eth0.${VLAN}"
+        VLAN_IFNAME="eth0.${VLAN}"
+    fi
+    
+fi
+
+print_console "ifconfig ${IFNAME} up"
+ifconfig ${IFNAME} up
+
+save_env_set MASTERIF   "${IFNAME}"
+save_env_set MASTERVLAN "${VLAN}"
+save_env_set NATIVE_IF  "${NATIVE_IFNAME}" # Native interface required do bind ODIP (new SDC VLAN support)
+save_env_set VLAN_IF    "${VLAN_IFNAME}"   # VLAN interface required for VLAN priorisation (802.1p)
+}
+
+################################################################################
+# misc
+
+dhcpc_renew () {
+	killall -SIGUSR1 omcfg  > /dev/null 2>&1
+	killall -SIGUSR1 udhcpc > /dev/null 2>&1
+}
+
+report_diskusage () {
+	df -k | grep tmpfs | while read a b c d e; do echo $d; done
+}	
+
+freemem () {
+    free | grep Mem: | while read what total used free shared buffers; do echo $free; done
+}
+
+################################################################################
+# saving data
+
+save_env_set () {
+
+	if [ $# -eq 2 ]; then
+	    om_filelock ${SAVE_ENV_FILE} 1
+        grep -v "^${1}=" ${SAVE_ENV_FILE} >> ${SAVE_ENV_FILE}.tmp
+		echo ${1}=\"${2}\" >> ${SAVE_ENV_FILE}.tmp
+		mv ${SAVE_ENV_FILE}.tmp  ${SAVE_ENV_FILE}
+		om_filelock ${SAVE_ENV_FILE} 0
+	else
+		info "number of parameters != 2 ($#)"
+	fi
+	
+}
+
+save_env_get () {
+
+	if [ -f $SAVE_ENV_FILE ]; then
+	   om_filelock ${SAVE_ENV_FILE} 1
+       . $SAVE_ENV_FILE
+       om_filelock ${SAVE_ENV_FILE} 0
+	else
+		info "file $SAVE_ENV_FILE not found"
+	fi
+}
+
+################################################################################
+#
+# /proc/cmdline parsing for old rfp
+# example cmdline
+# root=/dev/ram rw ip=10.11.1.185:0.0.0.0:0.0.0.0:255.255.255.0::eth0:off panic=5 rfp_extra=:chksum=2FC37D72:vlan=123:
+#
+#
+
+cmdline_get_ipparams () {
+   cat /proc/cmdline | while read a b ipparams d; do echo $ipparams; done
+}
+
+cmdline_get_ipaddr () {
+   IPPARAMS=`cmdline_get_ipparams`
+   IPADDR=`echo $IPPARAMS | sed -ne 's/.*ip=\(.*\):.*:.*:.*:.*:.*:.*/\1/p'`
+   echo "$IPADDR"
+}
+
+cmdline_get_netmask () {
+   IPPARAMS=`cmdline_get_ipparams`
+   NETMASK=`echo $IPPARAMS | sed -ne 's/.*ip=.*:.*:.*:\(.*\):.*:.*:.*/\1/p'`
+   echo "$NETMASK"
+}
+
+cmdline_get_gateway () {
+   IPPARAMS=`cmdline_get_ipparams`
+   GWADDR=`echo $IPPARAMS | sed -ne 's/.*ip=.*:.*:\(.*\):.*:.*:.*:.*/\1/p'`
+   echo "$GWADDR"
+}
+
+cmdline_get_extra () {
+   cat /proc/cmdline | while read a b c d extra f; do echo $extra; done
+}
+
+cmdline_get_checksum () {
+   EXTRA=`cmdline_get_extra`
+   if [ -n "$EXTRA" ]; then
+      CHKSUM=`echo $EXTRA | sed -ne 's/.*:chksum=\(.*\):.*:/\1/p'`
+   fi
+   # this is how the 2.x.x booter used to report the checksum
+   if [ ! -n "$CHKSUM" ]; then
+      CHKSUM=`cat /proc/cmdline | sed 's/.*image_chksum=\(.*\)/\1/p'`
+   fi
+   echo "$CHKSUM"
+}
+
+cmdline_get_vlanid () {
+   EXTRA=`cmdline_get_extra`
+   if [ -n "$EXTRA" ]; then
+      VLANID=`echo $EXTRA | sed -ne 's/.*:vlan=\(.*\):/\1/p'`
+   else
+      VLANID="no"
+   fi
+   echo "$VLANID"
+}
+

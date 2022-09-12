@@ -1,0 +1,1687 @@
+
+// strings used in configuration commands: <key> = <value> [ <value> ]
+// KEY_xxx   key
+// VAL_xxx   value
+
+#define KEY_CONFIGURATION_NAME   "UD_ConfigurationName"   // <string>
+
+// message melody options
+#define KEY_MSG_MEL_NORMAL   "UD_MessageMelodyNormal"     // VAL_MELODY_xxx
+#define KEY_MSG_MEL_URG      "UD_MessageMelodyUrgent"     // VAL_MELODY_xxx
+#define KEY_MSG_MEL_SOS      "UD_MessageMelodyAlarm"      // VAL_MELODY_xxx
+
+// message volume options
+#define KEY_MSG_VOL_NORMAL   "UD_MessageVolumeNormal"     // VAL_VOLUME_xxx
+#define KEY_MSG_VOL_URG      "UD_MessageVolumeUrgent"     // VAL_VOLUME_xxx
+#define KEY_MSG_VOL_SOS      "UD_MessageVolumeAlarm"      // VAL_VOLUME_xxx
+
+// message overwrite
+#define KEY_MSG_OVWR         "UD_MessageOverwrite"        // true/false
+
+// ringer melody options
+#define KEY_MEL_INT          "UD_RingerMelodyIntern"      // VAL_MELODY_xxx
+#define KEY_MEL_EXT          "UD_RingerMelodyExtern"      // VAL_MELODY_xxx
+#define KEY_MEL_UNK          "UD_RingerMelodyUnknown"     // VAL_MELODY_xxx
+#define KEY_MEL_CCBS         "UD_RingerMelodyCallback"    // VAL_MELODY_xxx
+#define KEY_MEL_RECALL       "UD_RingerMelodyRecall"      // VAL_MELODY_xxx
+#define KEY_MEL_VIP          "UD_RingerMelodyVip"         // VAL_MELODY_xxx
+#define KEY_MEL_SPECIAL      "UD_RingerMelodySpecial"     // VAL_MELODY_xxx
+#define KEY_MEL_ALARM        "UD_RingerMelodyAlarm"       // VAL_MELODY_xxx
+#define KEY_MEL_APPOINT      "UD_RingerMelodyAppointment" // VAL_MELODY_xxx
+
+// ringer volume options
+#define KEY_VOL_INT          "UD_RingerVolumeIntern"      // VAL_VOLUME_xxx
+#define KEY_VOL_EXT          "UD_RingerVolumeExtern"      // VAL_VOLUME_xxx
+#define KEY_VOL_UNK          "UD_RingerVolumeUnknown"     // VAL_VOLUME_xxx
+#define KEY_VOL_CCBS         "UD_RingerVolumeCallback"    // VAL_VOLUME_xxx
+#define KEY_VOL_RECALL       "UD_RingerVolumeRecall"      // VAL_VOLUME_xxx
+#define KEY_VOL_VIP          "UD_RingerVolumeVip"         // VAL_VOLUME_xxx
+#define KEY_VOL_SPECIAL      "UD_RingerVolumeSpecial"     // VAL_VOLUME_xxx
+#define KEY_VOL_ALARM        "UD_RingerVolumeAlarm"       // VAL_VOLUME_xxx
+#define KEY_VOL_APPOINT      "UD_RingerVolumeAppointment" // VAL_VOLUME_xxx
+
+// melodies
+#define VAL_MELODY_0   "weekend"            // Weekend
+#define VAL_MELODY_1   "butterfly"          // Butterfly
+#define VAL_MELODY_2   "barock"             // Barock
+#define VAL_MELODY_3   "ballade"            // Ballade
+#define VAL_MELODY_4   "fancy"              // Fancy
+#define VAL_MELODY_5   "comelody"           // Comelody
+#define VAL_MELODY_6   "easy_groove"        // Easy groove
+#define VAL_MELODY_7   "happy_fair"         // Happy fair
+#define VAL_MELODY_8   "kitafun"            // Kitafun
+#define VAL_MELODY_9   "latin_dance"        // Latin dance
+#define VAL_MELODY_10  "little_asia"        // Little asia
+#define VAL_MELODY_11  "mango_selassi"      // Mango selassi
+#define VAL_MELODY_12  "parka"              // Parka
+#define VAL_MELODY_13  "remember"           // Remember
+#define VAL_MELODY_14  "rocky_lane"         // Rocky lane
+#define VAL_MELODY_15  "ringing_1"          // Ringing 1
+#define VAL_MELODY_16  "ringing_2"          // Ringing 2
+#define VAL_MELODY_17  "ringing_3"          // Ringing 3
+#define VAL_MELODY_18  "ringing_4"          // Ringing 4
+#define VAL_MELODY_19  "ringing_5"          // Ringing 5
+#define VAL_MELODY_20  "ringing_6"          // Ringing 6
+#define VAL_MELODY_21  "ringing_7"          // Ringing 7
+#define VAL_MELODY_22  "ring_vintage"       // Ring vintage
+#define VAL_MELODY_23  "vibes"              // Vibes
+#define VAL_MELODY_24  "attack"             // Attack
+#define VAL_MELODY_25  "doorbell"           // Doorbell
+#define VAL_MELODY_26  "boogie"             // Boogie
+#define VAL_MELODY_27  "polka"              // Polka
+#define VAL_MELODY_28  "classical_1"        // Classical 1
+#define VAL_MELODY_29  "classical_2"        // Classical 2
+#define VAL_MELODY_30  "classical_3"        // Classical 3
+#define VAL_MELODY_31  "classical_4"        // Classical 4
+#define VAL_MELODY_32  "alla_turca"         // Alla turca
+#define VAL_MELODY_33  "entertainer"        // Entertainer
+#define VAL_MELODY_34  "jollygood"          // Jollygood
+#define VAL_MELODY_35  "in_the_saints"      // In the saints
+#define VAL_MELODY_36  "drunken_sailor"     // Drunken sailor
+#define VAL_MELODY_37  "mary_had"           // Mary had
+#define VAL_MELODY_38  "shell_be_walking"   // Shell be walking
+#define VAL_MELODY_39  "pippi_longstocking" // Pippi longstocking
+#define VAL_MELODY_40  "policehorn"         // Policehorn
+#define VAL_MELODY_41  "synthesizer"        // Synthesizer
+#define VAL_MELODY_42  "after_work"         // After work
+#define VAL_MELODY_43  "beep"               // Beep
+#define VAL_MELODY_44  "basic_1"            // Basic 1
+#define VAL_MELODY_45  "basic_2"            // Basic 2
+#define VAL_MELODY_46  "basic_3"            // Basic 3
+#define VAL_MELODY_47  "basic_4"            // Basic 4
+#define VAL_MELODY_48  "basic_5"            // Basic 5
+#define VAL_MELODY_49  "basic_6"            // Basic 6
+#define VAL_MELODY_50  "basic_7"            // Basic 7
+#define VAL_MELODY_51  "basic_8"            // Basic 8
+#define VAL_MELODY_52  "alarm_1"            // Alarm 1
+#define VAL_MELODY_53  "alarm_2"            // Alarm 2
+#define VAL_MELODY_54  "alarm_3"            // Alarm 3
+#define VAL_MELODY_55  "alarm_4"            // Alarm 4
+#define VAL_MELODY_56  "alarm_5"            // Alarm 5
+#define VAL_MELODY_57  "alarm_6"            // Alarm 6
+#define VAL_MELODY_58  "alarm_7"            // Alarm 7
+#define VAL_MELODY_59  "6700_one"           // 6700 One
+#define VAL_MELODY_60  "6700_two"           // 6700 Two
+#define VAL_MELODY_61  "6700_three"         // 6700 Three
+#define VAL_MELODY_62  "6700_four"          // 6700 Four
+#define VAL_MELODY_63  "6700_five"          // 6700 Five
+#define VAL_MELODY_240 "1_attention_tone"   // 1 Attention tone
+#define VAL_MELODY_241 "2_attention_tones"  // 2 Attention tones
+#define VAL_MELODY_242 "3_attention_tones"  // 3 Attention tones
+#define VAL_MELODY_243 "4_attention_tones"  // 4 Attention tones
+#define VAL_MELODY_244 "5_attention_tones"  // 5 Attention tones
+#define VAL_MELODY_245 "6_attention_tones"  // 6 Attention tones
+#define VAL_MELODY_246 "7_attention_tones"  // 7 Attention tones
+#define VAL_MELODY_247 "8_attention_tones"  // 8 Attention tones
+#define VAL_MELODY_248 "9_attention_tones"  // 9 Attention tones
+#define VAL_MELODY_249 "10_attention_tones" // 10 Attention tones
+
+// volumes
+#define VAL_VOLUME_0   "off"                // off
+#define VAL_VOLUME_1   "increasing"         // increasing
+#define VAL_VOLUME_2   "level_1"            // Level-1
+#define VAL_VOLUME_3   "level_2"            // Level-2
+#define VAL_VOLUME_4   "level_3"            // Level-3
+#define VAL_VOLUME_5   "level_4"            // Level-4
+#define VAL_VOLUME_6   "level_5"            // Level-5
+#define VAL_VOLUME_7   "level_6"            // Level-6
+#define VAL_VOLUME_8   "level_7"            // Level-7
+
+// ringer settings
+#define KEY_RING_MODE      "UD_RingMode"    // VAL_RING_MODE_xxx
+#define KEY_RING_BUZZ      "UD_RingBuzz"    // true/false
+#define KEY_RING_VIBRA     "UD_RingVibra"   // true/false
+#define KEY_RING_HEADSET   "UD_RingHeadset" // true/false
+
+#define VAL_RING_MODE_1   "repeat"             // repeat
+#define VAL_RING_MODE_3   "once"               // once
+
+// attention tones
+#define KEY_TONE_KEY        "UD_ToneKey"      // VAL_TONE_xxx (up to 3 values)
+#define KEY_TONE_CNF        "UD_ToneCnf"      // VAL_TONE_xxx (up to 3 values)
+#define KEY_TONE_MNEND      "UD_ToneMnend"    // VAL_TONE_xxx (up to 3 values)
+#define KEY_TONE_ACCU       "UD_ToneAccu"     // VAL_TONE_xxx (up to 3 values)
+#define KEY_TONE_RANGE      "UD_ToneRange"    // VAL_TONE_xxx (up to 3 values)
+#define KEY_TONE_OUTRANGE   "UD_ToneOutrange" // VAL_TONE_xxx (up to 3 values)
+
+#define VAL_TONE_0   "inactive"           // inactive
+#define VAL_TONE_1   "active"             // active
+#define VAL_TONE_2   "no_speaker"         // without Loudspeaker
+#define VAL_TONE_16  "vibra"              // Vibration
+
+// audio
+#define KEY_AUDIO_NOISEDETECT  "UD_AudioNoisedetect" // true/false
+#define KEY_AUDIO_LOUDENV      "UD_AudioLoudenv"     // true/false
+#define KEY_AUDIO_SPK_CHARGER  "UD_AudioSpkCharger"  // VAL_AUDIO_SPK_CHARGER_xxx
+
+#define VAL_AUDIO_SPK_CHARGER_0   "release"            // Release
+#define VAL_AUDIO_SPK_CHARGER_1   "handsfree"          // Handsfree
+
+// Systems/Subscription/<System X>
+#define KEY_DIAL_ABC            "UD_DialCharset"         // VAL_DIAL_ABC_xxx
+#define KEY_DIAL_CODE_IMAX      "UD_DialCodeImax"        // VAL_DIAL_CODE_IMAX_xxx
+#define KEY_DIAL_CODE_SYS       "UD_DialCodeSys"         // <digit-string>
+#define KEY_DIAL_CODE_INT       "UD_DialCodeInt"         // <digit-string>
+#define KEY_DIAL_CODE_NAT       "UD_DialCodeNational"    // <digit-string>
+#define KEY_DIAL_CODE_AREA      "UD_DialCodeArea"        // <digit-string>
+
+#define VAL_DIAL_ABC_0   "123_"               // 123...
+#define VAL_DIAL_ABC_1   "ABC_123"            // ABC...123
+#define VAL_DIAL_ABC_2   "123_ABC_äöü"        // 123...ABC...äöü
+#define VAL_DIAL_ABC_3   "ABC_äöü_123"        // ABC...äöü...123
+#define VAL_DIAL_ABC_4   "123_ABC"            // 123...ABC
+
+#define VAL_DIAL_CODE_IMAX_0   "automatic"          // automatic
+#define VAL_DIAL_CODE_IMAX_1   "1"                  // 1
+#define VAL_DIAL_CODE_IMAX_2   "2"                  // 2
+#define VAL_DIAL_CODE_IMAX_3   "3"                  // 3
+#define VAL_DIAL_CODE_IMAX_4   "4"                  // 4
+#define VAL_DIAL_CODE_IMAX_5   "5"                  // 5
+#define VAL_DIAL_CODE_IMAX_6   "6"                  // 6
+#define VAL_DIAL_CODE_IMAX_7   "7"                  // 7
+#define VAL_DIAL_CODE_IMAX_8   "8"                  // 8
+
+// USB
+#define KEY_USB_MODE         "UD_UsbMode"         // VAL_USB_MODE_xxx
+
+#define VAL_USB_MODE_0       "charge"             // Charge only
+#define VAL_USB_MODE_1       "vcom"               // VCom interface
+//efine VAL_USB_MODE_2       "msd"                // MSD (not supported by 6x2)
+
+// TIME-FORMAT
+#define KEY_TIME_FORMAT      "UD_TimeFormat"      // VAL_TIME_FORMAT_xxx
+#define KEY_DATE_FORMAT      "UD_DateFormat"      // VAL_DATE_FORMAT_xxx
+
+#define VAL_TIME_FORMAT_0    "24h"                // 24h
+#define VAL_TIME_FORMAT_1    "12h"                // 12h am/pm
+
+#define VAL_DATE_FORMAT_0    "dd_mm_yy"           // dd.mm.yy
+#define VAL_DATE_FORMAT_1    "mm_dd_yy"           // mm/dd/yy
+#define VAL_DATE_FORMAT_2    "yy_mm_dd"           // yy-mm-dd
+#define VAL_DATE_FORMAT_3    "dd_mmm_yyyy"        // dd-mmm-yyyy
+
+// display
+#define KEY_DISP_LANG      "UD_DispLang"   // VAL_DISP_LANG_xxx
+#define KEY_DISP_FONT      "UD_DispFont"   // VAL_DISP_FONT_xxx
+#define KEY_DISP_COLOR     "UD_DispColor"  // VAL_DISP_COLOR_xxx
+
+#define VAL_DISP_LANG_0   "default"            // default
+#define VAL_DISP_LANG_1   "de"                 // D - Deutsch
+#define VAL_DISP_LANG_2   "en"                 // GB - English
+#define VAL_DISP_LANG_3   "fr"                 // FR - Français
+#define VAL_DISP_LANG_4   "es"                 // ES - Español
+#define VAL_DISP_LANG_5   "it"                 // I - Italiano
+#define VAL_DISP_LANG_6   "nl"                 // NL - Nederlands
+#define VAL_DISP_LANG_7   "sv"                 // S - Svenska
+#define VAL_DISP_LANG_8   "da"                 // DK - Dansk
+#define VAL_DISP_LANG_9   "pt"                 // P - Português
+#define VAL_DISP_LANG_10  "no"                 // N - Norsk
+#define VAL_DISP_LANG_11  "cs"                 // Cz - Cesky
+#define VAL_DISP_LANG_12  "sk"                 // SK - Slovenčina - Slovensky
+#define VAL_DISP_LANG_13  "fi"                 // Su - Suomi
+#define VAL_DISP_LANG_14  "hu"                 // H - Magyar - Hungarian
+#define VAL_DISP_LANG_15  "ru"                 // RU - Русский - Russian
+#define VAL_DISP_LANG_16  "tr"                 // TURK - Türkçe
+#define VAL_DISP_LANG_17  "pl"                 // PL - Polski
+#define VAL_DISP_LANG_18  "et"                 // EST - Esti
+
+#define VAL_DISP_FONT_0   "small"              // Small
+#define VAL_DISP_FONT_1   "normal"             // Normal
+#define VAL_DISP_FONT_2   "large"              // Large
+
+#define VAL_DISP_COLOR_5   "gray"               // Gray
+#define VAL_DISP_COLOR_0   "black"              // Black
+#define VAL_DISP_COLOR_1   "business"           // Business
+#define VAL_DISP_COLOR_2   "future"             // Future
+#define VAL_DISP_COLOR_3   "plain"              // Plain
+#define VAL_DISP_COLOR_4   "sweet"              // Sweet
+
+// illumination
+#define KEY_LIGHT_DIM            "UD_LightDim"           // VAL_LIGHT_DIM_xxx
+#define KEY_LIGHT_DISP           "UD_LightDisp"          // VAL_LIGHT_DISP_xxx
+#define KEY_LIGHT_KEY            "UD_LightKey"           // VAL_LIGHT_KEY_xxx
+#define KEY_LIGHT_KEYOPT_INCOM   "UD_LightKeyoptIncom"   // true/false
+#define KEY_LIGHT_KEYOPT_ALARM   "UD_LightKeyoptAlarm"   // true/false
+#define KEY_LIGHT_KEYOPT_CHARGE  "UD_LightKeyoptCharge"  // true/false
+#define KEY_LIGHT_CHARGE         "UD_LightCharge"        // VAL_LIGHT_CHARGE_xxx
+#define KEY_LIGHT_CALL           "UD_LightCall"          // VAL_LIGHT_CALL_xxx
+#define KEY_LIGHT_MSG_MSG        "UD_LightMsgMsg"        // VAL_LIGHT_MSG_MSG_xxx
+#define KEY_LIGHT_MSG_INF        "UD_LightMsgInf"        // VAL_LIGHT_MSG_INF_xxx
+#define KEY_LIGHT_MSG_JOB        "UD_LightMsgJob"        // VAL_LIGHT_MSG_JOB_xxx
+#define KEY_LIGHT_MSG_SOS        "UD_LightMsgSos"        // VAL_LIGHT_MSG_SOS_xxx
+
+#define VAL_LIGHT_DIM_0   "off"                // off
+#define VAL_LIGHT_DIM_60  "1m"                 // 1 min
+#define VAL_LIGHT_DIM_129 "10m"                // 10 min
+#define VAL_LIGHT_DIM_234 "1h"                 // 60 min
+#define VAL_LIGHT_DIM_140 "2h"                 // 120 min
+#define VAL_LIGHT_DIM_152 "4h"                 // 240 min
+#define VAL_LIGHT_DIM_188 "10h"                // 600 min
+#define VAL_LIGHT_DIM_255 "on"                 // on
+
+#define VAL_LIGHT_DISP_10  "10s"                // 10 sec
+#define VAL_LIGHT_DISP_20  "20s"                // 20 sec
+#define VAL_LIGHT_DISP_30  "30s"                // 30 sec
+#define VAL_LIGHT_DISP_45  "45s"                // 45 sec
+#define VAL_LIGHT_DISP_60  "60s"                // 60 sec
+#define VAL_LIGHT_DISP_120 "2m"                 // 120 sec
+#define VAL_LIGHT_DISP_240 "4m"                 // 240 sec
+
+#define VAL_LIGHT_KEY_0   "off"                // off
+#define VAL_LIGHT_KEY_1   "1s"                 // 1 sec
+#define VAL_LIGHT_KEY_3   "3s"                 // 3 sec
+#define VAL_LIGHT_KEY_5   "5s"                 // 5 sec
+#define VAL_LIGHT_KEY_10  "10s"                // 10 sec
+#define VAL_LIGHT_KEY_20  "20s"                // 20 sec
+#define VAL_LIGHT_KEY_30  "30s"                // 30 sec
+#define VAL_LIGHT_KEY_45  "45s"                // 45 sec
+#define VAL_LIGHT_KEY_60  "60s"                // 60 sec
+#define VAL_LIGHT_KEY_120 "2m"                 // 120 sec
+#define VAL_LIGHT_KEY_240 "4m"                 // 240 sec
+
+#define VAL_LIGHT_CHARGE_0   "off"                // off
+#define VAL_LIGHT_CHARGE_1   "1s"                 // 1 sec
+#define VAL_LIGHT_CHARGE_3   "3s"                 // 3 sec
+#define VAL_LIGHT_CHARGE_5   "5s"                 // 5 sec
+#define VAL_LIGHT_CHARGE_10  "10s"                // 10 sec
+#define VAL_LIGHT_CHARGE_20  "20s"                // 20 sec
+#define VAL_LIGHT_CHARGE_30  "30s"                // 30 sec
+#define VAL_LIGHT_CHARGE_45  "45s"                // 45 sec
+#define VAL_LIGHT_CHARGE_60  "60s"                // 60 sec
+#define VAL_LIGHT_CHARGE_120 "2m"                 // 120 sec
+#define VAL_LIGHT_CHARGE_240 "4m"                 // 240 sec
+
+#define VAL_LIGHT_CALL_0   "off"                // off
+#define VAL_LIGHT_CALL_1   "1s"                 // 1 sec
+#define VAL_LIGHT_CALL_3   "3s"                 // 3 sec
+#define VAL_LIGHT_CALL_5   "5s"                 // 5 sec
+#define VAL_LIGHT_CALL_10  "10s"                // 10 sec
+#define VAL_LIGHT_CALL_20  "20s"                // 20 sec
+#define VAL_LIGHT_CALL_30  "30s"                // 30 sec
+#define VAL_LIGHT_CALL_45  "45s"                // 45 sec
+#define VAL_LIGHT_CALL_60  "60s"                // 60 sec
+#define VAL_LIGHT_CALL_120 "2m"                 // 120 sec
+#define VAL_LIGHT_CALL_180 "3m"                 // 180 sec
+#define VAL_LIGHT_CALL_240 "4m"                 // 240 sec
+#define VAL_LIGHT_CALL_255 "on"                 // on
+
+#define VAL_LIGHT_MSG_MSG_255 "nochange"           // No change
+#define VAL_LIGHT_MSG_MSG_133 "dimmed"             // Light dimmed
+#define VAL_LIGHT_MSG_MSG_1   "5s"                 // 5 sec
+#define VAL_LIGHT_MSG_MSG_2   "10s"                // 10 sec
+#define VAL_LIGHT_MSG_MSG_4   "20s"                // 20 sec
+#define VAL_LIGHT_MSG_MSG_6   "30s"                // 30 sec
+#define VAL_LIGHT_MSG_MSG_9   "45s"                // 45 sec
+#define VAL_LIGHT_MSG_MSG_12  "60s"                // 60 sec
+#define VAL_LIGHT_MSG_MSG_24  "2m"                 // 120 sec
+#define VAL_LIGHT_MSG_MSG_48  "4m"                 // 240 sec
+
+#define VAL_LIGHT_MSG_INF_255 "nochange"           // No change
+#define VAL_LIGHT_MSG_INF_133 "dimmed"             // Light dimmed
+#define VAL_LIGHT_MSG_INF_1   "5s"                 // 5 sec
+#define VAL_LIGHT_MSG_INF_2   "10s"                // 10 sec
+#define VAL_LIGHT_MSG_INF_4   "20s"                // 20 sec
+#define VAL_LIGHT_MSG_INF_6   "30s"                // 30 sec
+#define VAL_LIGHT_MSG_INF_9   "45s"                // 45 sec
+#define VAL_LIGHT_MSG_INF_12  "60s"                // 60 sec
+#define VAL_LIGHT_MSG_INF_24  "2m"                 // 120 sec
+#define VAL_LIGHT_MSG_INF_48  "4m"                 // 240 sec
+
+#define VAL_LIGHT_MSG_JOB_255 "nochange"           // No change
+#define VAL_LIGHT_MSG_JOB_133 "dimmed"             // Light dimmed
+#define VAL_LIGHT_MSG_JOB_1   "5s"                 // 5 sec
+#define VAL_LIGHT_MSG_JOB_2   "10s"                // 10 sec
+#define VAL_LIGHT_MSG_JOB_4   "20s"                // 20 sec
+#define VAL_LIGHT_MSG_JOB_6   "30s"                // 30 sec
+#define VAL_LIGHT_MSG_JOB_9   "45s"                // 45 sec
+#define VAL_LIGHT_MSG_JOB_12  "60s"                // 60 sec
+#define VAL_LIGHT_MSG_JOB_24  "2m"                 // 120 sec
+#define VAL_LIGHT_MSG_JOB_48  "4m"                 // 240 sec
+
+#define VAL_LIGHT_MSG_SOS_188 "dimmed"             // Light dimmed
+#define VAL_LIGHT_MSG_SOS_6   "30s"                // 30 sec
+#define VAL_LIGHT_MSG_SOS_12  "60s"                // 60 sec
+#define VAL_LIGHT_MSG_SOS_24  "2m"                 // 120 sec
+#define VAL_LIGHT_MSG_SOS_36  "3m"                 // 180 sec
+#define VAL_LIGHT_MSG_SOS_48  "4m"                 // 240 sec
+#define VAL_LIGHT_MSG_SOS_60  "5m"                 // 300 sec
+
+// led indications
+#define KEY_LED_ALIVE       "UD_LedAlive"           // true/false
+#define KEY_LED_INCOM       "UD_LedIncom"           // true/false
+#define KEY_LED_RANGE       "UD_LedRange"           // true/false
+#define KEY_LED_CHARGE      "UD_LedCharge"          // true/false
+#define KEY_LED_INFO        "UD_LedInfo"            // true/false
+#define KEY_LED_SPK         "UD_LedSpk"             // true/false
+#define KEY_LED_APPOINT     "UD_LedAppoint"         // true/false
+#define KEY_LED_ALARM       "UD_LedAlarm"           // true/false
+
+// list access
+#define KEY_LISTMODE_REDIAL   "UD_ListmodeRedial"   // VAL_LISTMODE_REDIAL_xxx
+#define KEY_LISTMODE_CALLER   "UD_ListmodeCaller"   // VAL_LISTMODE_CALLER_xxx
+#define KEY_LISTMODE_FILTER   "UD_ListmodeFilter"   // VAL_LISTMODE_FILTER_xxx
+
+#define VAL_LISTMODE_REDIAL_0   "local"              // local
+#define VAL_LISTMODE_REDIAL_1   "automatic"          // automatic
+#define VAL_LISTMODE_REDIAL_2   "pbx"                // PBX
+
+#define VAL_LISTMODE_CALLER_0   "local"              // local
+#define VAL_LISTMODE_CALLER_1   "automatic"          // automatic
+#define VAL_LISTMODE_CALLER_2   "pbx"                // PBX
+
+#define VAL_LISTMODE_FILTER_0   "accept_list"        // Accept list
+#define VAL_LISTMODE_FILTER_1   "block_list"         // Block list
+#define VAL_LISTMODE_FILTER_2   "filter_off"         // Filter off
+
+// device options
+#define KEY_MODE_SILENTCHARGE   "UD_ModeSilentcharge"   // true/false
+#define KEY_MODE_CHARGERANSWR   "UD_ModeChargeranswr"   // true/false
+#define KEY_MODE_AUTOANSWR      "UD_ModeAutoanswr"      // true/false
+#define KEY_MODE_AUTOQUICKHOOK  "UD_ModeAutoquickhook"  // true/false
+#define KEY_MODE_KEY            "UD_ModeKey"            // VAL_MODE_KEY_xxx
+
+#define VAL_MODE_KEY_0   "emo"                // Esc  >>>  Ok
+#define VAL_MODE_KEY_1   "oem"                // Ok  Esc  >>>
+#define VAL_MODE_KEY_2   "eom"                // Esc  Ok  >>>
+#define VAL_MODE_KEY_3   "meo"                // >>>  Esc  Ok
+#define VAL_MODE_KEY_128 "EMO"                // Esc  Menu Ok
+#define VAL_MODE_KEY_129 "OEM"                // Ok  Esc Menu
+#define VAL_MODE_KEY_130 "EOM"                // Esc  Ok Menu
+#define VAL_MODE_KEY_131 "MEO"                // Menu Esc  Ok
+
+// phone lock
+#define KEY_LOCK_MODE           "UD_LockMode"           // off,key,pin
+#define KEY_LOCK_KEY_AUTO       "UD_LockKeyAuto"        // true/false
+#define KEY_LOCK_KEY_T          "UD_LockKeyTime"        // VAL_LOCK_KEY_T_xxx
+#define KEY_LOCK_KEY_PIN        "UD_LockKeyPin"         // true/false
+#define KEY_LOCK_PIN            "UD_LockPin"            // <digit-string>
+#define KEY_LOCK_ADMIN          "UD_LockAdmin"          // <digit-string>
+
+#define VAL_LOCK_MODE_0   "off"                // Off
+#define VAL_LOCK_MODE_1   "key"                // key-lock
+#define VAL_LOCK_MODE_2   "pin"                // pin-lock
+
+#define VAL_LOCK_KEY_T_5   "5s"                 // 5 sec
+#define VAL_LOCK_KEY_T_10  "10s"                // 10 sec
+#define VAL_LOCK_KEY_T_20  "20s"                // 20 sec
+#define VAL_LOCK_KEY_T_30  "30s"                // 30 sec
+#define VAL_LOCK_KEY_T_40  "40s"                // 40 sec
+#define VAL_LOCK_KEY_T_50  "50s"                // 50 sec
+#define VAL_LOCK_KEY_T_60  "60s"                // 60 sec
+#define VAL_LOCK_KEY_T_90  "90s"                // 90 sec
+#define VAL_LOCK_KEY_T_120 "120s"               // 120 sec
+
+// SOS call
+#define KEY_SOS_NO         "UD_SosNum"           // <digit-string>
+#define KEY_SOS_MEL        "UD_SosMelody"        // VAL_MELODY_xxx
+#define KEY_SOS_VOL        "UD_SosVolume"        // VAL_VOLUME_xxx
+#define KEY_SOS_SPK        "UD_SosHandsfree"     // true/false
+
+// alarm sensor
+#define KEY_SOSMD_NO           "UD_SosMdNumber"       // <digit-string>
+#define KEY_SOSMD_AUTOANSWR    "UD_SosMdAutoanswr"    // true/false
+#define KEY_SOSMD_MODE_PRE     "UD_SosMdModePre"      // true/false
+#define KEY_SOSMD_MODE_DOWN    "UD_SosMdModeDown"     // true/false
+#define KEY_SOSMD_MODE_NOMOVE  "UD_SosMdModeNomove"   // true/false
+#define KEY_SOSMD_MODE_ESC     "UD_SosMdModeEsc"      // true/false
+#define KEY_SOSMD_MODE_REP     "UD_SosMdModeRep"      // true/false
+#define KEY_SOSMD_SENSE_ANGLE  "UD_SosMdSenseAngle"   // VAL_SOSMD_SENSE_ANGLE_xxx
+#define KEY_SOSMD_SENSE_MOVE   "UD_SosMdSenseMove"    // VAL_SOSMD_SENSE_MOVE_xxx
+#define KEY_SOSMD_SENSE_ESC    "UD_SosMdSenseEsc"     // VAL_SOSMD_SENSE_ESC_xxx
+#define KEY_SOSMD_NOMO_DOWN    "UD_SosMdNomoDown"     // VAL_SOSMD_NOMO_xxx (up to 4 values)
+#define KEY_SOSMD_NOMO_NOMOVE  "UD_SosMdNomoNomove"   // VAL_SOSMD_NOMO_xxx (up to 4 values)
+#define KEY_SOSMD_NOMO_ESC     "UD_SosMdNomoEsc"      // VAL_SOSMD_NOMO_xxx (up to 4 values)
+#define KEY_SOSMD_DELAY_DOWN   "UD_SosMdDelayDown"    // VAL_SOSMD_DELAY_DOWN_xxx
+#define KEY_SOSMD_DELAY_NOMOVE "UD_SosMdDelayNomove"  // VAL_SOSMD_DELAY_NOMOVE_xxx
+#define KEY_SOSMD_DELAY_ESC    "UD_SosMdDelayEsc"     // VAL_SOSMD_DELAY_ESC_xxx
+#define KEY_SOSMD_T_PRE        "UD_SosMdTimePre"      // VAL_SOSMD_T_PRE_xxx
+#define KEY_SOSMD_T_REP        "UD_SosMdTimeRep"      // VAL_SOSMD_T_REP_xxx
+#define KEY_SOSMD_TONE         "UD_SosMdTone"         // true/false
+#define KEY_SOSMD_VIBRA        "UD_SosMdVibra"        // true/false
+
+#define VAL_SOSMD_SENSE_ANGLE_0   "steep"              // Steep
+#define VAL_SOSMD_SENSE_ANGLE_1   "medium"             // Medium
+#define VAL_SOSMD_SENSE_ANGLE_2   "flat"               // Flat
+
+#define VAL_SOSMD_SENSE_MOVE_0   "low"                // Low
+#define VAL_SOSMD_SENSE_MOVE_1   "medium"             // Medium
+#define VAL_SOSMD_SENSE_MOVE_2   "high"               // High
+
+#define VAL_SOSMD_SENSE_ESC_0   "low"                // Low
+#define VAL_SOSMD_SENSE_ESC_1   "medium"             // Medium
+#define VAL_SOSMD_SENSE_ESC_2   "high"               // High
+
+#define VAL_SOSMD_NOMO_7   "idle"               // in idle
+#define VAL_SOSMD_NOMO_6   "conversation"       // during conversation
+#define VAL_SOSMD_NOMO_5   "local_menu"         // in local menu
+#define VAL_SOSMD_NOMO_3   "system_menu"        // in system menu
+
+#define VAL_SOSMD_DELAY_DOWN_1   "1s"                 // 1 sec
+#define VAL_SOSMD_DELAY_DOWN_2   "2s"                 // 2 sec
+#define VAL_SOSMD_DELAY_DOWN_5   "5s"                 // 5 sec
+#define VAL_SOSMD_DELAY_DOWN_10  "10s"                // 10 sec
+#define VAL_SOSMD_DELAY_DOWN_20  "20s"                // 20 sec
+#define VAL_SOSMD_DELAY_DOWN_30  "30s"                // 30 sec
+#define VAL_SOSMD_DELAY_DOWN_45  "45s"                // 45 sec
+#define VAL_SOSMD_DELAY_DOWN_60  "60s"                // 60 sec
+#define VAL_SOSMD_DELAY_DOWN_75  "75s"                // 75 sec
+
+#define VAL_SOSMD_DELAY_NOMOVE_10  "10s"                // 10 sec
+#define VAL_SOSMD_DELAY_NOMOVE_20  "20s"                // 20 sec
+#define VAL_SOSMD_DELAY_NOMOVE_30  "30s"                // 30 sec
+#define VAL_SOSMD_DELAY_NOMOVE_45  "45s"                // 45 sec
+#define VAL_SOSMD_DELAY_NOMOVE_60  "60s"                // 60 sec
+#define VAL_SOSMD_DELAY_NOMOVE_75  "75s"                // 75 sec
+
+#define VAL_SOSMD_DELAY_ESC_1   "1s"                 // 1 sec
+#define VAL_SOSMD_DELAY_ESC_2   "2s"                 // 2 sec
+#define VAL_SOSMD_DELAY_ESC_5   "5s"                 // 5 sec
+#define VAL_SOSMD_DELAY_ESC_10  "10s"                // 10 sec
+#define VAL_SOSMD_DELAY_ESC_20  "20s"                // 20 sec
+#define VAL_SOSMD_DELAY_ESC_30  "30s"                // 30 sec
+#define VAL_SOSMD_DELAY_ESC_45  "45s"                // 45 sec
+#define VAL_SOSMD_DELAY_ESC_60  "60s"                // 60 sec
+#define VAL_SOSMD_DELAY_ESC_75  "75s"                // 75 sec
+
+#define VAL_SOSMD_T_PRE_10  "10s"                // 10 sec
+#define VAL_SOSMD_T_PRE_20  "20s"                // 20 sec
+#define VAL_SOSMD_T_PRE_30  "30s"                // 30 sec
+#define VAL_SOSMD_T_PRE_45  "45s"                // 45 sec
+#define VAL_SOSMD_T_PRE_60  "60s"                // 60 sec
+#define VAL_SOSMD_T_PRE_75  "75s"                // 75 sec
+
+#define VAL_SOSMD_T_REP_5   "5s"                 // 5 sec
+#define VAL_SOSMD_T_REP_10  "10s"                // 10 sec
+#define VAL_SOSMD_T_REP_20  "20s"                // 20 sec
+#define VAL_SOSMD_T_REP_30  "30s"                // 30 sec
+#define VAL_SOSMD_T_REP_45  "45s"                // 45 sec
+#define VAL_SOSMD_T_REP_60  "60s"                // 60 sec
+#define VAL_SOSMD_T_REP_75  "75s"                // 75 sec
+#define VAL_SOSMD_T_REP_120 "120s"               // 120 sec
+#define VAL_SOSMD_T_REP_240 "240s"               // 240 sec
+
+// function/feature access
+#define KEY_FUNCTION_MENUHIDE         "UD_FunctionMenuHide"       // VAL_FUNCTION_xxx and true/false
+#define KEY_FUNCTION_LOCKED           "UD_FunctionLocked"         // VAL_FUNCTION_xxx and true/false
+#define KEY_FUNCTION_GRAYED           "UD_FunctionGrayed"         // VAL_FUNCTION_xxx and true/false
+#define KEY_FUNCTION_USER_PROTECTED   "UD_FunctionUserProtected"  // VAL_FUNCTION_xxx and true/false
+#define KEY_FUNCTION_ADMIN_PROTECTED  "UD_FunctionAdminProtected" // VAL_FUNCTION_xxx and true/false
+#define KEY_FUNCTION_PIN_PROTECTED    "UD_FunctionPinProtected"   // <digit-string>
+
+// functions/features available on device
+#define VAL_FUNCTION_PBX_UNPARK         "pbx_unpark"         // <<< Unpark call(*)
+#define VAL_FUNCTION_PBX_PARK           "pbx_park"           // <<< Pickup/Park(*)
+#define VAL_FUNCTION_GAPPP_PICKUP       "gappp_pickup"       // <<< Pickup call(*)
+#define VAL_FUNCTION_PBX_TAKE           "pbx_take"           // <<< Take call(*)
+#define VAL_FUNCTION_PBX_HOT_LIST       "pbx_hot_list"       // <<< Hot list(*)
+#define VAL_FUNCTION_GAPPP_CALL_FORWARD "gappp_call_forward" // <<< Call diversion(*)
+#define VAL_FUNCTION_PBX_CALL_ROUTING   "pbx_call_routing"   // <<< Call routing(*)
+#define VAL_FUNCTION_GAPPP_PICKUP_SELECT "gappp_pickup_select" // Pickup select
+#define VAL_FUNCTION_GAPPP_ANNOUNCEMENT "gappp_announcement" // Announcement
+#define VAL_FUNCTION_GAPPP_INTERCOM     "gappp_intercom"     // Intercom
+#define VAL_FUNCTION_GAPPP_VIP_CALL     "gappp_vip_call"     // VIP call
+#define VAL_FUNCTION_INF                "inf"                // >>> Info (menu item only)
+#define VAL_FUNCTION_JOURNAL            "journal"            // Call journal
+#define VAL_FUNCTION_CALLER             "caller"             // Caller list
+#define VAL_FUNCTION_REDIAL             "redial"             // Redial list
+#define VAL_FUNCTION_BOX_X              "box_x"              // >>> Voice box
+#define VAL_FUNCTION_BOX_SET_X          "box_set_x"          // Voice box settings
+#define VAL_FUNCTION_VOICE_BOX_MENU     "voice_box_menu"     // Settings/Voice mail(*)
+#define VAL_FUNCTION_ACTIVE_FEATURES    "active_features"    // >>> Active features
+#define VAL_FUNCTION_MSG_X              "msg_x"              // >>> Text message / Jobs / Mails(*)
+#define VAL_FUNCTION_OMM_DEF_MSG        "omm_def_msg"        // Pre-defined messages
+#define VAL_FUNCTION_MSG_OPT_X          "msg_opt_x"          // Message options
+#define VAL_FUNCTION_MEL_MSG_X          "mel_msg_x"          // Melodies
+#define VAL_FUNCTION_MEL_MSG            "mel_msg"            // Normal message
+#define VAL_FUNCTION_MEL_MSGURG         "mel_msgurg"         // Urgent message
+#define VAL_FUNCTION_MEL_MSGSOS         "mel_msgsos"         // Alarm  message
+#define VAL_FUNCTION_VOL_MSG_X          "vol_msg_x"          // Volume
+#define VAL_FUNCTION_VOL_MSG            "vol_msg"            // Normal message
+#define VAL_FUNCTION_VOL_MSGURG         "vol_msgurg"         // Urgent message
+#define VAL_FUNCTION_VOL_MSGSOS         "vol_msgsos"         // Alarm  message
+#define VAL_FUNCTION_MSG_POP            "msg_pop"            // Popup
+#define VAL_FUNCTION_MSG_OVWR           "msg_ovwr"           // Overwrite
+#define VAL_FUNCTION_MSG_DEL            "msg_del"            // Delete/Delete all
+#define VAL_FUNCTION_DIRECTORY_X        "directory_x"        // >>> Directories
+#define VAL_FUNCTION_VIP                "vip"                // VIP list
+#define VAL_FUNCTION_VIP_X              "vip_x"              // Edit/Add VIP list entry
+#define VAL_FUNCTION_DIR_X              "dir_x"              // Personal directory
+#define VAL_FUNCTION_BOOK_X             "book_x"             // Edit/Add personal directory entry
+#define VAL_FUNCTION_QUICK_X            "quick_x"            // Quick call
+#define VAL_FUNCTION_ADD_TO             "add_to"             // Add to...(VIP/Filter/Personal/Central directory)
+#define VAL_FUNCTION_PBX_DIRECTORY      "pbx_directory"      // Central directory(*)
+#define VAL_FUNCTION_TIME_X             "time_x"             // >>> Time functions
+#define VAL_FUNCTION_ALARM_X            "alarm_x"            // Alarm clock 1...3
+#define VAL_FUNCTION_APPOINTMENT_X      "appointment_x"      // Appointment 1...3
+#define VAL_FUNCTION_TEA_TIMER          "tea_timer"          // Timer
+#define VAL_FUNCTION_AUDIO_X            "audio_x"            // >>> Audio
+#define VAL_FUNCTION_VOLUME_MENU        "volume_menu"        // Volume settings
+#define VAL_FUNCTION_TONE_MENU          "tone_menu"          // Attention tones
+#define VAL_FUNCTION_TONE_KEY           "tone_key"           // Key click
+#define VAL_FUNCTION_TONE_CNF           "tone_cnf"           // Confirm tones
+#define VAL_FUNCTION_TONE_END           "tone_end"           // End of menu
+#define VAL_FUNCTION_TONE_BAT           "tone_bat"           // Battery warning
+#define VAL_FUNCTION_TONE_CHARGER       "tone_charger"       // Charger beep
+#define VAL_FUNCTION_TONE_COV           "tone_cov"           // Coverage warning
+#define VAL_FUNCTION_TONE_RANGE         "tone_range"         // Out of range
+#define VAL_FUNCTION_TONE_WAIT          "tone_wait"          // Call waiting
+#define VAL_FUNCTION_TONE_SENSOR        "tone_sensor"        // Pre alarm (63x only)
+#define VAL_FUNCTION_LOAD_ENVIRONMENT   "load_environment"   // Loud environment
+#define VAL_FUNCTION_AUDIO_HD           "audio_hd"           // Audio quality (only 650)
+#define VAL_FUNCTION_RING_X             "ring_x"             // >>> Ringing
+#define VAL_FUNCTION_RING_MEL_X         "ring_mel_x"         // Ringer melodies
+#define VAL_FUNCTION_MEL_INT            "mel_int"            // Internal call
+#define VAL_FUNCTION_MEL_EXT            "mel_ext"            // External call
+#define VAL_FUNCTION_MEL_UNK            "mel_unk"            // Unknown number
+#define VAL_FUNCTION_MEL_NYM            "mel_nym"            // Anonymous
+#define VAL_FUNCTION_MEL_CCBS           "mel_ccbs"           // Callback
+#define VAL_FUNCTION_MEL_RECALL         "mel_recall"         // Recall
+#define VAL_FUNCTION_MEL_VIP            "mel_vip"            // VIP call
+#define VAL_FUNCTION_MEL_SPECIAL        "mel_special"        // Special call
+#define VAL_FUNCTION_MEL_SOS            "mel_sos"            // Emergency call
+#define VAL_FUNCTION_MEL_ALARM          "mel_alarm"          // Alarm
+#define VAL_FUNCTION_MEL_APP            "mel_app"            // Appointment
+#define VAL_FUNCTION_RING_VOLUME        "ring_volume"        // Ringer volume
+#define VAL_FUNCTION_VOL_INT            "vol_int"            // Internal call
+#define VAL_FUNCTION_VOL_EXT            "vol_ext"            // External call
+#define VAL_FUNCTION_VOL_UNK            "vol_unk"            // Unknown number
+#define VAL_FUNCTION_VOL_NYM            "vol_nym"            // Anonymous
+#define VAL_FUNCTION_VOL_CCBS           "vol_ccbs"           // Callback
+#define VAL_FUNCTION_VOL_RECALL         "vol_recall"         // Recall
+#define VAL_FUNCTION_VOL_VIP            "vol_vip"            // VIP call
+#define VAL_FUNCTION_VOL_SPECIAL        "vol_special"        // Special call
+#define VAL_FUNCTION_VOL_SOS            "vol_sos"            // Emergency call
+#define VAL_FUNCTION_VOL_ALARM          "vol_alarm"          // Alarm
+#define VAL_FUNCTION_VOL_APP            "vol_app"            // Appointment
+#define VAL_FUNCTION_RING_TYPE_X        "ring_type_x"        // Ringer type
+#define VAL_FUNCTION_PLAY_ONCE          "play_once"          // Play melody once on/off
+#define VAL_FUNCTION_SILENT_CHARGING    "silent_charging"    // Silent charging
+#define VAL_FUNCTION_NOISE_DETECTION    "noise_detection"    // Noise detection on/off
+#define VAL_FUNCTION_RING_DEVICE_X      "ring_device_x"      // Ringer device
+#define VAL_FUNCTION_RING_OFF           "ring_off"           // Ringer/Buzzer on/off
+#define VAL_FUNCTION_RING_HS            "ring_hs"            // Corded headset-ring on/off
+#define VAL_FUNCTION_RING_VIBRA         "ring_vibra"         // Vibrator-ring on/off
+#define VAL_FUNCTION_DATAMANAGMENT      "datamanagment"      // >>> Data management / SD Card
+#define VAL_FUNCTION_FILTER_XX          "filter_xx"          // >>> Call filter
+#define VAL_FUNCTION_FILTER_X           "filter_x"           // Edit call filter
+#define VAL_FUNCTION_SYSTEM_X           "system_x"           // >>> System
+#define VAL_FUNCTION_SUBSCRIPTION_X     "subscription_x"     // >>> Subscription
+#define VAL_FUNCTION_START_ENROL        "start_enrol"        // <New system>
+#define VAL_FUNCTION_SUBS_AUTO          "subs_auto"          // Auto search
+#define VAL_FUNCTION_SUBS_SEL           "subs_sel"           // Select subscription
+#define VAL_FUNCTION_SUBS_STOP          "subs_stop"          // Stop searching
+#define VAL_FUNCTION_SUBS_OPT           "subs_opt"           // >Edit subscription
+#define VAL_FUNCTION_NO_PLAN            "no_plan"            // Number plan
+#define VAL_FUNCTION_EHS_X              "ehs_x"              // >>> Enhanced security
+#define VAL_FUNCTION_BT_X               "bt_x"               // >>> Bluetooth (only 62x/63x/65x)
+#define VAL_FUNCTION_BT_EDIT_X          "bt_edit_x"          // >Edit Bluetooth
+#define VAL_FUNCTION_SET_XX             "set_xx"             // >>> User settings
+#define VAL_FUNCTION_PROG_X             "prog_x"             // Key programming
+#define VAL_FUNCTION_DISP_X             "disp_x"             // Display settings
+#define VAL_FUNCTION_USER_NAME          "user_name"          // User name
+#define VAL_FUNCTION_LANGUAGE           "language"           // Language
+#define VAL_FUNCTION_FONT               "font"               // Font settings
+#define VAL_FUNCTION_COLOR              "color"              // Color schemes
+#define VAL_FUNCTION_SCHEME             "scheme"             // Menu structure
+#define VAL_FUNCTION_PIC_X              "pic_x"              // Idle picture
+#define VAL_FUNCTION_ILLU_X             "illu_x"             // Illumination/Light
+#define VAL_FUNCTION_DISP_DIM           "disp_dim"           // Display dimming
+#define VAL_FUNCTION_DISP_LIGHT         "disp_light"         // Display
+#define VAL_FUNCTION_DISP_KEY           "disp_key"           // Keyboard
+#define VAL_FUNCTION_DISP_CHARGER       "disp_charger"       // Charger
+#define VAL_FUNCTION_DISP_CALL          "disp_call"          // Conversation
+#define VAL_FUNCTION_DISP_INF           "disp_inf"           // Info message
+#define VAL_FUNCTION_DISP_MSG           "disp_msg"           // Text message
+#define VAL_FUNCTION_DISP_JOB1          "disp_job1"          // Job
+#define VAL_FUNCTION_DISP_SOS           "disp_sos"           // SOS alarm
+#define VAL_FUNCTION_DISP_LED           "disp_led"           // LED indications
+#define VAL_FUNCTION_LED_ALIFE          "led_alife"          // Life indication
+#define VAL_FUNCTION_LED_INCOM          "led_incom"          // Incoming call
+#define VAL_FUNCTION_LED_RANGE          "led_range"          // Out of range
+#define VAL_FUNCTION_LED_CHARGE         "led_charge"         // Charge indication
+#define VAL_FUNCTION_LED_INF            "led_inf"            // Infos
+#define VAL_FUNCTION_LED_SPK            "led_spk"            // Handsfree
+#define VAL_FUNCTION_LED_APP            "led_app"            // Appointment
+#define VAL_FUNCTION_LED_ALARM          "led_alarm"          // Alarm
+#define VAL_FUNCTION_LIST_SETTINGS      "list_settings"      // List access
+#define VAL_FUNCTION_DEVICE_OPT         "device_opt"         // Device options
+#define VAL_FUNCTION_SECURITY_X         "security_x"         // >>> Security
+#define VAL_FUNCTION_LOCK_X             "lock_x"             // >>> Lock
+#define VAL_FUNCTION_KEYLOCK            "keylock"            // Key lock
+#define VAL_FUNCTION_PINLOCK            "pinlock"            // Phone lock
+#define VAL_FUNCTION_AUTOLOCK           "auto_keylock"       // Auto. key lock
+#define VAL_FUNCTION_CHANGE_PIN         "change_pin"         // Change PIN
+#define VAL_FUNCTION_SOS_X              "sos_x"              // >>> SOS call
+#define VAL_FUNCTION_TMS_X              "tms_x"              // >>> Alarm sensor (63x only)
+#define VAL_FUNCTION_SET_PRE_ALARM      "set_pre_alarm"      // Pre alarm
+#define VAL_FUNCTION_SET_MANDOWN        "set_mandown"        // Mandown
+#define VAL_FUNCTION_SET_NO_MOVE        "set_no_move"        // No movement alarm
+#define VAL_FUNCTION_SET_SHOCK          "set_shock"          // Shock alarm
+#define VAL_FUNCTION_SET_REP_ALARM      "set_rep_alarm"      // Repeate alarm
+#define VAL_FUNCTION_TMS_OPT_X          "tms_opt_x"          // >Sensor options
+#define VAL_FUNCTION_RST_X              "rst_x"              // >>> Reset to default
+#define VAL_FUNCTION_OFF_MENU           "off_menu"           // >>> Off menu
+#define VAL_FUNCTION_OFF                "off"                // Power off
+#define VAL_FUNCTION_MENU               "menu"               // Menu
+#define VAL_FUNCTION_RING_TOGGLE        "ring_toggle"        // Ringer/Buzzer on/off
+#define VAL_FUNCTION_PROFILE_X          "profile_x"          // >>> Profiles
+#define VAL_FUNCTION_PROF_NO            "prof_no"            // <No profile>
+#define VAL_FUNCTION_PROF_NORM          "prof_norm"          // Normal
+#define VAL_FUNCTION_PROF_HS            "prof_hs"            // Headset
+#define VAL_FUNCTION_PROF_MEET          "prof_meet"          // Meeting
+#define VAL_FUNCTION_PROF_LOUD          "prof_loud"          // Loud
+#define VAL_FUNCTION_PROF_MY            "prof_my"            // <Profile 05>
+#define VAL_FUNCTION_PROF_ED_X          "prof_ed_x"          // Edit profiles
+#define VAL_FUNCTION_PROF_ED_NORM       "prof_ed_norm"       // Edit Normal
+#define VAL_FUNCTION_PROF_ED_HS         "prof_ed_hs"         // Edit Headset
+#define VAL_FUNCTION_PROF_ED_MEET       "prof_ed_meet"       // Edit Meeting
+#define VAL_FUNCTION_PROF_ED_LOUD       "prof_ed_loud"       // Edit Loud
+#define VAL_FUNCTION_USB_MODE           "usb_mode"           // USB mode
+#define VAL_FUNCTION_DOA_MASTER         "doa_master"         // DOA master
+#define VAL_FUNCTION_F_X                "f_x"                // <<< XML Applications / Functions 01..10(*)
+#define VAL_FUNCTION_PBX_FKEYS          "pbx_fkeys"          // <<< List of applications / functions(*)
+#define VAL_FUNCTION_F_1                "f_1"                // App/F01(*)
+#define VAL_FUNCTION_F_2                "f_2"                // App/F02(*)
+#define VAL_FUNCTION_F_3                "f_3"                // App/F03(*)
+#define VAL_FUNCTION_F_4                "f_4"                // App/F04(*)
+#define VAL_FUNCTION_F_5                "f_5"                // App/F05(*)
+#define VAL_FUNCTION_F_6                "f_6"                // App/F06(*)
+#define VAL_FUNCTION_F_7                "f_7"                // App/F07(*)
+#define VAL_FUNCTION_F_8                "f_8"                // App/F08(*)
+#define VAL_FUNCTION_F_9                "f_9"                // App/F09(*)
+#define VAL_FUNCTION_F_10               "f_10"               // App/F10(*)
+#define VAL_FUNCTION_VLSTX              "vlstx"              // Variable lists
+#define VAL_FUNCTION_VLST1              "vlst1"              // Variable list 1
+#define VAL_FUNCTION_VLST1_1            "vlst1_1"            // List 1 item 1
+#define VAL_FUNCTION_VLST1_2            "vlst1_2"            // List 1 item 2
+#define VAL_FUNCTION_VLST1_3            "vlst1_3"            // List 1 item 3
+#define VAL_FUNCTION_VLST1_4            "vlst1_4"            // List 1 item 4
+#define VAL_FUNCTION_VLST1_5            "vlst1_5"            // List 1 item 5
+#define VAL_FUNCTION_VLST1_6            "vlst1_6"            // List 1 item 6
+#define VAL_FUNCTION_VLST1_7            "vlst1_7"            // List 1 item 7
+#define VAL_FUNCTION_VLST1_8            "vlst1_8"            // List 1 item 8
+#define VAL_FUNCTION_VLST1_9            "vlst1_9"            // List 1 item 9
+#define VAL_FUNCTION_VLST1_10           "vlst1_10"           // List 1 item 10
+#define VAL_FUNCTION_VLST1_11           "vlst1_11"           // List 1 item 11
+#define VAL_FUNCTION_VLST1_12           "vlst1_12"           // List 1 item 12
+#define VAL_FUNCTION_VLST1_13           "vlst1_13"           // List 1 item 13
+#define VAL_FUNCTION_VLST1_14           "vlst1_14"           // List 1 item 14
+#define VAL_FUNCTION_VLST1_15           "vlst1_15"           // List 1 item 15
+#define VAL_FUNCTION_VLST2              "vlst2"              // Variable list 2
+#define VAL_FUNCTION_VLST2_1            "vlst2_1"            // List 2 item 1
+#define VAL_FUNCTION_VLST2_2            "vlst2_2"            // List 2 item 2
+#define VAL_FUNCTION_VLST2_3            "vlst2_3"            // List 2 item 3
+#define VAL_FUNCTION_VLST2_4            "vlst2_4"            // List 2 item 4
+#define VAL_FUNCTION_VLST2_5            "vlst2_5"            // List 2 item 5
+#define VAL_FUNCTION_VLST2_6            "vlst2_6"            // List 2 item 6
+#define VAL_FUNCTION_VLST2_7            "vlst2_7"            // List 2 item 7
+#define VAL_FUNCTION_VLST2_8            "vlst2_8"            // List 2 item 8
+#define VAL_FUNCTION_VLST2_9            "vlst2_9"            // List 2 item 9
+#define VAL_FUNCTION_VLST2_10           "vlst2_10"           // List 2 item 10
+#define VAL_FUNCTION_VLST2_11           "vlst2_11"           // List 2 item 11
+#define VAL_FUNCTION_VLST2_12           "vlst2_12"           // List 2 item 12
+#define VAL_FUNCTION_VLST2_13           "vlst2_13"           // List 2 item 13
+#define VAL_FUNCTION_VLST2_14           "vlst2_14"           // List 2 item 14
+#define VAL_FUNCTION_VLST2_15           "vlst2_15"           // List 2 item 15
+#define VAL_FUNCTION_VLST3              "vlst3"              // Variable list 3
+#define VAL_FUNCTION_VLST3_1            "vlst3_1"            // List 3 item 1
+#define VAL_FUNCTION_VLST3_2            "vlst3_2"            // List 3 item 2
+#define VAL_FUNCTION_VLST3_3            "vlst3_3"            // List 3 item 3
+#define VAL_FUNCTION_VLST3_4            "vlst3_4"            // List 3 item 4
+#define VAL_FUNCTION_VLST3_5            "vlst3_5"            // List 3 item 5
+#define VAL_FUNCTION_VLST3_6            "vlst3_6"            // List 3 item 6
+#define VAL_FUNCTION_VLST3_7            "vlst3_7"            // List 3 item 7
+#define VAL_FUNCTION_VLST3_8            "vlst3_8"            // List 3 item 8
+#define VAL_FUNCTION_VLST3_9            "vlst3_9"            // List 3 item 9
+#define VAL_FUNCTION_VLST3_10           "vlst3_10"           // List 3 item 10
+#define VAL_FUNCTION_VLST3_11           "vlst3_11"           // List 3 item 11
+#define VAL_FUNCTION_VLST3_12           "vlst3_12"           // List 3 item 12
+#define VAL_FUNCTION_VLST3_13           "vlst3_13"           // List 3 item 13
+#define VAL_FUNCTION_VLST3_14           "vlst3_14"           // List 3 item 14
+#define VAL_FUNCTION_VLST3_15           "vlst3_15"           // List 3 item 15
+#define VAL_FUNCTION_VLST4              "vlst4"              // Variable list 4
+#define VAL_FUNCTION_VLST4_1            "vlst4_1"            // List 4 item 1
+#define VAL_FUNCTION_VLST4_2            "vlst4_2"            // List 4 item 2
+#define VAL_FUNCTION_VLST4_3            "vlst4_3"            // List 4 item 3
+#define VAL_FUNCTION_VLST4_4            "vlst4_4"            // List 4 item 4
+#define VAL_FUNCTION_VLST4_5            "vlst4_5"            // List 4 item 5
+#define VAL_FUNCTION_VLST4_6            "vlst4_6"            // List 4 item 6
+#define VAL_FUNCTION_VLST4_7            "vlst4_7"            // List 4 item 7
+#define VAL_FUNCTION_VLST4_8            "vlst4_8"            // List 4 item 8
+#define VAL_FUNCTION_VLST4_9            "vlst4_9"            // List 4 item 9
+#define VAL_FUNCTION_VLST4_10           "vlst4_10"           // List 4 item 10
+#define VAL_FUNCTION_VLST4_11           "vlst4_11"           // List 4 item 11
+#define VAL_FUNCTION_VLST4_12           "vlst4_12"           // List 4 item 12
+#define VAL_FUNCTION_VLST4_13           "vlst4_13"           // List 4 item 13
+#define VAL_FUNCTION_VLST4_14           "vlst4_14"           // List 4 item 14
+#define VAL_FUNCTION_VLST4_15           "vlst4_15"           // List 4 item 15
+#define VAL_FUNCTION_VLST5              "vlst5"              // Variable list 5
+#define VAL_FUNCTION_VLST5_1            "vlst5_1"            // List 5 item 1
+#define VAL_FUNCTION_VLST5_2            "vlst5_2"            // List 5 item 2
+#define VAL_FUNCTION_VLST5_3            "vlst5_3"            // List 5 item 3
+#define VAL_FUNCTION_VLST5_4            "vlst5_4"            // List 5 item 4
+#define VAL_FUNCTION_VLST5_5            "vlst5_5"            // List 5 item 5
+#define VAL_FUNCTION_VLST5_6            "vlst5_6"            // List 5 item 6
+#define VAL_FUNCTION_VLST5_7            "vlst5_7"            // List 5 item 7
+#define VAL_FUNCTION_VLST5_8            "vlst5_8"            // List 5 item 8
+#define VAL_FUNCTION_VLST5_9            "vlst5_9"            // List 5 item 9
+#define VAL_FUNCTION_VLST5_10           "vlst5_10"           // List 5 item 10
+#define VAL_FUNCTION_VLST5_11           "vlst5_11"           // List 5 item 11
+#define VAL_FUNCTION_VLST5_12           "vlst5_12"           // List 5 item 12
+#define VAL_FUNCTION_VLST5_13           "vlst5_13"           // List 5 item 13
+#define VAL_FUNCTION_VLST5_14           "vlst5_14"           // List 5 item 14
+#define VAL_FUNCTION_VLST5_15           "vlst5_15"           // List 5 item 15
+#define VAL_FUNCTION_MENU_X             "menu_x"             // All menus
+#define VAL_FUNCTION_OPT                "opt"                // All dial/call options
+
+// assignment of keys
+#define KEY_KEY_ASSIGNMENT_IDLE               "UD_KeyAssignmentIdle"            // VAL_KEY_xxx and VAL_FKT_IDLE_xxx
+#define KEY_KEY_ASSIGNMENT_DIAL               "UD_KeyAssignmentDial"            // VAL_KEY_xxx and VAL_FKT_DIAL_xxx
+#define KEY_KEY_ASSIGNMENT_ALERT              "UD_KeyAssignmentAlert"           // VAL_KEY_xxx and VAL_FKT_ALERT_xxx
+#define KEY_KEY_ASSIGNMENT_ACTIVE             "UD_KeyAssignmentActive"          // VAL_KEY_xxx and VAL_FKT_ACTIVE_xxx
+#define KEY_KEY_ASSIGNMENT_ACTIVE_SOS         "UD_KeyAssignmentActiveSos"       // VAL_KEY_xxx and VAL_FKT_ACTIVE_SOS_xxx
+
+#define KEY_KEY_ASSIGNMENT_IDLE_MASTER        "UD_KeyAssignmentIdleMaster"      // VAL_KEY_xxx and VAL_FKT_IDLE_xxx
+#define KEY_KEY_ASSIGNMENT_DIAL_MASTER        "UD_KeyAssignmentDialMaster"      // VAL_KEY_xxx and VAL_FKT_DIAL_xxx
+#define KEY_KEY_ASSIGNMENT_ALERT_MASTER       "UD_KeyAssignmentAlertMaster"     // VAL_KEY_xxx and VAL_FKT_ALERT_xxx
+#define KEY_KEY_ASSIGNMENT_ACTIVE_MASTER      "UD_KeyAssignmentActiveMaster"    // VAL_KEY_xxx and VAL_FKT_ACTIVE_xxx
+#define KEY_KEY_ASSIGNMENT_ACTIVE_SOS_MASTER  "UD_KeyAssignmentActiveSosMaster" // VAL_KEY_xxx and VAL_FKT_ACTIVE_SOS_xxx
+
+// keys available on device
+#define VAL_KEY_SOS                "sos"                // SOS-key (sos)
+#define VAL_KEY_SIDE1              "side1"              // Side key up (side1)
+#define VAL_KEY_SIDE2              "side2"              // Side key middle (side2)
+#define VAL_KEY_SIDE3              "side3"              // Side key down (side3)
+#define VAL_KEY_VIP                "vip"                // Hotkey (vip)
+#define VAL_KEY_OK                 "ok"                 // Softkey left (ok)
+#define VAL_KEY_ESC                "esc"                // Softkey middle (esc)
+#define VAL_KEY_OPT                "opt"                // Softkey right (opt)
+#define VAL_KEY_LEFT               "left"               // Navi. left (left)
+#define VAL_KEY_RIGHT              "right"              // Navi. right (right)
+#define VAL_KEY_UP                 "up"                 // Navi. up (up)
+#define VAL_KEY_DOWN               "down"               // Navi. down (down)
+#define VAL_KEY_GREEN              "green"              // Hook off (green)
+#define VAL_KEY_RED                "red"                // Hook on (red)
+#define VAL_KEY_LONG_SOS           "long.sos"           // SOS-key long (long.sos)
+#define VAL_KEY_LONG_SIDE1         "long.side1"         // Side key up long (long.side1)
+#define VAL_KEY_LONG_SIDE2         "long.side2"         // Side key middle long (long.side2)
+#define VAL_KEY_LONG_SIDE3         "long.side3"         // Side key down long (long.side3)
+#define VAL_KEY_LONG_VIP           "long.vip"           // Hotkey long (long.vip)
+#define VAL_KEY_LONG_OK            "long.ok"            // Softkey left long (long.ok)
+#define VAL_KEY_LONG_ESC           "long.esc"           // Softkey middle long (long.esc)
+#define VAL_KEY_LONG_OPT           "long.opt"           // Softkey right long (long.opt)
+#define VAL_KEY_LONG_LEFT          "long.left"          // Navi. left long (long.left)
+#define VAL_KEY_LONG_RIGHT         "long.right"         // Navi. right long (long.right)
+#define VAL_KEY_LONG_GREEN         "long.green"         // Hook off long (long.green)
+#define VAL_KEY_LONG_RED           "long.red"           // Hook on long (long.red)
+#define VAL_KEY_LONG_D0            "long.d0"            // Key 0 long (long.d0)
+#define VAL_KEY_LONG_D1            "long.d1"            // Key 1 long (long.d1)
+#define VAL_KEY_LONG_D2            "long.d2"            // Key 2 long (long.d2)
+#define VAL_KEY_LONG_D3            "long.d3"            // Key 3 long (long.d3)
+#define VAL_KEY_LONG_D4            "long.d4"            // Key 4 long (long.d4)
+#define VAL_KEY_LONG_D5            "long.d5"            // Key 5 long (long.d5)
+#define VAL_KEY_LONG_D6            "long.d6"            // Key 6 long (long.d6)
+#define VAL_KEY_LONG_D7            "long.d7"            // Key 7 long (long.d7)
+#define VAL_KEY_LONG_D8            "long.d8"            // Key 8 long (long.d8)
+#define VAL_KEY_LONG_D9            "long.d9"            // Key 9 long (long.d9)
+#define VAL_KEY_LONG_STAR          "long.star"          // Star key long (long.star)
+#define VAL_KEY_LONG_HASH          "long.hash"          // Hash key long (long.hash)
+#define VAL_KEY_D0                 "d0"                 // Key 0 (d0)
+#define VAL_KEY_D1                 "d1"                 // Key 1 (d1)
+#define VAL_KEY_D2                 "d2"                 // Key 2 (d2)
+#define VAL_KEY_D3                 "d3"                 // Key 3 (d3)
+#define VAL_KEY_D4                 "d4"                 // Key 4 (d4)
+#define VAL_KEY_D5                 "d5"                 // Key 5 (d5)
+#define VAL_KEY_D6                 "d6"                 // Key 6 (d6)
+#define VAL_KEY_D7                 "d7"                 // Key 7 (d7)
+#define VAL_KEY_D8                 "d8"                 // Key 8 (d8)
+#define VAL_KEY_D9                 "d9"                 // Key 9 (d9)
+#define VAL_KEY_STAR               "star"               // Star key (star)
+#define VAL_KEY_HASH               "hash"               // Hash key (hash)
+#define VAL_KEY_DEL                "del"                // C-key (del)
+#define VAL_KEY_SPK                "spk"                // Handsfree (spk)
+#define VAL_KEY_LONG_DEL           "long.del"           // C-key long (long.del)
+#define VAL_KEY_LONG_SPK           "long.spk"           // Handsfree long (long.spk)
+
+// functions available in IDLE state
+#define VAL_FKT_IDLE_NOP                  "nop"                  // <no function>
+#define VAL_FKT_IDLE_DEF                  "def"                  // <default function>
+#define VAL_FKT_IDLE_PROG                 "prog"                 // <key programming>
+#define VAL_FKT_IDLE_MENU                 "menu"                 // >>>Menu
+#define VAL_FKT_IDLE_DYN_PBX_OPTION       "dyn_pbx_option"       // >>>System options / main menu
+#define VAL_FKT_IDLE_PBX_SERVER_MENU      "pbx_server_menu"      // >>>Server menu
+#define VAL_FKT_IDLE_GAPP_MAIN            "gappp_main"           // >>>System menu
+#define VAL_FKT_IDLE_ALARM_TIME           "alarm_time"           // Time/Alarms
+#define VAL_FKT_IDLE_ALARM                "alarm"                //     Alarm clock
+#define VAL_FKT_IDLE_APPOINTMENT          "appointment"          //     Appointment
+#define VAL_FKT_IDLE_TEA_TIMER            "tea_timer"            //     Timer
+#define VAL_FKT_IDLE_DIRECTORIES          "directories"          // Directories (Personal/Central/VIP-list)
+#define VAL_FKT_IDLE_GET_NAME             "get_name"             //     Get name from personal directory
+#define VAL_FKT_IDLE_BOOK                 "book"                 //     Personal directory
+#define VAL_FKT_IDLE_GAPPP_DIRECTORY      "gappp_directory"      //     Central directory (obsolete)
+#define VAL_FKT_IDLE_PBX_DIRECTORY        "pbx_directory"        //     Central directory(*)
+#define VAL_FKT_IDLE_VIP                  "vip"                  //     VIP list
+#define VAL_FKT_IDLE_QUICK0               "quick0"               // Quick call list
+#define VAL_FKT_IDLE_SOS_MENU             "sos_menu"             // SOS call: with confirmation
+#define VAL_FKT_IDLE_SOS                  "sos"                  // SOS call
+#define VAL_FKT_IDLE_SOS_LOC              "sos_loc"              // Localisation alarm
+#define VAL_FKT_IDLE_SHOCK                "shock"                // Shock detection
+#define VAL_FKT_IDLE_ALARM_CALL           "alarm_call"           // Alarm call
+#define VAL_FKT_IDLE_SENSOR_MENU          "sensor_menu"          // Alarm sensor
+#define VAL_FKT_IDLE_NAVI                 "navi"                 // Navigation key
+#define VAL_FKT_IDLE_INF                  "inf"                  // (i) Info menu
+#define VAL_FKT_IDLE_MENUINFNEW           "MenuInfNew"           // (i) New infos
+#define VAL_FKT_IDLE_VOICE_BOX            "voice_box"            //     Voice box
+#define VAL_FKT_IDLE_JOURNAL              "journal"              //     Call journal
+#define VAL_FKT_IDLE_CALLER               "caller"               //     Caller list
+#define VAL_FKT_IDLE_REDIAL               "redial"               //     Redial list
+#define VAL_FKT_IDLE_OMM_JOBS             "omm_jobs"             //     Job list
+#define VAL_FKT_IDLE_BESTMSG              "BestMsg"              //     Text messages
+#define VAL_FKT_IDLE_OMM_INBOX            "omm_inbox"            //     Inbox/Text messages
+#define VAL_FKT_IDLE_OMM_OUTBOX           "omm_outbox"           //     Outbox/Text messages
+#define VAL_FKT_IDLE_OMM_DEF_MSG          "omm_def_msg"          //     Pre-defined messages
+#define VAL_FKT_IDLE_TXT_SEND             "txt_send"             //     Send new text message
+#define VAL_FKT_IDLE_ACTIVE_FEATURES      "active_features"      // Active Handset features
+#define VAL_FKT_IDLE_FEATURE_ACCESS_CODE  "feature_access_code"  // Feature access codes(*)
+#define VAL_FKT_IDLE_PBX_UNPARK           "pbx_unpark"           // Unpark call(*)
+#define VAL_FKT_IDLE_GAPPP_PICKUP         "gappp_pickup"         // Pickup call(*)
+#define VAL_FKT_IDLE_GAPPP_PICKUP_SELECT  "gappp_pickup_select"  // Pickup select call(*)
+#define VAL_FKT_IDLE_PBX_HOT_LIST         "pbx_hot_list"         // Hot list(*)
+#define VAL_FKT_IDLE_PBX_TAKE             "pbx_take"             // Take call(*)
+#define VAL_FKT_IDLE_LOCATING_EDITOR      "locating_editor"      // Locating(*)
+#define VAL_FKT_IDLE_PBX_PRESENCE         "pbx_presence"         // Presence(*)
+#define VAL_FKT_IDLE_PBX_DND              "pbx_dnd"              // Call protection(*)
+#define VAL_FKT_IDLE_GAPPP_CALL_FORWARD   "gappp_call_forward"   // Call diversion(*)
+#define VAL_FKT_IDLE_PBX_CALL_ROUTING     "pbx_call_routing"     // Call routing(*)
+#define VAL_FKT_IDLE_PROFILE              "profile"              // Profile
+#define VAL_FKT_IDLE_DATAMANAGMENT        "datamanagment"        // Data managment
+#define VAL_FKT_IDLE_KEYLOCK              "keylock"              // Key lock
+#define VAL_FKT_IDLE_PINLOCK              "pinlock"              // Pin/Phone lock
+#define VAL_FKT_IDLE_LIGHT_TOGGLE         "light_toggle"         // Light on/off
+#define VAL_FKT_IDLE_BT                   "bt"                   // Bluetooth settings
+#define VAL_FKT_IDLE_BT_STATE             "bt_state"             // BT status (on/off)
+#define VAL_FKT_IDLE_RING_OFF             "ring_off"             // Ringer on/off
+#define VAL_FKT_IDLE_AUDIO_MENU           "audio"                // Audio settings
+#define VAL_FKT_IDLE_VOL_OK               "vol_ok"               //     Volume settings
+#define VAL_FKT_IDLE_AUDIO_HD             "audio_hd"             //     HiQ audio on/off
+#define VAL_FKT_IDLE_OFF_MENU             "off_menu"             // >>> Off menu
+#define VAL_FKT_IDLE_OFF                  "off"                  //     Power off
+#define VAL_FKT_IDLE_PREDIAL              "predial"              // Please dial editor
+#define VAL_FKT_IDLE_VERSION              "version"              // Version info
+#define VAL_FKT_IDLE_FILTER_MENU          "filter_menu"          // Call filter
+#define VAL_FKT_IDLE_FILTER_STATE         "filter_state"         //    Call filter state
+#define VAL_FKT_IDLE_PBX_FKEYS            "pbx_fkeys"            // XML Applications
+#define VAL_FKT_IDLE_F_1                  "f_1"                  //     App 1
+#define VAL_FKT_IDLE_F_2                  "f_2"                  //     App 2
+#define VAL_FKT_IDLE_F_3                  "f_3"                  //     App 3
+#define VAL_FKT_IDLE_F_4                  "f_4"                  //     App 4
+#define VAL_FKT_IDLE_F_5                  "f_5"                  //     App 5
+#define VAL_FKT_IDLE_F_6                  "f_6"                  //     App 6
+#define VAL_FKT_IDLE_F_7                  "f_7"                  //     App 7
+#define VAL_FKT_IDLE_F_8                  "f_8"                  //     App 8
+#define VAL_FKT_IDLE_F_9                  "f_9"                  //     App 9
+#define VAL_FKT_IDLE_F_10                 "f_10"                 //     App 10
+#define VAL_FKT_IDLE_VLSTX                "vlstx"              // Variable lists
+#define VAL_FKT_IDLE_VLST1                "vlst1"              // Variable list 1
+#define VAL_FKT_IDLE_VLST1_1              "vlst1_1"            // List 1 item 1
+#define VAL_FKT_IDLE_VLST1_2              "vlst1_2"            // List 1 item 2
+#define VAL_FKT_IDLE_VLST1_3              "vlst1_3"            // List 1 item 3
+#define VAL_FKT_IDLE_VLST1_4              "vlst1_4"            // List 1 item 4
+#define VAL_FKT_IDLE_VLST1_5              "vlst1_5"            // List 1 item 5
+#define VAL_FKT_IDLE_VLST1_6              "vlst1_6"            // List 1 item 6
+#define VAL_FKT_IDLE_VLST1_7              "vlst1_7"            // List 1 item 7
+#define VAL_FKT_IDLE_VLST1_8              "vlst1_8"            // List 1 item 8
+#define VAL_FKT_IDLE_VLST1_9              "vlst1_9"            // List 1 item 9
+#define VAL_FKT_IDLE_VLST1_10             "vlst1_10"           // List 1 item 10
+#define VAL_FKT_IDLE_VLST1_11             "vlst1_11"           // List 1 item 11
+#define VAL_FKT_IDLE_VLST1_12             "vlst1_12"           // List 1 item 12
+#define VAL_FKT_IDLE_VLST1_13             "vlst1_13"           // List 1 item 13
+#define VAL_FKT_IDLE_VLST1_14             "vlst1_14"           // List 1 item 14
+#define VAL_FKT_IDLE_VLST1_15             "vlst1_15"           // List 1 item 15
+#define VAL_FKT_IDLE_VLST2                "vlst2"              // Variable list 2
+#define VAL_FKT_IDLE_VLST2_1              "vlst2_1"            // List 2 item 1
+#define VAL_FKT_IDLE_VLST2_2              "vlst2_2"            // List 2 item 2
+#define VAL_FKT_IDLE_VLST2_3              "vlst2_3"            // List 2 item 3
+#define VAL_FKT_IDLE_VLST2_4              "vlst2_4"            // List 2 item 4
+#define VAL_FKT_IDLE_VLST2_5              "vlst2_5"            // List 2 item 5
+#define VAL_FKT_IDLE_VLST2_6              "vlst2_6"            // List 2 item 6
+#define VAL_FKT_IDLE_VLST2_7              "vlst2_7"            // List 2 item 7
+#define VAL_FKT_IDLE_VLST2_8              "vlst2_8"            // List 2 item 8
+#define VAL_FKT_IDLE_VLST2_9              "vlst2_9"            // List 2 item 9
+#define VAL_FKT_IDLE_VLST2_10             "vlst2_10"           // List 2 item 10
+#define VAL_FKT_IDLE_VLST2_11             "vlst2_11"           // List 2 item 11
+#define VAL_FKT_IDLE_VLST2_12             "vlst2_12"           // List 2 item 12
+#define VAL_FKT_IDLE_VLST2_13             "vlst2_13"           // List 2 item 13
+#define VAL_FKT_IDLE_VLST2_14             "vlst2_14"           // List 2 item 14
+#define VAL_FKT_IDLE_VLST2_15             "vlst2_15"           // List 2 item 15
+#define VAL_FKT_IDLE_VLST3                "vlst3"              // Variable list 3
+#define VAL_FKT_IDLE_VLST3_1              "vlst3_1"            // List 3 item 1
+#define VAL_FKT_IDLE_VLST3_2              "vlst3_2"            // List 3 item 2
+#define VAL_FKT_IDLE_VLST3_3              "vlst3_3"            // List 3 item 3
+#define VAL_FKT_IDLE_VLST3_4              "vlst3_4"            // List 3 item 4
+#define VAL_FKT_IDLE_VLST3_5              "vlst3_5"            // List 3 item 5
+#define VAL_FKT_IDLE_VLST3_6              "vlst3_6"            // List 3 item 6
+#define VAL_FKT_IDLE_VLST3_7              "vlst3_7"            // List 3 item 7
+#define VAL_FKT_IDLE_VLST3_8              "vlst3_8"            // List 3 item 8
+#define VAL_FKT_IDLE_VLST3_9              "vlst3_9"            // List 3 item 9
+#define VAL_FKT_IDLE_VLST3_10             "vlst3_10"           // List 3 item 10
+#define VAL_FKT_IDLE_VLST3_11             "vlst3_11"           // List 3 item 11
+#define VAL_FKT_IDLE_VLST3_12             "vlst3_12"           // List 3 item 12
+#define VAL_FKT_IDLE_VLST3_13             "vlst3_13"           // List 3 item 13
+#define VAL_FKT_IDLE_VLST3_14             "vlst3_14"           // List 3 item 14
+#define VAL_FKT_IDLE_VLST3_15             "vlst3_15"           // List 3 item 15
+#define VAL_FKT_IDLE_VLST4                "vlst4"              // Variable list 4
+#define VAL_FKT_IDLE_VLST4_1              "vlst4_1"            // List 4 item 1
+#define VAL_FKT_IDLE_VLST4_2              "vlst4_2"            // List 4 item 2
+#define VAL_FKT_IDLE_VLST4_3              "vlst4_3"            // List 4 item 3
+#define VAL_FKT_IDLE_VLST4_4              "vlst4_4"            // List 4 item 4
+#define VAL_FKT_IDLE_VLST4_5              "vlst4_5"            // List 4 item 5
+#define VAL_FKT_IDLE_VLST4_6              "vlst4_6"            // List 4 item 6
+#define VAL_FKT_IDLE_VLST4_7              "vlst4_7"            // List 4 item 7
+#define VAL_FKT_IDLE_VLST4_8              "vlst4_8"            // List 4 item 8
+#define VAL_FKT_IDLE_VLST4_9              "vlst4_9"            // List 4 item 9
+#define VAL_FKT_IDLE_VLST4_10             "vlst4_10"           // List 4 item 10
+#define VAL_FKT_IDLE_VLST4_11             "vlst4_11"           // List 4 item 11
+#define VAL_FKT_IDLE_VLST4_12             "vlst4_12"           // List 4 item 12
+#define VAL_FKT_IDLE_VLST4_13             "vlst4_13"           // List 4 item 13
+#define VAL_FKT_IDLE_VLST4_14             "vlst4_14"           // List 4 item 14
+#define VAL_FKT_IDLE_VLST4_15             "vlst4_15"           // List 4 item 15
+#define VAL_FKT_IDLE_VLST5                "vlst5"              // Variable list 5
+#define VAL_FKT_IDLE_VLST5_1              "vlst5_1"            // List 5 item 1
+#define VAL_FKT_IDLE_VLST5_2              "vlst5_2"            // List 5 item 2
+#define VAL_FKT_IDLE_VLST5_3              "vlst5_3"            // List 5 item 3
+#define VAL_FKT_IDLE_VLST5_4              "vlst5_4"            // List 5 item 4
+#define VAL_FKT_IDLE_VLST5_5              "vlst5_5"            // List 5 item 5
+#define VAL_FKT_IDLE_VLST5_6              "vlst5_6"            // List 5 item 6
+#define VAL_FKT_IDLE_VLST5_7              "vlst5_7"            // List 5 item 7
+#define VAL_FKT_IDLE_VLST5_8              "vlst5_8"            // List 5 item 8
+#define VAL_FKT_IDLE_VLST5_9              "vlst5_9"            // List 5 item 9
+#define VAL_FKT_IDLE_VLST5_10             "vlst5_10"           // List 5 item 10
+#define VAL_FKT_IDLE_VLST5_11             "vlst5_11"           // List 5 item 11
+#define VAL_FKT_IDLE_VLST5_12             "vlst5_12"           // List 5 item 12
+#define VAL_FKT_IDLE_VLST5_13             "vlst5_13"           // List 5 item 13
+#define VAL_FKT_IDLE_VLST5_14             "vlst5_14"           // List 5 item 14
+#define VAL_FKT_IDLE_VLST5_15             "vlst5_15"           // List 5 item 15
+
+// functions available in DIAL state
+#define VAL_FKT_DIAL_NOP                  "nop"                  // <no function>
+#define VAL_FKT_DIAL_DEF                  "def"                  // <default function>
+#define VAL_FKT_DIAL_SK_DYN1              "sk_dyn1"              // <dynamic soft-key>
+#define VAL_FKT_DIAL_JOURNAL              "journal"              // Call journal
+#define VAL_FKT_DIAL_CALLER               "caller"               // Caller list
+#define VAL_FKT_DIAL_REDIAL               "redial"               // Redial list
+#define VAL_FKT_DIAL_GET_NAME             "get_name"             // Get name from personal directory
+#define VAL_FKT_DIAL_BOOK_REQ             "book_req"             // Personal directory
+#define VAL_FKT_DIAL_GAPPP_DIRECTORY      "gappp_directory"      //     Central directory (obsolete)
+#define VAL_FKT_DIAL_PBX_DIRECTORY        "pbx_directory"        // Central directory(*)
+#define VAL_FKT_DIAL_VIP                  "vip"                  //     VIP list
+#define VAL_FKT_DIAL_ADD_TO               "add_to"               //     Add to... (VIP-, Filter-list, Personal directory)
+#define VAL_FKT_DIAL_GAPPP_PICKUP_SELECT  "gappp_pickup_select"  // Pickup select
+#define VAL_FKT_DIAL_GAPPP_VIP_CALL       "gappp_vip_call"       // VIP call
+#define VAL_FKT_DIAL_GAPPP_ANNOUNCEMENT   "gappp_announcement"   // Announcement
+#define VAL_FKT_DIAL_GAPPP_INTERCOM       "gappp_intercom"       // Intercom
+#define VAL_FKT_DIAL_VLSTX                 "vlstx"              // Variable lists
+#define VAL_FKT_DIAL_VLST1                 "vlst1"              // Variable list 1
+#define VAL_FKT_DIAL_VLST1_1               "vlst1_1"            // List 1 item 1
+#define VAL_FKT_DIAL_VLST1_2               "vlst1_2"            // List 1 item 2
+#define VAL_FKT_DIAL_VLST1_3               "vlst1_3"            // List 1 item 3
+#define VAL_FKT_DIAL_VLST1_4               "vlst1_4"            // List 1 item 4
+#define VAL_FKT_DIAL_VLST1_5               "vlst1_5"            // List 1 item 5
+#define VAL_FKT_DIAL_VLST1_6               "vlst1_6"            // List 1 item 6
+#define VAL_FKT_DIAL_VLST1_7               "vlst1_7"            // List 1 item 7
+#define VAL_FKT_DIAL_VLST1_8               "vlst1_8"            // List 1 item 8
+#define VAL_FKT_DIAL_VLST1_9               "vlst1_9"            // List 1 item 9
+#define VAL_FKT_DIAL_VLST1_10              "vlst1_10"           // List 1 item 10
+#define VAL_FKT_DIAL_VLST1_11              "vlst1_11"           // List 1 item 11
+#define VAL_FKT_DIAL_VLST1_12              "vlst1_12"           // List 1 item 12
+#define VAL_FKT_DIAL_VLST1_13              "vlst1_13"           // List 1 item 13
+#define VAL_FKT_DIAL_VLST1_14              "vlst1_14"           // List 1 item 14
+#define VAL_FKT_DIAL_VLST1_15              "vlst1_15"           // List 1 item 15
+#define VAL_FKT_DIAL_VLST2                 "vlst2"              // Variable list 2
+#define VAL_FKT_DIAL_VLST2_1               "vlst2_1"            // List 2 item 1
+#define VAL_FKT_DIAL_VLST2_2               "vlst2_2"            // List 2 item 2
+#define VAL_FKT_DIAL_VLST2_3               "vlst2_3"            // List 2 item 3
+#define VAL_FKT_DIAL_VLST2_4               "vlst2_4"            // List 2 item 4
+#define VAL_FKT_DIAL_VLST2_5               "vlst2_5"            // List 2 item 5
+#define VAL_FKT_DIAL_VLST2_6               "vlst2_6"            // List 2 item 6
+#define VAL_FKT_DIAL_VLST2_7               "vlst2_7"            // List 2 item 7
+#define VAL_FKT_DIAL_VLST2_8               "vlst2_8"            // List 2 item 8
+#define VAL_FKT_DIAL_VLST2_9               "vlst2_9"            // List 2 item 9
+#define VAL_FKT_DIAL_VLST2_10              "vlst2_10"           // List 2 item 10
+#define VAL_FKT_DIAL_VLST2_11              "vlst2_11"           // List 2 item 11
+#define VAL_FKT_DIAL_VLST2_12              "vlst2_12"           // List 2 item 12
+#define VAL_FKT_DIAL_VLST2_13              "vlst2_13"           // List 2 item 13
+#define VAL_FKT_DIAL_VLST2_14              "vlst2_14"           // List 2 item 14
+#define VAL_FKT_DIAL_VLST2_15              "vlst2_15"           // List 2 item 15
+#define VAL_FKT_DIAL_VLST3                 "vlst3"              // Variable list 3
+#define VAL_FKT_DIAL_VLST3_1               "vlst3_1"            // List 3 item 1
+#define VAL_FKT_DIAL_VLST3_2               "vlst3_2"            // List 3 item 2
+#define VAL_FKT_DIAL_VLST3_3               "vlst3_3"            // List 3 item 3
+#define VAL_FKT_DIAL_VLST3_4               "vlst3_4"            // List 3 item 4
+#define VAL_FKT_DIAL_VLST3_5               "vlst3_5"            // List 3 item 5
+#define VAL_FKT_DIAL_VLST3_6               "vlst3_6"            // List 3 item 6
+#define VAL_FKT_DIAL_VLST3_7               "vlst3_7"            // List 3 item 7
+#define VAL_FKT_DIAL_VLST3_8               "vlst3_8"            // List 3 item 8
+#define VAL_FKT_DIAL_VLST3_9               "vlst3_9"            // List 3 item 9
+#define VAL_FKT_DIAL_VLST3_10              "vlst3_10"           // List 3 item 10
+#define VAL_FKT_DIAL_VLST3_11              "vlst3_11"           // List 3 item 11
+#define VAL_FKT_DIAL_VLST3_12              "vlst3_12"           // List 3 item 12
+#define VAL_FKT_DIAL_VLST3_13              "vlst3_13"           // List 3 item 13
+#define VAL_FKT_DIAL_VLST3_14              "vlst3_14"           // List 3 item 14
+#define VAL_FKT_DIAL_VLST3_15              "vlst3_15"           // List 3 item 15
+#define VAL_FKT_DIAL_VLST4                 "vlst4"              // Variable list 4
+#define VAL_FKT_DIAL_VLST4_1               "vlst4_1"            // List 4 item 1
+#define VAL_FKT_DIAL_VLST4_2               "vlst4_2"            // List 4 item 2
+#define VAL_FKT_DIAL_VLST4_3               "vlst4_3"            // List 4 item 3
+#define VAL_FKT_DIAL_VLST4_4               "vlst4_4"            // List 4 item 4
+#define VAL_FKT_DIAL_VLST4_5               "vlst4_5"            // List 4 item 5
+#define VAL_FKT_DIAL_VLST4_6               "vlst4_6"            // List 4 item 6
+#define VAL_FKT_DIAL_VLST4_7               "vlst4_7"            // List 4 item 7
+#define VAL_FKT_DIAL_VLST4_8               "vlst4_8"            // List 4 item 8
+#define VAL_FKT_DIAL_VLST4_9               "vlst4_9"            // List 4 item 9
+#define VAL_FKT_DIAL_VLST4_10              "vlst4_10"           // List 4 item 10
+#define VAL_FKT_DIAL_VLST4_11              "vlst4_11"           // List 4 item 11
+#define VAL_FKT_DIAL_VLST4_12              "vlst4_12"           // List 4 item 12
+#define VAL_FKT_DIAL_VLST4_13              "vlst4_13"           // List 4 item 13
+#define VAL_FKT_DIAL_VLST4_14              "vlst4_14"           // List 4 item 14
+#define VAL_FKT_DIAL_VLST4_15              "vlst4_15"           // List 4 item 15
+#define VAL_FKT_DIAL_VLST5                 "vlst5"              // Variable list 5
+#define VAL_FKT_DIAL_VLST5_1               "vlst5_1"            // List 5 item 1
+#define VAL_FKT_DIAL_VLST5_2               "vlst5_2"            // List 5 item 2
+#define VAL_FKT_DIAL_VLST5_3               "vlst5_3"            // List 5 item 3
+#define VAL_FKT_DIAL_VLST5_4               "vlst5_4"            // List 5 item 4
+#define VAL_FKT_DIAL_VLST5_5               "vlst5_5"            // List 5 item 5
+#define VAL_FKT_DIAL_VLST5_6               "vlst5_6"            // List 5 item 6
+#define VAL_FKT_DIAL_VLST5_7               "vlst5_7"            // List 5 item 7
+#define VAL_FKT_DIAL_VLST5_8               "vlst5_8"            // List 5 item 8
+#define VAL_FKT_DIAL_VLST5_9               "vlst5_9"            // List 5 item 9
+#define VAL_FKT_DIAL_VLST5_10              "vlst5_10"           // List 5 item 10
+#define VAL_FKT_DIAL_VLST5_11              "vlst5_11"           // List 5 item 11
+#define VAL_FKT_DIAL_VLST5_12              "vlst5_12"           // List 5 item 12
+#define VAL_FKT_DIAL_VLST5_13              "vlst5_13"           // List 5 item 13
+#define VAL_FKT_DIAL_VLST5_14              "vlst5_14"           // List 5 item 14
+#define VAL_FKT_DIAL_VLST5_15              "vlst5_15"           // List 5 item 15
+
+// functions available in ALERTING state
+#define VAL_FKT_ALERT_NOP                  "nop"                  // <no function>
+#define VAL_FKT_ALERT_DEF                  "def"                  // <default function>
+#define VAL_FKT_ALERT_SK_DYN1              "sk_dyn1"              // <dynamic soft-key>
+#define VAL_FKT_ALERT_OPT                  "opt"                  // >>>Call options
+#define VAL_FKT_ALERT_ACC                  "acc"                  // Accept call / Hook off
+#define VAL_FKT_ALERT_REJ                  "rej"                  // Reject call / Hook on
+#define VAL_FKT_ALERT_RING_OFF             "ring_off"             // Ringing off
+#define VAL_FKT_ALERT_ADD_TO               "add_to"               // Add to... (VIP-, Filter-list, Personal directory)
+#define VAL_FKT_ALERT_OPT_CCBS             "opt_ccbs"             // Callback CCBS
+#define VAL_FKT_ALERT_OPT_CCNR             "opt_ccnr"             // Callback CCNR
+#define VAL_FKT_ALERT_OPT_MCID             "opt_mcid"             // Intercept MCID
+#define VAL_FKT_ALERT_OPT_PICKUP           "opt_pickup"           // Pickup call
+#define VAL_FKT_ALERT_OPT_PICKUP_SELECT    "opt_pickup_select"    // Pickup select
+#define VAL_FKT_ALERT_OPT_PARK             "opt_park"             // Park call/Unpark call
+#define VAL_FKT_ALERT_OPT_TAKE             "opt_take"             // Take call 
+#define VAL_FKT_ALERT_VLSTX                "vlstx"              // Variable lists
+#define VAL_FKT_ALERT_VLST1                "vlst1"              // Variable list 1
+#define VAL_FKT_ALERT_VLST1_1              "vlst1_1"            // List 1 item 1
+#define VAL_FKT_ALERT_VLST1_2              "vlst1_2"            // List 1 item 2
+#define VAL_FKT_ALERT_VLST1_3              "vlst1_3"            // List 1 item 3
+#define VAL_FKT_ALERT_VLST1_4              "vlst1_4"            // List 1 item 4
+#define VAL_FKT_ALERT_VLST1_5              "vlst1_5"            // List 1 item 5
+#define VAL_FKT_ALERT_VLST1_6              "vlst1_6"            // List 1 item 6
+#define VAL_FKT_ALERT_VLST1_7              "vlst1_7"            // List 1 item 7
+#define VAL_FKT_ALERT_VLST1_8              "vlst1_8"            // List 1 item 8
+#define VAL_FKT_ALERT_VLST1_9              "vlst1_9"            // List 1 item 9
+#define VAL_FKT_ALERT_VLST1_10             "vlst1_10"           // List 1 item 10
+#define VAL_FKT_ALERT_VLST1_11             "vlst1_11"           // List 1 item 11
+#define VAL_FKT_ALERT_VLST1_12             "vlst1_12"           // List 1 item 12
+#define VAL_FKT_ALERT_VLST1_13             "vlst1_13"           // List 1 item 13
+#define VAL_FKT_ALERT_VLST1_14             "vlst1_14"           // List 1 item 14
+#define VAL_FKT_ALERT_VLST1_15             "vlst1_15"           // List 1 item 15
+#define VAL_FKT_ALERT_VLST2                "vlst2"              // Variable list 2
+#define VAL_FKT_ALERT_VLST2_1              "vlst2_1"            // List 2 item 1
+#define VAL_FKT_ALERT_VLST2_2              "vlst2_2"            // List 2 item 2
+#define VAL_FKT_ALERT_VLST2_3              "vlst2_3"            // List 2 item 3
+#define VAL_FKT_ALERT_VLST2_4              "vlst2_4"            // List 2 item 4
+#define VAL_FKT_ALERT_VLST2_5              "vlst2_5"            // List 2 item 5
+#define VAL_FKT_ALERT_VLST2_6              "vlst2_6"            // List 2 item 6
+#define VAL_FKT_ALERT_VLST2_7              "vlst2_7"            // List 2 item 7
+#define VAL_FKT_ALERT_VLST2_8              "vlst2_8"            // List 2 item 8
+#define VAL_FKT_ALERT_VLST2_9              "vlst2_9"            // List 2 item 9
+#define VAL_FKT_ALERT_VLST2_10             "vlst2_10"           // List 2 item 10
+#define VAL_FKT_ALERT_VLST2_11             "vlst2_11"           // List 2 item 11
+#define VAL_FKT_ALERT_VLST2_12             "vlst2_12"           // List 2 item 12
+#define VAL_FKT_ALERT_VLST2_13             "vlst2_13"           // List 2 item 13
+#define VAL_FKT_ALERT_VLST2_14             "vlst2_14"           // List 2 item 14
+#define VAL_FKT_ALERT_VLST2_15             "vlst2_15"           // List 2 item 15
+#define VAL_FKT_ALERT_VLST3                "vlst3"              // Variable list 3
+#define VAL_FKT_ALERT_VLST3_1              "vlst3_1"            // List 3 item 1
+#define VAL_FKT_ALERT_VLST3_2              "vlst3_2"            // List 3 item 2
+#define VAL_FKT_ALERT_VLST3_3              "vlst3_3"            // List 3 item 3
+#define VAL_FKT_ALERT_VLST3_4              "vlst3_4"            // List 3 item 4
+#define VAL_FKT_ALERT_VLST3_5              "vlst3_5"            // List 3 item 5
+#define VAL_FKT_ALERT_VLST3_6              "vlst3_6"            // List 3 item 6
+#define VAL_FKT_ALERT_VLST3_7              "vlst3_7"            // List 3 item 7
+#define VAL_FKT_ALERT_VLST3_8              "vlst3_8"            // List 3 item 8
+#define VAL_FKT_ALERT_VLST3_9              "vlst3_9"            // List 3 item 9
+#define VAL_FKT_ALERT_VLST3_10             "vlst3_10"           // List 3 item 10
+#define VAL_FKT_ALERT_VLST3_11             "vlst3_11"           // List 3 item 11
+#define VAL_FKT_ALERT_VLST3_12             "vlst3_12"           // List 3 item 12
+#define VAL_FKT_ALERT_VLST3_13             "vlst3_13"           // List 3 item 13
+#define VAL_FKT_ALERT_VLST3_14             "vlst3_14"           // List 3 item 14
+#define VAL_FKT_ALERT_VLST3_15             "vlst3_15"           // List 3 item 15
+#define VAL_FKT_ALERT_VLST4                "vlst4"              // Variable list 4
+#define VAL_FKT_ALERT_VLST4_1              "vlst4_1"            // List 4 item 1
+#define VAL_FKT_ALERT_VLST4_2              "vlst4_2"            // List 4 item 2
+#define VAL_FKT_ALERT_VLST4_3              "vlst4_3"            // List 4 item 3
+#define VAL_FKT_ALERT_VLST4_4              "vlst4_4"            // List 4 item 4
+#define VAL_FKT_ALERT_VLST4_5              "vlst4_5"            // List 4 item 5
+#define VAL_FKT_ALERT_VLST4_6              "vlst4_6"            // List 4 item 6
+#define VAL_FKT_ALERT_VLST4_7              "vlst4_7"            // List 4 item 7
+#define VAL_FKT_ALERT_VLST4_8              "vlst4_8"            // List 4 item 8
+#define VAL_FKT_ALERT_VLST4_9              "vlst4_9"            // List 4 item 9
+#define VAL_FKT_ALERT_VLST4_10             "vlst4_10"           // List 4 item 10
+#define VAL_FKT_ALERT_VLST4_11             "vlst4_11"           // List 4 item 11
+#define VAL_FKT_ALERT_VLST4_12             "vlst4_12"           // List 4 item 12
+#define VAL_FKT_ALERT_VLST4_13             "vlst4_13"           // List 4 item 13
+#define VAL_FKT_ALERT_VLST4_14             "vlst4_14"           // List 4 item 14
+#define VAL_FKT_ALERT_VLST4_15             "vlst4_15"           // List 4 item 15
+#define VAL_FKT_ALERT_VLST5                "vlst5"              // Variable list 5
+#define VAL_FKT_ALERT_VLST5_1              "vlst5_1"            // List 5 item 1
+#define VAL_FKT_ALERT_VLST5_2              "vlst5_2"            // List 5 item 2
+#define VAL_FKT_ALERT_VLST5_3              "vlst5_3"            // List 5 item 3
+#define VAL_FKT_ALERT_VLST5_4              "vlst5_4"            // List 5 item 4
+#define VAL_FKT_ALERT_VLST5_5              "vlst5_5"            // List 5 item 5
+#define VAL_FKT_ALERT_VLST5_6              "vlst5_6"            // List 5 item 6
+#define VAL_FKT_ALERT_VLST5_7              "vlst5_7"            // List 5 item 7
+#define VAL_FKT_ALERT_VLST5_8              "vlst5_8"            // List 5 item 8
+#define VAL_FKT_ALERT_VLST5_9              "vlst5_9"            // List 5 item 9
+#define VAL_FKT_ALERT_VLST5_10             "vlst5_10"           // List 5 item 10
+#define VAL_FKT_ALERT_VLST5_11             "vlst5_11"           // List 5 item 11
+#define VAL_FKT_ALERT_VLST5_12             "vlst5_12"           // List 5 item 12
+#define VAL_FKT_ALERT_VLST5_13             "vlst5_13"           // List 5 item 13
+#define VAL_FKT_ALERT_VLST5_14             "vlst5_14"           // List 5 item 14
+#define VAL_FKT_ALERT_VLST5_15             "vlst5_15"           // List 5 item 15
+
+// functions available in ACTIVE state
+#define VAL_FKT_ACTIVE_NOP                  "nop"                  // <no function>
+#define VAL_FKT_ACTIVE_DEF                  "def"                  // <default function>
+#define VAL_FKT_ACTIVE_SK_DYN1              "sk_dyn1"              // <dynamic soft-key>
+#define VAL_FKT_ACTIVE_OPT                  "opt"                  // >>>Call options
+#define VAL_FKT_ACTIVE_PBX_SERVER_MENU      "pbx_server_menu"      // >>>Server menu(*)
+#define VAL_FKT_ACTIVE_FEATURE_ACCESS_CODE  "feature_access_code"  // >>>Feature access codes(*)
+#define VAL_FKT_ACTIVE_DIAL_R               "dial_r"               // (R) Register recall
+#define VAL_FKT_ACTIVE_OPT_ECT              "opt_ect"              // Transfer call
+#define VAL_FKT_ACTIVE_OPT_BROKERING        "opt_brokering"        // Brokering
+#define VAL_FKT_ACTIVE_OPT_HOLD             "opt_hold"             // Hold call
+#define VAL_FKT_ACTIVE_OPT_3PTY             "opt_3pty"             // Conference start/stopp
+#define VAL_FKT_ACTIVE_OPT_PARK             "opt_park"             // Park call/Unpark call
+#define VAL_FKT_ACTIVE_REL                  "rel"                  // Release call / Hook on
+#define VAL_FKT_ACTIVE_ADD_TO               "add_to"               // Add to... (VIP-, Filter-list, Personal directory)
+#define VAL_FKT_ACTIVE_BOOK                 "book"                 // Personal directory
+#define VAL_FKT_ACTIVE_GAPPP_DIRECTORY      "gappp_directory"      //     Central directory (obsolete)
+#define VAL_FKT_ACTIVE_PBX_DIRECTORY        "pbx_directory"        // Central directory(*)
+#define VAL_FKT_ACTIVE_VIP                  "vip"                  // VIP list
+#define VAL_FKT_ACTIVE_QUICK0               "quick0"               // Quick call list
+#define VAL_FKT_ACTIVE_FILTER               "filter"               // Call filter list
+#define VAL_FKT_ACTIVE_JOURNAL              "journal"              // Call journal
+#define VAL_FKT_ACTIVE_CALLER               "caller"               // Caller list
+#define VAL_FKT_ACTIVE_REDIAL               "redial"               // Redial list
+#define VAL_FKT_ACTIVE_TXT_SEND             "txt_send"             // Send new text message
+#define VAL_FKT_ACTIVE_VOL_OK               "vol_ok"               // Volume settings
+#define VAL_FKT_ACTIVE_VOL_UP               "vol_up"               // Volume +
+#define VAL_FKT_ACTIVE_VOL_DOWN             "vol_down"             // Volume -
+#define VAL_FKT_ACTIVE_MUTE                 "mute"                 // Microphone on/off
+#define VAL_FKT_ACTIVE_AUDIO_HD             "audio_hd"             // HiQ audio on/off
+#define VAL_FKT_ACTIVE_BT_TOGGLE            "bt_toggle"            // Transfer BT <-> Handset
+#define VAL_FKT_ACTIVE_OPT_CCBS             "opt_ccbs"             // Callback CCBS
+#define VAL_FKT_ACTIVE_OPT_CCNR             "opt_ccnr"             // Callback CCNR
+#define VAL_FKT_ACTIVE_OPT_MCID             "opt_mcid"             // Intercept MCID
+#define VAL_FKT_ACTIVE_OPT_PICKUP           "opt_pickup"           // Pickup
+#define VAL_FKT_ACTIVE_OPT_PICKUP_SELECT    "opt_pickup_select"    // Pickup select
+#define VAL_FKT_ACTIVE_OPT_TAKE             "opt_take"             // Take call 
+#define VAL_FKT_ACTIVE_VLSTX                "vlstx"              // Variable lists
+#define VAL_FKT_ACTIVE_VLST1                "vlst1"              // Variable list 1
+#define VAL_FKT_ACTIVE_VLST1_1              "vlst1_1"            // List 1 item 1
+#define VAL_FKT_ACTIVE_VLST1_2              "vlst1_2"            // List 1 item 2
+#define VAL_FKT_ACTIVE_VLST1_3              "vlst1_3"            // List 1 item 3
+#define VAL_FKT_ACTIVE_VLST1_4              "vlst1_4"            // List 1 item 4
+#define VAL_FKT_ACTIVE_VLST1_5              "vlst1_5"            // List 1 item 5
+#define VAL_FKT_ACTIVE_VLST1_6              "vlst1_6"            // List 1 item 6
+#define VAL_FKT_ACTIVE_VLST1_7              "vlst1_7"            // List 1 item 7
+#define VAL_FKT_ACTIVE_VLST1_8              "vlst1_8"            // List 1 item 8
+#define VAL_FKT_ACTIVE_VLST1_9              "vlst1_9"            // List 1 item 9
+#define VAL_FKT_ACTIVE_VLST1_10             "vlst1_10"           // List 1 item 10
+#define VAL_FKT_ACTIVE_VLST1_11             "vlst1_11"           // List 1 item 11
+#define VAL_FKT_ACTIVE_VLST1_12             "vlst1_12"           // List 1 item 12
+#define VAL_FKT_ACTIVE_VLST1_13             "vlst1_13"           // List 1 item 13
+#define VAL_FKT_ACTIVE_VLST1_14             "vlst1_14"           // List 1 item 14
+#define VAL_FKT_ACTIVE_VLST1_15             "vlst1_15"           // List 1 item 15
+#define VAL_FKT_ACTIVE_VLST2                "vlst2"              // Variable list 2
+#define VAL_FKT_ACTIVE_VLST2_1              "vlst2_1"            // List 2 item 1
+#define VAL_FKT_ACTIVE_VLST2_2              "vlst2_2"            // List 2 item 2
+#define VAL_FKT_ACTIVE_VLST2_3              "vlst2_3"            // List 2 item 3
+#define VAL_FKT_ACTIVE_VLST2_4              "vlst2_4"            // List 2 item 4
+#define VAL_FKT_ACTIVE_VLST2_5              "vlst2_5"            // List 2 item 5
+#define VAL_FKT_ACTIVE_VLST2_6              "vlst2_6"            // List 2 item 6
+#define VAL_FKT_ACTIVE_VLST2_7              "vlst2_7"            // List 2 item 7
+#define VAL_FKT_ACTIVE_VLST2_8              "vlst2_8"            // List 2 item 8
+#define VAL_FKT_ACTIVE_VLST2_9              "vlst2_9"            // List 2 item 9
+#define VAL_FKT_ACTIVE_VLST2_10             "vlst2_10"           // List 2 item 10
+#define VAL_FKT_ACTIVE_VLST2_11             "vlst2_11"           // List 2 item 11
+#define VAL_FKT_ACTIVE_VLST2_12             "vlst2_12"           // List 2 item 12
+#define VAL_FKT_ACTIVE_VLST2_13             "vlst2_13"           // List 2 item 13
+#define VAL_FKT_ACTIVE_VLST2_14             "vlst2_14"           // List 2 item 14
+#define VAL_FKT_ACTIVE_VLST2_15             "vlst2_15"           // List 2 item 15
+#define VAL_FKT_ACTIVE_VLST3                "vlst3"              // Variable list 3
+#define VAL_FKT_ACTIVE_VLST3_1              "vlst3_1"            // List 3 item 1
+#define VAL_FKT_ACTIVE_VLST3_2              "vlst3_2"            // List 3 item 2
+#define VAL_FKT_ACTIVE_VLST3_3              "vlst3_3"            // List 3 item 3
+#define VAL_FKT_ACTIVE_VLST3_4              "vlst3_4"            // List 3 item 4
+#define VAL_FKT_ACTIVE_VLST3_5              "vlst3_5"            // List 3 item 5
+#define VAL_FKT_ACTIVE_VLST3_6              "vlst3_6"            // List 3 item 6
+#define VAL_FKT_ACTIVE_VLST3_7              "vlst3_7"            // List 3 item 7
+#define VAL_FKT_ACTIVE_VLST3_8              "vlst3_8"            // List 3 item 8
+#define VAL_FKT_ACTIVE_VLST3_9              "vlst3_9"            // List 3 item 9
+#define VAL_FKT_ACTIVE_VLST3_10             "vlst3_10"           // List 3 item 10
+#define VAL_FKT_ACTIVE_VLST3_11             "vlst3_11"           // List 3 item 11
+#define VAL_FKT_ACTIVE_VLST3_12             "vlst3_12"           // List 3 item 12
+#define VAL_FKT_ACTIVE_VLST3_13             "vlst3_13"           // List 3 item 13
+#define VAL_FKT_ACTIVE_VLST3_14             "vlst3_14"           // List 3 item 14
+#define VAL_FKT_ACTIVE_VLST3_15             "vlst3_15"           // List 3 item 15
+#define VAL_FKT_ACTIVE_VLST4                "vlst4"              // Variable list 4
+#define VAL_FKT_ACTIVE_VLST4_1              "vlst4_1"            // List 4 item 1
+#define VAL_FKT_ACTIVE_VLST4_2              "vlst4_2"            // List 4 item 2
+#define VAL_FKT_ACTIVE_VLST4_3              "vlst4_3"            // List 4 item 3
+#define VAL_FKT_ACTIVE_VLST4_4              "vlst4_4"            // List 4 item 4
+#define VAL_FKT_ACTIVE_VLST4_5              "vlst4_5"            // List 4 item 5
+#define VAL_FKT_ACTIVE_VLST4_6              "vlst4_6"            // List 4 item 6
+#define VAL_FKT_ACTIVE_VLST4_7              "vlst4_7"            // List 4 item 7
+#define VAL_FKT_ACTIVE_VLST4_8              "vlst4_8"            // List 4 item 8
+#define VAL_FKT_ACTIVE_VLST4_9              "vlst4_9"            // List 4 item 9
+#define VAL_FKT_ACTIVE_VLST4_10             "vlst4_10"           // List 4 item 10
+#define VAL_FKT_ACTIVE_VLST4_11             "vlst4_11"           // List 4 item 11
+#define VAL_FKT_ACTIVE_VLST4_12             "vlst4_12"           // List 4 item 12
+#define VAL_FKT_ACTIVE_VLST4_13             "vlst4_13"           // List 4 item 13
+#define VAL_FKT_ACTIVE_VLST4_14             "vlst4_14"           // List 4 item 14
+#define VAL_FKT_ACTIVE_VLST4_15             "vlst4_15"           // List 4 item 15
+#define VAL_FKT_ACTIVE_VLST5                "vlst5"              // Variable list 5
+#define VAL_FKT_ACTIVE_VLST5_1              "vlst5_1"            // List 5 item 1
+#define VAL_FKT_ACTIVE_VLST5_2              "vlst5_2"            // List 5 item 2
+#define VAL_FKT_ACTIVE_VLST5_3              "vlst5_3"            // List 5 item 3
+#define VAL_FKT_ACTIVE_VLST5_4              "vlst5_4"            // List 5 item 4
+#define VAL_FKT_ACTIVE_VLST5_5              "vlst5_5"            // List 5 item 5
+#define VAL_FKT_ACTIVE_VLST5_6              "vlst5_6"            // List 5 item 6
+#define VAL_FKT_ACTIVE_VLST5_7              "vlst5_7"            // List 5 item 7
+#define VAL_FKT_ACTIVE_VLST5_8              "vlst5_8"            // List 5 item 8
+#define VAL_FKT_ACTIVE_VLST5_9              "vlst5_9"            // List 5 item 9
+#define VAL_FKT_ACTIVE_VLST5_10             "vlst5_10"           // List 5 item 10
+#define VAL_FKT_ACTIVE_VLST5_11             "vlst5_11"           // List 5 item 11
+#define VAL_FKT_ACTIVE_VLST5_12             "vlst5_12"           // List 5 item 12
+#define VAL_FKT_ACTIVE_VLST5_13             "vlst5_13"           // List 5 item 13
+#define VAL_FKT_ACTIVE_VLST5_14             "vlst5_14"           // List 5 item 14
+#define VAL_FKT_ACTIVE_VLST5_15             "vlst5_15"           // List 5 item 15
+
+// functions available in ACTIVE_SOS state
+#define VAL_FKT_ACTIVE_SOS_NOP                  "nop"                  // <no function>
+#define VAL_FKT_ACTIVE_SOS_DEF                  "def"                  // <default function>
+#define VAL_FKT_ACTIVE_SOS_SK_DYN1              "sk_dyn1"              // <dynamic soft-key>
+#define VAL_FKT_ACTIVE_SOS_OPT                  "opt"                  // >>>Call options
+#define VAL_FKT_ACTIVE_SOS_PBX_SERVER_MENU      "pbx_server_menu"      // >>>Server menu(*)
+#define VAL_FKT_ACTIVE_SOS_FEATURE_ACCESS_CODE  "feature_access_code"  // >>>Feature access codes(*)
+#define VAL_FKT_ACTIVE_SOS_DIAL_R               "dial_r"               // (R) Register recall
+#define VAL_FKT_ACTIVE_SOS_OPT_ECT              "opt_ect"              // Transfer call
+#define VAL_FKT_ACTIVE_SOS_OPT_BROKERING        "opt_brokering"        // Brokering
+#define VAL_FKT_ACTIVE_SOS_OPT_HOLD             "opt_hold"             // Hold call
+#define VAL_FKT_ACTIVE_SOS_OPT_3PTY             "opt_3pty"             // Conference start/stopp
+#define VAL_FKT_ACTIVE_SOS_OPT_PARK             "opt_park"             // Park call/Unpark call
+#define VAL_FKT_ACTIVE_SOS_REL                  "rel"                  // Release call / Hook on
+#define VAL_FKT_ACTIVE_SOS_ADD_TO               "add_to"               // Add to... (VIP-, Filter-list, Personal directory)
+#define VAL_FKT_ACTIVE_SOS_BOOK                 "book"                 // Personal directory
+#define VAL_FKT_ACTIVE_SOS_GAPPP_DIRECTORY      "gappp_directory"      //     Central directory (obsolete)
+#define VAL_FKT_ACTIVE_SOS_PBX_DIRECTORY        "pbx_directory"        // Central directory(*)
+#define VAL_FKT_ACTIVE_SOS_VIP                  "vip"                  // VIP list
+#define VAL_FKT_ACTIVE_SOS_QUICK0               "quick0"               // Quick call list
+#define VAL_FKT_ACTIVE_SOS_FILTER               "filter"               // Call filter list
+#define VAL_FKT_ACTIVE_SOS_JOURNAL              "journal"              // Call journal
+#define VAL_FKT_ACTIVE_SOS_CALLER               "caller"               // Caller list
+#define VAL_FKT_ACTIVE_SOS_REDIAL               "redial"               // Redial list
+#define VAL_FKT_ACTIVE_SOS_TXT_SEND             "txt_send"             // Send new text message
+#define VAL_FKT_ACTIVE_SOS_VOL_OK               "vol_ok"               // Volume settings
+#define VAL_FKT_ACTIVE_SOS_VOL_UP               "vol_up"               // Volume +
+#define VAL_FKT_ACTIVE_SOS_VOL_DOWN             "vol_down"             // Volume -
+#define VAL_FKT_ACTIVE_SOS_MUTE                 "mute"                 // Microphone on/off
+#define VAL_FKT_ACTIVE_SOS_AUDIO_HD             "audio_hd"             // HiQ audio on/off
+#define VAL_FKT_ACTIVE_SOS_BT_TOGGLE            "bt_toggle"            // Transfer BT <-> Handset
+#define VAL_FKT_ACTIVE_SOS_OPT_CCBS             "opt_ccbs"             // Callback CCBS
+#define VAL_FKT_ACTIVE_SOS_OPT_CCNR             "opt_ccnr"             // Callback CCNR
+#define VAL_FKT_ACTIVE_SOS_OPT_MCID             "opt_mcid"             // Intercept MCID
+#define VAL_FKT_ACTIVE_SOS_OPT_PICKUP           "opt_pickup"           // Pickup
+#define VAL_FKT_ACTIVE_SOS_OPT_PICKUP_SELECT    "opt_pickup_select"    // Pickup select
+#define VAL_FKT_ACTIVE_SOS_OPT_TAKE             "opt_take"             // Take call 
+#define VAL_FKT_ACTIVE_SOS_PREDIAL_HOOK_DYN     "predial_hook_dyn"     // Dial editor
+#define VAL_FKT_ACTIVE_SOS_DIAL_0               "dial_0"               //     Dial 0
+#define VAL_FKT_ACTIVE_SOS_DIAL_1               "dial_1"               //     Dial 1
+#define VAL_FKT_ACTIVE_SOS_DIAL_2               "dial_2"               //     Dial 2
+#define VAL_FKT_ACTIVE_SOS_DIAL_3               "dial_3"               //     Dial 3
+#define VAL_FKT_ACTIVE_SOS_DIAL_4               "dial_4"               //     Dial 4
+#define VAL_FKT_ACTIVE_SOS_DIAL_5               "dial_5"               //     Dial 5
+#define VAL_FKT_ACTIVE_SOS_DIAL_6               "dial_6"               //     Dial 6
+#define VAL_FKT_ACTIVE_SOS_DIAL_7               "dial_7"               //     Dial 7
+#define VAL_FKT_ACTIVE_SOS_DIAL_8               "dial_8"               //     Dial 8
+#define VAL_FKT_ACTIVE_SOS_DIAL_9               "dial_9"               //     Dial 9
+#define VAL_FKT_ACTIVE_SOS_DIAL_STAR            "dial_star"            //     Dial *
+#define VAL_FKT_ACTIVE_SOS_DIAL_HASH            "dial_hash"            //     Dial #
+#define VAL_FKT_ACTIVE_SOS_DIAL_DTMF            "dial_dtmf"            //     Dial DTMF
+#define VAL_FKT_ACTIVE_SOS_VLSTX                "vlstx"              // Variable lists
+#define VAL_FKT_ACTIVE_SOS_VLST1                "vlst1"              // Variable list 1
+#define VAL_FKT_ACTIVE_SOS_VLST1_1              "vlst1_1"            // List 1 item 1
+#define VAL_FKT_ACTIVE_SOS_VLST1_2              "vlst1_2"            // List 1 item 2
+#define VAL_FKT_ACTIVE_SOS_VLST1_3              "vlst1_3"            // List 1 item 3
+#define VAL_FKT_ACTIVE_SOS_VLST1_4              "vlst1_4"            // List 1 item 4
+#define VAL_FKT_ACTIVE_SOS_VLST1_5              "vlst1_5"            // List 1 item 5
+#define VAL_FKT_ACTIVE_SOS_VLST1_6              "vlst1_6"            // List 1 item 6
+#define VAL_FKT_ACTIVE_SOS_VLST1_7              "vlst1_7"            // List 1 item 7
+#define VAL_FKT_ACTIVE_SOS_VLST1_8              "vlst1_8"            // List 1 item 8
+#define VAL_FKT_ACTIVE_SOS_VLST1_9              "vlst1_9"            // List 1 item 9
+#define VAL_FKT_ACTIVE_SOS_VLST1_10             "vlst1_10"           // List 1 item 10
+#define VAL_FKT_ACTIVE_SOS_VLST1_11             "vlst1_11"           // List 1 item 11
+#define VAL_FKT_ACTIVE_SOS_VLST1_12             "vlst1_12"           // List 1 item 12
+#define VAL_FKT_ACTIVE_SOS_VLST1_13             "vlst1_13"           // List 1 item 13
+#define VAL_FKT_ACTIVE_SOS_VLST1_14             "vlst1_14"           // List 1 item 14
+#define VAL_FKT_ACTIVE_SOS_VLST1_15             "vlst1_15"           // List 1 item 15
+#define VAL_FKT_ACTIVE_SOS_VLST2                "vlst2"              // Variable list 2
+#define VAL_FKT_ACTIVE_SOS_VLST2_1              "vlst2_1"            // List 2 item 1
+#define VAL_FKT_ACTIVE_SOS_VLST2_2              "vlst2_2"            // List 2 item 2
+#define VAL_FKT_ACTIVE_SOS_VLST2_3              "vlst2_3"            // List 2 item 3
+#define VAL_FKT_ACTIVE_SOS_VLST2_4              "vlst2_4"            // List 2 item 4
+#define VAL_FKT_ACTIVE_SOS_VLST2_5              "vlst2_5"            // List 2 item 5
+#define VAL_FKT_ACTIVE_SOS_VLST2_6              "vlst2_6"            // List 2 item 6
+#define VAL_FKT_ACTIVE_SOS_VLST2_7              "vlst2_7"            // List 2 item 7
+#define VAL_FKT_ACTIVE_SOS_VLST2_8              "vlst2_8"            // List 2 item 8
+#define VAL_FKT_ACTIVE_SOS_VLST2_9              "vlst2_9"            // List 2 item 9
+#define VAL_FKT_ACTIVE_SOS_VLST2_10             "vlst2_10"           // List 2 item 10
+#define VAL_FKT_ACTIVE_SOS_VLST2_11             "vlst2_11"           // List 2 item 11
+#define VAL_FKT_ACTIVE_SOS_VLST2_12             "vlst2_12"           // List 2 item 12
+#define VAL_FKT_ACTIVE_SOS_VLST2_13             "vlst2_13"           // List 2 item 13
+#define VAL_FKT_ACTIVE_SOS_VLST2_14             "vlst2_14"           // List 2 item 14
+#define VAL_FKT_ACTIVE_SOS_VLST2_15             "vlst2_15"           // List 2 item 15
+#define VAL_FKT_ACTIVE_SOS_VLST3                "vlst3"              // Variable list 3
+#define VAL_FKT_ACTIVE_SOS_VLST3_1              "vlst3_1"            // List 3 item 1
+#define VAL_FKT_ACTIVE_SOS_VLST3_2              "vlst3_2"            // List 3 item 2
+#define VAL_FKT_ACTIVE_SOS_VLST3_3              "vlst3_3"            // List 3 item 3
+#define VAL_FKT_ACTIVE_SOS_VLST3_4              "vlst3_4"            // List 3 item 4
+#define VAL_FKT_ACTIVE_SOS_VLST3_5              "vlst3_5"            // List 3 item 5
+#define VAL_FKT_ACTIVE_SOS_VLST3_6              "vlst3_6"            // List 3 item 6
+#define VAL_FKT_ACTIVE_SOS_VLST3_7              "vlst3_7"            // List 3 item 7
+#define VAL_FKT_ACTIVE_SOS_VLST3_8              "vlst3_8"            // List 3 item 8
+#define VAL_FKT_ACTIVE_SOS_VLST3_9              "vlst3_9"            // List 3 item 9
+#define VAL_FKT_ACTIVE_SOS_VLST3_10             "vlst3_10"           // List 3 item 10
+#define VAL_FKT_ACTIVE_SOS_VLST3_11             "vlst3_11"           // List 3 item 11
+#define VAL_FKT_ACTIVE_SOS_VLST3_12             "vlst3_12"           // List 3 item 12
+#define VAL_FKT_ACTIVE_SOS_VLST3_13             "vlst3_13"           // List 3 item 13
+#define VAL_FKT_ACTIVE_SOS_VLST3_14             "vlst3_14"           // List 3 item 14
+#define VAL_FKT_ACTIVE_SOS_VLST3_15             "vlst3_15"           // List 3 item 15
+#define VAL_FKT_ACTIVE_SOS_VLST4                "vlst4"              // Variable list 4
+#define VAL_FKT_ACTIVE_SOS_VLST4_1              "vlst4_1"            // List 4 item 1
+#define VAL_FKT_ACTIVE_SOS_VLST4_2              "vlst4_2"            // List 4 item 2
+#define VAL_FKT_ACTIVE_SOS_VLST4_3              "vlst4_3"            // List 4 item 3
+#define VAL_FKT_ACTIVE_SOS_VLST4_4              "vlst4_4"            // List 4 item 4
+#define VAL_FKT_ACTIVE_SOS_VLST4_5              "vlst4_5"            // List 4 item 5
+#define VAL_FKT_ACTIVE_SOS_VLST4_6              "vlst4_6"            // List 4 item 6
+#define VAL_FKT_ACTIVE_SOS_VLST4_7              "vlst4_7"            // List 4 item 7
+#define VAL_FKT_ACTIVE_SOS_VLST4_8              "vlst4_8"            // List 4 item 8
+#define VAL_FKT_ACTIVE_SOS_VLST4_9              "vlst4_9"            // List 4 item 9
+#define VAL_FKT_ACTIVE_SOS_VLST4_10             "vlst4_10"           // List 4 item 10
+#define VAL_FKT_ACTIVE_SOS_VLST4_11             "vlst4_11"           // List 4 item 11
+#define VAL_FKT_ACTIVE_SOS_VLST4_12             "vlst4_12"           // List 4 item 12
+#define VAL_FKT_ACTIVE_SOS_VLST4_13             "vlst4_13"           // List 4 item 13
+#define VAL_FKT_ACTIVE_SOS_VLST4_14             "vlst4_14"           // List 4 item 14
+#define VAL_FKT_ACTIVE_SOS_VLST4_15             "vlst4_15"           // List 4 item 15
+#define VAL_FKT_ACTIVE_SOS_VLST5                "vlst5"              // Variable list 5
+#define VAL_FKT_ACTIVE_SOS_VLST5_1              "vlst5_1"            // List 5 item 1
+#define VAL_FKT_ACTIVE_SOS_VLST5_2              "vlst5_2"            // List 5 item 2
+#define VAL_FKT_ACTIVE_SOS_VLST5_3              "vlst5_3"            // List 5 item 3
+#define VAL_FKT_ACTIVE_SOS_VLST5_4              "vlst5_4"            // List 5 item 4
+#define VAL_FKT_ACTIVE_SOS_VLST5_5              "vlst5_5"            // List 5 item 5
+#define VAL_FKT_ACTIVE_SOS_VLST5_6              "vlst5_6"            // List 5 item 6
+#define VAL_FKT_ACTIVE_SOS_VLST5_7              "vlst5_7"            // List 5 item 7
+#define VAL_FKT_ACTIVE_SOS_VLST5_8              "vlst5_8"            // List 5 item 8
+#define VAL_FKT_ACTIVE_SOS_VLST5_9              "vlst5_9"            // List 5 item 9
+#define VAL_FKT_ACTIVE_SOS_VLST5_10             "vlst5_10"           // List 5 item 10
+#define VAL_FKT_ACTIVE_SOS_VLST5_11             "vlst5_11"           // List 5 item 11
+#define VAL_FKT_ACTIVE_SOS_VLST5_12             "vlst5_12"           // List 5 item 12
+#define VAL_FKT_ACTIVE_SOS_VLST5_13             "vlst5_13"           // List 5 item 13
+#define VAL_FKT_ACTIVE_SOS_VLST5_14             "vlst5_14"           // List 5 item 14
+#define VAL_FKT_ACTIVE_SOS_VLST5_15             "vlst5_15"           // List 5 item 15
+
+#define KEY_VLIST_NAME          "UD_VListName"      // <list-index 1..5> <utf8-string>
+#define KEY_VLIST_SHORTNAME     "UD_VListShortName" // <list-index 1..5> <utf8-string>
+#define KEY_VLIST_SUBITEMS      "UD_VListSubItems"  // <list-index 1..5> <boolean>
+#define KEY_VLIST_ICONS         "UD_VListIcons"     // <list-index 1..5> <boolean>
+
+                                                    // list-index    item-index    number-to-dial  longname       function-id        shortname/icon   handsfree        visible(idle,dial,alert,active)
+                                                    // 1..5          1..15                                        VAL_FKT_VLIST_xxx                   true/false/1/0
+#define KEY_VLIST_ENTRY         "UD_VListEntry"     // <string>      <string>      <utf8-string>   <utf8-string>  <string>           <utf8-string>    <boolean>        <4-digit-string-of(0,1)>
+
+// functions available in VLIST
+#define VAL_FKT_VLIST_X                    "x"                    // Dummy-Function-ID
+#define VAL_FKT_VLIST_VLST1                "vlst1"              // Variable list 1
+#define VAL_FKT_VLIST_VLST1_1              "vlst1_1"            // List 1 item 1
+#define VAL_FKT_VLIST_VLST1_2              "vlst1_2"            // List 1 item 2
+#define VAL_FKT_VLIST_VLST1_3              "vlst1_3"            // List 1 item 3
+#define VAL_FKT_VLIST_VLST1_4              "vlst1_4"            // List 1 item 4
+#define VAL_FKT_VLIST_VLST1_5              "vlst1_5"            // List 1 item 5
+#define VAL_FKT_VLIST_VLST1_6              "vlst1_6"            // List 1 item 6
+#define VAL_FKT_VLIST_VLST1_7              "vlst1_7"            // List 1 item 7
+#define VAL_FKT_VLIST_VLST1_8              "vlst1_8"            // List 1 item 8
+#define VAL_FKT_VLIST_VLST1_9              "vlst1_9"            // List 1 item 9
+#define VAL_FKT_VLIST_VLST1_10             "vlst1_10"           // List 1 item 10
+#define VAL_FKT_VLIST_VLST1_11             "vlst1_11"           // List 1 item 11
+#define VAL_FKT_VLIST_VLST1_12             "vlst1_12"           // List 1 item 12
+#define VAL_FKT_VLIST_VLST1_13             "vlst1_13"           // List 1 item 13
+#define VAL_FKT_VLIST_VLST1_14             "vlst1_14"           // List 1 item 14
+#define VAL_FKT_VLIST_VLST1_15             "vlst1_15"           // List 1 item 15
+#define VAL_FKT_VLIST_VLST2                "vlst2"              // Variable list 2
+#define VAL_FKT_VLIST_VLST2_1              "vlst2_1"            // List 2 item 1
+#define VAL_FKT_VLIST_VLST2_2              "vlst2_2"            // List 2 item 2
+#define VAL_FKT_VLIST_VLST2_3              "vlst2_3"            // List 2 item 3
+#define VAL_FKT_VLIST_VLST2_4              "vlst2_4"            // List 2 item 4
+#define VAL_FKT_VLIST_VLST2_5              "vlst2_5"            // List 2 item 5
+#define VAL_FKT_VLIST_VLST2_6              "vlst2_6"            // List 2 item 6
+#define VAL_FKT_VLIST_VLST2_7              "vlst2_7"            // List 2 item 7
+#define VAL_FKT_VLIST_VLST2_8              "vlst2_8"            // List 2 item 8
+#define VAL_FKT_VLIST_VLST2_9              "vlst2_9"            // List 2 item 9
+#define VAL_FKT_VLIST_VLST2_10             "vlst2_10"           // List 2 item 10
+#define VAL_FKT_VLIST_VLST2_11             "vlst2_11"           // List 2 item 11
+#define VAL_FKT_VLIST_VLST2_12             "vlst2_12"           // List 2 item 12
+#define VAL_FKT_VLIST_VLST2_13             "vlst2_13"           // List 2 item 13
+#define VAL_FKT_VLIST_VLST2_14             "vlst2_14"           // List 2 item 14
+#define VAL_FKT_VLIST_VLST2_15             "vlst2_15"           // List 2 item 15
+#define VAL_FKT_VLIST_VLST3                "vlst3"              // Variable list 3
+#define VAL_FKT_VLIST_VLST3_1              "vlst3_1"            // List 3 item 1
+#define VAL_FKT_VLIST_VLST3_2              "vlst3_2"            // List 3 item 2
+#define VAL_FKT_VLIST_VLST3_3              "vlst3_3"            // List 3 item 3
+#define VAL_FKT_VLIST_VLST3_4              "vlst3_4"            // List 3 item 4
+#define VAL_FKT_VLIST_VLST3_5              "vlst3_5"            // List 3 item 5
+#define VAL_FKT_VLIST_VLST3_6              "vlst3_6"            // List 3 item 6
+#define VAL_FKT_VLIST_VLST3_7              "vlst3_7"            // List 3 item 7
+#define VAL_FKT_VLIST_VLST3_8              "vlst3_8"            // List 3 item 8
+#define VAL_FKT_VLIST_VLST3_9              "vlst3_9"            // List 3 item 9
+#define VAL_FKT_VLIST_VLST3_10             "vlst3_10"           // List 3 item 10
+#define VAL_FKT_VLIST_VLST3_11             "vlst3_11"           // List 3 item 11
+#define VAL_FKT_VLIST_VLST3_12             "vlst3_12"           // List 3 item 12
+#define VAL_FKT_VLIST_VLST3_13             "vlst3_13"           // List 3 item 13
+#define VAL_FKT_VLIST_VLST3_14             "vlst3_14"           // List 3 item 14
+#define VAL_FKT_VLIST_VLST3_15             "vlst3_15"           // List 3 item 15
+#define VAL_FKT_VLIST_VLST4                "vlst4"              // Variable list 4
+#define VAL_FKT_VLIST_VLST4_1              "vlst4_1"            // List 4 item 1
+#define VAL_FKT_VLIST_VLST4_2              "vlst4_2"            // List 4 item 2
+#define VAL_FKT_VLIST_VLST4_3              "vlst4_3"            // List 4 item 3
+#define VAL_FKT_VLIST_VLST4_4              "vlst4_4"            // List 4 item 4
+#define VAL_FKT_VLIST_VLST4_5              "vlst4_5"            // List 4 item 5
+#define VAL_FKT_VLIST_VLST4_6              "vlst4_6"            // List 4 item 6
+#define VAL_FKT_VLIST_VLST4_7              "vlst4_7"            // List 4 item 7
+#define VAL_FKT_VLIST_VLST4_8              "vlst4_8"            // List 4 item 8
+#define VAL_FKT_VLIST_VLST4_9              "vlst4_9"            // List 4 item 9
+#define VAL_FKT_VLIST_VLST4_10             "vlst4_10"           // List 4 item 10
+#define VAL_FKT_VLIST_VLST4_11             "vlst4_11"           // List 4 item 11
+#define VAL_FKT_VLIST_VLST4_12             "vlst4_12"           // List 4 item 12
+#define VAL_FKT_VLIST_VLST4_13             "vlst4_13"           // List 4 item 13
+#define VAL_FKT_VLIST_VLST4_14             "vlst4_14"           // List 4 item 14
+#define VAL_FKT_VLIST_VLST4_15             "vlst4_15"           // List 4 item 15
+#define VAL_FKT_VLIST_VLST5                "vlst5"              // Variable list 5
+#define VAL_FKT_VLIST_VLST5_1              "vlst5_1"            // List 5 item 1
+#define VAL_FKT_VLIST_VLST5_2              "vlst5_2"            // List 5 item 2
+#define VAL_FKT_VLIST_VLST5_3              "vlst5_3"            // List 5 item 3
+#define VAL_FKT_VLIST_VLST5_4              "vlst5_4"            // List 5 item 4
+#define VAL_FKT_VLIST_VLST5_5              "vlst5_5"            // List 5 item 5
+#define VAL_FKT_VLIST_VLST5_6              "vlst5_6"            // List 5 item 6
+#define VAL_FKT_VLIST_VLST5_7              "vlst5_7"            // List 5 item 7
+#define VAL_FKT_VLIST_VLST5_8              "vlst5_8"            // List 5 item 8
+#define VAL_FKT_VLIST_VLST5_9              "vlst5_9"            // List 5 item 9
+#define VAL_FKT_VLIST_VLST5_10             "vlst5_10"           // List 5 item 10
+#define VAL_FKT_VLIST_VLST5_11             "vlst5_11"           // List 5 item 11
+#define VAL_FKT_VLIST_VLST5_12             "vlst5_12"           // List 5 item 12
+#define VAL_FKT_VLIST_VLST5_13             "vlst5_13"           // List 5 item 13
+#define VAL_FKT_VLIST_VLST5_14             "vlst5_14"           // List 5 item 14
+#define VAL_FKT_VLIST_VLST5_15             "vlst5_15"           // List 5 item 15
+#define VAL_FKT_VLIST_MENU                 "menu"                 // Menu
+#define VAL_FKT_VLIST_ACTIVE_FEATURES      "active_features"      // Active Handset features
+#define VAL_FKT_VLIST_ALARM_TIME           "alarm_time"           // Time/Alarms
+#define VAL_FKT_VLIST_ALARM                "alarm"                //     Alarm clock
+#define VAL_FKT_VLIST_APPOINTMENT          "appointment"          //     Appointment
+#define VAL_FKT_VLIST_TEA_TIMER            "tea_timer"            //     Timer
+#define VAL_FKT_VLIST_SHOW_TIME_DATE       "show_time_date"       //     Date/Time
+#define VAL_FKT_VLIST_BT                   "bt"                   // Bluetooth settings
+#define VAL_FKT_VLIST_BT_STATE             "bt_state"             // BT status (on/off)
+#define VAL_FKT_VLIST_DATAMANAGMENT        "datamanagment"        // Data managment
+#define VAL_FKT_VLIST_SECURITY             "security"             // Security
+#define VAL_FKT_VLIST_KEYLOCK              "keylock"              //     Key lock
+#define VAL_FKT_VLIST_PINLOCK              "pinlock"              //     Pin/Phone lock
+#define VAL_FKT_VLIST_PROFILES             "profiles"             // Profiles
+#define VAL_FKT_VLIST_PROFILE              "profile"              //     Profile
+#define VAL_FKT_VLIST_PREDIAL              "predial"              // Please dial editor
+#define VAL_FKT_VLIST_OFF                  "off"                  // Power off
+#define VAL_FKT_VLIST_OFF_MENU             "off_menu"             // Off menu
+#define VAL_FKT_VLIST_RING_OFF             "ring_off"             // Ringer on/off
+#define VAL_FKT_VLIST_AUDIO_MENU           "audio"                // Audio settings
+#define VAL_FKT_VLIST_AUDIO_HD             "audio_hd"             //     HiQ audio on/off
+#define VAL_FKT_VLIST_VOL_OK               "vol_ok"               //     Volume settings
+#define VAL_FKT_VLIST_SET                  "set"                  // User settings
+#define VAL_FKT_VLIST_PROG_KEY             "prog_key"             // Key programming
+#define VAL_FKT_VLIST_LANGUAGE             "language"             //     Language
+#define VAL_FKT_VLIST_DISPLAY              "MenuDisp"             //     Display settings
+#define VAL_FKT_VLIST_LED                  "disp_led"             //     LED indications
+#define VAL_FKT_VLIST_LIGHT_TOGGLE         "light_toggle"         //     Light on/off
+#define VAL_FKT_VLIST_MENU_EXPERT          "MenuExpert"           // Expert menu
+#define VAL_FKT_VLIST_MENU_ILLU            "MenuIllu"             //     Illumination
+#define VAL_FKT_VLIST_MENU_DEVICE          "MenuDevice"           //     Device options
+#define VAL_FKT_VLIST_VERSION              "version"              // Version info
+#define VAL_FKT_VLIST_NAVI                 "navi"                 // Navigation key
+#define VAL_FKT_VLIST_INF                  "inf"                  // (i) Info menu
+#define VAL_FKT_VLIST_MENUINFNEW           "MenuInfNew"           // (i) New infos
+#define VAL_FKT_VLIST_VOICE_BOX            "voice_box"            //     Voice box
+#define VAL_FKT_VLIST_JOURNAL              "journal"              //     Call journal
+#define VAL_FKT_VLIST_CALLER               "caller"               //     Caller list
+#define VAL_FKT_VLIST_REDIAL               "redial"               //     Redial list
+#define VAL_FKT_VLIST_PBX_EMAIL            "pbx_email"            //     Email list
+#define VAL_FKT_VLIST_PBX_FAX              "pbx_fax"              //     Fax list
+#define VAL_FKT_VLIST_OMM_JOBS             "omm_jobs"             //     Job list
+#define VAL_FKT_VLIST_BESTMSG              "BestMsg"              //     Text messages
+#define VAL_FKT_VLIST_OMM_INBOX            "omm_inbox"            //     Inbox/Text messages
+#define VAL_FKT_VLIST_OMM_OUTBOX           "omm_outbox"           //     Outbox/Text messages
+#define VAL_FKT_VLIST_OMM_DEF_MSG          "omm_def_msg"          //     Pre-defined messages
+#define VAL_FKT_VLIST_TXT_SEND             "txt_send"             //     Send new text message
+#define VAL_FKT_VLIST_GAPPP_COST           "gappp_cost"           //     Cost infos
+#define VAL_FKT_VLIST_PBX_FEATURE          "pbx_feature"          //     Active PBX features
+#define VAL_FKT_VLIST_FILTER_MENU          "filter_menu"          // Call filter
+#define VAL_FKT_VLIST_FILTER_STATE         "filter_state"         //     Call filter state
+#define VAL_FKT_VLIST_FILTER_LIST          "filter_list"          //     Call filter list
+#define VAL_FKT_VLIST_DIRECTORIES          "directories"          // Directories (Personal/Central/VIP-list)
+#define VAL_FKT_VLIST_GET_NAME             "get_name"             //     Get name from personal directory
+#define VAL_FKT_VLIST_BOOK                 "book"                 //     Personal directory
+#define VAL_FKT_VLIST_GAPPP_INTERN         "gappp_intern"         //     Internal directory
+#define VAL_FKT_VLIST_PBX_DIRECTORY        "pbx_directory"        //     Central directory
+#define VAL_FKT_VLIST_VIP                  "vip"                  //     VIP list
+#define VAL_FKT_VLIST_FEATURE_ACCESS_CODE  "feature_access_code"  //     Feature access codes
+#define VAL_FKT_VLIST_PBX_RECEPTION        "pbx_reception"        //     Hotel reception
+#define VAL_FKT_VLIST_QUICK0               "quick0"               //     Quick call list
+#define VAL_FKT_VLIST_SOS_MENU             "sos_menu"             // SOS call: with confirmation
+#define VAL_FKT_VLIST_SOS                  "sos"                  // SOS call
+#define VAL_FKT_VLIST_SOS_LOC              "sos_loc"              // Localisation alarm
+#define VAL_FKT_VLIST_SHOCK                "shock"                // Shock detection
+#define VAL_FKT_VLIST_ALARM_CALL           "alarm_call"           // Alarm call
+#define VAL_FKT_VLIST_SENSOR_MENU          "sensor_menu"          // Alarm sensor
+#define VAL_FKT_VLIST_DYN_PBX_OPTION       "dyn_pbx_option"       // System options / Main menu
+#define VAL_FKT_VLIST_PBX_SERVER_MENU      "pbx_server_menu"      // Server menu
+#define VAL_FKT_VLIST_PBX_OPTIONS          "pbx_options"          // System Options
+#define VAL_FKT_VLIST_GAPP_MAIN            "gappp_main"           // System menu
+#define VAL_FKT_VLIST_GAPPP_CALL_FORWARD   "gappp_call_forward"   // Call diversion
+#define VAL_FKT_VLIST_PBX_CALL_ROUTING     "pbx_call_routing"     // Call routing
+#define VAL_FKT_VLIST_PBX_DND              "pbx_dnd"              // Call protection
+#define VAL_FKT_VLIST_PBX_PRESENCE         "pbx_presence"         // Presence
+#define VAL_FKT_VLIST_LOCATING_EDITOR      "locating_editor"      // Locating
+#define VAL_FKT_VLIST_PBX_HOT_LIST         "pbx_hot_list"         // Hot list
+#define VAL_FKT_VLIST_PBX_TAKE             "pbx_take"             // Take call
+#define VAL_FKT_VLIST_PBX_UNPARK           "pbx_unpark"           // Unpark call
+#define VAL_FKT_VLIST_PBX_PARK             "pbx_park"             // Park/Pickup
+#define VAL_FKT_VLIST_GAPPP_PICKUP         "gappp_pickup"         // Pickup call
+#define VAL_FKT_VLIST_PBX_FKEYS            "pbx_fkeys"            // XML Applications
+#define VAL_FKT_VLIST_PBX_LOGIN            "pbx_login"            // Log in
+#define VAL_FKT_VLIST_PBX_LOGOUT           "pbx_logout"           // Log out
+#define VAL_FKT_VLIST_F_1                  "f_1"                  //     App 1
+#define VAL_FKT_VLIST_F_2                  "f_2"                  //     App 2
+#define VAL_FKT_VLIST_F_3                  "f_3"                  //     App 3
+#define VAL_FKT_VLIST_F_4                  "f_4"                  //     App 4
+#define VAL_FKT_VLIST_F_5                  "f_5"                  //     App 5
+#define VAL_FKT_VLIST_F_6                  "f_6"                  //     App 6
+#define VAL_FKT_VLIST_F_7                  "f_7"                  //     App 7
+#define VAL_FKT_VLIST_F_8                  "f_8"                  //     App 8
+#define VAL_FKT_VLIST_F_9                  "f_9"                  //     App 9
+#define VAL_FKT_VLIST_F_10                 "f_10"                 //     App 10
+#define VAL_FKT_VLIST_GAPPP_DOOR           "gappp_door"           // Door opener
+#define VAL_FKT_VLIST_GAPPP_DOOR1          "gappp_door1"          //     Door 1
+#define VAL_FKT_VLIST_GAPPP_DOOR2          "gappp_door2"          //     Door 2
+#define VAL_FKT_VLIST_SYSTEM_MENU          "system_menu"          //System/Subscription
+#define VAL_FKT_VLIST_GAPPP_PICKUP_SELECT  "gappp_pickup_select"  //     Pickup select
+#define VAL_FKT_VLIST_GAPPP_ANNOUNCEMENT   "gappp_announcement"   //     Announcement
+#define VAL_FKT_VLIST_GAPPP_INTERCOM       "gappp_intercom"       //     Intercom
+#define VAL_FKT_VLIST_GAPPP_VIP_CALL       "gappp_vip_call"       //     VIP call
+#define VAL_FKT_VLIST_SUPPRESS_NO          "suppress_no"          //     Suppress no on/off
+#define VAL_FKT_VLIST_SEL_LINE             "sel_line"             // Select line
+#define VAL_FKT_VLIST_LINE_1               "line_1"               //     L1
+#define VAL_FKT_VLIST_LINE_2               "line_2"               //     L2
+#define VAL_FKT_VLIST_LINE_3               "line_3"               //     L3
+#define VAL_FKT_VLIST_LINE_4               "line_4"               //     L4
+#define VAL_FKT_VLIST_LINE_5               "line_5"               //     L5
+#define VAL_FKT_VLIST_LINE_6               "line_6"               //     L6
+#define VAL_FKT_VLIST_LINE_7               "line_7"               //     L7
+#define VAL_FKT_VLIST_LINE_8               "line_8"               //     L8
+#define VAL_FKT_VLIST_LINE_9               "line_9"               //     L9
+#define VAL_FKT_VLIST_LINE_10              "line_10"              //     L10
+#define VAL_FKT_VLIST_SK_DYN1              "sk_dyn1"              // <dynamic soft-key>
+#define VAL_FKT_VLIST_OPT                  "opt"                  // Call options
+#define VAL_FKT_VLIST_ADD_TO               "add_to"               // Add to... (VIP-, Filter-list, Personal directory)
+#define VAL_FKT_VLIST_FILTER               "filter"               // Call filter list
+#define VAL_FKT_VLIST_OPT_CALLED_LINES     "opt_called_lines"     // Called lines
+#define VAL_FKT_VLIST_DIAL_R               "dial_r"               // (R) Register recall
+#define VAL_FKT_VLIST_OPT_ECT              "opt_ect"              // Transfer call
+#define VAL_FKT_VLIST_OPT_DEFLECT          "opt_deflect"          // Deflect call
+#define VAL_FKT_VLIST_OPT_CCBS             "opt_ccbs"             // Callback CCBS
+#define VAL_FKT_VLIST_OPT_CCNR             "opt_ccnr"             // Callback CCNR
+#define VAL_FKT_VLIST_OPT_MCID             "opt_mcid"             // Intercept MCID
+#define VAL_FKT_VLIST_OPT_RECEIVE          "opt_receive"          // Receive call
+#define VAL_FKT_VLIST_OPT_REJECT           "opt_reject"           // Reject call
+#define VAL_FKT_VLIST_OPT_INT              "opt_int"              // DECT intern
+#define VAL_FKT_VLIST_OPT_BROKERING        "opt_brokering"        // Brokering
+#define VAL_FKT_VLIST_OPT_HOLD             "opt_hold"             // Hold call
+#define VAL_FKT_VLIST_OPT_3PTY             "opt_3pty"             // Conference start/stopp
+#define VAL_FKT_VLIST_OPT_RECORD           "opt_record"           // Recording start/stopp
+#define VAL_FKT_VLIST_OPT_RETRIEVE         "opt_retrieve"         // Retrieve call in hold
+#define VAL_FKT_VLIST_OPT_PRIVIOUS         "opt_privious"         // Previous call
+#define VAL_FKT_VLIST_OPT_RELEASE          "opt_release"          // Release call
+#define VAL_FKT_VLIST_REL                  "rel"                  // Release call / Hook on
+#define VAL_FKT_VLIST_OPT_PARK             "pbx_park"             // Park call/Unpark call
+#define VAL_FKT_VLIST_OPT_BOOKING_NO       "opt_booking_no"       // Booking no
+#define VAL_FKT_VLIST_VOL_UP               "vol_up"               // Volume +
+#define VAL_FKT_VLIST_VOL_DOWN             "vol_down"             // Volume -
+#define VAL_FKT_VLIST_MUTE                 "mute"                 // Microphone on/off
+#define VAL_FKT_VLIST_BT_TOGGLE            "bt_toggle"            // Transfer BT <-> Handset

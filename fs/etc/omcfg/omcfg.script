@@ -1,0 +1,90 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+export DrivenBy="OMCFG"
+
+# OMConfigurator may set the vlanid
+# we have to check here if the vlan id has changed
+# if yes we have to reboot the RFP
+#
+# OM configurator option 'Use VLAN and DHCP' is mirrored in 'use_vlan'  
+
+
+var_check () {
+
+   if [ -f ${OMCFG_LAST_ENV_FILE} ]; then
+   
+      . ${OMCFG_LAST_ENV_FILE}
+   
+      #
+      # find out if we have vlan active currently
+      # 
+      if [ x${last_use_local_cfg} == "x1" -o x${last_use_vlan} == "x1" ] && [ -n ${last_vlanid} ]; then
+      
+         #
+         # vlan is active now
+         #
+         last_vlan=${last_vlanid}
+         
+      fi   
+      
+      if [ x${use_local_cfg} == "x1" -o x${use_vlan} == "x1" ] && [ -n ${vlanid} ]; then
+         
+         #
+         # vlan will be active in new config
+         #
+         new_vlan=${vlanid}
+         
+      fi
+      
+      if [ x${last_vlan} != x${new_vlan} ]; then
+         fatal "rebooting system (vlan has to change from ${last_vlan:-none} to ${new_vlan:-none})"
+         sleep 10  
+      fi
+    
+   fi
+
+   if [ x${use_local_cfg} == "x0" ]; then
+         # this will be checked
+         #   -  after load of new local_db content by OM_Configurator
+         #   -  after each reboot of RFP, if local config is not active
+         val=`local_db_check use_802_1x`
+         	if [ x"${val}" == "x1" ]; then
+         		ipc "IND_NEW_EAPOL_CFG"
+      		fi        
+      fi
+         
+   echo "last_use_local_cfg=\"${use_local_cfg:-0}\""   > ${OMCFG_LAST_ENV_FILE}
+   echo "last_use_vlan=\"${use_vlan:-0}\""             >> ${OMCFG_LAST_ENV_FILE}
+   echo "last_vlanid=\"${vlanid}\""                    >> ${OMCFG_LAST_ENV_FILE}
+   
+}
+
+case "$1" in
+
+  check)
+    env > ${OMCFG_ENV_FILE}
+    var_check
+    ;;
+    
+  omcfg_config)
+    env > ${OMCFG_ENV_FILE}
+    var_check
+    exec /etc/sysconfig/rcCfg config
+    ;;
+    
+  omcfg_inactive)
+    env > ${OMCFG_ENV_FILE}
+    var_check
+    ipc "OMCFG INACTIVE"
+    ;;
+    
+  *)
+    env > ${OMCFG_ENV_FILE}
+    logger -s -t $0 "OMCFG $1 unknown"
+    ;;
+
+esac
+
+exit 0

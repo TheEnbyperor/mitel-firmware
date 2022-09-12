@@ -1,0 +1,12 @@
+#
+# /etc/profile
+#
+alias ll="ls -als"
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin:/opt/python/bin:/media/usbStick/rfp43/bin:/media/usbStick/rfp43/usr/bin:/media/usbStick/rfp43/usr/local/bin:/media/usbStick/rfp43/sbin:/media/usbStick/rfp43/usr/sbin:/media/usbStick/rfp43/usr/local/sbin:/private/bin:/private/sbin:/private/usr/sbin:/private/usr/bin
+
+export LD_LIBRARY_PATH=/lib:/usr/lib:/media/usbStick/rfp43/lib:/media/usbStick/rfp43/usr/lib:/media/usbStick/rfp43/usr/local/lib
+
+HISTFILE=/var/tmp/sh_history.${USER}
+
+PS1='[\u@\h]\$ '

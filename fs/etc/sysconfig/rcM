@@ -1,0 +1,371 @@
+#!/bin/sh
+#
+# rcM
+
+. /etc/rc.functions
+
+################################################################################
+# function to handle system overload
+
+sys_reportload_collect () {
+
+    if [ -f /sys/kernel/debug/tracing/trace ]; then
+        echo "##### kernel trace output" >> /tmp/reportload
+        cat /sys/kernel/debug/tracing/trace >> /tmp/reportload
+        echo "##### kernel trace output end" >> /tmp/reportload
+    fi
+
+    # save top reports
+    echo "##### top -b -n 1" >> /tmp/reportload
+    top -b -n 1 >> /tmp/reportload
+
+}
+
+sys_reportload_report () {
+
+ifs_org=$IFS
+
+ifs="
+"
+    if [ -f /tmp/reportload ]; then
+
+        # output    
+        IFS=$ifs
+        for line in `cat /tmp/reportload`
+        do
+            logger -t "REPORT LOAD" -p user.emerg $line
+        done
+        
+        IFS=$ifs_org
+        
+        rm -rf /tmp/reportload
+    
+    fi
+    
+    logger -t "REPORT LOAD" -p user.emerg "##### task list follows "
+    # omm
+    conclient -p 8107 -x tasks 2>&1 > /dev/null
+    
+    # ip_rfp
+    conclient -p 10318 -x tasks 2>&1 > /dev/null
+    
+    # wlan
+    conclient -p 18181 -x tasks 2>&1 > /dev/null
+    
+}
+
+
+# function to handle system overload
+sys_overload () {
+
+ifs_org=$IFS
+
+ifs="
+"
+    # save top reports
+    top -b -n 1 > /tmp/top
+    cat /tmp/top | sed -e "1,4 d" | sed -e "s/%//g" | \
+            grep -v top | grep -v sed | \
+            while read PID PPID USER STAT VSZ MEM CPU COMMAND ARGS; do
+            echo $CPU $COMMAND >> /tmp/top1
+        done
+    sort -r /tmp/top1 > /tmp/top2
+    cat /tmp/top2 | \
+        while read CPU COMMAND; do
+            if expr $CPU \> 60 > /dev/null; then
+                CMD=`basename $COMMAND`
+                killall $CMD 2>&1
+                sleep 2
+                killall -9 $CMD 2>&1
+                sleep 2
+                logger -t "OVERLOAD" -p user.emerg "killed $COMMAND"
+            fi
+        break
+        done
+    
+    IFS=$ifs
+    for line in `cat /tmp/top`
+    do
+        logger -t "OVERLOAD" -p user.emerg $line
+    done
+    
+    IFS=$ifs_org
+    rm -f /tmp/top /tmp/top1 /tmp/top2
+    
+}
+
+################################################################################
+# run all scripts with start or stop action
+run_scripts () {
+
+   if [ -f /etc/sysconfig/${1}.sh ]; then
+        . /etc/sysconfig/${1}.sh
+   fi
+
+   for script in /etc/sysconfig/${1}??* /var/opt/addons/sysconfig/${1}??* ; do
+   
+      # Ignore dangling symlinks (if any).
+      [ ! -f "$script" ] && continue
+       
+      case "$script" in
+      
+         *.sh)
+             # Source shell script for speed.
+             (
+             trap - INT QUIT TSTP
+             set $2
+             . $script
+             )
+          ;;
+             
+         *~)
+            # ignore
+         ;;
+             
+         *)
+            # No sh extension, so fork subprocess.
+            print_console "$script $2"
+            $script $2
+         ;;
+          
+      esac
+           
+   done
+   
+}
+
+################################################################################
+# allow scripts to continue running after rcM completes
+trap "" SIGHUP
+
+save_env_get
+if [ -n ${MASTERIF} ]; then
+    export OM_RfpInterface=${MASTERIF}
+fi
+
+ACTION=$1
+
+case "$ACTION" in
+
+   "BASE_CONFIG_INTERFACE"*)
+      /etc/sysconfig/B??interface
+   ;;
+
+   "BASE_CONFIG"*)
+      run_scripts B config
+      
+      om_filelock ${RCB_ENV_FILE} 1
+      env > ${RCB_ENV_FILE}
+      om_filelock ${RCB_ENV_FILE} 0
+   ;;
+   
+   "BASE_DECONFIG"*)
+      run_scripts B deconfig
+      
+      om_filelock ${RCB_ENV_FILE} 1
+      cp /dev/null ${RCB_ENV_FILE}
+      om_filelock ${RCB_ENV_FILE} 0
+   ;;
+   
+   "DHCP START"*)
+      verbose "starting udhcpc"
+      stopproc udhcpc
+      /sbin/udhcpc \
+           -i ${OM_RfpInterface} \
+           -p /tmp/udhcpc.pid \
+           -s /etc/dhcpc/dhcpc.script \
+           -H `hostname` \
+           -b \
+           -S \
+           -a \
+           -R
+   ;;
+   
+   "DHCP STOP"*)
+      verbose "stopping udhcpc"
+      stopproc udhcpc
+   ;;
+   
+   "DHCP RENEW"*)
+      killall -SIGUSR1 omcfg > /dev/null 2>&1
+      killall -SIGUSR1 udhcpc > /dev/null 2>&1
+   ;;
+   
+   "DHCP RESTART"*)
+      killall -SIGUSR2 udhcpc > /dev/null 2>&1
+      sleep 3
+      killall -SIGUSR1 udhcpc > /dev/null 2>&1
+   ;;
+   
+   "OMCFG START"*)
+      stopproc omcfg
+      eval start-stop-daemon -S -b -p ${OM_PID_DIR}/omcfg.pid \
+           -m -x /opt/omcfg/omcfg -- -i ${OM_RfpInterface}
+   ;;
+   
+   "OMCFG STOP"*)
+      stopproc omcfg
+   ;;
+
+   "SYS SYSLOGD"*)
+      /etc/sysconfig/M??syslogd $ACTION
+   ;;
+   
+   "SYS RACCESS ACTIVE"*)
+      /etc/raccess start
+   ;;
+   
+   "SYS RACCESS INACTIVE"*)
+      if [ ! -f ${RFPM_NETWORK_CONFIG_FILE_USB} ]; then 
+        /etc/raccess stop
+      fi
+   ;;
+   
+   "SYS REPORTLOAD COLLECT"*)
+      sys_reportload_collect
+      ipc "SYS REPORTLOAD REPORT"
+   ;;
+   
+   "SYS REPORTLOAD REPORT"*)
+      sys_reportload_report
+   ;;
+   
+   "SYS OVERLOAD"*)
+      sys_overload
+   ;;
+   
+   "SYS INIT")
+      kill -SIGHUP 1
+      if is_rfp43 || is_rfp4g; then
+        udevadm trigger --subsystem-match=video4linux
+        udevadm trigger --subsystem-match=block
+      fi
+   ;;
+   
+   "SYS INTERFACE SETUP VLAN "*)
+        VLAN=${ACTION#"SYS INTERFACE SETUP VLAN "}
+        interface_setup
+   ;;
+   
+   "SYS INTERFACE SETUP"*)
+        VLAN=""
+        interface_setup
+   ;;
+   
+   "SYS INTERFACE MRPROPER"*)
+        rm -f ${WLAN_CFG_FILE}
+        killall ip_rfp > /dev/null 2>&1
+        interface_mrproper
+   ;;
+   
+   "SYS REBOOT FACTORYRESET"*)
+      touch /tmp/factoryreset
+      fatal "reboot request received (discard all data)"
+   ;;
+   
+   "SYS REBOOT"*)
+      fatal "reboot request received"
+   ;;
+
+   "SYS CHANGE_STREAM OMM SCSIP"*)
+      touch /tmp/stream_request_omm_scsip
+      touch /tmp/factoryreset
+      fatal "reboot due to stream change to SCSIP"
+   ;;
+   
+   "SYS CHANGE_STREAM SCSIP"*)
+      touch /tmp/stream_request_scsip
+      touch /tmp/factoryreset_except_auth
+      fatal "reboot due to stream change to SCSIP"
+   ;;
+
+   "SYS CHANGE_STREAM OMM FFSIP"*)
+      touch /tmp/stream_request_omm_ffsip
+      touch /tmp/factoryreset
+      fatal "reboot due to stream change to FFSIP"
+   ;;
+
+   "SYS CHANGE_STREAM FFSIP"*)
+      touch /tmp/stream_request_ffsip
+      touch /tmp/factoryreset_except_auth
+      fatal "reboot due to stream change to FFSIP"
+   ;;
+   
+   "APPL START WITHOUT IP"*)
+      om_filelock ${RCM_ENV_FILE} 1
+      env > ${RCM_ENV_FILE}
+      om_filelock ${RCM_ENV_FILE} 0
+      /etc/sysconfig/M??omm start
+      /etc/sysconfig/M??ip_rfp start
+   ;;
+   
+   "APPL START"*)
+      om_filelock ${RCM_ENV_FILE} 1
+      env > ${RCM_ENV_FILE}
+      om_filelock ${RCM_ENV_FILE} 0
+      run_scripts M start
+   ;;
+   
+   "APPL STOP"*)
+      om_filelock ${RCM_ENV_FILE} 1
+      cp /dev/null ${RCM_ENV_FILE}
+      om_filelock ${RCM_ENV_FILE} 0
+      run_scripts M stop
+   ;;
+   
+#	not in use:
+#   "APPL RESTART"*)
+    #      om_filelock ${RCM_ENV_FILE} 1
+    #      cp /dev/null ${RCM_ENV_FILE}
+    #      om_filelock ${RCM_ENV_FILE} 0
+    #      run_scripts M stop
+      
+    #      om_filelock ${RCM_ENV_FILE} 1
+    #      env > ${RCM_ENV_FILE}
+    #      om_filelock ${RCM_ENV_FILE} 0
+    #      run_scripts M start
+#   ;;
+   
+   
+   "RFP STARTED"*)
+      if [ -x /opt/snmp/snmpd -a -x /opt/snmp/snmpd.sh ]; then
+           /opt/snmp/snmpd.sh stop
+      fi
+   ;;
+
+   "RFP CONNECTED"*)
+      if [ -x /opt/snmp/snmpd -a -x /opt/snmp/snmpd.sh ]; then
+           /opt/snmp/snmpd.sh start
+      fi
+   ;;
+   
+   "RFP UNCONNECTED"*)
+      if [ -x /opt/snmp/snmpd -a -x /opt/snmp/snmpd.sh ]; then
+           /opt/snmp/snmpd.sh stop
+      fi
+   ;;
+   
+   "HOTPLUG STORAGE"*)
+       true
+   ;;
+   
+   "UNPLUG STORAGE"*)
+        true
+   ;;
+      
+   "USB unload")
+        modprobe -r ehci_hcd
+        killall mjpg_streamer > /dev/null 2>&1
+        killall -9 mjpg_streamer > /dev/null 2>&1
+   ;;
+   
+   "USB load")
+        modprobe ehci_hcd
+   ;;  
+    
+   *)
+      logger -p user.notice -s -t $0 "unknown parameter \"$1\""
+      exit 1
+   ;;
+
+esac

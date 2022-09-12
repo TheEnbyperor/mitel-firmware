@@ -1,0 +1,90 @@
+#!/bin/sh
+#
+#
+. /etc/rc.functions
+
+usage() {
+        echo "$0 omm [on|off]"
+        echo "      gdbserver will listen on port 20000"
+        echo "$0 ip_rfp [on|off]"
+        echo "      gdbserver will listen on port 20001"
+}
+
+###############################################################################
+
+case "$1" in
+
+    omm)
+    
+        case "$2" in 
+            
+            on)
+                if [ ! -f /tmp/debug-${1} ]; then
+                    touch /tmp/debug-${1}
+                    killall omm > /dev/null 2>&1
+                    killall omm.sh > /dev/null 2>&1
+                    ipc "REQ_NEW_CFG"
+                else
+                    echo "omm debugging already active"
+                fi
+            ;;
+            
+            off)
+                if [ -f /tmp/debug-${1} ]; then
+                    rm -f /tmp/debug-${1}
+                    killall gdbserver
+                    killall omm > /dev/null 2>&1
+                    killall omm.sh > /dev/null 2>&1
+                    ipc "REQ_NEW_CFG"
+                else
+                    echo "omm debugging not active"
+                fi
+            ;;
+            
+            *)
+                usage
+            ;;
+         
+         esac
+    
+    ;;
+
+
+    ip_rfp)
+    
+        case "$2" in 
+            
+            on)
+                touch /tmp/debug-${1}
+                mount -t tmpfs rootfs / -oremount,rw
+                sed -i s/^null::respawn:\\/opt\\/ip_rfp\\/ip_rfp/#null::respawn:\\/opt\\/ip_rfp\\/ip_rfp/ /etc/inittab
+                mount -t tmpfs rootfs / -oremount,ro
+                echo 1 > /sys/class/gpio/gpio42/value
+                kill -HUP 1
+                sleep 2
+                chrt -o 0 gdbserver 0.0.0.0:20001 /opt/ip_rfp/ip_rfp
+            ;;
+             
+          off)
+                rm -f /tmp/debug-${1}
+                mount -t tmpfs rootfs / -oremount,rw
+                sed -i s/^#null::respawn:\\/opt\\/ip_rfp\\/ip_rfp/null::respawn:\\/opt\\/ip_rfp\\/ip_rfp/ /etc/inittab
+                mount -t tmpfs rootfs / -oremount,ro
+                kill -HUP 1
+            ;;
+            
+            *)
+                usage
+            ;;
+            
+         esac
+            
+    ;;
+
+    *)
+        usage
+    ;;
+
+esac
+
+###############################################################################

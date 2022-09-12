@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# B30dns: configure DNS
+#
+. /etc/rc.functions
+
+RESOLV=/etc/resolv.conf
+
+case "$1" in
+
+    config)
+        if [ ! -z "${OM_RfpDnsServerIpList}" ]; then
+            cat /dev/null > $RESOLV
+            for dnsserver in ${OM_RfpDnsServerIpList}; do
+                echo "nameserver ${dnsserver}" >> $RESOLV
+            done
+            if [ ! -z "${OM_RfpDnsDomain}" ]; then
+                echo "search ${OM_RfpDnsDomain}" >> $RESOLV
+                count=1;
+                for domain in ${OM_RfpDnsDomain}; do
+                  let count++;
+                done
+                echo "options attempts:$count" >> $RESOLV
+            fi
+        else
+            cat /dev/null > $RESOLV
+        fi
+        
+    ;;
+    
+    deconfig)
+        cat /dev/null > $RESOLV
+        
+    ;;
+
+esac

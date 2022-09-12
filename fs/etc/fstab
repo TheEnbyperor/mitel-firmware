@@ -1,0 +1,6 @@
+# <file system> <mount point>    <type>  <options>                <dump>  <pass>
+proc            /proc            proc     defaults                 0       0
+sysfs           /sys             sysfs    defaults                 0       0
+#
+/dev/microSD    /media/microSD   auto     defaults,sync                 0       0
+/dev/usbStick   /media/usbStick  auto     defaults,sync                 0       0

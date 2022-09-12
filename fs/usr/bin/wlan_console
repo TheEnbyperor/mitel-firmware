@@ -1,0 +1,30 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+if is_rfp43 || is_rfp4g; then
+
+   echo "#######################################################################"
+   echo "#######################################################################"
+   echo "<wlan_console> is deprecated"
+   echo "its functionality has been integrated into <ip_rfpconsole>"
+   echo "calling <ip_rfpconsole> instead"
+   echo "#######################################################################"
+   echo "#######################################################################"
+   ip_rfpconsole $@
+
+else
+
+   if [ -f /usr/bin/conclient ] ; then
+      
+      if [ $# -ge 1 ]; then
+         conclient -p 18181 -x $@
+      else
+         conclient -p 18181 -s -i "wlan# "
+      fi
+      
+   else 
+      telnet 127.0.0.1 18181
+   fi
+
+fi

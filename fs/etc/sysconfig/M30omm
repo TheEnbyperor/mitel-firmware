@@ -1,0 +1,167 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+################################################################################
+# configuration 
+################################################################################
+OMM_START=0
+OMM_PARAMS_SCRIPT=/opt/omm/omm.params
+
+OMM_PARAMS_FILE=${OM_TMP_DIR}/omm/omm.params
+OMM_PID_FILE=${OM_PID_DIR}/omm.pid
+OMMW_PID_FILE=${OM_PID_DIR}/ommwatcher.pid
+
+ICS_START=0
+
+   [ -d ${OM_TMP_DIR}/omm ] || mkdir -p ${OM_TMP_DIR}/omm
+   [ -d ${OM_OPT_DIR}/omm ] || mkdir -p ${OM_OPT_DIR}/omm
+   [ -d ${OM_LIB_DIR}/omm ] || mkdir -p ${OM_LIB_DIR}/omm
+
+################################################################################
+# stop of application 
+################################################################################
+
+stop_omm () {
+
+   start-stop-daemon -K -n omm.sh > /dev/null 2>&1
+   start-stop-daemon -K -n ommwatcher > /dev/null 2>&1
+   start-stop-daemon -K -n omm > /dev/null 2>&1
+   start-stop-daemon -K -n udhcpd > /dev/null 2>&1
+   
+if [ -x /opt/omm/ics ]; then
+   start-stop-daemon -K -n ics.sh > /dev/null 2>&1
+   start-stop-daemon -K -n ics > /dev/null 2>&1
+fi
+   
+}
+
+################################################################################
+# start of application 
+################################################################################
+
+start_omm () {
+
+   mac=`interface_report_mac eth0`
+   if [ "${mac}" == "00:30:42:12:90:00" ]; then
+      stop_omm
+      exit 0
+   fi
+   
+   if [ -z "${OM_RfpIpAddress}" ]; then
+      info "ERROR: OM_RfpIpAddress not set"
+      stop_omm
+      exit 0
+   fi
+   
+   if [ -z "${OM_ManagerIpAddress1}" -a -z "${OM_ManagerIpAddress2}" ]; then
+      exit 0
+   fi
+   
+   ##############################################
+   # cut netmask from IPv6-Address 
+   RFP_IP=$(echo $OM_RfpIpAddress|cut -d'/' -f 1)
+   
+   ### stop omm if not configured
+   if [ x${RFP_IP} != x${OM_ManagerIpAddress1} \
+        -a x${RFP_IP} != x${OM_ManagerIpAddress2} ]; then
+      stop_omm
+      exit 1
+   fi
+   
+   [ ! -f ${OMM_PARAMS_FILE} ] && touch ${OMM_PARAMS_FILE}
+   OMM_PARAMS_OLD=`cat ${OMM_PARAMS_FILE}`
+
+   . ${OMM_PARAMS_SCRIPT}
+   
+   # command line syntax for OMM standby
+   if [ -n "${OM_ManagerIpAddress1}" -a -n "${OM_ManagerIpAddress2}" ]; then
+      OMM_PARAMS="$OMM_PARAMS -m '${OM_ManagerIpAddress1}:${OM_ManagerIpAddress2}'"
+   fi
+      
+   #############################################################################
+   
+   ### store the parameter in the new params file, add OM_RfpIpAddress
+   eval echo "${OMM_PARAMS} ${RFP_IP}" > ${OMM_PARAMS_FILE}-new
+   OMM_PARAMS_NEW=`cat ${OMM_PARAMS_FILE}-new`
+   rm ${OMM_PARAMS_FILE}-new
+   
+   checkproc omm
+   if [ $? -eq 1 ]; then
+   ### application not running
+      OMM_START=1
+   else
+   ### application running
+      if [ "${OMM_PARAMS_NEW}" != "$OMM_PARAMS_OLD" ]; then
+      ### parameter have changed, stop the running appl
+         info "stopping omm due to changed parameters ..."
+         stop_omm
+         OMM_START=1
+      fi
+   fi
+   
+   if [ -x /opt/omm/ics ]; then
+      checkproc ics
+      if [ $? -eq 1 ]; then
+      ### application not running
+          ICS_START=1
+      fi
+   fi
+   
+################################################################################
+# start of application  
+#
+   ### export the used vars
+   export OMM_PARAMS OM_RfpInterface
+      
+   if [ $OMM_START -eq 1 ]; then
+
+      ### make sure that there is nothing left over
+      make_sure_no_proc omm
+      
+      ### store the parameter in the params file, add OM_RfpIpAddress
+      eval echo "${OMM_PARAMS} ${RFP_IP}" > ${OMM_PARAMS_FILE}
+      
+      ### run the startscript
+      /opt/omm/omm.sh &
+ 
+   fi
+   
+   if [ $ICS_START -eq 1 ]; then
+      ### run the startscript
+      /opt/omm/ics.sh &
+   fi
+   
+}
+   
+################################################################################
+# main: handle the first parameter used in this call 
+################################################################################
+
+case "$1" in
+
+   start)
+       start_omm
+	;;
+   
+   stop)
+       stop_omm
+	;;
+   
+   restart)
+       $0 stop
+       $0 start
+	;;
+	
+	*)
+       logger -p user.notice -s -t $0 "unknown parameter $1"
+       exit 1
+   ;;
+   
+esac
+
+exit 0
+
+#
+# end of file
+################################################################################

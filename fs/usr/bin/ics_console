@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ -f /usr/bin/conclient ] ; then
+   if [ $# -ge 1 ]; then
+      conclient -p 14167 -x $@
+   else
+      conclient -p 14167 -s -i "ics# "
+   fi
+else 
+   telnet 127.0.0.1 14167
+fi

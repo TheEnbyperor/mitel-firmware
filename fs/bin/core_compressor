@@ -1,0 +1,2 @@
+#!/bin/sh
+/bin/gzip -c > ${1}.gz

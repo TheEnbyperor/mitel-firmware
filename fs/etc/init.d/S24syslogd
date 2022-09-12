@@ -1,0 +1,35 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+   [ -d ${SYSLOGD_VAR_DIR} ] || mkdir -p ${SYSLOGD_VAR_DIR}
+
+# flush the boot messages to file and start klogd
+   print_console "starting klogd ..."
+   dmesg -c > /tmp/boot.log
+   klogd -c 2
+   
+# start syslogd
+   if is_rfp43 || is_rfp4g; then
+      SYSLOGD_PARAMS="-S -L -C64"
+   else
+      SYSLOGD_PARAMS="-S -L -C16 -O /dev/console"
+   fi
+
+   if [ -f ${SYSLOGD_OMM_CONF} ]; then
+           SYSLOGD_REMOTE="-R `cat ${SYSLOGD_OMM_CONF}`"
+   elif [ -f ${SYSLOGD_CONF} ]; then
+      SYSLOGD_REMOTE="-R `cat ${SYSLOGD_CONF}`"
+   else
+      SYSLOGD_REMOTE=""
+   fi
+
+   SYSLOGD_PARAMS="${SYSLOGD_PARAMS} ${SYSLOGD_REMOTE}"
+   print_console "starting syslogd ${SYSLOGD_PARAMS} ..."
+   if [ -x /usr/bin/chrt ]; then
+      eval start-stop-daemon -S -p ${SYSLOGD_PID_FILE} -m -x /usr/bin/chrt -- -f ${SYSLOGD_PRIO} /sbin/syslogd ${SYSLOGD_PARAMS}
+   else
+      eval start-stop-daemon -S -p ${SYSLOGD_PID_FILE} -m -x /sbin/syslogd -- ${SYSLOGD_PARAMS}
+   fi
+   echo ${SYSLOGD_PARAMS} > ${SYSLOGD_PARAMS_FILE}
+   

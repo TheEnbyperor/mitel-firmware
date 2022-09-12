@@ -1,0 +1,9 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+if [ -f ${BIT_FILE} ]; then
+    sort ${BIT_FILE}
+else
+    echo "sorry, no build in test results found"
+fi

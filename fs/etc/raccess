@@ -1,0 +1,91 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+raccessPrio=1
+
+case "$1" in
+  start)
+    mkdir -p /tmp
+    if [ -x /usr/sbin/dropbear ]; then
+      raccessDaemon=dropbear
+      raccessDaemonPath="/usr/sbin/dropbear"
+      
+      if [ -d /private ]; then
+         raccessDaemonOptions="-b ${BANNER_FILE} -F -j -k"
+      elif [ -f /var/opt/misc/ssh_enable ]; then
+         raccessDaemonOptions="-b ${BANNER_FILE} -F -j -k"   
+      else
+         raccessDaemonOptions="-b ${BANNER_FILE} -F -j -k -w"
+      fi
+      
+      echo ${raccessDaemonOptions} > ${SSH_PARAMS_FILE}-new
+      
+	  checkproc ${raccessDaemon}
+      if [ $? -eq 1 ]; then
+   		 ### application not running
+    	 rm -f /tmp/${raccessDaemon}.pid
+	  fi
+   
+      if [ ! -f /tmp/${raccessDaemon}.pid ] || ! diff ${SSH_PARAMS_FILE} ${SSH_PARAMS_FILE}-new >/dev/null 2>&1 ; then
+    	start-stop-daemon --stop --quiet --name ${raccessDaemon} 2>&1 >/dev/null
+    	sleep 1
+    	start-stop-daemon --stop --signal 9 --quiet --name ${raccessDaemon} 2>&1 >/dev/null
+    	rm -f /tmp/${raccessDaemon}.pid
+        verbose "starting ${raccessDaemon}"
+        if [ ! -z ${changerealtime} ]; then
+          start-stop-daemon -b --start --quiet --make-pidfile \
+            --pidfile /tmp/${raccessDaemon}.pid --exec ${changerealtime} \
+            -- -f ${raccessPrio} ${raccessDaemonPath} ${raccessDaemonOptions}
+        else
+          start-stop-daemon -b --start --quiet --make-pidfile \
+            --pidfile /tmp/${raccessDaemon}.pid --exec ${raccessDaemonPath} \
+            -- ${raccessDaemonOptions}
+        fi
+        
+        echo ${raccessDaemonOptions} > ${SSH_PARAMS_FILE}  
+      fi
+      
+    else
+      raccessDaemon=telnetd
+      raccessDaemonPath=/usr/sbin/telnetd
+      raccessDaemonOptions="-f ${BANNER_FILE}"
+      if [ ! -f /tmp/${raccessDaemon}.pid ]; then
+        verbose "starting ${raccessDaemon}"
+        if [ ! -z ${changerealtime} ]; then
+          start-stop-daemon --start --quiet --make-pidfile \
+            --pidfile /tmp/${raccessDaemon}.pid --exec ${changerealtime} \
+            -- -f ${raccessPrio} ${raccessDaemonPath} ${raccessDaemonOptions}
+        else
+          start-stop-daemon --start --quiet --make-pidfile \
+            --pidfile /tmp/${raccessDaemon}.pid --exec ${raccessDaemonPath} \
+            -- ${raccessDaemonOptions}
+        fi
+      fi
+    fi
+    ;;
+
+  stop)
+    if [ -f /var/opt/misc/ssh_enable ]; then
+        exit 0
+    fi
+  
+    if [ -x /usr/sbin/dropbear ]; then
+      raccessDaemon=dropbear
+    else
+      raccessDaemon=telnetd
+    fi
+    if [ -f /tmp/${raccessDaemon}.pid ]; then
+      start-stop-daemon --stop --quiet --pidfile /tmp/${raccessDaemon}.pid --name ${raccessDaemon} 2>&1 >/dev/null
+    fi
+    start-stop-daemon --stop --quiet --name ${raccessDaemon} 2>&1 >/dev/null
+    rm -f /tmp/${raccessDaemon}.pid
+    rm -f ${SSH_PARAMS_FILE}
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+esac
+

@@ -1,0 +1,72 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+#################################################### 
+# Disable IPv6
+#################################################### 
+echo 0 > /proc/sys/net/ipv6/conf/all/autoconf
+echo 0 > /proc/sys/net/ipv6/conf/all/accept_ra
+echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
+
+#################################################### 
+# Config VLAN
+#################################################### 
+VLAN=""
+
+#                                         New file containing VLAN ID in SDC
+if [ -f ${RFPM_NETWORK_CONFIG_FILE} ] || [ -f ${RFPM_VLAN_CONFIG_FILE} ]; then
+        
+# extract the vlan id form the local config file
+		if [ -f ${RFPM_NETWORK_CONFIG_FILE} ]; then
+			# extract the vlan id form the local config file
+			VLAN=`grep "^OM_RfpVlanId=" ${RFPM_NETWORK_CONFIG_FILE} | \
+				awk -F '=' '{print $2}'`
+		fi
+
+		if [ -f ${RFPM_VLAN_CONFIG_FILE} ]; then
+			if [ "x${OM_RfpVlanId}" == "x" ] ; then
+				VLAN=`grep "^OM_RfpVlanId=" ${RFPM_VLAN_CONFIG_FILE} | \
+					awk -F '=' '{print $2}'`
+			fi
+		fi
+
+else
+
+# check for local configuration with vlan
+    val=`local_db_check use_local_cfg`
+    if [ $? -eq 0 ] && [ x"${val}" == "x1" ]; then
+    # local configuraion
+        val=`local_db_check vlanid`
+        if [ $? -eq 0 ]; then
+           VLAN=${val}
+        fi
+    fi
+    
+# check for local vlan configuration
+    if [ -z "$VLAN" ]; then
+    
+        val=`local_db_check use_vlan`
+        if [ $? -eq 0 ] && [ x"${val}" == "x1" ]; then
+            touch ${DHCP_CHECK_VLAN_USAGE_DONE}
+            val=`local_db_check vlanid`
+            if [ $? -eq 0 ]; then
+                VLAN=${val}
+            fi
+        fi
+    fi
+fi
+
+# check the vlan id
+if [ -z "$VLAN" ] || ! [ "$VLAN" -eq "$VLAN" ] >/dev/null 2>&1 || \
+    [ "$VLAN" -lt 1 ] || [ "$VLAN" -gt 4094 ]; then
+    
+    # not a valid number 
+    VLAN=""
+fi
+
+
+
+# setup the interfaces
+    interface_setup
+    

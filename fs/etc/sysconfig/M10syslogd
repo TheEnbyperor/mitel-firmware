@@ -1,0 +1,100 @@
+#!/bin/sh
+
+################################################################################
+# first read all we need in here 
+. /etc/rc.functions
+
+
+
+################################################################################
+# local functions
+syslogd_restart () {
+
+        local SYSLOGD_START=0
+    
+        if is_rfp43 || is_rfp4g; then
+           SYSLOGD_PARAMS="-S -L -C64"
+        else
+           SYSLOGD_PARAMS="-S -L -C16 -O /dev/console"
+        fi
+        
+        if [ -f ${SYSLOGD_OMM_CONF} ]; then
+           SYSLOGD_REMOTE="-R `cat ${SYSLOGD_OMM_CONF}`"
+        elif [ -f ${SYSLOGD_CONF} ]; then
+           SYSLOGD_REMOTE="-R `cat ${SYSLOGD_CONF}`"
+        else
+           SYSLOGD_REMOTE=""
+        fi
+     
+        SYSLOGD_PARAMS="${SYSLOGD_PARAMS} ${SYSLOGD_REMOTE}"
+        echo ${SYSLOGD_PARAMS} > ${SYSLOGD_PARAMS_FILE}-new
+       
+        checkproc syslogd
+        if [ $? -eq 1 ]; then
+            ### application not running
+            print_console "starting syslogd ${SYSLOGD_PARAMS}"
+            SYSLOGD_START=1
+        else
+            diff ${SYSLOGD_PARAMS_FILE} ${SYSLOGD_PARAMS_FILE}-new > /dev/null 2>&1
+            if [ $? -ne 0 ]; then
+                start-stop-daemon -K -n syslogd > /dev/null 2>&1
+                print_console "restaring syslogd ${SYSLOGD_PARAMS}"
+                SYSLOGD_START=1
+            fi
+        fi
+                
+        if [ ${SYSLOGD_START} -ne 0 ]; then
+           if [ -x /usr/bin/chrt ]; then
+             eval start-stop-daemon -S -p ${SYSLOGD_PID_FILE} -m -x /usr/bin/chrt -- -f ${SYSLOGD_PRIO} /sbin/syslogd ${SYSLOGD_PARAMS}
+           else
+             eval start-stop-daemon -S -p ${SYSLOGD_PID_FILE} -m -x /sbin/syslogd -- ${SYSLOGD_PARAMS}
+           fi
+           echo ${SYSLOGD_PARAMS} > ${SYSLOGD_PARAMS_FILE}
+        fi
+        
+}
+
+################################################################################
+# actions
+case "$1" in
+
+   SYS)
+      if [ x${2} == xSYSLOGD ]; then
+         SyslogRemote=`echo $@ | while read a b c; do echo $c; done`
+         case "$SyslogRemote" in
+            NONE|none|OFF|off)
+               rm -f ${SYSLOGD_OMM_CONF}
+            ;;
+            *)
+               echo "${SyslogRemote}"              > ${SYSLOGD_OMM_CONF}
+            ;;
+         esac
+         syslogd_restart
+      fi 
+   ;;
+
+   start)
+      if [ ! -z $OM_SyslogIpAddress ]; then
+         if [ -z $OM_SyslogPort ]; then
+            echo "$OM_SyslogIpAddress:514"             > ${SYSLOGD_CONF}
+         else
+            echo "$OM_SyslogIpAddress:$OM_SyslogPort"  > ${SYSLOGD_CONF}
+         fi
+      else
+         rm -f ${SYSLOGD_CONF}
+      fi
+      syslogd_restart
+   ;;
+    
+    stop)
+      # we do not stop the syslogd here
+    ;;
+    
+    *)
+        logger -p user.notice -s -t $0 "unknown parameter $1"
+        exit 1     
+    ;;
+    
+esac
+
+exit 0

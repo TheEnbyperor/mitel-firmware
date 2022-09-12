@@ -1,0 +1,135 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+# called by init on reboot
+
+# give feedback on console
+info "running $0"
+
+#
+# LEDs 
+#
+ipc "LED 0 ON"
+
+# stop snmpd
+   killall snmpd >/dev/null 2>&1
+
+#
+# reset the bmc
+#
+echo 1 > /sys/class/gpio/gpio42/value
+
+#
+# shutdown our processes
+#
+/etc/sysconfig/M??omm stop
+
+#
+# save the system time 
+#
+if [ -x /sbin/hwclock ]; then
+    verbose "saving the system time"
+    hwclock -w
+    verbose "            system time: `date`"
+fi
+
+#
+# software reset
+#
+if [ -f /tmp/swreset ]; then
+    rm -rf /flash/boot
+fi
+
+#
+# factory reset
+#
+if [ -f /tmp/factoryreset ]; then
+
+    find /var -xdev -type f | grep -v otp | xargs -r rm -f
+    
+    touch /var/keep
+    find /var -xdev -type d | grep -v "/var$" | xargs rmdir -p >/dev/null 2>&1
+    rm -rf /var/keep
+    
+fi
+
+#
+# factoryreset_except_auth
+#
+# We are slowly being lost in chaos :)
+# When changing the stream of an RFP, the previously received encryption key must NOT be deleted.
+#
+# Don't delete the 'auth.bin' file - It is still necessary for the encryption
+#
+if [ -f /tmp/factoryreset_except_auth ]; then
+
+    find /var -xdev -type f | grep -v -e otp -e auth.bin | xargs -r rm -f
+    
+    touch /var/keep
+    find /var -xdev -type d | grep -v "/var$" | xargs rmdir -p >/dev/null 2>&1
+    rm -rf /var/keep
+    
+fi
+
+#
+# factory cleanup
+#
+if [ -f /tmp/factorycleanup ]; then
+
+    find /var -xdev -type f | grep -v -e otp | xargs -r rm -f
+    
+    touch /var/keep
+    find /var -xdev -type d | grep -v "/var$" | xargs rmdir -p >/dev/null 2>&1
+    rm -rf /var/keep
+    
+fi
+
+#
+# change of stream requested
+#
+if [ -f /tmp/stream_request_omm_scsip ]; then
+	print_console " Set stream to SCSIP with OMM"
+	# /var/opt may be deleted due to factory reset
+	mkdir /var/opt
+	touch /var/opt/stream_scsip
+	touch /var/opt/stream_omm_scsip
+fi
+
+if [ -f /tmp/stream_request_scsip ]; then
+	print_console " Set stream to SCSIP"
+	rm -f /var/opt/stream_omm_scsip
+	# /var/opt may be deleted due to factory reset
+	mkdir /var/opt
+	touch /var/opt/stream_scsip
+fi
+
+if [ -f /tmp/stream_request_ffsip ]; then
+	print_console " Set stream to FFSIP"
+	rm -f /var/opt/stream_scsip
+	rm -f /var/opt/stream_omm_scsip
+fi
+
+
+#
+# wait a little time
+#
+sync
+
+#
+# remount ubifs partitions readonly
+#
+if [ -f /proc/mtd ]; then
+    grep 'ubifs-' /proc/mtd | while read mtd start size name; do 
+        ubifsname=`echo $name | sed -e 's/\"//g' -e 's/ubifs\-//g'`
+        print_console "remounting ubivolume /${ubifsname} readonly";
+        fuser -mk /${ubifsname}
+        sync
+        mount -t ubifs /${ubifsname} -oremount,ro
+     done
+fi
+
+
+# sleep 
+sleep 2
+

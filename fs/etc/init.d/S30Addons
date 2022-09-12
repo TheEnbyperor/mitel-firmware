@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# check and install the addons form the bootimage in use
+#
+
+. /etc/rc.functions
+
+#
+local BI="nofile"
+
+# find the bootimage in use
+    if   grep "bi=ubi0" /proc/cmdline >/dev/null; then
+        BI="/flash/boot/bootimage0"   
+    elif grep "bi=ubi1" /proc/cmdline >/dev/null; then
+        BI="/flash/boot/bootimage1"
+    elif grep "bi=ubi" /proc/cmdline >/dev/null; then
+        BI=`readlink -f /flash/boot/bootimage`
+    fi
+    
+    export ADDONS=${BI}.addons
+    
+    if [ ! -f ${ADDONS} ]; then
+        info "no addons for the active bootimage"
+        rm -rf /var/opt/addons  
+        exit 2
+    fi
+    
+# unpack addons.sh from the addons package
+    tar -x -j -C /tmp -f ${ADDONS} addons/addons.sh
+    chown -R root.root /tmp/addons
+    chmod u+x /tmp/addons/addons.sh
+
+# execute the addons script
+    /tmp/addons/addons.sh install
+    rm -rf /tmp/addons
+    

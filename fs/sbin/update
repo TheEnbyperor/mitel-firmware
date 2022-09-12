@@ -1,0 +1,12 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+
+if [ $# -eq 0 ]; then
+   ipc "REQUEST IMGCHK_REBOOT"
+elif [ "$1" = "checkonly" ]; then
+   ipc "REQUEST IMGCHK"
+else
+   echo "usage: update [checkonly]"
+fi

@@ -1,0 +1,239 @@
+^/tags/versions/Walpurgis-200319 versions
+ 
+^/tags/make/Walpurgis-200129 make
+^/tags/misc/190116 misc
+ 
+^/tags/appl/mom/build/190618 appl/mom/build
+^/tags/appl/mom/certs/160212 appl/mom/certs
+ 
+^/tags/appl/mom/rpmbuild/Walpurgis-190607 appl/mom/rpmbuild
+ 
+^/tags/appl/mom/src/adc/181031 appl/mom/src/adc
+^/tags/appl/mom/src/cron/160311 appl/mom/src/cron
+^/tags/appl/mom/src/appweb/Walpurgis-190715 appl/mom/src/appweb
+^/tags/appl/mom/src/avl/160920 appl/mom/src/avl
+^/tags/appl/mom/src/ds/180910 appl/mom/src/ds
+^/tags/appl/mom/src/esm/161010_2 appl/mom/src/esm
+^/tags/appl/mom/src/macl/Walpurgis-200121 appl/mom/src/macl
+^/tags/appl/mom/src/mc/180409 appl/mom/src/mc
+^/tags/appl/mom/src/mcm/180409 appl/mom/src/mcm
+^/tags/appl/mom/src/mcnf/Walpurgis-200120 appl/mom/src/mcnf
+^/tags/appl/mom/src/mlic/161222 appl/mom/src/mlic
+^/tags/appl/mom/src/mlicence/160322_2 appl/mom/src/mlicence
+^/tags/appl/mom/src/mom/Walpurgis-190514 appl/mom/src/mom
+^/tags/appl/mom/src/msgh/181030 appl/mom/src/msgh
+^/tags/appl/mom/src/nh/190613 appl/mom/src/nh
+^/tags/appl/mom/src/ocm/190613 appl/mom/src/ocm
+^/tags/appl/mom/src/rh/180316 appl/mom/src/rh
+^/tags/appl/mom/src/signals/160412 appl/mom/src/signals
+^/tags/appl/mom/src/statistic/171206 appl/mom/src/statistic
+^/tags/appl/omm/src/COA-Convert/191218 appl/mom/src/COA-Convert
+^/tags/appl/omm/src/omi/Walpurgis-200205 appl/mom/src/omi
+^/tags/appl/omm/src/omiNetwork/200124 appl/mom/src/omiNetwork
+ 
+^/tags/appl/omm/build/190618 appl/omm/build
+^/tags/appl/omm/certs/141030 appl/omm/certs
+ 
+^/tags/appl/omm/rpmbuild/Walpurgis-190607 appl/omm/rpmbuild
+ 
+^/tags/appl/omm/src/adc/160509 appl/omm/src/adc
+^/tags/appl/omm/src/autodb/190823 appl/omm/src/autodb
+^/tags/appl/omm/src/axiCmd/181204 appl/omm/src/axiCmd
+ 
+^/tags/appl/omm/src/cmi/appl/Walpurgis-200130 appl/omm/src/cmi/appl
+^/tags/appl/omm/src/cmi/build/190114 appl/omm/src/cmi/build
+^/tags/appl/omm/src/cmi/common/190517 appl/omm/src/cmi/common
+^/tags/appl/omm/src/cmi/mom/190607 appl/omm/src/cmi/mom
+^/tags/appl/omm/src/cmi/conference/190514 appl/omm/src/cmi/conference
+^/tags/appl/omm/src/cmi/video/190208 appl/omm/src/cmi/video
+^/tags/appl/omm/src/cmi/wideband/190514 appl/omm/src/cmi/wideband
+^/tags/appl/omm/src/cmi/omm_ffsip/Walpurgis-200207 appl/omm/src/cmi/omm_ffsip
+^/tags/appl/omm/src/cmi/prsh/190109 appl/omm/src/cmi/prsh
+ 
+^/tags/appl/omm/src/cert/181206 appl/omm/src/cert
+^/tags/appl/omm/src/cnf/Walpurgis-200318 appl/omm/src/cnf
+^/tags/appl/omm/src/COA-Convert/191218 appl/omm/src/COA-Convert
+^/tags/appl/omm/src/common/Walpurgis-200113 appl/omm/src/common
+^/tags/appl/omm/src/cron/171207 appl/omm/src/cron
+^/tags/appl/omm/src/dhcp/190128 appl/omm/src/dhcp
+^/tags/appl/omm/src/dsip/Walpurgis-200221 appl/omm/src/dsip
+^/tags/appl/omm/src/epr/181123 appl/omm/src/epr
+^/tags/appl/omm/src/fts/181016 appl/omm/src/fts
+^/tags/appl/omm/src/gmi/190607 appl/omm/src/gmi
+^/tags/appl/omm/src/hcm/191125 appl/omm/src/hcm
+^/tags/appl/omm/src/ima/191212 appl/omm/src/ima
+^/tags/appl/omm/src/ipc/180411 appl/omm/src/ipc
+^/tags/appl/omm/src/ipl/Walpurgis-200124 appl/omm/src/ipl
+^/tags/appl/omm/src/lic/180606 appl/omm/src/lic
+^/tags/appl/omm/src/licence/180221 appl/omm/src/licence
+^/tags/appl/omm/src/loc/150331 appl/omm/src/loc
+^/tags/appl/omm/src/moni/181031 appl/omm/src/moni
+^/tags/appl/omm/src/msm/Walpurgis-190813 appl/omm/src/msm
+^/tags/appl/omm/src/omi/Walpurgis-200205 appl/omm/src/omi
+^/tags/appl/omm/src/omiNetwork/200124 appl/omm/src/omiNetwork
+^/tags/appl/omm/src/ommwatcher/150210 appl/omm/src/ommwatcher
+^/tags/appl/omm/src/opsb/190129 appl/omm/src/opsb
+^/tags/appl/omm/src/osip/190614 appl/omm/src/osip
+^/tags/appl/omm/src/prov/181128 appl/omm/src/prov
+^/tags/appl/omm/src/snmp/181009 appl/omm/src/snmp
+^/tags/appl/omm/src/standby/Walpurgis-200113 appl/omm/src/standby
+^/tags/appl/omm/src/sync/190327 appl/omm/src/sync
+^/tags/appl/omm/src/tb/190607 appl/omm/src/tb
+^/tags/appl/omm/src/tzone/181029 appl/omm/src/tzone
+^/tags/appl/omm/src/umo/191212 appl/omm/src/umo
+^/tags/appl/omm/src/upd/190514 appl/omm/src/upd
+^/tags/appl/omm/src/video/190304 appl/omm/src/video
+^/tags/appl/omm/src/web/Walpurgis-200131 appl/omm/src/web
+^/tags/appl/omm/src/webs/Walpurgis-200115 appl/omm/src/webs
+^/tags/appl/omm/src/wlan/181009 appl/omm/src/wlan
+^/tags/appl/omm/src/xml/200304 appl/omm/src/xml
+^/tags/appl/omm/src/xsc/190805 appl/omm/src/xsc
+ 
+^/tags/appl/omm/src/ddl/130220 appl/omm/src/ddl
+^/tags/appl/omm/src/dlc/181009 appl/omm/src/dlc
+^/tags/appl/omm/src/nwk/190125 appl/omm/src/nwk
+^/tags/appl/omm/src/rfp/190220 appl/omm/src/rfp
+^/tags/appl/omm/src/dm/180607 appl/omm/src/dm
+^/tags/appl/omm/src/trc/190118 appl/omm/src/trc
+^/tags/appl/omm/src/trcpoint/170620 appl/omm/src/trcpoint
+^/tags/appl/omm/src/odip/190503 appl/omm/src/odip
+ 
+^/tags/appl/ip_rfp/build/180222 appl/ip_rfp/build
+^/tags/appl/ip_rfp/common/180307 appl/ip_rfp/common
+ 
+^/tags/appl/ip_rfp/rfp43/binaries/181217 appl/ip_rfp/rfp43/binaries
+ 
+^/tags/appl/ip_rfp/rfp43/build/130606 appl/ip_rfp/rfp43/build
+ 
+^/tags/appl/ip_rfp/rfp43/src/bluetooth/180112 appl/ip_rfp/rfp43/src/bluetooth
+^/tags/appl/ip_rfp/rfp43/src/common/Walpurgis-200113 appl/ip_rfp/rfp43/src/common
+^/tags/appl/ip_rfp/rfp43/src/snmp/181009 appl/ip_rfp/rfp43/src/snmp
+^/tags/appl/ip_rfp/rfp43/src/usb/180208 appl/ip_rfp/rfp43/src/usb
+^/tags/appl/ip_rfp/rfp43/src/video/151202 appl/ip_rfp/rfp43/src/video
+ 
+^/tags/appl/ip_rfp/rfp43/src/wlan/190502 appl/ip_rfp/rfp43/src/wlan
+^/tags/appl/ip_rfp/rfp43/src/lu10/181016 appl/ip_rfp/rfp43/src/lu10
+^/tags/appl/ip_rfp/rfp43/src/media/Walpurgis-200318 appl/ip_rfp/rfp43/src/media
+^/tags/appl/ip_rfp/rfp43/src/misc/181009 appl/ip_rfp/rfp43/src/misc
+^/tags/appl/ip_rfp/rfp43/src/bmc/190517 appl/ip_rfp/rfp43/src/bmc
+^/tags/appl/ip_rfp/rfp43/src/confmixer/181001 appl/ip_rfp/rfp43/src/confmixer
+^/tags/appl/ip_rfp/rfp43/src/odip/190503 appl/ip_rfp/rfp43/src/odip
+ 
+^/tags/appl/ip_rfp/pc/100623 appl/ip_rfp/pc
+ 
+^/tags/appl/ip_rfp/rfp4g/binaries/181217 appl/ip_rfp/rfp4g/binaries
+ 
+^/tags/appl/ip_rfp/rfp4g/build/180320 appl/ip_rfp/rfp4g/build
+ 
+^/tags/appl/ip_rfp/rfp4g/src/common/Walpurgis-200113 appl/ip_rfp/rfp4g/src/common
+^/tags/appl/ip_rfp/rfp4g/src/snmp/181009 appl/ip_rfp/rfp4g/src/snmp
+^/tags/appl/ip_rfp/rfp4g/src/wlan/181205 appl/ip_rfp/rfp4g/src/wlan
+^/tags/appl/ip_rfp/rfp4g/src/lu10/181016 appl/ip_rfp/rfp4g/src/lu10
+^/tags/appl/ip_rfp/rfp4g/src/media/Walpurgis-200318 appl/ip_rfp/rfp4g/src/media
+^/tags/appl/ip_rfp/rfp4g/src/misc/181009 appl/ip_rfp/rfp4g/src/misc
+^/tags/appl/ip_rfp/rfp4g/src/bmc/190517 appl/ip_rfp/rfp4g/src/bmc
+^/tags/appl/ip_rfp/rfp4g/src/confmixer/180921 appl/ip_rfp/rfp4g/src/confmixer
+^/tags/appl/ip_rfp/rfp4g/src/odip/190503 appl/ip_rfp/rfp4g/src/odip
+ 
+^/tags/appl/ics/build/180412 appl/ics/build
+^/tags/appl/ics/src/common/Walpurgis-190514 appl/ics/src/common
+^/tags/appl/ics/src/csm/190509 appl/ics/src/csm
+^/tags/appl/ics/src/dsip/180928 appl/ics/src/dsip
+ 
+^/tags/appl/atftp/190116 appl/atftp
+^/tags/appl/busybox/Walpurgis-190926 appl/busybox
+^/tags/appl/dropbear/190115 appl/dropbear
+^/tags/appl/e2fsprogs/190115 appl/e2fsprogs
+^/tags/appl/ethtool/190115 appl/ethtool
+^/tags/appl/fuseImage/190116 appl/fuseImage
+^/tags/appl/handset/Walpurgis-200121 appl/handset
+^/tags/appl/iperf/180918 appl/iperf
+^/tags/appl/iputils/190115 appl/iputils
+^/tags/appl/local_db/170516 appl/local_db
+^/tags/appl/manu/191128 appl/manu
+^/tags/appl/minirsx/180613 appl/minirsx
+^/tags/appl/misc/180919 appl/misc
+^/tags/appl/mtd-utils/141215 appl/mtd-utils
+^/tags/appl/netalysisprobe/180222 appl/netalysisprobe
+^/tags/appl/omcfg/180226 appl/omcfg
+^/tags/appl/otp_util/130220 appl/otp_util
+^/tags/appl/tcpdump/180222 appl/tcpdump
+^/tags/appl/tcpecho/180222 appl/tcpecho
+^/tags/appl/pdatad/170516 appl/pdatad
+^/tags/appl/rfpmanager/Walpurgis-190830 appl/rfpmanager
+^/tags/appl/snmp/180222 appl/snmp
+^/tags/appl/sntp/190503 appl/sntp
+^/tags/appl/supplicant/191016 appl/supplicant
+^/tags/appl/udev/190122 appl/udev
+^/tags/appl/fw_printenv/180322 appl/fw_printenv
+^/tags/appl/wslay/180607 appl/wslay
+ 
+^/tags/appl/wlan/190820 appl/wlan
+ 
+^/tags/booter/build/120116 booter/build
+^/tags/booter/rfp/130108 booter/rfp
+^/tags/booter/rfp43/190115 booter/rfp43
+^/tags/booter/rfp4g/190115 booter/rfp4g
+ 
+^/tags/appl/OM_Configurator/170626 appl/OM_Configurator
+ 
+^/tags/appl/java/build/190618b appl/java/build
+^/tags/appl/java/Locating/200318__axiprot_v50 appl/java/Locating
+^/tags/appl/java/gwt/180921 appl/java/gwt
+^/tags/appl/java/oamp/Walpurgis-200122 appl/java/oamp
+^/tags/appl/java/oamp_runtime_image/Walpurgis-191211 appl/java/oamp_runtime_image
+^/tags/appl/java/libs/aastra_styles/190221 appl/java/libs/aastra_styles
+^/tags/appl/java/libs/omilib/Walpurgis-200211 appl/java/libs/omilib
+^/tags/appl/java/libs/omilibgui/160525 appl/java/libs/omilibgui
+^/tags/appl/java/libs/opsb/180529 appl/java/libs/opsb
+^/tags/appl/java/libs/util/130128 appl/java/libs/util
+^/tags/appl/java/omcfg/Octo-200117 appl/java/omcfg
+^/tags/appl/java/omcfg_runtime_image/190910 appl/java/omcfg_runtime_image
+ 
+^/tags/libs/build/190116 libs/build
+^/tags/libs/bluez/190116 libs/bluez
+^/tags/libs/curl/190212 libs/curl
+^/tags/libs/dmalloc/190116 libs/dmalloc
+^/tags/libs/epeg/130923 libs/epeg
+^/tags/libs/fuse/190116 libs/fuse
+^/tags/libs/imap/180926 libs/imap
+^/tags/libs/libadsp/190722 libs/libadsp
+^/tags/libs/libcaxi/Walpurgis-200205 libs/libcaxi
+^/tags/libs/libconfmix/181004 libs/libconfmix
+^/tags/libs/libfts/181210 libs/libfts
+^/tags/libs/libguihlp/180221 libs/libguihlp
+^/tags/libs/libjpeg/130308 libs/libjpeg
+^/tags/libs/libnl/190116 libs/libnl
+^/tags/libs/libom/Walpurgis-200113 libs/libom
+^/tags/libs/libpcap/130705 libs/libpcap
+^/tags/libs/libsrtp/180222 libs/libsrtp
+^/tags/libs/libssh2/180918 libs/libssh2
+^/tags/libs/libusb/180222 libs/libusb
+^/tags/libs/lzo/120116 libs/lzo
+^/tags/libs/openldap/170425 libs/openldap
+^/tags/libs/openssl/190118 libs/openssl
+^/tags/libs/srfplic/180221 libs/srfplic
+^/tags/libs/pugixml/171211 libs/pugixml
+^/tags/libs/v4l-utils/130301 libs/v4l-utils
+^/tags/libs/zlib/190116 libs/zlib
+ 
+^/tags/kernel/190115 kernel
+ 
+^/tags/rootfs/Walpurgis-200113 rootfs
+ 
+^/tags/etc/certs/190607 etc/certs
+ 
+^/tags/extra/180221 extra
+ 
+^/tags/tools/Walpurgis-200226 tools
+ 
+^/tags/toolchain/Walpurgis-200122 toolchain
+ 
+^/trunk/doc doc
+ 
+
+SVN status in /home/tkaule/workspace/prod_5038_walpurgis:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  total of 0 file(s)
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 

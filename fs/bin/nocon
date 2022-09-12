@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+if [ -x /usr/bin/conclient ]; then
+    killall -SIGUSR1 conclient
+else
+    killall logread
+fi

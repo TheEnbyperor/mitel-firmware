@@ -1,0 +1,27 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+###############################################################################
+# welcome message
+#
+    if [ -x /opt/ip_rfp/ip_rfp ]; then
+        VERSION=`/opt/ip_rfp/ip_rfp --version`
+    else
+        VERSION="(Unknown Version)"
+    fi
+    
+    mkdir -p `dirname ${BANNER_FILE}`
+    echo -e "\n$VERSION\n" >> ${BANNER_FILE}
+
+###############################################################################
+#
+# private productions only
+if [ -d /private ]; then
+    telnetd -l /bin/sh -f ${BANNER_FILE}
+fi
+
+###############################################################################
+# start the remote access daemon 
+#
+    /etc/raccess start

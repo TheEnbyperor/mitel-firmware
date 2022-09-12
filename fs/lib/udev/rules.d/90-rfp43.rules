@@ -1,0 +1,3 @@
+# USB MEMORY STICKS or other MASS STORAGE
+ACTION=="add",    KERNEL=="sda1", SUBSYSTEMS=="usb", SYMLINK+="usbStick", RUN+="/bin/mount /media/usbStick", RUN+="/bin/ipc 'HOTPLUG STORAGE'"
+ACTION=="remove", KERNEL=="sda1", SUBSYSTEMS=="usb", RUN+="/bin/umount /media/usbStick", RUN+="/bin/ipc 'UNPLUG STORAGE'"

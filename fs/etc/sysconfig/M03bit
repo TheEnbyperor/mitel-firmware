@@ -1,0 +1,13 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+#
+# read the results from startup
+#
+    
+# READ THE DEFERREN BIT ENTRIES
+    if [ -f ${BIT_DEFERRED_FILE} ]; then
+        ( IFS=$'\n'; for line in `cat ${BIT_DEFERRED_FILE}`; do ipc "$line"; done )
+        rm -f ${BIT_DEFERRED_FILE}
+    fi

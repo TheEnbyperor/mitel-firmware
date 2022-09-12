@@ -1,0 +1,28 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+#
+# files/directories that need for be created
+#
+
+[ -d ${OM_TMP_DIR} ]                || mkdir -p  ${OM_TMP_DIR}
+[ -d ${OM_PID_DIR} ]                || mkdir -p  ${OM_PID_DIR}
+[ -d ${OM_LOCK_DIR} ]               || mkdir -p  ${OM_LOCK_DIR}
+[ -d ${OM_LOG_DIR} ]                || mkdir -p  ${OM_LOG_DIR}
+[ -d ${OM_LIB_DIR} ]                || mkdir -p  ${OM_LIB_DIR}
+[ -d ${OM_OPT_DIR} ]                || mkdir -p  ${OM_OPT_DIR}
+
+[ -d ${OM_TMP_DIR}/env ]            || mkdir -p  ${OM_TMP_DIR}/env
+[ -d ${OM_TMP_DIR}/rfpm ]           || mkdir -p  ${OM_TMP_DIR}/rfpm
+[ -d ${OM_TMP_DIR}/ip_rfp ]         || mkdir -p  ${OM_TMP_DIR}/ip_rfp
+[ -d ${OM_TMP_DIR}/omm ]            || mkdir -p  ${OM_TMP_DIR}/omm
+
+[ -d ${OM_OPT_DIR}/rfpm ]           || mkdir -p  ${OM_OPT_DIR}/rfpm
+[ -d ${OM_OPT_DIR}/ip_rfp ]         || mkdir -p  ${OM_OPT_DIR}/ip_rfp
+[ -d ${OM_OPT_DIR}/omm ]            || mkdir -p  ${OM_OPT_DIR}/omm
+
+#
+# changes on the filsystem
+#
+    chmod u+s /sbin/local_db

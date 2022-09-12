@@ -1,0 +1,40 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+if [ -x /sbin/ifconfig ]; then
+
+   print_console "setting up loopback interface ..."
+   ifconfig lo 127.0.0.1 up
+   
+fi
+
+if [ -f /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts ]; then
+
+        print_console "ignoring icmp broadcasts ..."
+        echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+
+fi
+
+if [ -f /proc/sys/net/ipv4/icmp_ratemask ]; then
+
+        print_console "setting up the icmp ratemask ..."
+        echo 6169 > /proc/sys/net/ipv4/icmp_ratemask
+
+fi
+
+if [ -f /proc/sys/net/core/wmem_max ]; then
+
+		WMEM_MAX=`cat /proc/sys/net/core/wmem_max`
+		print_console "adjusting maximum send socket buffer size from $WMEM_MAX to 131071"
+		echo 131071 > /proc/sys/net/core/wmem_max
+
+fi
+
+if [ -f /proc/sys/net/unix/max_dgram_qlen ]; then
+
+		DGRAM_QLEN=`cat /proc/sys/net/unix/max_dgram_qlen`
+		print_console "adjusting maximum unix domain socket buffer to 4096, was $DGRAM_QLEN"
+		echo 4096 > /proc/sys/net/unix/max_dgram_qlen
+
+fi

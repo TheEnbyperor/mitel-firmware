@@ -1,0 +1,110 @@
+#!/bin/sh
+
+trap '' SIGINT
+
+PATH=/usr/sbin:/bin:/usr/bin:/sbin
+
+PROMPT=$USER@`hostname`' '$PS2
+
+while true
+do
+   read -p "$PROMPT" command argv1 argvs
+   if [ $? != 0 ]; then
+      exit 1
+   fi
+
+   case "$command" in
+   
+   exit|quit|bye)
+      exit 1
+      ;;
+   ver*)
+      cat /var/run/ip_rfp/banner.txt
+      ;;
+      
+   ommc*|omm_c*)
+      ommconsole
+      ;;
+
+   rfpc*|ip_rfpc*)
+      ip_rfpconsole
+      ;;
+
+   rfpm*|rfpm_c*)
+      rfpm_console
+      ;;
+      
+   ics*|ics_c*)
+      ics_console
+      ;;
+
+   wlanc*|wlan_c*)
+      wlan_console
+      ;;
+      
+   ldb*|local_db)
+      local_db $argv1 $argvs
+      ;;
+
+   date)
+      date
+      ;;
+
+   su)
+      if [ x$argv1 != x ]; then
+         trap - SIGINT
+         /bin/su - $argv1
+         trap '' SIGINT
+      else
+         echo usage: su [root\'s name]
+      fi
+      ;;
+
+# busybox commands wich are allowed with all arguments
+   ping|traceroute)
+      (trap - SIGINT; $command $argv1 $argvs)
+      ;;
+
+# busybox commands wich are allowed without any additional arguments
+   ps|ifconfig|logread|free|dmesg|uptime|reboot|top)
+      $command
+      ;;
+
+   sc|setc*|setconsole)
+      setcon
+      ;;
+
+   nc|noc*|noconsole)
+      nocon
+      ;;
+
+   '')
+      ;;
+
+   *)
+      echo 'Commands:'
+      echo '  exit,quit,bye  : leave session'
+      echo '  ommconsole     : omm console'
+      echo '  ip_rfpconsole  : rfp console'
+      echo '  rfpm_console   : rfp manager console'
+      echo '  wlan_console   : wlan console'
+      echo '  ics_console    : ics console'
+      echo '  ldb            : view / set local configuration (OmConfigurator)'
+      echo '  setconsole     : duplicate messages to console'
+      echo '  noconsole      : do not duplicate messages to console'
+      echo '  dmesg          : messages from last boot'
+      echo '  logread        : last messages'
+      echo '  su             : switch to user root'
+      echo '  ping           : well known ping'
+      echo '  traceroute     : well known traceroute'
+      echo '  free           : well known free'
+      echo '  ps             : well known ps'
+      echo '  top            : well known top'
+      echo '  ifconfig       : well known ifconfig'
+      echo '  uptime         : well known uptime'
+      echo '  reboot         : well known reboot'
+      echo '  date           : well known date'
+      ;;
+  esac
+done
+

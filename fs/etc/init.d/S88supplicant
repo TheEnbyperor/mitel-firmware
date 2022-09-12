@@ -1,0 +1,100 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+WPA_SUPPLICANT=wpa_supplicant
+WPA_CLI=wpa_cli
+
+SUPPLICANT_OPT_PATH=/var/opt/$WPA_SUPPLICANT
+SUPPLICANT_TMP_PATH=/var/run/$WPA_SUPPLICANT
+SUPPLICANT_BIN_PATH=/usr/local/bin
+
+SUPPLICANT=$SUPPLICANT_BIN_PATH/$WPA_SUPPLICANT
+CLI=$SUPPLICANT_BIN_PATH/$WPA_CLI
+
+SUPPLICANT_CONF=$SUPPLICANT_OPT_PATH/wpa_supplicant.conf
+
+MAX_8021X_NOT_IN_AUTHENTICATING_TRY_COUNT=60
+
+
+if [ ! -e $SUPPLICANT ]     
+    then
+	log " Cannot start 802.1x supplicant - application not found"
+	exit 1
+fi    			
+		
+mkdir -p $SUPPLICANT_TMP_PATH		
+		
+if [ ! -e $SUPPLICANT_CONF ]
+	then
+	log " Cannot start 802.1x supplicant - configuration file not found"
+	exit 1
+fi				
+
+current_time=$(date "+%T")																																																							
+log " [$current_time] 802.1x supplicant: starting"
+
+# start wpa_supplicant in background:
+$SUPPLICANT -B -ieth0 -Dwired -c$SUPPLICANT_CONF
+				
+ss=0
+vv=""
+	
+while [ $ss -lt $MAX_8021X_NOT_IN_AUTHENTICATING_TRY_COUNT ] ;                                                  
+	do
+    sleep 1;                                                        
+    ss=`expr $ss + 1`        				
+	rr=`$CLI -p$SUPPLICANT_TMP_PATH -ieth0 status | sed -n -e "s/Supplicant\ PAE\ state=\(.*\)/\1/p"`
+
+	if [ "$vv" != "$rr" ]
+		then
+		current_time=$(date "+%T")
+		log " [$current_time] 802.1x supplicant: status $rr"
+		vv="$rr"
+	fi
+		
+	case "$rr" in
+		"AUTHENTICATED")
+    		break
+    		;;
+    			
+    	"AUTHENTICATING")
+    		ii=`$CLI -p$SUPPLICANT_TMP_PATH -ieth0 status | sed -n -e "s/suppPortStatus=\(.*\)/\1/p"`
+    		if [ $ii = "Authorized" ]; then
+				log " 802.1x supplicant: break out authorized from AUTHENTICATING"
+        		break
+    		fi
+    		;;
+    
+    	"CONNECTING")
+    		ii=`$CLI -p$SUPPLICANT_TMP_PATH -ieth0 status | sed -n -e "s/suppPortStatus=\(.*\)/\1/p"`
+    		if [ $ii = "Authorized" ]; then
+				log " 802.1x supplicant: break out authorized from CONNECTING"
+        		break
+    		fi
+    		;;
+    
+    	"HELD")
+    		log " 802.1x supplicant: cannot authenticate 802.1x in HELD state "
+    		break
+    		;;
+        
+    	"LOGOFF" | "DISCONNECTED" | "RESTART" | "UNKNOWN")
+           	;;
+           	
+	esac
+										        								        								        				
+done                                                       
+
+if [ "$rr" == "CONNECTING" ]
+	then
+	current_time=$(date "+%T")
+	log " [$current_time] 802.1x supplicant: no successful authentication"
+	exit 1
+fi
+
+current_time=$(date "+%T")
+log " [$current_time] 802.1x supplicant: finished script"
+
+exit 0
+		

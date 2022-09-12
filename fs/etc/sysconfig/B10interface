@@ -1,0 +1,55 @@
+#!/bin/sh
+#
+# B10interface: configure interfaces
+#               check for changes
+#
+. /etc/rc.functions
+
+#                                             New file containing VLAN ID in SDC
+    if [ -f ${RFPM_NETWORK_CONFIG_FILE} ] || [ -f ${RFPM_VLAN_CONFIG_FILE} ]; then
+		if [ -f ${RFPM_NETWORK_CONFIG_FILE} ]; then
+			# extract the vlan id form the local config file
+			OM_RfpVlanId=`grep "^OM_RfpVlanId=" ${RFPM_NETWORK_CONFIG_FILE} | \
+				awk -F '=' '{print $2}'`
+		fi
+
+		if [ -f ${RFPM_VLAN_CONFIG_FILE} ]; then
+			if [ "x${OM_RfpVlanId}" == "x" ] ; then
+				OM_RfpVlanId=`grep "^OM_RfpVlanId=" ${RFPM_VLAN_CONFIG_FILE} | \
+					awk -F '=' '{print $2}'`
+			fi
+		fi
+
+        if [ "x${OM_RfpVlanId}" == "x0" ] ; then
+            OM_RfpVlanId=""
+        fi
+
+        save_env_get
+        if [ -z "${MASTERVLAN}" -a -n "${OM_RfpVlanId}" ]; then
+            logger -p user.notice -s -t $0 "VLAN config changed, activating VLAN ${OM_RfpVlanId}" 
+            ipc "DHCP STOP"
+            ipc "OMCFG STOP"
+            ipc "SYS INTERFACE MRPROPER"
+            ipc "SYS INTERFACE SETUP VLAN ${OM_RfpVlanId}"
+            ipc "OMCFG START"
+                
+        elif [ -n "${MASTERVLAN}" -a -z "${OM_RfpVlanId}" ]; then
+            logger -p user.notice -s -t $0 "VLAN config changed, no VLAN anymore"
+            ipc "DHCP STOP"
+            ipc "OMCFG STOP"
+            ipc "SYS INTERFACE MRPROPER"
+            ipc "OMCFG START"
+            
+        elif [ -n "${MASTERVLAN}" -a -n "${OM_RfpVlanId}" ]; then
+            if [ "${MASTERVLAN}" != "${OM_RfpVlanId}" ]; then
+                logger -p user.notice -s -t $0 "VLAN config changed, switching to VLAN ${OM_RfpVlanId}"
+                ipc "DHCP STOP"
+                ipc "OMCFG STOP"
+                ipc "SYS INTERFACE MRPROPER"
+                ipc "SYS INTERFACE SETUP VLAN ${OM_RfpVlanId}"
+                ipc "OMCFG START"
+            fi
+        fi
+    fi
+
+exit 0

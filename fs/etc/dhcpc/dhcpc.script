@@ -1,0 +1,39 @@
+#!/bin/sh
+# Currently, we only dispatch according to command.  However, a more
+# elaborate system might dispatch by command and interface or do some
+# common initialization first, especially if more dhcp event notifications
+# are added.
+
+. /etc/rc.functions
+
+export DrivenBy="DHCP"
+
+verbose "$1"
+
+case "$1" in
+
+    bound|renew)
+      env > ${DHCP_ENV_FILE}
+      exec /etc/sysconfig/rcCfg config
+    ;;
+    
+    deconfig)
+      exec /etc/sysconfig/rcCfg deconfig
+    ;;
+    
+    nak)
+      logger -s -t $0 "DHCPC NAK"
+    ;;
+    
+    leasefail)
+      exec /etc/sysconfig/rcCfg leasefail
+    ;;
+    
+    *)
+      logger -s -t $0 "DHCPC $1 unknown"
+      exit 1
+
+esac
+
+exit 0
+

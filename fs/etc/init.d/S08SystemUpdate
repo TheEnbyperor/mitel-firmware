@@ -1,0 +1,101 @@
+#!/bin/sh
+#
+# SystemUpdate
+# Update booter and environment area of RFP 35/43
+#
+
+. /etc/rc.functions
+
+#
+# CONFIGURATION
+#
+export booter_image="/startup/u-boot-oob-9.flash"
+
+#
+# UTILITIES
+#
+get_booter_var () {
+
+    export "$1"=`/startup/fw_printenv "$1" 2>/dev/null | sed -r "s/${1}=//"`
+
+}
+
+do_reboot () {
+    log "rebooting the system"
+    sync
+    reboot
+    sleep 10
+    kill 1
+    sleep 10
+    reboot -f
+    sleep 10
+    exit 0
+}
+
+do_flash_booter () {
+    
+    # the following entries have to exist in /proc/mtd
+    
+    if grep "mtd0: 00080000 00020000 \"uboot\"" /proc/mtd > /dev/null 2>&1 && \
+       grep "mtd1: 00020000 00020000 \"uboot-env0\"" /proc/mtd > /dev/null 2>&1 && \
+       grep "mtd2: 00020000 00020000 \"uboot-env1\"" /proc/mtd > /dev/null 2>&1; then
+            # update the booter
+            if [ ! -x  /startup/flash_erase ] || [ ! -x /startup/nandwrite ] || [ ! -f ${booter_image} ]; then
+                log "booter image / tools not found, exiting"
+                exit 1
+            fi
+            log "updating the booter"
+            /startup/flash_erase /dev/mtd0 0 0
+            /startup/nandwrite -m -n -o /dev/mtd0 ${booter_image}
+    else
+            log "mtd partion not as expected, exiting"
+            exit 1;
+    fi
+    
+}
+
+do_reset_env () {
+
+    log "resetting the environment area (on next boot)"
+    /startup/fw_setenv reset_env     true
+
+}
+
+################################################################################
+# handle the different booter/environment versions
+
+    get_booter_var booter_ver    
+    if [ -z ${booter_ver} ]; then
+        export booter_ver=0
+    fi
+    
+    case "${booter_ver}" in
+        
+        0|1|2|3|4|5|6|7|8)
+                do_flash_booter
+                do_reset_env
+                do_reboot
+        ;;
+        
+        9)
+            log "found booter_ver=${booter_ver} ==>> version is up-to-date"
+        ;;
+        
+        
+        *)
+            log "found booter_ver=${booter_ver} ==>> version newer than this SW knows of"
+        ;;
+        
+    esac
+  
+    ###########################################################################
+    # default mac address -> flash booter
+    
+    get_booter_var ethaddr
+    if [ ${ethaddr} == "00:30:42:12:90:00" ]; then
+        do_flash_booter
+        fmanu conf 2>&1 >/dev/null
+    fi
+    
+    exit 0
+    

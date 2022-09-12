@@ -1,0 +1,18 @@
+. /etc/rc.functions
+
+case "$1" in
+
+  start)
+    ;;
+    
+  stop)
+        ipc "LED 1 BLINK ORANGE"
+    ;;
+    
+  *)
+    logger -p user.notice -s -t $0 "unknown parameter $1"
+    exit 1
+
+esac
+
+exit 0

@@ -1,0 +1,2105 @@
+// das include-file enthaelt die defines der weiter unten verwendeten symbole,
+// das sind die schluesselwoerter der konfigurationssprache
+#include "setcoa.def"
+
+//****************************************************************************************************************
+// DEPRECATED COMMANDS
+// not defined in "setcoa.def" but recognized by converter
+//----------------------------------------------------------------------------------------------------------------
+#define KEY_LED_AUTOANS     "UD_LedAutoans"             // true/false
+
+<inopts>
+KEY_LED_AUTOANS " = %1":
+</inopts>
+//****************************************************************************************************************
+
+
+<maps>
+// list of used maps
+// map-name starts with '@', followed by one letter, followed by a string of letters, digits or '_' (case-sensitive)
+
+@boolean_map: \
+  "true"=1 | \
+  "True"=1 | \
+  "TRUE"=1 | \
+  "1"=1 | \
+  "false"=0 | \
+  "False"=0 | \
+  "FALSE"=0 | \
+  "0"=0
+
+@bool_map: \
+  "true"=true | \
+  "True"=true | \
+  "TRUE"=true | \
+  "1"=true | \
+  "false"=false | \
+  "False"=false | \
+  "FALSE"=false | \
+  "0"=false
+
+@vlist_index_map: \
+  "1"=1 | \
+  "2"=1 | \
+  "3"=1 | \
+  "4"=1 | \
+  "5"=1
+
+@vlist_item_index_map: \
+  "1"=1 | \
+  "2"=1 | \
+  "3"=1 | \
+  "4"=1 | \
+  "5"=1 | \
+  "6"=1 | \
+  "7"=1 | \
+  "8"=1 | \
+  "9"=1 | \
+  "10"=1 | \
+  "11"=1 | \
+  "12"=1 | \
+  "13"=1 | \
+  "14"=1 | \
+  "15"=1
+
+// @vlist_line_map: \
+//   "1"=1 | \
+//   "2"=1 | \
+//   "3"=1 | \
+//   "4"=1 | \
+//   "5"=1 | \
+//   "6"=1 | \
+//   "7"=1 | \
+//   "8"=1 | \
+//   "9"=1 | \
+//   "10"=1
+
+// @vlist_pres_map: \
+//   "clip"=clip | \
+//   "true"=clip | \
+//   "True"=clip | \
+//   "TRUE"=clip | \
+//   "1"=clip | \
+//   "clir"=clir | \
+//   "false"=clir | \
+//   "False"=clir | \
+//   "FALSE"=clir | \
+//   "0"=clir
+
+@vlist_visible_map: \
+  "1"=1 | \
+  "-"=nil | \
+  "0"=0
+
+@melody_map: \
+  VAL_MELODY_0=0 | \
+  VAL_MELODY_1=1 | \
+  VAL_MELODY_2=2 | \
+  VAL_MELODY_3=3 | \
+  VAL_MELODY_4=4 | \
+  VAL_MELODY_5=5 | \
+  VAL_MELODY_6=6 | \
+  VAL_MELODY_7=7 | \
+  VAL_MELODY_8=8 | \
+  VAL_MELODY_9=9 | \
+  VAL_MELODY_10=10 | \
+  VAL_MELODY_11=11 | \
+  VAL_MELODY_12=12 | \
+  VAL_MELODY_13=13 | \
+  VAL_MELODY_14=14 | \
+  VAL_MELODY_15=15 | \
+  VAL_MELODY_16=16 | \
+  VAL_MELODY_17=17 | \
+  VAL_MELODY_18=18 | \
+  VAL_MELODY_19=19 | \
+  VAL_MELODY_20=20 | \
+  VAL_MELODY_21=21 | \
+  VAL_MELODY_22=22 | \
+  VAL_MELODY_23=23 | \
+  VAL_MELODY_24=24 | \
+  VAL_MELODY_25=25 | \
+  VAL_MELODY_26=26 | \
+  VAL_MELODY_27=27 | \
+  VAL_MELODY_28=28 | \
+  VAL_MELODY_29=29 | \
+  VAL_MELODY_30=30 | \
+  VAL_MELODY_31=31 | \
+  VAL_MELODY_32=32 | \
+  VAL_MELODY_33=33 | \
+  VAL_MELODY_34=34 | \
+  VAL_MELODY_35=35 | \
+  VAL_MELODY_36=36 | \
+  VAL_MELODY_37=37 | \
+  VAL_MELODY_38=38 | \
+  VAL_MELODY_39=39 | \
+  VAL_MELODY_40=40 | \
+  VAL_MELODY_41=41 | \
+  VAL_MELODY_42=42 | \
+  VAL_MELODY_43=43 | \
+  VAL_MELODY_44=44 | \
+  VAL_MELODY_45=45 | \
+  VAL_MELODY_46=46 | \
+  VAL_MELODY_47=47 | \
+  VAL_MELODY_48=48 | \
+  VAL_MELODY_49=49 | \
+  VAL_MELODY_50=50 | \
+  VAL_MELODY_51=51 | \
+  VAL_MELODY_52=52 | \
+  VAL_MELODY_53=53 | \
+  VAL_MELODY_54=54 | \
+  VAL_MELODY_55=55 | \
+  VAL_MELODY_56=56 | \
+  VAL_MELODY_57=57 | \
+  VAL_MELODY_58=58 | \
+  VAL_MELODY_59=59 | \
+  VAL_MELODY_60=60 | \
+  VAL_MELODY_61=61 | \
+  VAL_MELODY_62=62 | \
+  VAL_MELODY_63=63 | \
+  VAL_MELODY_240=240 | \
+  VAL_MELODY_241=241 | \
+  VAL_MELODY_242=242 | \
+  VAL_MELODY_243=243 | \
+  VAL_MELODY_244=244 | \
+  VAL_MELODY_245=245 | \
+  VAL_MELODY_246=246 | \
+  VAL_MELODY_247=247 | \
+  VAL_MELODY_248=248 | \
+  VAL_MELODY_249=249
+
+@volume_map: \
+  VAL_VOLUME_0=0 | \
+  VAL_VOLUME_1=1 | \
+  VAL_VOLUME_2=2 | \
+  VAL_VOLUME_3=3 | \
+  VAL_VOLUME_4=4 | \
+  VAL_VOLUME_5=5 | \
+  VAL_VOLUME_6=6 | \
+  VAL_VOLUME_7=7 | \
+  VAL_VOLUME_8=8
+
+@ring_mode_map: \
+  VAL_RING_MODE_1=1 | \
+  VAL_RING_MODE_3=3
+
+@tone_map: \
+  VAL_TONE_0=0 | \
+  VAL_TONE_1=1 | \
+  VAL_TONE_2=2 | \
+  VAL_TONE_16=16
+
+@audio_spk_charger_map: \
+  VAL_AUDIO_SPK_CHARGER_0=0 | \
+  VAL_AUDIO_SPK_CHARGER_1=1
+
+@usb_mode_map: \
+  VAL_USB_MODE_0=0 | \
+  VAL_USB_MODE_1=1
+
+@dial_abc_map: \
+  VAL_DIAL_ABC_0=0 | \
+  VAL_DIAL_ABC_1=1 | \
+  VAL_DIAL_ABC_2=2 | \
+  VAL_DIAL_ABC_3=3 | \
+  VAL_DIAL_ABC_4=4
+
+@dial_code_imax_map: \
+  VAL_DIAL_CODE_IMAX_0=0 | \
+  VAL_DIAL_CODE_IMAX_1=1 | \
+  VAL_DIAL_CODE_IMAX_2=2 | \
+  VAL_DIAL_CODE_IMAX_3=3 | \
+  VAL_DIAL_CODE_IMAX_4=4 | \
+  VAL_DIAL_CODE_IMAX_5=5 | \
+  VAL_DIAL_CODE_IMAX_6=6 | \
+  VAL_DIAL_CODE_IMAX_7=7 | \
+  VAL_DIAL_CODE_IMAX_8=8
+
+@disp_lang_map: \
+  VAL_DISP_LANG_0=0 | \
+  VAL_DISP_LANG_1=1 | \
+  VAL_DISP_LANG_2=2 | \
+  VAL_DISP_LANG_3=3 | \
+  VAL_DISP_LANG_4=4 | \
+  VAL_DISP_LANG_5=5 | \
+  VAL_DISP_LANG_6=6 | \
+  VAL_DISP_LANG_7=7 | \
+  VAL_DISP_LANG_8=8 | \
+  VAL_DISP_LANG_9=9 | \
+  VAL_DISP_LANG_10=10 | \
+  VAL_DISP_LANG_11=11 | \
+  VAL_DISP_LANG_12=12 | \
+  VAL_DISP_LANG_13=13 | \
+  VAL_DISP_LANG_14=14 | \
+  VAL_DISP_LANG_15=15 | \
+  VAL_DISP_LANG_16=16 | \
+  VAL_DISP_LANG_17=17 | \
+  VAL_DISP_LANG_18=18
+
+@disp_font_map: \
+  VAL_DISP_FONT_0=0 | \
+  VAL_DISP_FONT_1=1 | \
+  VAL_DISP_FONT_2=2
+
+@disp_color_map: \
+  VAL_DISP_COLOR_5=5 | \
+  VAL_DISP_COLOR_0=0 | \
+  VAL_DISP_COLOR_1=1 | \
+  VAL_DISP_COLOR_2=2 | \
+  VAL_DISP_COLOR_3=3 | \
+  VAL_DISP_COLOR_4=4
+
+@time_format_map: \
+  VAL_TIME_FORMAT_0=0 | \
+  VAL_TIME_FORMAT_1=1
+
+@date_format_map: \
+  VAL_DATE_FORMAT_0=0 | \
+  VAL_DATE_FORMAT_1=1 | \
+  VAL_DATE_FORMAT_2=2 | \
+  VAL_DATE_FORMAT_3=3
+
+@light_dim_map: \
+  VAL_LIGHT_DIM_0=0 | \
+  VAL_LIGHT_DIM_60=60 | \
+  VAL_LIGHT_DIM_129=129 | \
+  VAL_LIGHT_DIM_234=234 | \
+  VAL_LIGHT_DIM_140=140 | \
+  VAL_LIGHT_DIM_152=152 | \
+  VAL_LIGHT_DIM_188=188 | \
+  VAL_LIGHT_DIM_255=255
+
+@light_disp_map: \
+  VAL_LIGHT_DISP_10=10 | \
+  VAL_LIGHT_DISP_20=20 | \
+  VAL_LIGHT_DISP_30=30 | \
+  VAL_LIGHT_DISP_45=45 | \
+  VAL_LIGHT_DISP_60=60 | \
+  VAL_LIGHT_DISP_120=120 | \
+  VAL_LIGHT_DISP_240=240
+
+@light_key_map: \
+  VAL_LIGHT_KEY_0=0 | \
+  VAL_LIGHT_KEY_1=1 | \
+  VAL_LIGHT_KEY_3=3 | \
+  VAL_LIGHT_KEY_5=5 | \
+  VAL_LIGHT_KEY_10=10 | \
+  VAL_LIGHT_KEY_20=20 | \
+  VAL_LIGHT_KEY_30=30 | \
+  VAL_LIGHT_KEY_45=45 | \
+  VAL_LIGHT_KEY_60=60 | \
+  VAL_LIGHT_KEY_120=120 | \
+  VAL_LIGHT_KEY_240=240
+
+@light_charge_map: \
+  VAL_LIGHT_CHARGE_0=0 | \
+  VAL_LIGHT_CHARGE_1=1 | \
+  VAL_LIGHT_CHARGE_3=3 | \
+  VAL_LIGHT_CHARGE_5=5 | \
+  VAL_LIGHT_CHARGE_10=10 | \
+  VAL_LIGHT_CHARGE_20=20 | \
+  VAL_LIGHT_CHARGE_30=30 | \
+  VAL_LIGHT_CHARGE_45=45 | \
+  VAL_LIGHT_CHARGE_60=60 | \
+  VAL_LIGHT_CHARGE_120=120 | \
+  VAL_LIGHT_CHARGE_240=240
+
+@light_call_map: \
+  VAL_LIGHT_CALL_0=0 | \
+  VAL_LIGHT_CALL_1=1 | \
+  VAL_LIGHT_CALL_3=3 | \
+  VAL_LIGHT_CALL_5=5 | \
+  VAL_LIGHT_CALL_10=10 | \
+  VAL_LIGHT_CALL_20=20 | \
+  VAL_LIGHT_CALL_30=30 | \
+  VAL_LIGHT_CALL_45=45 | \
+  VAL_LIGHT_CALL_60=60 | \
+  VAL_LIGHT_CALL_120=120 | \
+  VAL_LIGHT_CALL_180=180 | \
+  VAL_LIGHT_CALL_240=240 | \
+  VAL_LIGHT_CALL_255=255
+
+@light_msg_msg_map: \
+  VAL_LIGHT_MSG_MSG_255=255 | \
+  VAL_LIGHT_MSG_MSG_133=133 | \
+  VAL_LIGHT_MSG_MSG_1=1 | \
+  VAL_LIGHT_MSG_MSG_2=2 | \
+  VAL_LIGHT_MSG_MSG_4=4 | \
+  VAL_LIGHT_MSG_MSG_6=6 | \
+  VAL_LIGHT_MSG_MSG_9=9 | \
+  VAL_LIGHT_MSG_MSG_12=12 | \
+  VAL_LIGHT_MSG_MSG_24=24 | \
+  VAL_LIGHT_MSG_MSG_48=48
+
+@light_msg_inf_map: \
+  VAL_LIGHT_MSG_INF_255=255 | \
+  VAL_LIGHT_MSG_INF_133=133 | \
+  VAL_LIGHT_MSG_INF_1=1 | \
+  VAL_LIGHT_MSG_INF_2=2 | \
+  VAL_LIGHT_MSG_INF_4=4 | \
+  VAL_LIGHT_MSG_INF_6=6 | \
+  VAL_LIGHT_MSG_INF_9=9 | \
+  VAL_LIGHT_MSG_INF_12=12 | \
+  VAL_LIGHT_MSG_INF_24=24 | \
+  VAL_LIGHT_MSG_INF_48=48
+
+@light_msg_job_map: \
+  VAL_LIGHT_MSG_JOB_255=255 | \
+  VAL_LIGHT_MSG_JOB_133=133 | \
+  VAL_LIGHT_MSG_JOB_1=1 | \
+  VAL_LIGHT_MSG_JOB_2=2 | \
+  VAL_LIGHT_MSG_JOB_4=4 | \
+  VAL_LIGHT_MSG_JOB_6=6 | \
+  VAL_LIGHT_MSG_JOB_9=9 | \
+  VAL_LIGHT_MSG_JOB_12=12 | \
+  VAL_LIGHT_MSG_JOB_24=24 | \
+  VAL_LIGHT_MSG_JOB_48=48
+
+@light_msg_sos_map: \
+  VAL_LIGHT_MSG_SOS_188=188 | \
+  VAL_LIGHT_MSG_SOS_6=6 | \
+  VAL_LIGHT_MSG_SOS_12=12 | \
+  VAL_LIGHT_MSG_SOS_24=24 | \
+  VAL_LIGHT_MSG_SOS_36=36 | \
+  VAL_LIGHT_MSG_SOS_48=48 | \
+  VAL_LIGHT_MSG_SOS_60=60
+
+@listmode_redial_map: \
+  VAL_LISTMODE_REDIAL_0=0 | \
+  VAL_LISTMODE_REDIAL_1=1 | \
+  VAL_LISTMODE_REDIAL_2=2
+
+@listmode_caller_map: \
+  VAL_LISTMODE_CALLER_0=0 | \
+  VAL_LISTMODE_CALLER_1=1 | \
+  VAL_LISTMODE_CALLER_2=2
+
+@listmode_filter_map: \
+  VAL_LISTMODE_FILTER_0=0 | \
+  VAL_LISTMODE_FILTER_1=1 | \
+  VAL_LISTMODE_FILTER_2=2
+
+@mode_key_map: \
+  VAL_MODE_KEY_0=0 | \
+  VAL_MODE_KEY_1=1 | \
+  VAL_MODE_KEY_2=2 | \
+  VAL_MODE_KEY_3=3 | \
+  VAL_MODE_KEY_128=128 | \
+  VAL_MODE_KEY_129=129 | \
+  VAL_MODE_KEY_130=130 | \
+  VAL_MODE_KEY_131=131
+
+@lock_key_t_map: \
+  VAL_LOCK_KEY_T_5=5 | \
+  VAL_LOCK_KEY_T_10=10 | \
+  VAL_LOCK_KEY_T_20=20 | \
+  VAL_LOCK_KEY_T_30=30 | \
+  VAL_LOCK_KEY_T_40=40 | \
+  VAL_LOCK_KEY_T_50=50 | \
+  VAL_LOCK_KEY_T_60=60 | \
+  VAL_LOCK_KEY_T_90=90 | \
+  VAL_LOCK_KEY_T_120=120
+
+@lock_mode_map: \
+  VAL_LOCK_MODE_0=0 | \
+  VAL_LOCK_MODE_1=1 | \
+  VAL_LOCK_MODE_2=3
+
+@sosmd_sense_angle_map: \
+  VAL_SOSMD_SENSE_ANGLE_0=0 | \
+  VAL_SOSMD_SENSE_ANGLE_1=1 | \
+  VAL_SOSMD_SENSE_ANGLE_2=2
+
+@sosmd_sense_move_map: \
+  VAL_SOSMD_SENSE_MOVE_0=0 | \
+  VAL_SOSMD_SENSE_MOVE_1=1 | \
+  VAL_SOSMD_SENSE_MOVE_2=2
+
+@sosmd_sense_esc_map: \
+  VAL_SOSMD_SENSE_ESC_0=0 | \
+  VAL_SOSMD_SENSE_ESC_1=1 | \
+  VAL_SOSMD_SENSE_ESC_2=2
+
+@sosmd_nomo_map: \
+  VAL_SOSMD_NOMO_7=7 | \
+  VAL_SOSMD_NOMO_6=6 | \
+  VAL_SOSMD_NOMO_5=5 | \
+  VAL_SOSMD_NOMO_3=3
+
+@sosmd_delay_down_map: \
+  VAL_SOSMD_DELAY_DOWN_1=1 | \
+  VAL_SOSMD_DELAY_DOWN_2=2 | \
+  VAL_SOSMD_DELAY_DOWN_5=5 | \
+  VAL_SOSMD_DELAY_DOWN_10=10 | \
+  VAL_SOSMD_DELAY_DOWN_20=20 | \
+  VAL_SOSMD_DELAY_DOWN_30=30 | \
+  VAL_SOSMD_DELAY_DOWN_45=45 | \
+  VAL_SOSMD_DELAY_DOWN_60=60 | \
+  VAL_SOSMD_DELAY_DOWN_75=75
+
+@sosmd_delay_nomove_map: \
+  VAL_SOSMD_DELAY_NOMOVE_10=10 | \
+  VAL_SOSMD_DELAY_NOMOVE_20=20 | \
+  VAL_SOSMD_DELAY_NOMOVE_30=30 | \
+  VAL_SOSMD_DELAY_NOMOVE_45=45 | \
+  VAL_SOSMD_DELAY_NOMOVE_60=60 | \
+  VAL_SOSMD_DELAY_NOMOVE_75=75
+
+@sosmd_delay_esc_map: \
+  VAL_SOSMD_DELAY_ESC_1=1 | \
+  VAL_SOSMD_DELAY_ESC_2=2 | \
+  VAL_SOSMD_DELAY_ESC_5=5 | \
+  VAL_SOSMD_DELAY_ESC_10=10 | \
+  VAL_SOSMD_DELAY_ESC_20=20 | \
+  VAL_SOSMD_DELAY_ESC_30=30 | \
+  VAL_SOSMD_DELAY_ESC_45=45 | \
+  VAL_SOSMD_DELAY_ESC_60=60 | \
+  VAL_SOSMD_DELAY_ESC_75=75
+
+@sosmd_t_pre_map: \
+  VAL_SOSMD_T_PRE_10=10 | \
+  VAL_SOSMD_T_PRE_20=20 | \
+  VAL_SOSMD_T_PRE_30=30 | \
+  VAL_SOSMD_T_PRE_45=45 | \
+  VAL_SOSMD_T_PRE_60=60 | \
+  VAL_SOSMD_T_PRE_75=75
+
+@sosmd_t_rep_map: \
+  VAL_SOSMD_T_REP_5=5 | \
+  VAL_SOSMD_T_REP_10=10 | \
+  VAL_SOSMD_T_REP_20=20 | \
+  VAL_SOSMD_T_REP_30=30 | \
+  VAL_SOSMD_T_REP_45=45 | \
+  VAL_SOSMD_T_REP_60=60 | \
+  VAL_SOSMD_T_REP_75=75 | \
+  VAL_SOSMD_T_REP_120=120 | \
+  VAL_SOSMD_T_REP_240=240
+
+@function_map: \
+  VAL_FUNCTION_PBX_UNPARK=pbx_unpark | \
+  VAL_FUNCTION_PBX_PARK=pbx_park | \
+  VAL_FUNCTION_GAPPP_PICKUP=gappp_pickup | \
+  VAL_FUNCTION_PBX_TAKE=pbx_take | \
+  VAL_FUNCTION_PBX_HOT_LIST=pbx_hot_list | \
+  VAL_FUNCTION_GAPPP_CALL_FORWARD=gappp_call_forward | \
+  VAL_FUNCTION_PBX_CALL_ROUTING=pbx_call_routing | \
+  VAL_FUNCTION_GAPPP_PICKUP_SELECT=gappp_pickup_select | \
+  VAL_FUNCTION_GAPPP_ANNOUNCEMENT=gappp_announcement | \
+  VAL_FUNCTION_GAPPP_INTERCOM=gappp_intercom | \
+  VAL_FUNCTION_GAPPP_VIP_CALL=gappp_vip_call | \
+  VAL_FUNCTION_INF=inf | \
+  VAL_FUNCTION_JOURNAL=journal | \
+  VAL_FUNCTION_CALLER=caller | \
+  VAL_FUNCTION_REDIAL=redial | \
+  VAL_FUNCTION_BOX_X=box_x | \
+  VAL_FUNCTION_BOX_SET_X=box_set_x | \
+  VAL_FUNCTION_VOICE_BOX_MENU=voice_box_menu | \
+  VAL_FUNCTION_ACTIVE_FEATURES=active_features | \
+  VAL_FUNCTION_MSG_X=msg_x | \
+  VAL_FUNCTION_OMM_DEF_MSG=omm_def_msg | \
+  VAL_FUNCTION_MSG_OPT_X=msg_opt_x | \
+  VAL_FUNCTION_MEL_MSG_X=mel_msg_x | \
+  VAL_FUNCTION_MEL_MSG=mel_msg | \
+  VAL_FUNCTION_MEL_MSGURG=mel_msgurg | \
+  VAL_FUNCTION_MEL_MSGSOS=mel_msgsos | \
+  VAL_FUNCTION_VOL_MSG_X=vol_msg_x | \
+  VAL_FUNCTION_VOL_MSG=vol_msg | \
+  VAL_FUNCTION_VOL_MSGURG=vol_msgurg | \
+  VAL_FUNCTION_VOL_MSGSOS=vol_msgsos | \
+  VAL_FUNCTION_MSG_POP=msg_pop | \
+  VAL_FUNCTION_MSG_OVWR=msg_ovwr | \
+  VAL_FUNCTION_MSG_DEL=msg_del | \
+  VAL_FUNCTION_DIRECTORY_X=directory_x | \
+  VAL_FUNCTION_VIP=vip | \
+  VAL_FUNCTION_VIP_X=vip_x | \
+  VAL_FUNCTION_DIR_X=dir_x | \
+  VAL_FUNCTION_BOOK_X=book_x | \
+  VAL_FUNCTION_QUICK_X=quick_x | \
+  VAL_FUNCTION_ADD_TO=add_to | \
+  VAL_FUNCTION_PBX_DIRECTORY=pbx_directory | \
+  VAL_FUNCTION_TIME_X=time_x | \
+  VAL_FUNCTION_ALARM_X=alarm_x | \
+  VAL_FUNCTION_APPOINTMENT_X=appointment_x | \
+  VAL_FUNCTION_TEA_TIMER=tea_timer | \
+  VAL_FUNCTION_AUDIO_X=audio_x | \
+  VAL_FUNCTION_VOLUME_MENU=volume_menu | \
+  VAL_FUNCTION_TONE_MENU=tone_menu | \
+  VAL_FUNCTION_TONE_KEY=tone_key | \
+  VAL_FUNCTION_TONE_CNF=tone_cnf | \
+  VAL_FUNCTION_TONE_END=tone_end | \
+  VAL_FUNCTION_TONE_BAT=tone_bat | \
+  VAL_FUNCTION_TONE_CHARGER=tone_charger | \
+  VAL_FUNCTION_TONE_COV=tone_cov | \
+  VAL_FUNCTION_TONE_RANGE=tone_range | \
+  VAL_FUNCTION_TONE_WAIT=tone_wait | \
+  VAL_FUNCTION_TONE_SENSOR=tone_sensor | \
+  VAL_FUNCTION_LOAD_ENVIRONMENT=load_environment | \
+  VAL_FUNCTION_AUDIO_HD=audio_hd | \
+  VAL_FUNCTION_RING_X=ring_x | \
+  VAL_FUNCTION_RING_MEL_X=ring_mel_x | \
+  VAL_FUNCTION_MEL_INT=mel_int | \
+  VAL_FUNCTION_MEL_EXT=mel_ext | \
+  VAL_FUNCTION_MEL_UNK=mel_unk | \
+  VAL_FUNCTION_MEL_NYM=mel_nym | \
+  VAL_FUNCTION_MEL_CCBS=mel_ccbs | \
+  VAL_FUNCTION_MEL_RECALL=mel_recall | \
+  VAL_FUNCTION_MEL_VIP=mel_vip | \
+  VAL_FUNCTION_MEL_SPECIAL=mel_special | \
+  VAL_FUNCTION_MEL_SOS=mel_sos | \
+  VAL_FUNCTION_MEL_ALARM=mel_alarm | \
+  VAL_FUNCTION_MEL_APP=mel_app | \
+  VAL_FUNCTION_RING_VOLUME=ring_volume | \
+  VAL_FUNCTION_VOL_INT=vol_int | \
+  VAL_FUNCTION_VOL_EXT=vol_ext | \
+  VAL_FUNCTION_VOL_UNK=vol_unk | \
+  VAL_FUNCTION_VOL_NYM=vol_nym | \
+  VAL_FUNCTION_VOL_CCBS=vol_ccbs | \
+  VAL_FUNCTION_VOL_RECALL=vol_recall | \
+  VAL_FUNCTION_VOL_VIP=vol_vip | \
+  VAL_FUNCTION_VOL_SPECIAL=vol_special | \
+  VAL_FUNCTION_VOL_SOS=vol_sos | \
+  VAL_FUNCTION_VOL_ALARM=vol_alarm | \
+  VAL_FUNCTION_VOL_APP=vol_app | \
+  VAL_FUNCTION_RING_TYPE_X=ring_type_x | \
+  VAL_FUNCTION_PLAY_ONCE=play_once | \
+  VAL_FUNCTION_SILENT_CHARGING=silent_charging | \
+  VAL_FUNCTION_NOISE_DETECTION=noise_detection | \
+  VAL_FUNCTION_RING_DEVICE_X=ring_device_x | \
+  VAL_FUNCTION_RING_OFF=ring_off | \
+  VAL_FUNCTION_RING_HS=ring_hs | \
+  VAL_FUNCTION_RING_VIBRA=ring_vibra | \
+  VAL_FUNCTION_DATAMANAGMENT=datamanagment | \
+  VAL_FUNCTION_FILTER_XX=filter_xx | \
+  VAL_FUNCTION_FILTER_X=filter_x | \
+  VAL_FUNCTION_SYSTEM_X=system_x | \
+  VAL_FUNCTION_SUBSCRIPTION_X=subscription_x | \
+  VAL_FUNCTION_START_ENROL=start_enrol | \
+  VAL_FUNCTION_SUBS_AUTO=subs_auto | \
+  VAL_FUNCTION_SUBS_SEL=subs_sel | \
+  VAL_FUNCTION_SUBS_STOP=subs_stop | \
+  VAL_FUNCTION_SUBS_OPT=subs_opt | \
+  VAL_FUNCTION_NO_PLAN=no_plan | \
+  VAL_FUNCTION_EHS_X=ehs_x | \
+  VAL_FUNCTION_BT_X=bt_x | \
+  VAL_FUNCTION_BT_EDIT_X=bt_edit_x | \
+  VAL_FUNCTION_SET_XX=set_xx | \
+  VAL_FUNCTION_PROG_X=prog_x | \
+  VAL_FUNCTION_DISP_X=disp_x | \
+  VAL_FUNCTION_USER_NAME=user_name | \
+  VAL_FUNCTION_LANGUAGE=language | \
+  VAL_FUNCTION_FONT=font | \
+  VAL_FUNCTION_COLOR=color | \
+  VAL_FUNCTION_SCHEME=scheme | \
+  VAL_FUNCTION_PIC_X=pic_x | \
+  VAL_FUNCTION_ILLU_X=illu_x | \
+  VAL_FUNCTION_DISP_DIM=disp_dim | \
+  VAL_FUNCTION_DISP_LIGHT=disp_light | \
+  VAL_FUNCTION_DISP_KEY=disp_key | \
+  VAL_FUNCTION_DISP_CHARGER=disp_charger | \
+  VAL_FUNCTION_DISP_CALL=disp_call | \
+  VAL_FUNCTION_DISP_INF=disp_inf | \
+  VAL_FUNCTION_DISP_MSG=disp_msg | \
+  VAL_FUNCTION_DISP_JOB1=disp_job1 | \
+  VAL_FUNCTION_DISP_SOS=disp_sos | \
+  VAL_FUNCTION_DISP_LED=disp_led | \
+  VAL_FUNCTION_LED_ALIFE=led_alife | \
+  VAL_FUNCTION_LED_INCOM=led_incom | \
+  VAL_FUNCTION_LED_RANGE=led_range | \
+  VAL_FUNCTION_LED_CHARGE=led_charge | \
+  VAL_FUNCTION_LED_INF=led_inf | \
+  VAL_FUNCTION_LED_SPK=led_spk | \
+  VAL_FUNCTION_LED_APP=led_app | \
+  VAL_FUNCTION_LED_ALARM=led_alarm | \
+  VAL_FUNCTION_LIST_SETTINGS=list_settings | \
+  VAL_FUNCTION_DEVICE_OPT=device_opt | \
+  VAL_FUNCTION_SECURITY_X=security_x | \
+  VAL_FUNCTION_LOCK_X=lock_x | \
+  VAL_FUNCTION_KEYLOCK=keylock | \
+  VAL_FUNCTION_PINLOCK=pinlock | \
+  VAL_FUNCTION_AUTOLOCK=auto_keylock | \
+  VAL_FUNCTION_CHANGE_PIN=change_pin | \
+  VAL_FUNCTION_SOS_X=sos_x | \
+  VAL_FUNCTION_TMS_X=tms_x | \
+  VAL_FUNCTION_SET_PRE_ALARM=set_pre_alarm | \
+  VAL_FUNCTION_SET_MANDOWN=set_mandown | \
+  VAL_FUNCTION_SET_NO_MOVE=set_no_move | \
+  VAL_FUNCTION_SET_SHOCK=set_shock | \
+  VAL_FUNCTION_SET_REP_ALARM=set_rep_alarm | \
+  VAL_FUNCTION_TMS_OPT_X=tms_opt_x | \
+  VAL_FUNCTION_RST_X=rst_x | \
+  VAL_FUNCTION_OFF_MENU=off_menu | \
+  VAL_FUNCTION_OFF=off | \
+  VAL_FUNCTION_MENU=menu | \
+  VAL_FUNCTION_RING_TOGGLE=ring_toggle | \
+  VAL_FUNCTION_PROFILE_X=profile_x | \
+  VAL_FUNCTION_PROF_NO=prof_no | \
+  VAL_FUNCTION_PROF_NORM=prof_norm | \
+  VAL_FUNCTION_PROF_HS=prof_hs | \
+  VAL_FUNCTION_PROF_MEET=prof_meet | \
+  VAL_FUNCTION_PROF_LOUD=prof_loud | \
+  VAL_FUNCTION_PROF_MY=prof_my | \
+  VAL_FUNCTION_PROF_ED_X=prof_ed_x | \
+  VAL_FUNCTION_PROF_ED_NORM=prof_ed_norm | \
+  VAL_FUNCTION_PROF_ED_HS=prof_ed_hs | \
+  VAL_FUNCTION_PROF_ED_MEET=prof_ed_meet | \
+  VAL_FUNCTION_PROF_ED_LOUD=prof_ed_loud | \
+  VAL_FUNCTION_USB_MODE=usb_mode | \
+  VAL_FUNCTION_DOA_MASTER=doa_master | \
+  VAL_FUNCTION_F_X=f_x | \
+  VAL_FUNCTION_PBX_FKEYS=pbx_fkeys | \
+  VAL_FUNCTION_F_1=f_1 | \
+  VAL_FUNCTION_F_2=f_2 | \
+  VAL_FUNCTION_F_3=f_3 | \
+  VAL_FUNCTION_F_4=f_4 | \
+  VAL_FUNCTION_F_5=f_5 | \
+  VAL_FUNCTION_F_6=f_6 | \
+  VAL_FUNCTION_F_7=f_7 | \
+  VAL_FUNCTION_F_8=f_8 | \
+  VAL_FUNCTION_F_9=f_9 | \
+  VAL_FUNCTION_F_10=f_10 | \
+  VAL_FUNCTION_VLSTX=vlstx | \
+  VAL_FUNCTION_VLST1=vlst1 | \
+  VAL_FUNCTION_VLST1_1=vlst1_1 | \
+  VAL_FUNCTION_VLST1_2=vlst1_2 | \
+  VAL_FUNCTION_VLST1_3=vlst1_3 | \
+  VAL_FUNCTION_VLST1_4=vlst1_4 | \
+  VAL_FUNCTION_VLST1_5=vlst1_5 | \
+  VAL_FUNCTION_VLST1_6=vlst1_6 | \
+  VAL_FUNCTION_VLST1_7=vlst1_7 | \
+  VAL_FUNCTION_VLST1_8=vlst1_8 | \
+  VAL_FUNCTION_VLST1_9=vlst1_9 | \
+  VAL_FUNCTION_VLST1_10=vlst1_10 | \
+  VAL_FUNCTION_VLST1_11=vlst1_11 | \
+  VAL_FUNCTION_VLST1_12=vlst1_12 | \
+  VAL_FUNCTION_VLST1_13=vlst1_13 | \
+  VAL_FUNCTION_VLST1_14=vlst1_14 | \
+  VAL_FUNCTION_VLST1_15=vlst1_15 | \
+  VAL_FUNCTION_VLST2=vlst2 | \
+  VAL_FUNCTION_VLST2_1=vlst2_1 | \
+  VAL_FUNCTION_VLST2_2=vlst2_2 | \
+  VAL_FUNCTION_VLST2_3=vlst2_3 | \
+  VAL_FUNCTION_VLST2_4=vlst2_4 | \
+  VAL_FUNCTION_VLST2_5=vlst2_5 | \
+  VAL_FUNCTION_VLST2_6=vlst2_6 | \
+  VAL_FUNCTION_VLST2_7=vlst2_7 | \
+  VAL_FUNCTION_VLST2_8=vlst2_8 | \
+  VAL_FUNCTION_VLST2_9=vlst2_9 | \
+  VAL_FUNCTION_VLST2_10=vlst2_10 | \
+  VAL_FUNCTION_VLST2_10=vlst2_10 | \
+  VAL_FUNCTION_VLST2_11=vlst2_11 | \
+  VAL_FUNCTION_VLST2_12=vlst2_12 | \
+  VAL_FUNCTION_VLST2_13=vlst2_13 | \
+  VAL_FUNCTION_VLST2_14=vlst2_14 | \
+  VAL_FUNCTION_VLST2_15=vlst2_15 | \
+  VAL_FUNCTION_VLST3=vlst3 | \
+  VAL_FUNCTION_VLST3_1=vlst3_1 | \
+  VAL_FUNCTION_VLST3_2=vlst3_2 | \
+  VAL_FUNCTION_VLST3_3=vlst3_3 | \
+  VAL_FUNCTION_VLST3_4=vlst3_4 | \
+  VAL_FUNCTION_VLST3_5=vlst3_5 | \
+  VAL_FUNCTION_VLST3_6=vlst3_6 | \
+  VAL_FUNCTION_VLST3_7=vlst3_7 | \
+  VAL_FUNCTION_VLST3_8=vlst3_8 | \
+  VAL_FUNCTION_VLST3_9=vlst3_9 | \
+  VAL_FUNCTION_VLST3_10=vlst3_10 | \
+  VAL_FUNCTION_VLST3_10=vlst3_10 | \
+  VAL_FUNCTION_VLST3_11=vlst3_11 | \
+  VAL_FUNCTION_VLST3_12=vlst3_12 | \
+  VAL_FUNCTION_VLST3_13=vlst3_13 | \
+  VAL_FUNCTION_VLST3_14=vlst3_14 | \
+  VAL_FUNCTION_VLST3_15=vlst3_15 | \
+  VAL_FUNCTION_VLST4=vlst4 | \
+  VAL_FUNCTION_VLST4_1=vlst4_1 | \
+  VAL_FUNCTION_VLST4_2=vlst4_2 | \
+  VAL_FUNCTION_VLST4_3=vlst4_3 | \
+  VAL_FUNCTION_VLST4_4=vlst4_4 | \
+  VAL_FUNCTION_VLST4_5=vlst4_5 | \
+  VAL_FUNCTION_VLST4_6=vlst4_6 | \
+  VAL_FUNCTION_VLST4_7=vlst4_7 | \
+  VAL_FUNCTION_VLST4_8=vlst4_8 | \
+  VAL_FUNCTION_VLST4_9=vlst4_9 | \
+  VAL_FUNCTION_VLST4_10=vlst4_10 | \
+  VAL_FUNCTION_VLST4_10=vlst4_10 | \
+  VAL_FUNCTION_VLST4_11=vlst4_11 | \
+  VAL_FUNCTION_VLST4_12=vlst4_12 | \
+  VAL_FUNCTION_VLST4_13=vlst4_13 | \
+  VAL_FUNCTION_VLST4_14=vlst4_14 | \
+  VAL_FUNCTION_VLST4_15=vlst4_15 | \
+  VAL_FUNCTION_VLST5=vlst5 | \
+  VAL_FUNCTION_VLST5_1=vlst5_1 | \
+  VAL_FUNCTION_VLST5_2=vlst5_2 | \
+  VAL_FUNCTION_VLST5_3=vlst5_3 | \
+  VAL_FUNCTION_VLST5_4=vlst5_4 | \
+  VAL_FUNCTION_VLST5_5=vlst5_5 | \
+  VAL_FUNCTION_VLST5_6=vlst5_6 | \
+  VAL_FUNCTION_VLST5_7=vlst5_7 | \
+  VAL_FUNCTION_VLST5_8=vlst5_8 | \
+  VAL_FUNCTION_VLST5_9=vlst5_9 | \
+  VAL_FUNCTION_VLST5_10=vlst5_10 | \
+  VAL_FUNCTION_VLST5_10=vlst5_10 | \
+  VAL_FUNCTION_VLST5_11=vlst5_11 | \
+  VAL_FUNCTION_VLST5_12=vlst5_12 | \
+  VAL_FUNCTION_VLST5_13=vlst5_13 | \
+  VAL_FUNCTION_VLST5_14=vlst5_14 | \
+  VAL_FUNCTION_VLST5_15=vlst5_15 | \
+  VAL_FUNCTION_MENU_X=menu_x | \
+  VAL_FUNCTION_OPT=opt
+
+@key_map: \
+  VAL_KEY_SOS=sos | \
+  VAL_KEY_SIDE1=side1 | \
+  VAL_KEY_SIDE2=side2 | \
+  VAL_KEY_SIDE3=side3 | \
+  VAL_KEY_VIP=vip | \
+  VAL_KEY_OK=ok | \
+  VAL_KEY_ESC=esc | \
+  VAL_KEY_OPT=opt | \
+  VAL_KEY_LEFT=left | \
+  VAL_KEY_RIGHT=right | \
+  VAL_KEY_UP=up | \
+  VAL_KEY_DOWN=down | \
+  VAL_KEY_GREEN=green | \
+  VAL_KEY_RED=red | \
+  VAL_KEY_LONG_SOS=long.sos | \
+  VAL_KEY_LONG_SIDE1=long.side1 | \
+  VAL_KEY_LONG_SIDE2=long.side2 | \
+  VAL_KEY_LONG_SIDE3=long.side3 | \
+  VAL_KEY_LONG_VIP=long.vip | \
+  VAL_KEY_LONG_OK=long.ok | \
+  VAL_KEY_LONG_ESC=long.esc | \
+  VAL_KEY_LONG_OPT=long.opt | \
+  VAL_KEY_LONG_LEFT=long.left | \
+  VAL_KEY_LONG_RIGHT=long.right | \
+  VAL_KEY_LONG_GREEN=long.green | \
+  VAL_KEY_LONG_RED=long.red | \
+  VAL_KEY_LONG_D0=long.d0 | \
+  VAL_KEY_LONG_D1=long.d1 | \
+  VAL_KEY_LONG_D2=long.d2 | \
+  VAL_KEY_LONG_D3=long.d3 | \
+  VAL_KEY_LONG_D4=long.d4 | \
+  VAL_KEY_LONG_D5=long.d5 | \
+  VAL_KEY_LONG_D6=long.d6 | \
+  VAL_KEY_LONG_D7=long.d7 | \
+  VAL_KEY_LONG_D8=long.d8 | \
+  VAL_KEY_LONG_D9=long.d9 | \
+  VAL_KEY_LONG_STAR=long.star | \
+  VAL_KEY_LONG_HASH=long.hash | \
+  VAL_KEY_D0=d0 | \
+  VAL_KEY_D1=d1 | \
+  VAL_KEY_D2=d2 | \
+  VAL_KEY_D3=d3 | \
+  VAL_KEY_D4=d4 | \
+  VAL_KEY_D5=d5 | \
+  VAL_KEY_D6=d6 | \
+  VAL_KEY_D7=d7 | \
+  VAL_KEY_D8=d8 | \
+  VAL_KEY_D9=d9 | \
+  VAL_KEY_STAR=star | \
+  VAL_KEY_HASH=hash | \
+  VAL_KEY_DEL=del | \
+  VAL_KEY_SPK=spk | \
+  VAL_KEY_LONG_DEL=long.del | \
+  VAL_KEY_LONG_SPK=long.spk
+
+@fkt_idle_map: \
+  VAL_FKT_IDLE_NOP=nop | \
+  VAL_FKT_IDLE_DEF=def | \
+  VAL_FKT_IDLE_PROG=prog | \
+  VAL_FKT_IDLE_MENU=menu | \
+  VAL_FKT_IDLE_DYN_PBX_OPTION=dyn_pbx_option | \
+  VAL_FKT_IDLE_PBX_SERVER_MENU=pbx_server_menu | \
+  VAL_FKT_IDLE_GAPP_MAIN=gappp_main | \
+  VAL_FKT_IDLE_ALARM_TIME=alarm_time | \
+  VAL_FKT_IDLE_ALARM=alarm | \
+  VAL_FKT_IDLE_APPOINTMENT=appointment | \
+  VAL_FKT_IDLE_TEA_TIMER=tea_timer | \
+  VAL_FKT_IDLE_DIRECTORIES=directories | \
+  VAL_FKT_IDLE_GET_NAME=get_name | \
+  VAL_FKT_IDLE_BOOK=book | \
+  VAL_FKT_IDLE_GAPPP_DIRECTORY=gappp_directory | \
+  VAL_FKT_IDLE_PBX_DIRECTORY=pbx_directory | \
+  VAL_FKT_IDLE_VIP=vip | \
+  VAL_FKT_IDLE_QUICK0=quick0 | \
+  VAL_FKT_IDLE_SOS_MENU=sos_menu | \
+  VAL_FKT_IDLE_SOS=sos | \
+  VAL_FKT_IDLE_SOS_LOC=sos_loc | \
+  VAL_FKT_IDLE_SHOCK=shock | \
+  VAL_FKT_IDLE_ALARM_CALL=alarm_call | \
+  VAL_FKT_IDLE_SENSOR_MENU=sensor_menu | \
+  VAL_FKT_IDLE_NAVI=navi | \
+  VAL_FKT_IDLE_INF=inf | \
+  VAL_FKT_IDLE_MENUINFNEW=MenuInfNew | \
+  VAL_FKT_IDLE_VOICE_BOX=voice_box | \
+  VAL_FKT_IDLE_JOURNAL=journal | \
+  VAL_FKT_IDLE_CALLER=caller | \
+  VAL_FKT_IDLE_REDIAL=redial | \
+  VAL_FKT_IDLE_OMM_JOBS=omm_jobs | \
+  VAL_FKT_IDLE_BESTMSG=BestMsg | \
+  VAL_FKT_IDLE_OMM_INBOX=omm_inbox | \
+  VAL_FKT_IDLE_OMM_OUTBOX=omm_outbox | \
+  VAL_FKT_IDLE_OMM_DEF_MSG=omm_def_msg | \
+  VAL_FKT_IDLE_TXT_SEND=txt_send | \
+  VAL_FKT_IDLE_ACTIVE_FEATURES=active_features | \
+  VAL_FKT_IDLE_FEATURE_ACCESS_CODE=feature_access_code | \
+  VAL_FKT_IDLE_PBX_UNPARK=pbx_unpark | \
+  VAL_FKT_IDLE_GAPPP_PICKUP=gappp_pickup | \
+  VAL_FKT_IDLE_GAPPP_PICKUP_SELECT=gappp_pickup_select | \
+  VAL_FKT_IDLE_PBX_TAKE=pbx_take | \
+  VAL_FKT_IDLE_PBX_HOT_LIST=pbx_hot_list | \
+  VAL_FKT_IDLE_LOCATING_EDITOR=locating_editor | \
+  VAL_FKT_IDLE_PBX_PRESENCE=pbx_presence | \
+  VAL_FKT_IDLE_PBX_DND=pbx_dnd | \
+  VAL_FKT_IDLE_GAPPP_CALL_FORWARD=gappp_call_forward | \
+  VAL_FKT_IDLE_PBX_CALL_ROUTING=pbx_call_routing | \
+  VAL_FKT_IDLE_PROFILE=profile | \
+  VAL_FKT_IDLE_DATAMANAGMENT=datamanagment | \
+  VAL_FKT_IDLE_KEYLOCK=keylock | \
+  VAL_FKT_IDLE_PINLOCK=pinlock | \
+  VAL_FKT_IDLE_LIGHT_TOGGLE=light_toggle | \
+  VAL_FKT_IDLE_BT=bt | \
+  VAL_FKT_IDLE_BT_STATE=bt_state | \
+  VAL_FKT_IDLE_AUDIO_MENU=audio | \
+  VAL_FKT_IDLE_RING_OFF=ring_off | \
+  VAL_FKT_IDLE_VOL_OK=vol_ok | \
+  VAL_FKT_IDLE_AUDIO_HD=audio_hd | \
+  VAL_FKT_IDLE_OFF_MENU=off_menu | \
+  VAL_FKT_IDLE_OFF=off | \
+  VAL_FKT_IDLE_PREDIAL=predial | \
+  VAL_FKT_IDLE_VERSION=version | \
+  VAL_FKT_IDLE_FILTER_MENU=filter_menu | \
+  VAL_FKT_IDLE_FILTER_STATE=filter_state | \
+  VAL_FKT_IDLE_PBX_FKEYS=pbx_fkeys | \
+  VAL_FKT_IDLE_F_1=f_1 | \
+  VAL_FKT_IDLE_F_2=f_2 | \
+  VAL_FKT_IDLE_F_3=f_3 | \
+  VAL_FKT_IDLE_F_4=f_4 | \
+  VAL_FKT_IDLE_F_5=f_5 | \
+  VAL_FKT_IDLE_F_6=f_6 | \
+  VAL_FKT_IDLE_F_7=f_7 | \
+  VAL_FKT_IDLE_F_8=f_8 | \
+  VAL_FKT_IDLE_F_9=f_9 | \
+  VAL_FKT_IDLE_F_10=f_10 | \
+  VAL_FKT_IDLE_VLSTX=vlstx | \
+  VAL_FKT_IDLE_VLST1=vlst1 | \
+  VAL_FKT_IDLE_VLST1_1=vlst1_1 | \
+  VAL_FKT_IDLE_VLST1_2=vlst1_2 | \
+  VAL_FKT_IDLE_VLST1_3=vlst1_3 | \
+  VAL_FKT_IDLE_VLST1_4=vlst1_4 | \
+  VAL_FKT_IDLE_VLST1_5=vlst1_5 | \
+  VAL_FKT_IDLE_VLST1_6=vlst1_6 | \
+  VAL_FKT_IDLE_VLST1_7=vlst1_7 | \
+  VAL_FKT_IDLE_VLST1_8=vlst1_8 | \
+  VAL_FKT_IDLE_VLST1_9=vlst1_9 | \
+  VAL_FKT_IDLE_VLST1_10=vlst1_10 | \
+  VAL_FKT_IDLE_VLST1_11=vlst1_11 | \
+  VAL_FKT_IDLE_VLST1_12=vlst1_12 | \
+  VAL_FKT_IDLE_VLST1_13=vlst1_13 | \
+  VAL_FKT_IDLE_VLST1_14=vlst1_14 | \
+  VAL_FKT_IDLE_VLST1_15=vlst1_15 | \
+  VAL_FKT_IDLE_VLST2=vlst2 | \
+  VAL_FKT_IDLE_VLST2_1=vlst2_1 | \
+  VAL_FKT_IDLE_VLST2_2=vlst2_2 | \
+  VAL_FKT_IDLE_VLST2_3=vlst2_3 | \
+  VAL_FKT_IDLE_VLST2_4=vlst2_4 | \
+  VAL_FKT_IDLE_VLST2_5=vlst2_5 | \
+  VAL_FKT_IDLE_VLST2_6=vlst2_6 | \
+  VAL_FKT_IDLE_VLST2_7=vlst2_7 | \
+  VAL_FKT_IDLE_VLST2_8=vlst2_8 | \
+  VAL_FKT_IDLE_VLST2_9=vlst2_9 | \
+  VAL_FKT_IDLE_VLST2_10=vlst2_10 | \
+  VAL_FKT_IDLE_VLST2_10=vlst2_10 | \
+  VAL_FKT_IDLE_VLST2_11=vlst2_11 | \
+  VAL_FKT_IDLE_VLST2_12=vlst2_12 | \
+  VAL_FKT_IDLE_VLST2_13=vlst2_13 | \
+  VAL_FKT_IDLE_VLST2_14=vlst2_14 | \
+  VAL_FKT_IDLE_VLST2_15=vlst2_15 | \
+  VAL_FKT_IDLE_VLST3=vlst3 | \
+  VAL_FKT_IDLE_VLST3_1=vlst3_1 | \
+  VAL_FKT_IDLE_VLST3_2=vlst3_2 | \
+  VAL_FKT_IDLE_VLST3_3=vlst3_3 | \
+  VAL_FKT_IDLE_VLST3_4=vlst3_4 | \
+  VAL_FKT_IDLE_VLST3_5=vlst3_5 | \
+  VAL_FKT_IDLE_VLST3_6=vlst3_6 | \
+  VAL_FKT_IDLE_VLST3_7=vlst3_7 | \
+  VAL_FKT_IDLE_VLST3_8=vlst3_8 | \
+  VAL_FKT_IDLE_VLST3_9=vlst3_9 | \
+  VAL_FKT_IDLE_VLST3_10=vlst3_10 | \
+  VAL_FKT_IDLE_VLST3_10=vlst3_10 | \
+  VAL_FKT_IDLE_VLST3_11=vlst3_11 | \
+  VAL_FKT_IDLE_VLST3_12=vlst3_12 | \
+  VAL_FKT_IDLE_VLST3_13=vlst3_13 | \
+  VAL_FKT_IDLE_VLST3_14=vlst3_14 | \
+  VAL_FKT_IDLE_VLST3_15=vlst3_15 | \
+  VAL_FKT_IDLE_VLST4=vlst4 | \
+  VAL_FKT_IDLE_VLST4_1=vlst4_1 | \
+  VAL_FKT_IDLE_VLST4_2=vlst4_2 | \
+  VAL_FKT_IDLE_VLST4_3=vlst4_3 | \
+  VAL_FKT_IDLE_VLST4_4=vlst4_4 | \
+  VAL_FKT_IDLE_VLST4_5=vlst4_5 | \
+  VAL_FKT_IDLE_VLST4_6=vlst4_6 | \
+  VAL_FKT_IDLE_VLST4_7=vlst4_7 | \
+  VAL_FKT_IDLE_VLST4_8=vlst4_8 | \
+  VAL_FKT_IDLE_VLST4_9=vlst4_9 | \
+  VAL_FKT_IDLE_VLST4_10=vlst4_10 | \
+  VAL_FKT_IDLE_VLST4_10=vlst4_10 | \
+  VAL_FKT_IDLE_VLST4_11=vlst4_11 | \
+  VAL_FKT_IDLE_VLST4_12=vlst4_12 | \
+  VAL_FKT_IDLE_VLST4_13=vlst4_13 | \
+  VAL_FKT_IDLE_VLST4_14=vlst4_14 | \
+  VAL_FKT_IDLE_VLST4_15=vlst4_15 | \
+  VAL_FKT_IDLE_VLST5=vlst5 | \
+  VAL_FKT_IDLE_VLST5_1=vlst5_1 | \
+  VAL_FKT_IDLE_VLST5_2=vlst5_2 | \
+  VAL_FKT_IDLE_VLST5_3=vlst5_3 | \
+  VAL_FKT_IDLE_VLST5_4=vlst5_4 | \
+  VAL_FKT_IDLE_VLST5_5=vlst5_5 | \
+  VAL_FKT_IDLE_VLST5_6=vlst5_6 | \
+  VAL_FKT_IDLE_VLST5_7=vlst5_7 | \
+  VAL_FKT_IDLE_VLST5_8=vlst5_8 | \
+  VAL_FKT_IDLE_VLST5_9=vlst5_9 | \
+  VAL_FKT_IDLE_VLST5_10=vlst5_10 | \
+  VAL_FKT_IDLE_VLST5_10=vlst5_10 | \
+  VAL_FKT_IDLE_VLST5_11=vlst5_11 | \
+  VAL_FKT_IDLE_VLST5_12=vlst5_12 | \
+  VAL_FKT_IDLE_VLST5_13=vlst5_13 | \
+  VAL_FKT_IDLE_VLST5_14=vlst5_14 | \
+  VAL_FKT_IDLE_VLST5_15=vlst5_15
+
+@fkt_dial_map: \
+  VAL_FKT_DIAL_NOP=nop | \
+  VAL_FKT_DIAL_DEF=def | \
+  VAL_FKT_DIAL_SK_DYN1=sk_dyn1 | \
+  VAL_FKT_DIAL_JOURNAL=journal | \
+  VAL_FKT_DIAL_CALLER=caller | \
+  VAL_FKT_DIAL_REDIAL=redial | \
+  VAL_FKT_DIAL_GET_NAME=get_name | \
+  VAL_FKT_DIAL_BOOK_REQ=book_req | \
+  VAL_FKT_DIAL_GAPPP_DIRECTORY=gappp_directory | \
+  VAL_FKT_DIAL_PBX_DIRECTORY=pbx_directory | \
+  VAL_FKT_DIAL_VIP=vip | \
+  VAL_FKT_DIAL_ADD_TO=add_to | \
+  VAL_FKT_DIAL_GAPPP_PICKUP_SELECT=gappp_pickup_select | \
+  VAL_FKT_DIAL_GAPPP_VIP_CALL=gappp_vip_call | \
+  VAL_FKT_DIAL_GAPPP_ANNOUNCEMENT=gappp_announcement | \
+  VAL_FKT_DIAL_GAPPP_INTERCOM=gappp_intercom | \
+  VAL_FKT_DIAL_VLSTX=vlstx | \
+  VAL_FKT_DIAL_VLST1=vlst1 | \
+  VAL_FKT_DIAL_VLST1_1=vlst1_1 | \
+  VAL_FKT_DIAL_VLST1_2=vlst1_2 | \
+  VAL_FKT_DIAL_VLST1_3=vlst1_3 | \
+  VAL_FKT_DIAL_VLST1_4=vlst1_4 | \
+  VAL_FKT_DIAL_VLST1_5=vlst1_5 | \
+  VAL_FKT_DIAL_VLST1_6=vlst1_6 | \
+  VAL_FKT_DIAL_VLST1_7=vlst1_7 | \
+  VAL_FKT_DIAL_VLST1_8=vlst1_8 | \
+  VAL_FKT_DIAL_VLST1_9=vlst1_9 | \
+  VAL_FKT_DIAL_VLST1_10=vlst1_10 | \
+  VAL_FKT_DIAL_VLST1_11=vlst1_11 | \
+  VAL_FKT_DIAL_VLST1_12=vlst1_12 | \
+  VAL_FKT_DIAL_VLST1_13=vlst1_13 | \
+  VAL_FKT_DIAL_VLST1_14=vlst1_14 | \
+  VAL_FKT_DIAL_VLST1_15=vlst1_15 | \
+  VAL_FKT_DIAL_VLST2=vlst2 | \
+  VAL_FKT_DIAL_VLST2_1=vlst2_1 | \
+  VAL_FKT_DIAL_VLST2_2=vlst2_2 | \
+  VAL_FKT_DIAL_VLST2_3=vlst2_3 | \
+  VAL_FKT_DIAL_VLST2_4=vlst2_4 | \
+  VAL_FKT_DIAL_VLST2_5=vlst2_5 | \
+  VAL_FKT_DIAL_VLST2_6=vlst2_6 | \
+  VAL_FKT_DIAL_VLST2_7=vlst2_7 | \
+  VAL_FKT_DIAL_VLST2_8=vlst2_8 | \
+  VAL_FKT_DIAL_VLST2_9=vlst2_9 | \
+  VAL_FKT_DIAL_VLST2_10=vlst2_10 | \
+  VAL_FKT_DIAL_VLST2_10=vlst2_10 | \
+  VAL_FKT_DIAL_VLST2_11=vlst2_11 | \
+  VAL_FKT_DIAL_VLST2_12=vlst2_12 | \
+  VAL_FKT_DIAL_VLST2_13=vlst2_13 | \
+  VAL_FKT_DIAL_VLST2_14=vlst2_14 | \
+  VAL_FKT_DIAL_VLST2_15=vlst2_15 | \
+  VAL_FKT_DIAL_VLST3=vlst3 | \
+  VAL_FKT_DIAL_VLST3_1=vlst3_1 | \
+  VAL_FKT_DIAL_VLST3_2=vlst3_2 | \
+  VAL_FKT_DIAL_VLST3_3=vlst3_3 | \
+  VAL_FKT_DIAL_VLST3_4=vlst3_4 | \
+  VAL_FKT_DIAL_VLST3_5=vlst3_5 | \
+  VAL_FKT_DIAL_VLST3_6=vlst3_6 | \
+  VAL_FKT_DIAL_VLST3_7=vlst3_7 | \
+  VAL_FKT_DIAL_VLST3_8=vlst3_8 | \
+  VAL_FKT_DIAL_VLST3_9=vlst3_9 | \
+  VAL_FKT_DIAL_VLST3_10=vlst3_10 | \
+  VAL_FKT_DIAL_VLST3_10=vlst3_10 | \
+  VAL_FKT_DIAL_VLST3_11=vlst3_11 | \
+  VAL_FKT_DIAL_VLST3_12=vlst3_12 | \
+  VAL_FKT_DIAL_VLST3_13=vlst3_13 | \
+  VAL_FKT_DIAL_VLST3_14=vlst3_14 | \
+  VAL_FKT_DIAL_VLST3_15=vlst3_15 | \
+  VAL_FKT_DIAL_VLST4=vlst4 | \
+  VAL_FKT_DIAL_VLST4_1=vlst4_1 | \
+  VAL_FKT_DIAL_VLST4_2=vlst4_2 | \
+  VAL_FKT_DIAL_VLST4_3=vlst4_3 | \
+  VAL_FKT_DIAL_VLST4_4=vlst4_4 | \
+  VAL_FKT_DIAL_VLST4_5=vlst4_5 | \
+  VAL_FKT_DIAL_VLST4_6=vlst4_6 | \
+  VAL_FKT_DIAL_VLST4_7=vlst4_7 | \
+  VAL_FKT_DIAL_VLST4_8=vlst4_8 | \
+  VAL_FKT_DIAL_VLST4_9=vlst4_9 | \
+  VAL_FKT_DIAL_VLST4_10=vlst4_10 | \
+  VAL_FKT_DIAL_VLST4_10=vlst4_10 | \
+  VAL_FKT_DIAL_VLST4_11=vlst4_11 | \
+  VAL_FKT_DIAL_VLST4_12=vlst4_12 | \
+  VAL_FKT_DIAL_VLST4_13=vlst4_13 | \
+  VAL_FKT_DIAL_VLST4_14=vlst4_14 | \
+  VAL_FKT_DIAL_VLST4_15=vlst4_15 | \
+  VAL_FKT_DIAL_VLST5=vlst5 | \
+  VAL_FKT_DIAL_VLST5_1=vlst5_1 | \
+  VAL_FKT_DIAL_VLST5_2=vlst5_2 | \
+  VAL_FKT_DIAL_VLST5_3=vlst5_3 | \
+  VAL_FKT_DIAL_VLST5_4=vlst5_4 | \
+  VAL_FKT_DIAL_VLST5_5=vlst5_5 | \
+  VAL_FKT_DIAL_VLST5_6=vlst5_6 | \
+  VAL_FKT_DIAL_VLST5_7=vlst5_7 | \
+  VAL_FKT_DIAL_VLST5_8=vlst5_8 | \
+  VAL_FKT_DIAL_VLST5_9=vlst5_9 | \
+  VAL_FKT_DIAL_VLST5_10=vlst5_10 | \
+  VAL_FKT_DIAL_VLST5_10=vlst5_10 | \
+  VAL_FKT_DIAL_VLST5_11=vlst5_11 | \
+  VAL_FKT_DIAL_VLST5_12=vlst5_12 | \
+  VAL_FKT_DIAL_VLST5_13=vlst5_13 | \
+  VAL_FKT_DIAL_VLST5_14=vlst5_14 | \
+  VAL_FKT_DIAL_VLST5_15=vlst5_15
+
+@fkt_alert_map: \
+  VAL_FKT_ALERT_NOP=nop | \
+  VAL_FKT_ALERT_DEF=def | \
+  VAL_FKT_ALERT_SK_DYN1=sk_dyn1 | \
+  VAL_FKT_ALERT_OPT=opt | \
+  VAL_FKT_ALERT_ACC=acc | \
+  VAL_FKT_ALERT_REJ=rej | \
+  VAL_FKT_ALERT_RING_OFF=ring_off | \
+  VAL_FKT_ALERT_ADD_TO=add_to | \
+  VAL_FKT_ALERT_OPT_CCBS=opt_ccbs | \
+  VAL_FKT_ALERT_OPT_CCNR=opt_ccnr | \
+  VAL_FKT_ALERT_OPT_MCID=opt_mcid | \
+  VAL_FKT_ALERT_OPT_PICKUP=opt_pickup | \
+  VAL_FKT_ALERT_OPT_PICKUP_SELECT=opt_pickup_select | \
+  VAL_FKT_ALERT_OPT_PARK=opt_park | \
+  VAL_FKT_ALERT_OPT_TAKE=opt_take | \
+  VAL_FKT_ALERT_VLSTX=vlstx | \
+  VAL_FKT_ALERT_VLST1=vlst1 | \
+  VAL_FKT_ALERT_VLST1_1=vlst1_1 | \
+  VAL_FKT_ALERT_VLST1_2=vlst1_2 | \
+  VAL_FKT_ALERT_VLST1_3=vlst1_3 | \
+  VAL_FKT_ALERT_VLST1_4=vlst1_4 | \
+  VAL_FKT_ALERT_VLST1_5=vlst1_5 | \
+  VAL_FKT_ALERT_VLST1_6=vlst1_6 | \
+  VAL_FKT_ALERT_VLST1_7=vlst1_7 | \
+  VAL_FKT_ALERT_VLST1_8=vlst1_8 | \
+  VAL_FKT_ALERT_VLST1_9=vlst1_9 | \
+  VAL_FKT_ALERT_VLST1_10=vlst1_10 | \
+  VAL_FKT_ALERT_VLST1_11=vlst1_11 | \
+  VAL_FKT_ALERT_VLST1_12=vlst1_12 | \
+  VAL_FKT_ALERT_VLST1_13=vlst1_13 | \
+  VAL_FKT_ALERT_VLST1_14=vlst1_14 | \
+  VAL_FKT_ALERT_VLST1_15=vlst1_15 | \
+  VAL_FKT_ALERT_VLST2=vlst2 | \
+  VAL_FKT_ALERT_VLST2_1=vlst2_1 | \
+  VAL_FKT_ALERT_VLST2_2=vlst2_2 | \
+  VAL_FKT_ALERT_VLST2_3=vlst2_3 | \
+  VAL_FKT_ALERT_VLST2_4=vlst2_4 | \
+  VAL_FKT_ALERT_VLST2_5=vlst2_5 | \
+  VAL_FKT_ALERT_VLST2_6=vlst2_6 | \
+  VAL_FKT_ALERT_VLST2_7=vlst2_7 | \
+  VAL_FKT_ALERT_VLST2_8=vlst2_8 | \
+  VAL_FKT_ALERT_VLST2_9=vlst2_9 | \
+  VAL_FKT_ALERT_VLST2_10=vlst2_10 | \
+  VAL_FKT_ALERT_VLST2_10=vlst2_10 | \
+  VAL_FKT_ALERT_VLST2_11=vlst2_11 | \
+  VAL_FKT_ALERT_VLST2_12=vlst2_12 | \
+  VAL_FKT_ALERT_VLST2_13=vlst2_13 | \
+  VAL_FKT_ALERT_VLST2_14=vlst2_14 | \
+  VAL_FKT_ALERT_VLST2_15=vlst2_15 | \
+  VAL_FKT_ALERT_VLST3=vlst3 | \
+  VAL_FKT_ALERT_VLST3_1=vlst3_1 | \
+  VAL_FKT_ALERT_VLST3_2=vlst3_2 | \
+  VAL_FKT_ALERT_VLST3_3=vlst3_3 | \
+  VAL_FKT_ALERT_VLST3_4=vlst3_4 | \
+  VAL_FKT_ALERT_VLST3_5=vlst3_5 | \
+  VAL_FKT_ALERT_VLST3_6=vlst3_6 | \
+  VAL_FKT_ALERT_VLST3_7=vlst3_7 | \
+  VAL_FKT_ALERT_VLST3_8=vlst3_8 | \
+  VAL_FKT_ALERT_VLST3_9=vlst3_9 | \
+  VAL_FKT_ALERT_VLST3_10=vlst3_10 | \
+  VAL_FKT_ALERT_VLST3_10=vlst3_10 | \
+  VAL_FKT_ALERT_VLST3_11=vlst3_11 | \
+  VAL_FKT_ALERT_VLST3_12=vlst3_12 | \
+  VAL_FKT_ALERT_VLST3_13=vlst3_13 | \
+  VAL_FKT_ALERT_VLST3_14=vlst3_14 | \
+  VAL_FKT_ALERT_VLST3_15=vlst3_15 | \
+  VAL_FKT_ALERT_VLST4=vlst4 | \
+  VAL_FKT_ALERT_VLST4_1=vlst4_1 | \
+  VAL_FKT_ALERT_VLST4_2=vlst4_2 | \
+  VAL_FKT_ALERT_VLST4_3=vlst4_3 | \
+  VAL_FKT_ALERT_VLST4_4=vlst4_4 | \
+  VAL_FKT_ALERT_VLST4_5=vlst4_5 | \
+  VAL_FKT_ALERT_VLST4_6=vlst4_6 | \
+  VAL_FKT_ALERT_VLST4_7=vlst4_7 | \
+  VAL_FKT_ALERT_VLST4_8=vlst4_8 | \
+  VAL_FKT_ALERT_VLST4_9=vlst4_9 | \
+  VAL_FKT_ALERT_VLST4_10=vlst4_10 | \
+  VAL_FKT_ALERT_VLST4_10=vlst4_10 | \
+  VAL_FKT_ALERT_VLST4_11=vlst4_11 | \
+  VAL_FKT_ALERT_VLST4_12=vlst4_12 | \
+  VAL_FKT_ALERT_VLST4_13=vlst4_13 | \
+  VAL_FKT_ALERT_VLST4_14=vlst4_14 | \
+  VAL_FKT_ALERT_VLST4_15=vlst4_15 | \
+  VAL_FKT_ALERT_VLST5=vlst5 | \
+  VAL_FKT_ALERT_VLST5_1=vlst5_1 | \
+  VAL_FKT_ALERT_VLST5_2=vlst5_2 | \
+  VAL_FKT_ALERT_VLST5_3=vlst5_3 | \
+  VAL_FKT_ALERT_VLST5_4=vlst5_4 | \
+  VAL_FKT_ALERT_VLST5_5=vlst5_5 | \
+  VAL_FKT_ALERT_VLST5_6=vlst5_6 | \
+  VAL_FKT_ALERT_VLST5_7=vlst5_7 | \
+  VAL_FKT_ALERT_VLST5_8=vlst5_8 | \
+  VAL_FKT_ALERT_VLST5_9=vlst5_9 | \
+  VAL_FKT_ALERT_VLST5_10=vlst5_10 | \
+  VAL_FKT_ALERT_VLST5_10=vlst5_10 | \
+  VAL_FKT_ALERT_VLST5_11=vlst5_11 | \
+  VAL_FKT_ALERT_VLST5_12=vlst5_12 | \
+  VAL_FKT_ALERT_VLST5_13=vlst5_13 | \
+  VAL_FKT_ALERT_VLST5_14=vlst5_14 | \
+  VAL_FKT_ALERT_VLST5_15=vlst5_15
+
+@fkt_active_map: \
+  VAL_FKT_ACTIVE_NOP=nop | \
+  VAL_FKT_ACTIVE_DEF=def | \
+  VAL_FKT_ACTIVE_SK_DYN1=sk_dyn1 | \
+  VAL_FKT_ACTIVE_OPT=opt | \
+  VAL_FKT_ACTIVE_PBX_SERVER_MENU=pbx_server_menu | \
+  VAL_FKT_ACTIVE_FEATURE_ACCESS_CODE=feature_access_code | \
+  VAL_FKT_ACTIVE_DIAL_R=dial_r | \
+  VAL_FKT_ACTIVE_OPT_ECT=opt_ect | \
+  VAL_FKT_ACTIVE_OPT_BROKERING=opt_brokering | \
+  VAL_FKT_ACTIVE_OPT_HOLD=opt_hold | \
+  VAL_FKT_ACTIVE_OPT_3PTY=opt_3pty | \
+  VAL_FKT_ACTIVE_OPT_PARK=opt_park | \
+  VAL_FKT_ACTIVE_REL=rel | \
+  VAL_FKT_ACTIVE_ADD_TO=add_to | \
+  VAL_FKT_ACTIVE_BOOK=book | \
+  VAL_FKT_ACTIVE_GAPPP_DIRECTORY=gappp_directory | \
+  VAL_FKT_ACTIVE_PBX_DIRECTORY=pbx_directory | \
+  VAL_FKT_ACTIVE_VIP=vip | \
+  VAL_FKT_ACTIVE_QUICK0=quick0 | \
+  VAL_FKT_ACTIVE_JOURNAL=journal | \
+  VAL_FKT_ACTIVE_FILTER=filter | \
+  VAL_FKT_ACTIVE_CALLER=caller | \
+  VAL_FKT_ACTIVE_REDIAL=redial | \
+  VAL_FKT_ACTIVE_TXT_SEND=txt_send | \
+  VAL_FKT_ACTIVE_VOL_OK=vol_ok | \
+  VAL_FKT_ACTIVE_VOL_UP=vol_up | \
+  VAL_FKT_ACTIVE_VOL_DOWN=vol_down | \
+  VAL_FKT_ACTIVE_MUTE=mute | \
+  VAL_FKT_ACTIVE_AUDIO_HD=audio_hd | \
+  VAL_FKT_ACTIVE_BT_TOGGLE=bt_toggle | \
+  VAL_FKT_ACTIVE_OPT_CCBS=opt_ccbs | \
+  VAL_FKT_ACTIVE_OPT_CCNR=opt_ccnr | \
+  VAL_FKT_ACTIVE_OPT_MCID=opt_mcid | \
+  VAL_FKT_ACTIVE_OPT_PICKUP=opt_pickup | \
+  VAL_FKT_ACTIVE_OPT_PICKUP_SELECT=opt_pickup_select | \
+  VAL_FKT_ACTIVE_OPT_TAKE=opt_take | \
+  VAL_FKT_ACTIVE_VLSTX=vlstx | \
+  VAL_FKT_ACTIVE_VLST1=vlst1 | \
+  VAL_FKT_ACTIVE_VLST1_1=vlst1_1 | \
+  VAL_FKT_ACTIVE_VLST1_2=vlst1_2 | \
+  VAL_FKT_ACTIVE_VLST1_3=vlst1_3 | \
+  VAL_FKT_ACTIVE_VLST1_4=vlst1_4 | \
+  VAL_FKT_ACTIVE_VLST1_5=vlst1_5 | \
+  VAL_FKT_ACTIVE_VLST1_6=vlst1_6 | \
+  VAL_FKT_ACTIVE_VLST1_7=vlst1_7 | \
+  VAL_FKT_ACTIVE_VLST1_8=vlst1_8 | \
+  VAL_FKT_ACTIVE_VLST1_9=vlst1_9 | \
+  VAL_FKT_ACTIVE_VLST1_10=vlst1_10 | \
+  VAL_FKT_ACTIVE_VLST1_11=vlst1_11 | \
+  VAL_FKT_ACTIVE_VLST1_12=vlst1_12 | \
+  VAL_FKT_ACTIVE_VLST1_13=vlst1_13 | \
+  VAL_FKT_ACTIVE_VLST1_14=vlst1_14 | \
+  VAL_FKT_ACTIVE_VLST1_15=vlst1_15 | \
+  VAL_FKT_ACTIVE_VLST2=vlst2 | \
+  VAL_FKT_ACTIVE_VLST2_1=vlst2_1 | \
+  VAL_FKT_ACTIVE_VLST2_2=vlst2_2 | \
+  VAL_FKT_ACTIVE_VLST2_3=vlst2_3 | \
+  VAL_FKT_ACTIVE_VLST2_4=vlst2_4 | \
+  VAL_FKT_ACTIVE_VLST2_5=vlst2_5 | \
+  VAL_FKT_ACTIVE_VLST2_6=vlst2_6 | \
+  VAL_FKT_ACTIVE_VLST2_7=vlst2_7 | \
+  VAL_FKT_ACTIVE_VLST2_8=vlst2_8 | \
+  VAL_FKT_ACTIVE_VLST2_9=vlst2_9 | \
+  VAL_FKT_ACTIVE_VLST2_10=vlst2_10 | \
+  VAL_FKT_ACTIVE_VLST2_10=vlst2_10 | \
+  VAL_FKT_ACTIVE_VLST2_11=vlst2_11 | \
+  VAL_FKT_ACTIVE_VLST2_12=vlst2_12 | \
+  VAL_FKT_ACTIVE_VLST2_13=vlst2_13 | \
+  VAL_FKT_ACTIVE_VLST2_14=vlst2_14 | \
+  VAL_FKT_ACTIVE_VLST2_15=vlst2_15 | \
+  VAL_FKT_ACTIVE_VLST3=vlst3 | \
+  VAL_FKT_ACTIVE_VLST3_1=vlst3_1 | \
+  VAL_FKT_ACTIVE_VLST3_2=vlst3_2 | \
+  VAL_FKT_ACTIVE_VLST3_3=vlst3_3 | \
+  VAL_FKT_ACTIVE_VLST3_4=vlst3_4 | \
+  VAL_FKT_ACTIVE_VLST3_5=vlst3_5 | \
+  VAL_FKT_ACTIVE_VLST3_6=vlst3_6 | \
+  VAL_FKT_ACTIVE_VLST3_7=vlst3_7 | \
+  VAL_FKT_ACTIVE_VLST3_8=vlst3_8 | \
+  VAL_FKT_ACTIVE_VLST3_9=vlst3_9 | \
+  VAL_FKT_ACTIVE_VLST3_10=vlst3_10 | \
+  VAL_FKT_ACTIVE_VLST3_10=vlst3_10 | \
+  VAL_FKT_ACTIVE_VLST3_11=vlst3_11 | \
+  VAL_FKT_ACTIVE_VLST3_12=vlst3_12 | \
+  VAL_FKT_ACTIVE_VLST3_13=vlst3_13 | \
+  VAL_FKT_ACTIVE_VLST3_14=vlst3_14 | \
+  VAL_FKT_ACTIVE_VLST3_15=vlst3_15 | \
+  VAL_FKT_ACTIVE_VLST4=vlst4 | \
+  VAL_FKT_ACTIVE_VLST4_1=vlst4_1 | \
+  VAL_FKT_ACTIVE_VLST4_2=vlst4_2 | \
+  VAL_FKT_ACTIVE_VLST4_3=vlst4_3 | \
+  VAL_FKT_ACTIVE_VLST4_4=vlst4_4 | \
+  VAL_FKT_ACTIVE_VLST4_5=vlst4_5 | \
+  VAL_FKT_ACTIVE_VLST4_6=vlst4_6 | \
+  VAL_FKT_ACTIVE_VLST4_7=vlst4_7 | \
+  VAL_FKT_ACTIVE_VLST4_8=vlst4_8 | \
+  VAL_FKT_ACTIVE_VLST4_9=vlst4_9 | \
+  VAL_FKT_ACTIVE_VLST4_10=vlst4_10 | \
+  VAL_FKT_ACTIVE_VLST4_10=vlst4_10 | \
+  VAL_FKT_ACTIVE_VLST4_11=vlst4_11 | \
+  VAL_FKT_ACTIVE_VLST4_12=vlst4_12 | \
+  VAL_FKT_ACTIVE_VLST4_13=vlst4_13 | \
+  VAL_FKT_ACTIVE_VLST4_14=vlst4_14 | \
+  VAL_FKT_ACTIVE_VLST4_15=vlst4_15 | \
+  VAL_FKT_ACTIVE_VLST5=vlst5 | \
+  VAL_FKT_ACTIVE_VLST5_1=vlst5_1 | \
+  VAL_FKT_ACTIVE_VLST5_2=vlst5_2 | \
+  VAL_FKT_ACTIVE_VLST5_3=vlst5_3 | \
+  VAL_FKT_ACTIVE_VLST5_4=vlst5_4 | \
+  VAL_FKT_ACTIVE_VLST5_5=vlst5_5 | \
+  VAL_FKT_ACTIVE_VLST5_6=vlst5_6 | \
+  VAL_FKT_ACTIVE_VLST5_7=vlst5_7 | \
+  VAL_FKT_ACTIVE_VLST5_8=vlst5_8 | \
+  VAL_FKT_ACTIVE_VLST5_9=vlst5_9 | \
+  VAL_FKT_ACTIVE_VLST5_10=vlst5_10 | \
+  VAL_FKT_ACTIVE_VLST5_10=vlst5_10 | \
+  VAL_FKT_ACTIVE_VLST5_11=vlst5_11 | \
+  VAL_FKT_ACTIVE_VLST5_12=vlst5_12 | \
+  VAL_FKT_ACTIVE_VLST5_13=vlst5_13 | \
+  VAL_FKT_ACTIVE_VLST5_14=vlst5_14 | \
+  VAL_FKT_ACTIVE_VLST5_15=vlst5_15
+
+@fkt_active_sos_map: \
+  VAL_FKT_ACTIVE_SOS_NOP=nop | \
+  VAL_FKT_ACTIVE_SOS_DEF=def | \
+  VAL_FKT_ACTIVE_SOS_SK_DYN1=sk_dyn1 | \
+  VAL_FKT_ACTIVE_SOS_OPT=opt | \
+  VAL_FKT_ACTIVE_SOS_PBX_SERVER_MENU=pbx_server_menu | \
+  VAL_FKT_ACTIVE_SOS_FEATURE_ACCESS_CODE=feature_access_code | \
+  VAL_FKT_ACTIVE_SOS_DIAL_R=dial_r | \
+  VAL_FKT_ACTIVE_SOS_OPT_ECT=opt_ect | \
+  VAL_FKT_ACTIVE_SOS_OPT_BROKERING=opt_brokering | \
+  VAL_FKT_ACTIVE_SOS_OPT_HOLD=opt_hold | \
+  VAL_FKT_ACTIVE_SOS_OPT_3PTY=opt_3pty | \
+  VAL_FKT_ACTIVE_SOS_OPT_PARK=opt_park | \
+  VAL_FKT_ACTIVE_SOS_REL=rel | \
+  VAL_FKT_ACTIVE_SOS_ADD_TO=add_to | \
+  VAL_FKT_ACTIVE_SOS_BOOK=book | \
+  VAL_FKT_ACTIVE_SOS_GAPPP_DIRECTORY=gappp_directory | \
+  VAL_FKT_ACTIVE_SOS_PBX_DIRECTORY=pbx_directory | \
+  VAL_FKT_ACTIVE_SOS_VIP=vip | \
+  VAL_FKT_ACTIVE_SOS_QUICK0=quick0 | \
+  VAL_FKT_ACTIVE_SOS_FILTER=filter | \
+  VAL_FKT_ACTIVE_SOS_JOURNAL=journal | \
+  VAL_FKT_ACTIVE_SOS_CALLER=caller | \
+  VAL_FKT_ACTIVE_SOS_REDIAL=redial | \
+  VAL_FKT_ACTIVE_SOS_TXT_SEND=txt_send | \
+  VAL_FKT_ACTIVE_SOS_VOL_OK=vol_ok | \
+  VAL_FKT_ACTIVE_SOS_VOL_UP=vol_up | \
+  VAL_FKT_ACTIVE_SOS_VOL_DOWN=vol_down | \
+  VAL_FKT_ACTIVE_SOS_MUTE=mute | \
+  VAL_FKT_ACTIVE_SOS_AUDIO_HD=audio_hd | \
+  VAL_FKT_ACTIVE_SOS_BT_TOGGLE=bt_toggle | \
+  VAL_FKT_ACTIVE_SOS_OPT_CCBS=opt_ccbs | \
+  VAL_FKT_ACTIVE_SOS_OPT_CCNR=opt_ccnr | \
+  VAL_FKT_ACTIVE_SOS_OPT_MCID=opt_mcid | \
+  VAL_FKT_ACTIVE_SOS_OPT_PICKUP=opt_pickup | \
+  VAL_FKT_ACTIVE_SOS_OPT_PICKUP_SELECT=opt_pickup_select | \
+  VAL_FKT_ACTIVE_SOS_OPT_TAKE=opt_take | \
+  VAL_FKT_ACTIVE_SOS_PREDIAL_HOOK_DYN=predial_hook_dyn | \
+  VAL_FKT_ACTIVE_SOS_DIAL_0=dial_0 | \
+  VAL_FKT_ACTIVE_SOS_DIAL_1=dial_1 | \
+  VAL_FKT_ACTIVE_SOS_DIAL_2=dial_2 | \
+  VAL_FKT_ACTIVE_SOS_DIAL_3=dial_3 | \
+  VAL_FKT_ACTIVE_SOS_DIAL_4=dial_4 | \
+  VAL_FKT_ACTIVE_SOS_DIAL_5=dial_5 | \
+  VAL_FKT_ACTIVE_SOS_DIAL_6=dial_6 | \
+  VAL_FKT_ACTIVE_SOS_DIAL_7=dial_7 | \
+  VAL_FKT_ACTIVE_SOS_DIAL_8=dial_8 | \
+  VAL_FKT_ACTIVE_SOS_DIAL_9=dial_9 | \
+  VAL_FKT_ACTIVE_SOS_DIAL_STAR=dial_star | \
+  VAL_FKT_ACTIVE_SOS_DIAL_HASH=dial_hash | \
+  VAL_FKT_ACTIVE_SOS_DIAL_DTMF=dial_dtmf | \
+  VAL_FKT_ACTIVE_SOS_VLSTX=vlstx | \
+  VAL_FKT_ACTIVE_SOS_VLST1=vlst1 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_1=vlst1_1 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_2=vlst1_2 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_3=vlst1_3 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_4=vlst1_4 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_5=vlst1_5 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_6=vlst1_6 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_7=vlst1_7 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_8=vlst1_8 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_9=vlst1_9 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_10=vlst1_10 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_11=vlst1_11 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_12=vlst1_12 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_13=vlst1_13 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_14=vlst1_14 | \
+  VAL_FKT_ACTIVE_SOS_VLST1_15=vlst1_15 | \
+  VAL_FKT_ACTIVE_SOS_VLST2=vlst2 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_1=vlst2_1 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_2=vlst2_2 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_3=vlst2_3 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_4=vlst2_4 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_5=vlst2_5 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_6=vlst2_6 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_7=vlst2_7 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_8=vlst2_8 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_9=vlst2_9 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_10=vlst2_10 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_10=vlst2_10 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_11=vlst2_11 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_12=vlst2_12 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_13=vlst2_13 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_14=vlst2_14 | \
+  VAL_FKT_ACTIVE_SOS_VLST2_15=vlst2_15 | \
+  VAL_FKT_ACTIVE_SOS_VLST3=vlst3 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_1=vlst3_1 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_2=vlst3_2 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_3=vlst3_3 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_4=vlst3_4 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_5=vlst3_5 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_6=vlst3_6 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_7=vlst3_7 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_8=vlst3_8 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_9=vlst3_9 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_10=vlst3_10 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_10=vlst3_10 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_11=vlst3_11 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_12=vlst3_12 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_13=vlst3_13 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_14=vlst3_14 | \
+  VAL_FKT_ACTIVE_SOS_VLST3_15=vlst3_15 | \
+  VAL_FKT_ACTIVE_SOS_VLST4=vlst4 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_1=vlst4_1 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_2=vlst4_2 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_3=vlst4_3 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_4=vlst4_4 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_5=vlst4_5 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_6=vlst4_6 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_7=vlst4_7 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_8=vlst4_8 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_9=vlst4_9 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_10=vlst4_10 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_10=vlst4_10 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_11=vlst4_11 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_12=vlst4_12 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_13=vlst4_13 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_14=vlst4_14 | \
+  VAL_FKT_ACTIVE_SOS_VLST4_15=vlst4_15 | \
+  VAL_FKT_ACTIVE_SOS_VLST5=vlst5 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_1=vlst5_1 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_2=vlst5_2 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_3=vlst5_3 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_4=vlst5_4 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_5=vlst5_5 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_6=vlst5_6 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_7=vlst5_7 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_8=vlst5_8 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_9=vlst5_9 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_10=vlst5_10 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_10=vlst5_10 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_11=vlst5_11 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_12=vlst5_12 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_13=vlst5_13 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_14=vlst5_14 | \
+  VAL_FKT_ACTIVE_SOS_VLST5_15=vlst5_15
+
+@fkt_vlist_map: \
+  VAL_FKT_VLIST_VLIST_X=vlstx | \
+  VAL_FKT_VLIST_VLST1=vlst1 | \
+  VAL_FKT_VLIST_VLST1_1=vlst1_1 | \
+  VAL_FKT_VLIST_VLST1_2=vlst1_2 | \
+  VAL_FKT_VLIST_VLST1_3=vlst1_3 | \
+  VAL_FKT_VLIST_VLST1_4=vlst1_4 | \
+  VAL_FKT_VLIST_VLST1_5=vlst1_5 | \
+  VAL_FKT_VLIST_VLST1_6=vlst1_6 | \
+  VAL_FKT_VLIST_VLST1_7=vlst1_7 | \
+  VAL_FKT_VLIST_VLST1_8=vlst1_8 | \
+  VAL_FKT_VLIST_VLST1_9=vlst1_9 | \
+  VAL_FKT_VLIST_VLST1_10=vlst1_10 | \
+  VAL_FKT_VLIST_VLST1_11=vlst1_11 | \
+  VAL_FKT_VLIST_VLST1_12=vlst1_12 | \
+  VAL_FKT_VLIST_VLST1_13=vlst1_13 | \
+  VAL_FKT_VLIST_VLST1_14=vlst1_14 | \
+  VAL_FKT_VLIST_VLST1_15=vlst1_15 | \
+  VAL_FKT_VLIST_VLST2=vlst2 | \
+  VAL_FKT_VLIST_VLST2_1=vlst2_1 | \
+  VAL_FKT_VLIST_VLST2_2=vlst2_2 | \
+  VAL_FKT_VLIST_VLST2_3=vlst2_3 | \
+  VAL_FKT_VLIST_VLST2_4=vlst2_4 | \
+  VAL_FKT_VLIST_VLST2_5=vlst2_5 | \
+  VAL_FKT_VLIST_VLST2_6=vlst2_6 | \
+  VAL_FKT_VLIST_VLST2_7=vlst2_7 | \
+  VAL_FKT_VLIST_VLST2_8=vlst2_8 | \
+  VAL_FKT_VLIST_VLST2_9=vlst2_9 | \
+  VAL_FKT_VLIST_VLST2_10=vlst2_10 | \
+  VAL_FKT_VLIST_VLST2_10=vlst2_10 | \
+  VAL_FKT_VLIST_VLST2_11=vlst2_11 | \
+  VAL_FKT_VLIST_VLST2_12=vlst2_12 | \
+  VAL_FKT_VLIST_VLST2_13=vlst2_13 | \
+  VAL_FKT_VLIST_VLST2_14=vlst2_14 | \
+  VAL_FKT_VLIST_VLST2_15=vlst2_15 | \
+  VAL_FKT_VLIST_VLST3=vlst3 | \
+  VAL_FKT_VLIST_VLST3_1=vlst3_1 | \
+  VAL_FKT_VLIST_VLST3_2=vlst3_2 | \
+  VAL_FKT_VLIST_VLST3_3=vlst3_3 | \
+  VAL_FKT_VLIST_VLST3_4=vlst3_4 | \
+  VAL_FKT_VLIST_VLST3_5=vlst3_5 | \
+  VAL_FKT_VLIST_VLST3_6=vlst3_6 | \
+  VAL_FKT_VLIST_VLST3_7=vlst3_7 | \
+  VAL_FKT_VLIST_VLST3_8=vlst3_8 | \
+  VAL_FKT_VLIST_VLST3_9=vlst3_9 | \
+  VAL_FKT_VLIST_VLST3_10=vlst3_10 | \
+  VAL_FKT_VLIST_VLST3_10=vlst3_10 | \
+  VAL_FKT_VLIST_VLST3_11=vlst3_11 | \
+  VAL_FKT_VLIST_VLST3_12=vlst3_12 | \
+  VAL_FKT_VLIST_VLST3_13=vlst3_13 | \
+  VAL_FKT_VLIST_VLST3_14=vlst3_14 | \
+  VAL_FKT_VLIST_VLST3_15=vlst3_15 | \
+  VAL_FKT_VLIST_VLST4=vlst4 | \
+  VAL_FKT_VLIST_VLST4_1=vlst4_1 | \
+  VAL_FKT_VLIST_VLST4_2=vlst4_2 | \
+  VAL_FKT_VLIST_VLST4_3=vlst4_3 | \
+  VAL_FKT_VLIST_VLST4_4=vlst4_4 | \
+  VAL_FKT_VLIST_VLST4_5=vlst4_5 | \
+  VAL_FKT_VLIST_VLST4_6=vlst4_6 | \
+  VAL_FKT_VLIST_VLST4_7=vlst4_7 | \
+  VAL_FKT_VLIST_VLST4_8=vlst4_8 | \
+  VAL_FKT_VLIST_VLST4_9=vlst4_9 | \
+  VAL_FKT_VLIST_VLST4_10=vlst4_10 | \
+  VAL_FKT_VLIST_VLST4_10=vlst4_10 | \
+  VAL_FKT_VLIST_VLST4_11=vlst4_11 | \
+  VAL_FKT_VLIST_VLST4_12=vlst4_12 | \
+  VAL_FKT_VLIST_VLST4_13=vlst4_13 | \
+  VAL_FKT_VLIST_VLST4_14=vlst4_14 | \
+  VAL_FKT_VLIST_VLST4_15=vlst4_15 | \
+  VAL_FKT_VLIST_VLST5=vlst5 | \
+  VAL_FKT_VLIST_VLST5_1=vlst5_1 | \
+  VAL_FKT_VLIST_VLST5_2=vlst5_2 | \
+  VAL_FKT_VLIST_VLST5_3=vlst5_3 | \
+  VAL_FKT_VLIST_VLST5_4=vlst5_4 | \
+  VAL_FKT_VLIST_VLST5_5=vlst5_5 | \
+  VAL_FKT_VLIST_VLST5_6=vlst5_6 | \
+  VAL_FKT_VLIST_VLST5_7=vlst5_7 | \
+  VAL_FKT_VLIST_VLST5_8=vlst5_8 | \
+  VAL_FKT_VLIST_VLST5_9=vlst5_9 | \
+  VAL_FKT_VLIST_VLST5_10=vlst5_10 | \
+  VAL_FKT_VLIST_VLST5_10=vlst5_10 | \
+  VAL_FKT_VLIST_VLST5_11=vlst5_11 | \
+  VAL_FKT_VLIST_VLST5_12=vlst5_12 | \
+  VAL_FKT_VLIST_VLST5_13=vlst5_13 | \
+  VAL_FKT_VLIST_VLST5_14=vlst5_14 | \
+  VAL_FKT_VLIST_VLST5_15=vlst5_15 | \
+  VAL_FKT_VLIST_MENU=menu | \
+  VAL_FKT_VLIST_ACTIVE_FEATURES=active_features | \
+  VAL_FKT_VLIST_ALARM_TIME=alarm_time | \
+  VAL_FKT_VLIST_ALARM=alarm | \
+  VAL_FKT_VLIST_APPOINTMENT=appointment | \
+  VAL_FKT_VLIST_TEA_TIMER=tea_timer | \
+  VAL_FKT_VLIST_SHOW_TIME_DATE=show_time_date | \
+  VAL_FKT_VLIST_BT=bt | \
+  VAL_FKT_VLIST_BT_STATE=bt_state | \
+  VAL_FKT_VLIST_DATAMANAGMENT=datamanagment | \
+  VAL_FKT_VLIST_SECURITY=security | \
+  VAL_FKT_VLIST_KEYLOCK=keylock | \
+  VAL_FKT_VLIST_PINLOCK=pinlock | \
+  VAL_FKT_VLIST_PROFILES=profiles | \
+  VAL_FKT_VLIST_PROFILE=profile | \
+  VAL_FKT_VLIST_PREDIAL=predial | \
+  VAL_FKT_VLIST_OFF=off | \
+  VAL_FKT_VLIST_OFF_MENU=off_menu | \
+  VAL_FKT_VLIST_RING_OFF=ring_off | \
+  VAL_FKT_VLIST_SET=set | \
+  VAL_FKT_VLIST_DISPLAY= MenuDisp | \
+  VAL_FKT_VLIST_LED= disp_led | \
+  VAL_FKT_VLIST_PROG_KEY= prog_key | \
+  VAL_FKT_VLIST_LANGUAGE= language | \
+  VAL_FKT_VLIST_MENU_EXPERT= MenuExpert | \
+  VAL_FKT_VLIST_MENU_ILLU= MenuIllu   | \
+  VAL_FKT_VLIST_MENU_DEVICE= MenuDevice | \
+  VAL_FKT_VLIST_AUDIO_MENU=audio | \
+  VAL_FKT_VLIST_AUDIO_HD=audio_hd | \
+  VAL_FKT_VLIST_VOL_OK=vol_ok | \
+  VAL_FKT_VLIST_LIGHT_TOGGLE=light_toggle | \
+  VAL_FKT_VLIST_VERSION=version | \
+  VAL_FKT_VLIST_NAVI=navi | \
+  VAL_FKT_VLIST_INF=inf | \
+  VAL_FKT_VLIST_MENUINFNEW=MenuInfNew | \
+  VAL_FKT_VLIST_VOICE_BOX=voice_box | \
+  VAL_FKT_VLIST_JOURNAL=journal | \
+  VAL_FKT_VLIST_CALLER=caller | \
+  VAL_FKT_VLIST_REDIAL=redial | \
+  VAL_FKT_VLIST_PBX_EMAIL=pbx_email | \
+  VAL_FKT_VLIST_PBX_FAX=pbx_fax | \
+  VAL_FKT_VLIST_OMM_JOBS=omm_jobs | \
+  VAL_FKT_VLIST_BESTMSG=BestMsg | \
+  VAL_FKT_VLIST_OMM_INBOX=omm_inbox | \
+  VAL_FKT_VLIST_OMM_OUTBOX=omm_outbox | \
+  VAL_FKT_VLIST_OMM_DEF_MSG=omm_def_msg | \
+  VAL_FKT_VLIST_TXT_SEND=txt_send | \
+  VAL_FKT_VLIST_GAPPP_COST=gappp_cost | \
+  VAL_FKT_VLIST_PBX_FEATURE=pbx_feature | \
+  VAL_FKT_VLIST_FILTER_MENU=filter_menu | \
+  VAL_FKT_VLIST_FILTER_STATE=filter_state | \
+  VAL_FKT_VLIST_FILTER_LIST=filter_list | \
+  VAL_FKT_VLIST_DIRECTORIES=directories | \
+  VAL_FKT_VLIST_GET_NAME=get_name | \
+  VAL_FKT_VLIST_BOOK=book | \
+  VAL_FKT_VLIST_GAPPP_INTERN=gappp_intern | \
+  VAL_FKT_VLIST_PBX_DIRECTORY=pbx_directory | \
+  VAL_FKT_VLIST_VIP=vip | \
+  VAL_FKT_VLIST_FEATURE_ACCESS_CODE=feature_access_code | \
+  VAL_FKT_VLIST_PBX_RECEPTION=pbx_reception | \
+  VAL_FKT_VLIST_QUICK0=quick0 | \
+  VAL_FKT_VLIST_SOS_MENU=sos_menu | \
+  VAL_FKT_VLIST_SOS=sos | \
+  VAL_FKT_VLIST_SOS_LOC=sos_loc | \
+  VAL_FKT_VLIST_SHOCK=shock | \
+  VAL_FKT_VLIST_ALARM_CALL=alarm_call | \
+  VAL_FKT_VLIST_SENSOR_MENU=sensor_menu | \
+  VAL_FKT_VLIST_SYSTEM_MENU=system_menu | \
+  VAL_FKT_VLIST_DYN_PBX_OPTION=dyn_pbx_option | \
+  VAL_FKT_VLIST_PBX_SERVER_MENU=pbx_server_menu | \
+  VAL_FKT_VLIST_PBX_OPTIONS=pbx_options | \
+  VAL_FKT_VLIST_GAPP_MAIN=gappp_main | \
+  VAL_FKT_VLIST_GAPPP_CALL_FORWARD=gappp_call_forward | \
+  VAL_FKT_VLIST_PBX_CALL_ROUTING=pbx_call_routing | \
+  VAL_FKT_VLIST_PBX_DND=pbx_dnd | \
+  VAL_FKT_VLIST_PBX_PRESENCE=pbx_presence | \
+  VAL_FKT_VLIST_LOCATING_EDITOR=locating_editor | \
+  VAL_FKT_VLIST_PBX_TAKE=pbx_take | \
+  VAL_FKT_VLIST_PBX_HOT_LIST=pbx_hot_list | \
+  VAL_FKT_VLIST_PBX_UNPARK=pbx_unpark | \
+  VAL_FKT_VLIST_PBX_PARK=pbx_park | \
+  VAL_FKT_VLIST_GAPPP_PICKUP=gappp_pickup | \
+  VAL_FKT_VLIST_PBX_FKEYS=pbx_fkeys | \
+  VAL_FKT_VLIST_PBX_LOGIN=pbx_login | \
+  VAL_FKT_VLIST_PBX_LOGOUT=pbx_logout | \
+  VAL_FKT_VLIST_F_1=f_1 | \
+  VAL_FKT_VLIST_F_2=f_2 | \
+  VAL_FKT_VLIST_F_3=f_3 | \
+  VAL_FKT_VLIST_F_4=f_4 | \
+  VAL_FKT_VLIST_F_5=f_5 | \
+  VAL_FKT_VLIST_F_6=f_6 | \
+  VAL_FKT_VLIST_F_7=f_7 | \
+  VAL_FKT_VLIST_F_8=f_8 | \
+  VAL_FKT_VLIST_F_9=f_9 | \
+  VAL_FKT_VLIST_F_10=f_10 | \
+  VAL_FKT_VLIST_GAPPP_DOOR=gappp_door | \
+  VAL_FKT_VLIST_GAPPP_DOOR1=gappp_door1 | \
+  VAL_FKT_VLIST_GAPPP_DOOR2=gappp_door2 | \
+  VAL_FKT_VLIST_GAPPP_PICKUP_SELECT=gappp_pickup_select | \
+  VAL_FKT_VLIST_GAPPP_ANNOUNCEMENT=gappp_announcement | \
+  VAL_FKT_VLIST_GAPPP_INTERCOM=gappp_intercom | \
+  VAL_FKT_VLIST_GAPPP_VIP_CALL=gappp_vip_call | \
+  VAL_FKT_VLIST_SUPPRESS_NO=suppress_no | \
+  VAL_FKT_VLIST_SEL_LINE=sel_line | \
+  VAL_FKT_VLIST_LINE_1=line_1 | \
+  VAL_FKT_VLIST_LINE_2=line_2 | \
+  VAL_FKT_VLIST_LINE_3=line_3 | \
+  VAL_FKT_VLIST_LINE_4=line_4 | \
+  VAL_FKT_VLIST_LINE_5=line_5 | \
+  VAL_FKT_VLIST_LINE_6=line_6 | \
+  VAL_FKT_VLIST_LINE_7=line_7 | \
+  VAL_FKT_VLIST_LINE_8=line_8 | \
+  VAL_FKT_VLIST_LINE_9=line_9 | \
+  VAL_FKT_VLIST_LINE_10=line_10 | \
+  VAL_FKT_VLIST_SK_DYN1=sk_dyn1 | \
+  VAL_FKT_VLIST_OPT=opt | \
+  VAL_FKT_VLIST_ADD_TO=add_to | \
+  VAL_FKT_VLIST_FILTER=filter | \
+  VAL_FKT_VLIST_OPT_CALLED_LINES=opt_called_lines | \
+  VAL_FKT_VLIST_DIAL_R=dial_r | \
+  VAL_FKT_VLIST_OPT_ECT=opt_ect | \
+  VAL_FKT_VLIST_OPT_DEFLECT=opt_deflect | \
+  VAL_FKT_VLIST_OPT_CCBS=opt_ccbs | \
+  VAL_FKT_VLIST_OPT_CCNR=opt_ccnr | \
+  VAL_FKT_VLIST_OPT_MCID=opt_mcid | \
+  VAL_FKT_VLIST_OPT_RECEIVE=opt_receive | \
+  VAL_FKT_VLIST_OPT_REJECT=opt_reject | \
+  VAL_FKT_VLIST_OPT_INT=opt_int | \
+  VAL_FKT_VLIST_OPT_BROKERING=opt_brokering | \
+  VAL_FKT_VLIST_OPT_HOLD=opt_hold | \
+  VAL_FKT_VLIST_OPT_3PTY=opt_3pty | \
+  VAL_FKT_VLIST_OPT_RECORD=opt_record | \
+  VAL_FKT_VLIST_OPT_RETRIEVE=opt_retrieve | \
+  VAL_FKT_VLIST_OPT_PRIVIOUS=opt_privious | \
+  VAL_FKT_VLIST_OPT_RELEASE=opt_release | \
+  VAL_FKT_VLIST_REL=rel | \
+  VAL_FKT_VLIST_OPT_PARK=opt_park | \
+  VAL_FKT_VLIST_OPT_BOOKING_NO=opt_booking_no | \
+  VAL_FKT_VLIST_VOL_UP=vol_up | \
+  VAL_FKT_VLIST_VOL_DOWN=vol_down | \
+  VAL_FKT_VLIST_MUTE=mute | \
+  VAL_FKT_VLIST_BT_TOGGLE=bt_toggle
+  
+</maps>
+
+<vars>
+// list of used variable names
+// name starts with '@', followed by one letter, followed by a string of letters, digits or '_' (case-sensitive)
+@configuration_name
+@tmp
+@val
+
+@setting_msg_mel
+@setting_msg_vol
+@setting_msg_ovwr
+@setting_vol
+@setting_mel
+@setting_ring
+@setting_tone
+@setting_audio
+@setting_audio_spk
+@setting_usb
+@setting_dial
+@setting_dial_code
+@setting_dial_code_sys
+@setting_dial_code_int
+@setting_dial_code_nat
+@setting_dial_code_area
+@setting_disp
+@setting_light
+@setting_light_keyopt
+@setting_light_msg
+@setting_led
+@setting_listmode
+@setting_mode
+@setting_lock
+@setting_lock_key
+@setting_sos
+@setting_sosmd
+@setting_sosmd_mode
+@setting_sosmd_sense
+@setting_sosmd_nomo
+@setting_sosmd_delay
+@setting_sosmd_t
+@setting_time_format
+
+@mninvis
+@mnlock
+@mngray
+@mnprot
+@mnadmin
+@mnpin
+
+@keydef_idle
+@keydef_dial
+@keydef_alert
+@keydef_active
+@keydef_active_sos
+
+@keydef_idle_master
+@keydef_dial_master
+@keydef_alert_master
+@keydef_active_master
+@keydef_active_sos_master
+
+@vlst_na1
+@vlst_na2
+@vlst_na3
+@vlst_na4
+@vlst_na5
+@vlst_sna1
+@vlst_sna2
+@vlst_sna3
+@vlst_sna4
+@vlst_sna5
+@vlst_sitem1
+@vlst_sitem2
+@vlst_sitem3
+@vlst_sitem4
+@vlst_sitem5
+@vlst_icons1
+@vlst_icons2
+@vlst_icons3
+@vlst_icons4
+@vlst_icons5
+@vlst1
+@vlst2
+@vlst3
+@vlst4
+@vlst5
+
+</vars>
+
+<inopts>
+// functions: listcat(), listcompr(), strcpy(), strcat(), strquote(), str2utf8(), printf(), sprintf(), map(), ifempty(), ifequal(),
+//            band(), bor(), add(), sub(), mul(), div(), max(), min(), substr()
+// wildcards: %0, ..., %9
+
+KEY_CONFIGURATION_NAME " = %1":        strcpy(@configuration_name, %1);
+
+// message options
+KEY_MSG_VOL_NORMAL " = %1":            sprintf(@tmp, "normal=%s", map(@volume_map, %1, "nil")); listcat(@setting_msg_vol, @tmp);
+KEY_MSG_VOL_URG " = %1":               sprintf(@tmp, "urg=%s", map(@volume_map, %1, "nil")); listcat(@setting_msg_vol, @tmp);
+KEY_MSG_VOL_SOS " = %1":               sprintf(@tmp, "sos=%s", map(@volume_map, %1, "nil")); listcat(@setting_msg_vol, @tmp);
+
+KEY_MSG_MEL_NORMAL " = %1":            sprintf(@tmp, "normal=%s", map(@melody_map, %1, "nil")); listcat(@setting_msg_mel, @tmp);
+KEY_MSG_MEL_URG " = %1":               sprintf(@tmp, "urg=%s", map(@melody_map, %1, "nil")); listcat(@setting_msg_mel, @tmp);
+KEY_MSG_MEL_SOS " = %1":               sprintf(@tmp, "sos=%s", map(@melody_map, %1, "nil")); listcat(@setting_msg_mel, @tmp);
+
+KEY_MSG_OVWR " = %1":                  strcpy(@setting_msg_ovwr, map(@boolean_map, %1, "0"));
+
+// volume settings
+KEY_VOL_INT " = %1":                   sprintf(@tmp, "int=%s", map(@volume_map, %1, "nil")); listcat(@setting_vol, @tmp);
+KEY_VOL_EXT " = %1":                   sprintf(@tmp, "buzz=%s", map(@volume_map, %1, "nil")); listcat(@setting_vol, @tmp);
+KEY_VOL_UNK " = %1":                   sprintf(@tmp, "unk=%s", map(@volume_map, %1, "nil")); listcat(@setting_vol, @tmp);
+KEY_VOL_CCBS " = %1":                  sprintf(@tmp, "ccbs=%s", map(@volume_map, %1, "nil")); listcat(@setting_vol, @tmp);
+KEY_VOL_RECALL " = %1":                sprintf(@tmp, "recall=%s", map(@volume_map, %1, "nil")); listcat(@setting_vol, @tmp);
+KEY_VOL_VIP " = %1":                   sprintf(@tmp, "vip=%s", map(@volume_map, %1, "nil")); listcat(@setting_vol, @tmp);
+KEY_VOL_SPECIAL " = %1":               sprintf(@tmp, "special=%s", map(@volume_map, %1, "nil")); listcat(@setting_vol, @tmp);
+KEY_VOL_ALARM " = %1":                 sprintf(@tmp, "alarm=%s", map(@volume_map, %1, "nil")); listcat(@setting_vol, @tmp);
+KEY_VOL_APPOINT " = %1":               sprintf(@tmp, "appoint=%s", map(@volume_map, %1, "nil")); listcat(@setting_vol, @tmp);
+
+// melodies
+KEY_MEL_INT " = %1":                   sprintf(@tmp, "int=%s", map(@melody_map, %1, "nil")); listcat(@setting_mel, @tmp);
+KEY_MEL_EXT " = %1":                   sprintf(@tmp, "ext=%s", map(@melody_map, %1, "nil")); listcat(@setting_mel, @tmp);
+KEY_MEL_UNK " = %1":                   sprintf(@tmp, "unk=%s", map(@melody_map, %1, "nil")); listcat(@setting_mel, @tmp);
+KEY_MEL_CCBS " = %1":                  sprintf(@tmp, "ccbs=%s", map(@melody_map, %1, "nil")); listcat(@setting_mel, @tmp);
+KEY_MEL_RECALL " = %1":                sprintf(@tmp, "recall=%s", map(@melody_map, %1, "nil")); listcat(@setting_mel, @tmp);
+KEY_MEL_VIP " = %1":                   sprintf(@tmp, "vip=%s", map(@melody_map, %1, "nil")); listcat(@setting_mel, @tmp);
+KEY_MEL_SPECIAL " = %1":               sprintf(@tmp, "special=%s", map(@melody_map, %1, "nil")); listcat(@setting_mel, @tmp);
+KEY_MEL_ALARM " = %1":                 sprintf(@tmp, "alarm=%s", map(@melody_map, %1, "nil")); listcat(@setting_mel, @tmp);
+KEY_MEL_APPOINT " = %1":               sprintf(@tmp, "appoint=%s", map(@melody_map, %1, "nil")); listcat(@setting_mel, @tmp);
+
+// ringer settings
+KEY_RING_MODE " = %1":                 sprintf(@tmp, "mode=%s", map(@ring_mode_map, %1, "nil")); listcat(@setting_ring, @tmp);
+KEY_RING_BUZZ " = %1":                 sprintf(@tmp, "buzz=%s", map(@boolean_map, %1, "0")); listcat(@setting_ring, @tmp);
+KEY_RING_VIBRA " = %1":                sprintf(@tmp, "vibra=%s", map(@boolean_map, %1, "0")); listcat(@setting_ring, @tmp);
+KEY_RING_HEADSET " = %1":              sprintf(@tmp, "headset=%s", map(@boolean_map, %1, "0")); listcat(@setting_ring, @tmp);
+
+// attention tones
+KEY_TONE_KEY " = %1 %2 %3 %4":         sprintf(@tmp, "key=%s", bor(map(@tone_map, %1, "0"), map(@tone_map, %2, "0"), map(@tone_map, %3, "0"), map(@tone_map, %4, "0"))); listcat(@setting_tone, @tmp);
+KEY_TONE_CNF " = %1 %2 %3 %4":         sprintf(@tmp, "cnf=%s", bor(map(@tone_map, %1, "0"), map(@tone_map, %2, "0"), map(@tone_map, %3, "0"), map(@tone_map, %4, "0"))); listcat(@setting_tone, @tmp);
+KEY_TONE_MNEND " = %1 %2 %3 %4":       sprintf(@tmp, "mnend=%s", bor(map(@tone_map, %1, "0"), map(@tone_map, %2, "0"), map(@tone_map, %3, "0"), map(@tone_map, %4, "0"))); listcat(@setting_tone, @tmp);
+KEY_TONE_ACCU " = %1 %2 %3 %4":        sprintf(@tmp, "accu=%s", bor(map(@tone_map, %1, "0"), map(@tone_map, %2, "0"), map(@tone_map, %3, "0"), map(@tone_map, %4, "0"))); listcat(@setting_tone, @tmp);
+KEY_TONE_RANGE " = %1 %2 %3 %4":       sprintf(@tmp, "range=%s", bor(map(@tone_map, %1, "0"), map(@tone_map, %2, "0"), map(@tone_map, %3, "0"), map(@tone_map, %4, "0"))); listcat(@setting_tone, @tmp);
+KEY_TONE_OUTRANGE " = %1 %2 %3 %4":    sprintf(@tmp, "outrange=%s", bor(map(@tone_map, %1, "0"), map(@tone_map, %2, "0"), map(@tone_map, %3, "0"), map(@tone_map, %4, "0"))); listcat(@setting_tone, @tmp);
+
+// audio
+KEY_AUDIO_NOISEDETECT " = %1":         sprintf(@tmp, "noisedetect=%s", map(@boolean_map, %1, "0")); listcat(@setting_audio, @tmp);
+KEY_AUDIO_LOUDENV " = %1":             sprintf(@tmp, "loudenv=%s", map(@boolean_map, %1, "0")); listcat(@setting_audio, @tmp);
+KEY_AUDIO_SPK_CHARGER " = %1":         sprintf(@tmp, "charger=%s", map(@audio_spk_charger_map, %1, "nil")); listcat(@setting_audio_spk, @tmp);
+
+// USB
+KEY_USB_MODE " = %1":                  sprintf(@tmp, "mode=%s", map(@usb_mode_map, %1, "nil")); listcat(@setting_usb, @tmp);
+
+// Systems/Subscription/<System X>
+KEY_DIAL_ABC " = %1":                  sprintf(@tmp, "abc=%s", map(@dial_abc_map, %1, "nil")); listcat(@setting_dial, @tmp);
+KEY_DIAL_CODE_IMAX " = %1":            sprintf(@tmp, "imax=%s", map(@dial_code_imax_map, %1, "nil")); listcat(@setting_dial_code, @tmp);
+KEY_DIAL_CODE_SYS " = %1":             sprintf(@tmp, "%s", %1); listcat(@setting_dial_code_sys, @tmp);
+KEY_DIAL_CODE_INT " = %1":             sprintf(@tmp, "%s", %1); listcat(@setting_dial_code_int, @tmp);
+KEY_DIAL_CODE_NAT " = %1":             sprintf(@tmp, "%s", %1); listcat(@setting_dial_code_nat, @tmp);
+KEY_DIAL_CODE_AREA " = %1":            sprintf(@tmp, "%s", %1); listcat(@setting_dial_code_area, @tmp);
+
+// display
+KEY_DISP_LANG " = %1":                 sprintf(@tmp, "lang=%s", map(@disp_lang_map, %1, "nil")); listcat(@setting_disp, @tmp);
+KEY_DISP_FONT " = %1":                 sprintf(@tmp, "font=%s", map(@disp_font_map, %1, "nil")); listcat(@setting_disp, @tmp);
+KEY_DISP_COLOR " = %1":                sprintf(@tmp, "color=%s", map(@disp_color_map, %1, "nil")); listcat(@setting_disp, @tmp);
+
+//time format
+KEY_TIME_FORMAT " = %1":               sprintf(@tmp, "time=%s", map(@time_format_map, %1, "nil")); listcat(@setting_time_format, @tmp);
+KEY_DATE_FORMAT " = %1":               sprintf(@tmp, "date=%s", map(@date_format_map, %1, "nil")); listcat(@setting_time_format, @tmp);
+
+// illumination
+KEY_LIGHT_DIM " = %1":                 sprintf(@tmp, "dim=%s", map(@light_dim_map, %1, "nil")); listcat(@setting_light, @tmp);
+KEY_LIGHT_DISP " = %1":                sprintf(@tmp, "disp=%s", map(@light_disp_map, %1, "nil")); listcat(@setting_light, @tmp);
+KEY_LIGHT_KEY " = %1":                 sprintf(@tmp, "key=%s", map(@light_key_map, %1, "nil")); listcat(@setting_light, @tmp);
+KEY_LIGHT_KEYOPT_INCOM " = %1":        sprintf(@tmp, "incom=%s", map(@boolean_map, %1, "0")); listcat(@setting_light_keyopt, @tmp);
+KEY_LIGHT_KEYOPT_ALARM " = %1":        sprintf(@tmp, "alarm=%s", map(@boolean_map, %1, "0")); listcat(@setting_light_keyopt, @tmp);
+KEY_LIGHT_KEYOPT_CHARGE " = %1":       sprintf(@tmp, "charge=%s", map(@boolean_map, %1, "0")); listcat(@setting_light_keyopt, @tmp);
+KEY_LIGHT_CHARGE " = %1":              sprintf(@tmp, "charge=%s", map(@light_key_map, %1, "nil")); listcat(@setting_light, @tmp);
+KEY_LIGHT_CALL " = %1":                sprintf(@tmp, "call=%s", map(@light_call_map, %1, "nil")); listcat(@setting_light, @tmp);
+KEY_LIGHT_MSG_MSG " = %1":             sprintf(@tmp, "msg=%s", map(@light_msg_msg_map, %1, "nil")); listcat(@setting_light_msg, @tmp);
+KEY_LIGHT_MSG_INF " = %1":             sprintf(@tmp, "inf=%s", map(@light_msg_inf_map, %1, "nil")); listcat(@setting_light_msg, @tmp);
+KEY_LIGHT_MSG_JOB " = %1":             sprintf(@tmp, "job=%s", map(@light_msg_job_map, %1, "nil")); listcat(@setting_light_msg, @tmp);
+KEY_LIGHT_MSG_SOS " = %1":             sprintf(@tmp, "sos=%s", map(@light_msg_sos_map, %1, "nil")); listcat(@setting_light_msg, @tmp);
+
+// led indications
+KEY_LED_ALIVE " = %1":                 sprintf(@tmp, "alive=%s", map(@boolean_map, %1, "0")); listcat(@setting_led, @tmp);
+KEY_LED_INCOM " = %1":                 sprintf(@tmp, "incom=%s", map(@boolean_map, %1, "0")); listcat(@setting_led, @tmp);
+KEY_LED_RANGE " = %1":                 sprintf(@tmp, "range=%s", map(@boolean_map, %1, "0")); listcat(@setting_led, @tmp);
+KEY_LED_CHARGE " = %1":                sprintf(@tmp, "charge=%s", map(@boolean_map, %1, "0")); listcat(@setting_led, @tmp);
+KEY_LED_INFO " = %1":                  sprintf(@tmp, "info=%s", map(@boolean_map, %1, "0")); listcat(@setting_led, @tmp);
+KEY_LED_SPK " = %1":                   sprintf(@tmp, "spk=%s", map(@boolean_map, %1, "0")); listcat(@setting_led, @tmp);
+KEY_LED_APPOINT " = %1":               sprintf(@tmp, "appoint=%s", map(@boolean_map, %1, "0")); listcat(@setting_led, @tmp);
+KEY_LED_ALARM " = %1":                 sprintf(@tmp, "alarm=%s", map(@boolean_map, %1, "0")); listcat(@setting_led, @tmp);
+
+// list access
+KEY_LISTMODE_REDIAL " = %1":           sprintf(@tmp, "redial=%s", map(@listmode_redial_map, %1, "nil")); listcat(@setting_listmode, @tmp);
+KEY_LISTMODE_CALLER " = %1":           sprintf(@tmp, "caller=%s", map(@listmode_caller_map, %1, "nil")); listcat(@setting_listmode, @tmp);
+KEY_LISTMODE_FILTER " = %1":           sprintf(@tmp, "filter=%s", map(@listmode_filter_map, %1, "nil")); listcat(@setting_listmode, @tmp);
+
+// device options
+KEY_MODE_SILENTCHARGE " = %1":         sprintf(@tmp, "silentcharge=%s", map(@boolean_map, %1, "0")); listcat(@setting_mode, @tmp);
+KEY_MODE_CHARGERANSWR" = %1":          sprintf(@tmp, "chargeranswr=%s", map(@boolean_map, %1, "0")); listcat(@setting_mode, @tmp);
+KEY_MODE_AUTOANSWR " = %1":            sprintf(@tmp, "autoanswr=%s", map(@boolean_map, %1, "0")); listcat(@setting_mode, @tmp);
+KEY_MODE_AUTOQUICKHOOK " = %1":        sprintf(@tmp, "autoquickhook=%s", map(@boolean_map, %1, "0")); listcat(@setting_mode, @tmp);
+KEY_MODE_KEY " = %1":                  sprintf(@tmp, "key=%s", map(@mode_key_map, %1, "0")); listcat(@setting_mode, @tmp);
+
+// phone lock
+KEY_LOCK_KEY_AUTO " = %1":             sprintf(@tmp, "auto=%s", map(@boolean_map, %1, "0")); listcat(@setting_lock_key, @tmp);
+KEY_LOCK_KEY_T " = %1":                sprintf(@tmp, "t=%s", map(@lock_key_t_map, %1, "0")); listcat(@setting_lock_key, @tmp);
+KEY_LOCK_KEY_PIN " = %1":              sprintf(@tmp, "pin=%s", map(@boolean_map, %1, "0")); listcat(@setting_lock_key, @tmp);
+KEY_LOCK_PIN " = %1":                  sprintf(@tmp, "PIN='%s'", %1); listcat(@setting_lock, @tmp);
+KEY_LOCK_ADMIN " = %1":                sprintf(@tmp, "admin='%s'", %1); listcat(@setting_lock, @tmp);
+KEY_LOCK_MODE " = %1":                 sprintf(@tmp, "mode=%s", map(@lock_mode_map, %1, "0")); listcat(@setting_lock, @tmp);
+
+// SOS call
+KEY_SOS_NO " = %1":                    sprintf(@tmp, "no='%s'", %1); listcat(@setting_sos, @tmp);
+KEY_SOS_MEL " = %1":                   sprintf(@tmp, "mel=%s", map(@melody_map, %1, "nil")); listcat(@setting_sos, @tmp);
+KEY_SOS_VOL " = %1":                   sprintf(@tmp, "vol=%s", map(@volume_map, %1, "nil")); listcat(@setting_sos, @tmp);
+KEY_SOS_SPK " = %1":                   sprintf(@tmp, "spk=%s", map(@boolean_map, %1, "1")); listcat(@setting_sos, @tmp);
+
+// alarm sensor
+KEY_SOSMD_NO " = %1":                    sprintf(@tmp, "no='%s'", %1); listcat(@setting_sosmd, @tmp);
+KEY_SOSMD_AUTOANSWR " = %1":             sprintf(@tmp, "autoanswr=%s", map(@boolean_map, %1, "0")); listcat(@setting_sosmd, @tmp);
+KEY_SOSMD_MODE_PRE " = %1":              sprintf(@tmp, "pre=%s", map(@boolean_map, %1, "0")); listcat(@setting_sosmd_mode, @tmp);
+KEY_SOSMD_MODE_DOWN " = %1":             sprintf(@tmp, "down=%s", map(@boolean_map, %1, "0")); listcat(@setting_sosmd_mode, @tmp);
+KEY_SOSMD_MODE_NOMOVE " = %1":           sprintf(@tmp, "nomove=%s", map(@boolean_map, %1, "0")); listcat(@setting_sosmd_mode, @tmp);
+KEY_SOSMD_MODE_ESC " = %1":              sprintf(@tmp, "esc=%s", map(@boolean_map, %1, "0")); listcat(@setting_sosmd_mode, @tmp);
+KEY_SOSMD_MODE_REP " = %1":              sprintf(@tmp, "rep=%s", map(@boolean_map, %1, "0")); listcat(@setting_sosmd_mode, @tmp);
+KEY_SOSMD_SENSE_ANGLE " = %1":           sprintf(@tmp, "angle=%s", map(@sosmd_sense_angle_map, %1, "nil")); listcat(@setting_sosmd_sense, @tmp);
+KEY_SOSMD_SENSE_MOVE " = %1":            sprintf(@tmp, "move=%s", map(@sosmd_sense_move_map, %1, "nil")); listcat(@setting_sosmd_sense, @tmp);
+KEY_SOSMD_SENSE_ESC " = %1":             sprintf(@tmp, "esc=%s", map(@sosmd_sense_esc_map, %1, "nil")); listcat(@setting_sosmd_sense, @tmp);
+KEY_SOSMD_NOMO_DOWN " = %1 %2 %3 %4":    sprintf(@tmp, "down=%s", band(map(@sosmd_nomo_map, %1, "7"), map(@sosmd_nomo_map, %2, "7"), map(@sosmd_nomo_map, %3, "7"), map(@sosmd_nomo_map, %4, "7"))); listcat(@setting_sosmd_nomo, @tmp);
+KEY_SOSMD_NOMO_NOMOVE " = %1 %2 %3 %4":  sprintf(@tmp, "nomove=%s", band(map(@sosmd_nomo_map, %1, "7"), map(@sosmd_nomo_map, %2, "7"), map(@sosmd_nomo_map, %3, "7"), map(@sosmd_nomo_map, %4, "7"))); listcat(@setting_sosmd_nomo, @tmp);
+KEY_SOSMD_NOMO_ESC " = %1 %2 %3 %4":     sprintf(@tmp, "esc=%s", band(map(@sosmd_nomo_map, %1, "7"), map(@sosmd_nomo_map, %2, "7"), map(@sosmd_nomo_map, %3, "7"), map(@sosmd_nomo_map, %4, "7"))); listcat(@setting_sosmd_nomo, @tmp);
+KEY_SOSMD_DELAY_DOWN " = %1":            sprintf(@tmp, "down=%s", map(@sosmd_delay_down_map, %1, "nil")); listcat(@setting_sosmd_delay, @tmp);
+KEY_SOSMD_DELAY_NOMOVE " = %1":          sprintf(@tmp, "nomove=%s", map(@sosmd_delay_nomove_map, %1, "nil")); listcat(@setting_sosmd_delay, @tmp);
+KEY_SOSMD_DELAY_ESC " = %1":             sprintf(@tmp, "esc=%s", map(@sosmd_delay_esc_map, %1, "nil")); listcat(@setting_sosmd_delay, @tmp);
+KEY_SOSMD_T_PRE " = %1":                 sprintf(@tmp, "pre=%s", map(@sosmd_t_pre_map, %1, "nil")); listcat(@setting_sosmd_t, @tmp);
+KEY_SOSMD_T_REP " = %1":                 sprintf(@tmp, "rep=%s", map(@sosmd_t_rep_map, %1, "nil")); listcat(@setting_sosmd_t, @tmp);
+KEY_SOSMD_TONE " = %1":                  sprintf(@tmp, "tone=%s", map(@boolean_map, %1, "1")); listcat(@setting_sosmd, @tmp);
+KEY_SOSMD_VIBRA " = %1":                 sprintf(@tmp, "vibra=%s", map(@boolean_map, %1, "0")); listcat(@setting_sosmd, @tmp);
+
+KEY_FUNCTION_MENUHIDE " = %1 %2":        sprintf(@tmp, "'%s'=%s", map(@function_map, %1), map(@boolean_map, %2, "0")); listcat(@mninvis, @tmp);
+KEY_FUNCTION_LOCKED " = %1 %2":          sprintf(@tmp, "'%s'=%s", map(@function_map, %1), map(@boolean_map, %2, "0")); listcat(@mnlock, @tmp);
+KEY_FUNCTION_GRAYED " = %1 %2":          sprintf(@tmp, "'%s'=%s", map(@function_map, %1), map(@boolean_map, %2, "0")); listcat(@mngray, @tmp);
+KEY_FUNCTION_USER_PROTECTED " = %1 %2":  sprintf(@tmp, "'%s'=%s", map(@function_map, %1), map(@boolean_map, %2, "0")); listcat(@mnprot, @tmp);
+KEY_FUNCTION_ADMIN_PROTECTED " = %1 %2": sprintf(@tmp, "'%s'=%s", map(@function_map, %1), map(@boolean_map, %2, "0")); listcat(@mnadmin, @tmp);
+KEY_FUNCTION_PIN_PROTECTED " = %1 %2":   sprintf(@tmp, "%s='%s'", map(@function_map, %1, "_"), %2); listcat(@mnpin, @tmp);
+
+
+KEY_KEY_ASSIGNMENT_IDLE " = %1 %2":       ifequal(%2,"default",strcpy(@val,""),strcpy(@val,map(@fkt_idle_map,%2)));ifempty(@val,strcpy(@tmp,""),sprintf(@tmp,"['%s']='%s'",map(@key_map,%1),@val));listcat(@keydef_idle,@tmp);
+KEY_KEY_ASSIGNMENT_DIAL " = %1 %2":       ifequal(%2,"default",strcpy(@val,""),strcpy(@val,map(@fkt_dial_map,%2)));ifempty(@val,strcpy(@tmp,""),sprintf(@tmp,"['%s']='%s'",map(@key_map,%1),@val));listcat(@keydef_dial,@tmp);
+KEY_KEY_ASSIGNMENT_ALERT " = %1 %2":      ifequal(%2,"default",strcpy(@val,""),strcpy(@val,map(@fkt_alert_map,%2)));ifempty(@val,strcpy(@tmp,""),sprintf(@tmp,"['%s']='%s'",map(@key_map,%1),@val));listcat(@keydef_alert,@tmp);
+KEY_KEY_ASSIGNMENT_ACTIVE " = %1 %2":     ifequal(%2,"default",strcpy(@val,""),strcpy(@val,map(@fkt_active_map,%2)));ifempty(@val,strcpy(@tmp,""),sprintf(@tmp,"['%s']='%s'",map(@key_map,%1),@val));listcat(@keydef_active,@tmp);
+KEY_KEY_ASSIGNMENT_ACTIVE_SOS " = %1 %2": ifequal(%2,"default",strcpy(@val,""),strcpy(@val,map(@fkt_active_sos_map,%2)));ifempty(@val,strcpy(@tmp,""),sprintf(@tmp,"['%s']='%s'",map(@key_map,%1),@val));listcat(@keydef_active_sos,@tmp);
+
+KEY_KEY_ASSIGNMENT_IDLE_MASTER " = %1 %2":       ifequal(%2,"default",strcpy(@val,""),strcpy(@val,map(@fkt_idle_map,%2)));ifempty(@val,strcpy(@tmp,""),sprintf(@tmp,"['%s']='%s'",map(@key_map,%1),@val));listcat(@keydef_idle_master,@tmp);
+KEY_KEY_ASSIGNMENT_DIAL_MASTER " = %1 %2":       ifequal(%2,"default",strcpy(@val,""),strcpy(@val,map(@fkt_dial_map,%2)));ifempty(@val,strcpy(@tmp,""),sprintf(@tmp,"['%s']='%s'",map(@key_map,%1),@val));listcat(@keydef_dial_master,@tmp);
+KEY_KEY_ASSIGNMENT_ALERT_MASTER " = %1 %2":      ifequal(%2,"default",strcpy(@val,""),strcpy(@val,map(@fkt_alert_map,%2)));ifempty(@val,strcpy(@tmp,""),sprintf(@tmp,"['%s']='%s'",map(@key_map,%1),@val));listcat(@keydef_alert_master,@tmp);
+KEY_KEY_ASSIGNMENT_ACTIVE_MASTER " = %1 %2":     ifequal(%2,"default",strcpy(@val,""),strcpy(@val,map(@fkt_active_map,%2)));ifempty(@val,strcpy(@tmp,""),sprintf(@tmp,"['%s']='%s'",map(@key_map,%1),@val));listcat(@keydef_active_master,@tmp);
+KEY_KEY_ASSIGNMENT_ACTIVE_SOS_MASTER " = %1 %2": ifequal(%2,"default",strcpy(@val,""),strcpy(@val,map(@fkt_active_sos_map,%2)));ifempty(@val,strcpy(@tmp,""),sprintf(@tmp,"['%s']='%s'",map(@key_map,%1),@val));listcat(@keydef_active_sos_master,@tmp);
+
+KEY_VLIST_NAME " = %0 %1":       ifequal(map(@vlist_index_map,%0,"0"),"1",sprintf(@val,"@vlst_na%s",%0),strcpy(@val,"")); ifempty(@val,strcpy(@tmp,""),sprintf(*@val,"na='%s'",str2utf8(%1)));
+KEY_VLIST_SHORTNAME " = %0 %1":  ifequal(map(@vlist_index_map,%0,"0"),"1",sprintf(@val,"@vlst_sna%s",%0),strcpy(@val,"")); ifempty(@val,strcpy(@tmp,""),sprintf(*@val,"sna='%s'",str2utf8(%1)));
+KEY_VLIST_SUBITEMS " = %0 %1":   ifequal(map(@vlist_index_map,%0,"0"),"1",sprintf(@val,"@vlst_sitem%s",%0),strcpy(@val,"")); ifempty(@val,strcpy(@tmp,""),sprintf(*@val,"subitem=%s",map(@boolean_map,%1,"0")));
+KEY_VLIST_ICONS " = %0 %1":      ifequal(map(@vlist_index_map,%0,"0"),"1",sprintf(@val,"@vlst_icons%s",%0),strcpy(@val,"")); ifempty(@val,strcpy(@tmp,""),sprintf(*@val,"icons=%s",map(@bool_map,%1,"0")));
+
+KEY_VLIST_ENTRY " = %0 %1 %2 %3 %4 %5 %6 %7": \
+  strcpy(@val,""); \
+  ifempty(%2,strcpy(@tmp,""),sprintf(@tmp,"no='%s'",str2utf8(%2))); listcat(@val,@tmp); \
+  ifempty(%3,strcpy(@tmp,""),sprintf(@tmp,"na='%s'",str2utf8(%3))); listcat(@val,@tmp); \
+  ifempty(map(@fkt_vlist_map,%4),strcpy(@tmp,""),sprintf(@tmp,"id='%s'",map(@fkt_vlist_map,%4))); listcat(@val,@tmp); \
+  ifempty(%5,strcpy(@tmp,""),sprintf(@tmp,"sna='%s'",str2utf8(%5))); listcat(@val,@tmp); \
+  ifempty(map(@boolean_map,%6),strcpy(@tmp,""),sprintf(@tmp,"spk=%s",map(@boolean_map,%6,"0"))); listcat(@val,@tmp); \
+  ifempty(%7,strcpy(@tmp,""),sprintf(@tmp,"visible={%s,%s,%s,%s}",map(@vlist_visible_map,substr(%7,"0","1"),"nil"),map(@vlist_visible_map,substr(%7,"1","1"),"nil"),map(@vlist_visible_map,substr(%7,"2","1"),"nil"),map(@vlist_visible_map,substr(%7,"3","1"),"nil"))); listcat(@val,@tmp); \
+  ifequal(map(@vlist_item_index_map,%1,"0"),"1",sprintf(@tmp,"[%s]={%s}",%1,@val),strcpy(@tmp,"")); \
+  ifequal(map(@vlist_index_map,%0,"0"),"1",sprintf(@val,"@vlst%s",%0),strcpy(@val,"")); ifempty(@val,strcpy(@tmp,""),listcat(*@val,@tmp));
+
+// FOR TEST:
+// "band = %1 %2 %3 %4 %5": sprintf(@configuration_name, "band(%s,%s,%s,%s,%s)=%s", %1, %2, %3, %4, %5, band(%1,%2,%3,%4,%5));
+// "bor = %1 %2 %3 %4 %5":  sprintf(@configuration_name, "bor(%s,%s,%s,%s,%s)=%s", %1, %2, %3, %4, %5, bor(%1,%2,%3,%4,%5));
+// "add = %1 %2 %3 %4 %5":  sprintf(@configuration_name, "add(%s,%s,%s,%s,%s)=%s", %1, %2, %3, %4, %5, add(%1,%2,%3,%4,%5));
+// "sub = %1 %2 %3 %4 %5":  sprintf(@configuration_name, "sub(%s,%s,%s,%s,%s)=%s", %1, %2, %3, %4, %5, sub(%1,%2,%3,%4,%5));
+// "mul = %1 %2 %3 %4 %5":  sprintf(@configuration_name, "mul(%s,%s,%s,%s,%s)=%s", %1, %2, %3, %4, %5, mul(%1,%2,%3,%4,%5));
+// "div = %1 %2 %3 %4 %5":  sprintf(@configuration_name, "div(%s,%s,%s,%s,%s)=%s", %1, %2, %3, %4, %5, div(%1,%2,%3,%4,%5));
+// "max = %1 %2 %3 %4 %5":  sprintf(@configuration_name, "max(%s,%s,%s,%s,%s)=%s", %1, %2, %3, %4, %5, max(%1,%2,%3,%4,%5));
+// "min = %1 %2 %3 %4 %5":  sprintf(@configuration_name, "min(%s,%s,%s,%s,%s)=%s", %1, %2, %3, %4, %5, min(%1,%2,%3,%4,%5));
+// "substr = %1":           sprintf(@configuration_name, "substr(%s,1,2)=%s", %1, substr(%1,"1","2"));
+// "xxx = %1":              strcpy(@val,"@configuration_name"); strcpy(@tmp,"test %s"); sprintf(*@val,@tmp,%1);
+</inopts>
+
+<out>
+// functions: listcat(), listcompr(), strcpy(), strcat(), strquote(), str2utf8(), printf(), sprintf(), map(), ifempty(), ifequal(),
+//            band(), bor(), add(), sub(), mul(), div(), max(), min(), substr()
+
+listcompr(@setting_msg_vol);
+listcompr(@setting_msg_mel);
+listcompr(@setting_vol);
+listcompr(@setting_mel);
+listcompr(@setting_ring);
+listcompr(@setting_tone);
+listcompr(@setting_audio);
+listcompr(@setting_usb);
+listcompr(@setting_dial);
+listcompr(@setting_dial_code);
+listcompr(@setting_disp);
+listcompr(@setting_light);
+listcompr(@setting_light_keyopt);
+listcompr(@setting_light_msg);
+listcompr(@setting_led);
+listcompr(@setting_listmode);
+listcompr(@setting_mode);
+listcompr(@setting_lock);
+listcompr(@setting_lock_key);
+listcompr(@setting_sos);
+listcompr(@setting_sosmd);
+listcompr(@setting_sosmd_mode);
+listcompr(@setting_sosmd_sense);
+listcompr(@setting_sosmd_nomo);
+listcompr(@setting_sosmd_delay);
+listcompr(@setting_sosmd_t);
+listcompr(@setting_time_format);
+
+listcompr(@mninvis, "1"); // boolean: only keep keys with value "1"
+listcompr(@mnlock, "1"); // boolean: only keep keys with value "1"
+listcompr(@mngray, "1"); // boolean: only keep keys with value "1"
+listcompr(@mnprot, "1"); // boolean: only keep keys with value "1"
+listcompr(@mnadmin, "1"); // boolean: only keep keys with value "1"
+listcompr(@mnpin);
+
+listcompr(@keydef_idle);
+listcompr(@keydef_dial);
+listcompr(@keydef_alert);
+listcompr(@keydef_active);
+listcompr(@keydef_active_sos);
+
+listcompr(@keydef_idle_master);
+listcompr(@keydef_dial_master);
+listcompr(@keydef_alert_master);
+listcompr(@keydef_active_master);
+listcompr(@keydef_active_sos_master);
+
+
+printf("return{\n");
+printf("version=500,\n");
+printf("verc='%s',\n", @@verc); // buildin-variable
+printf("versys='%s',\n", @configuration_name);
+
+printf("setting={\n");
+printf("vrst=50,vset=50");
+
+strcpy(@val,"");
+ifempty(@setting_msg_mel,strcpy(@tmp,""),sprintf(@tmp,"mel={%s}", @setting_msg_mel)); listcat(@val,@tmp);
+ifempty(@setting_msg_vol,strcpy(@tmp,""),sprintf(@tmp,"vol={%s}", @setting_msg_vol)); listcat(@val,@tmp);
+ifempty(@setting_msg_ovwr,strcpy(@tmp,""),sprintf(@tmp,"ovwr=%s", @setting_msg_ovwr)); listcat(@val,@tmp);
+printf(",\nmsg={%s}", @val);
+
+printf(",\nmel={%s}", @setting_mel);
+printf(",\nvol={%s}", @setting_vol);
+printf(",\nring={%s}", @setting_ring);
+printf(",\ntone={%s}", @setting_tone);
+
+strcpy(@val,@setting_audio);
+ifempty(@setting_audio_spk,strcpy(@tmp,""),sprintf(@tmp,"spk={%s}", @setting_audio_spk)); listcat(@val,@tmp);
+printf(",\naudio={%s}", @val);
+
+printf(",\nusb={%s}", @setting_usb);
+
+strcpy(@val,@setting_dial_code);
+ifempty(@setting_dial_code_sys,strcpy(@tmp,""),sprintf(@tmp,"sys='%s'", @setting_dial_code_sys)); listcat(@val,@tmp);
+ifempty(@setting_dial_code_int,strcpy(@tmp,""),sprintf(@tmp,"int='%s'", @setting_dial_code_int)); listcat(@val,@tmp);
+ifempty(@setting_dial_code_nat,strcpy(@tmp,""),sprintf(@tmp,"nat='%s'", @setting_dial_code_nat)); listcat(@val,@tmp);
+ifempty(@setting_dial_code_area,strcpy(@tmp,""),sprintf(@tmp,"area='%s'", @setting_dial_code_area)); listcat(@val,@tmp);
+ifempty(@val,strcpy(@tmp,""),sprintf(@tmp,"code={%s}", @val));
+listcat(@setting_dial,@tmp);
+printf(",\ndial={%s}", @setting_dial);
+
+printf(",\ndisp={%s}", @setting_disp);
+
+strcpy(@val,@setting_light);
+ifempty(@setting_light_keyopt,strcpy(@tmp,""),sprintf(@tmp,"keyopt={%s}", @setting_light_keyopt)); listcat(@val,@tmp);
+ifempty(@setting_light_msg,strcpy(@tmp,""),sprintf(@tmp,"msg={%s}", @setting_light_msg)); listcat(@val,@tmp);
+printf(",\nlight={%s}", @val);
+
+printf(",\nled={%s}", @setting_led);
+printf(",\nlist_mode={%s}", @setting_listmode);
+printf(",\nmode={%s}", @setting_mode);
+
+strcpy(@val,"");
+ifempty(@setting_lock_key,strcpy(@tmp,""),sprintf(@tmp,"key={%s}", @setting_lock_key)); listcat(@val,@tmp);
+listcat(@val,@setting_lock);
+printf(",\nlock={%s}", @val);
+
+printf(",\nsos={%s}", @setting_sos);
+
+printf(",\ntime_format={%s}", @setting_time_format);
+
+strcpy(@val,@setting_sosmd);
+ifempty(@setting_sosmd_mode,strcpy(@tmp,""),sprintf(@tmp,"mode={%s}", @setting_sosmd_mode)); listcat(@val,@tmp);
+ifempty(@setting_sosmd_sense,strcpy(@tmp,""),sprintf(@tmp,"sense={%s}", @setting_sosmd_sense)); listcat(@val,@tmp);
+ifempty(@setting_sosmd_nomo,strcpy(@tmp,""),sprintf(@tmp,"nomo={%s}", @setting_sosmd_nomo)); listcat(@val,@tmp);
+ifempty(@setting_sosmd_delay,strcpy(@tmp,""),sprintf(@tmp,"delay={%s}", @setting_sosmd_delay)); listcat(@val,@tmp);
+ifempty(@setting_sosmd_t,strcpy(@tmp,""),sprintf(@tmp,"t={%s}", @setting_sosmd_t)); listcat(@val,@tmp);
+printf(",\nsos_md={%s}", @val);
+
+printf("\n}");
+
+printf(",\nmninvis={%s}", @mninvis);
+printf(",\nmnlock={%s}", @mnlock);
+printf(",\nmngray={%s}", @mngray);
+printf(",\nmnprot={%s}", @mnprot);
+printf(",\nmnadmin={%s}", @mnadmin);
+printf(",\nmnpin={%s}", @mnpin);
+
+strcpy(@val,"");
+ifempty(@keydef_idle,strcpy(@tmp,""),sprintf(@tmp,"['idle']={%s}", @keydef_idle)); listcat(@val,@tmp);
+ifempty(@keydef_dial,strcpy(@tmp,""),sprintf(@tmp,"['dial']={%s}", @keydef_dial)); listcat(@val,@tmp);
+ifempty(@keydef_alert,strcpy(@tmp,""),sprintf(@tmp,"['alert']={%s}", @keydef_alert)); listcat(@val,@tmp);
+ifempty(@keydef_active,strcpy(@tmp,""),sprintf(@tmp,"['active']={%s}", @keydef_active)); listcat(@val,@tmp);
+ifempty(@keydef_active_sos,strcpy(@tmp,""),sprintf(@tmp,"['active_sos']={%s}", @keydef_active_sos)); listcat(@val,@tmp);
+printf(",\nkeydef={%s}", @val);
+
+strcpy(@val,"");
+ifempty(@keydef_idle_master,strcpy(@tmp,""),sprintf(@tmp,"['idle']={%s}", @keydef_idle_master)); listcat(@val,@tmp);
+ifempty(@keydef_dial_master,strcpy(@tmp,""),sprintf(@tmp,"['dial']={%s}", @keydef_dial_master)); listcat(@val,@tmp);
+ifempty(@keydef_alert_master,strcpy(@tmp,""),sprintf(@tmp,"['alert']={%s}", @keydef_alert_master)); listcat(@val,@tmp);
+ifempty(@keydef_active_master,strcpy(@tmp,""),sprintf(@tmp,"['active']={%s}", @keydef_active_master)); listcat(@val,@tmp);
+ifempty(@keydef_active_sos_master,strcpy(@tmp,""),sprintf(@tmp,"['active_sos']={%s}", @keydef_active_sos_master)); listcat(@val,@tmp);
+printf(",\nkeymaster={%s}", @val);
+
+strcpy(@val,"");
+strcpy(@tmp,@vlst_na1); listcat(@tmp,@vlst_sna1); listcat(@tmp,@vlst_sitem1); listcat(@tmp,@vlst_icons1); listcat(@tmp,@vlst1);
+ifempty(@tmp,strcpy(@vlst1,""),sprintf(@vlst1,"[1]={%s}", @tmp)); listcat(@val,@vlst1,",\n");
+strcpy(@tmp,@vlst_na2); listcat(@tmp,@vlst_sna2); listcat(@tmp,@vlst_sitem2); listcat(@tmp,@vlst_icons2); listcat(@tmp,@vlst2);
+ifempty(@tmp,strcpy(@vlst2,""),sprintf(@vlst2,"[2]={%s}", @tmp)); listcat(@val,@vlst2,",\n");
+strcpy(@tmp,@vlst_na3); listcat(@tmp,@vlst_sna3); listcat(@tmp,@vlst_sitem3); listcat(@tmp,@vlst_icons3); listcat(@tmp,@vlst3);
+ifempty(@tmp,strcpy(@vlst3,""),sprintf(@vlst3,"[3]={%s}", @tmp)); listcat(@val,@vlst3,",\n");
+strcpy(@tmp,@vlst_na4); listcat(@tmp,@vlst_sna4); listcat(@tmp,@vlst_sitem4); listcat(@tmp,@vlst_icons4); listcat(@tmp,@vlst4);
+ifempty(@tmp,strcpy(@vlst4,""),sprintf(@vlst4,"[4]={%s}", @tmp)); listcat(@val,@vlst4,",\n");
+strcpy(@tmp,@vlst_na5); listcat(@tmp,@vlst_sna5); listcat(@tmp,@vlst_sitem5); listcat(@tmp,@vlst_icons5); listcat(@tmp,@vlst5);
+ifempty(@tmp,strcpy(@vlst5,""),sprintf(@vlst5,"[5]={%s}", @tmp)); listcat(@val,@vlst5,",\n");
+printf(",\nvlst={\n%s\n}", @val);
+
+printf("\n}\n");
+
+</out>

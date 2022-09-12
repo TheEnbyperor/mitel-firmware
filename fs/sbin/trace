@@ -1,0 +1,117 @@
+#!/bin/sh
+#
+# shell script for changing priorities of processes involved 
+# in tracing applications
+#
+# usage: trace [ on | off ]
+#
+#
+
+change_prio_by_pid () {
+
+   PRIO=$1;
+   shift;
+   
+   for pid in $@
+   do
+      chrt -p -f $PRIO $pid
+   done
+
+}
+
+
+trace_on () {
+
+   local PRIO=98
+
+   # change prio of calling shell
+   chrt -p -f $PRIO $PPID
+   
+   # change prio of usersh
+   pids=`pidof usersh`
+   if [ $? -eq 0 ]; then
+      change_prio_by_pid $PRIO $pids
+   fi
+
+   # change prio of telnetd
+   pids=`pidof telnetd`
+   if [ $? -eq 0 ]; then
+      change_prio_by_pid $PRIO $pids
+   fi
+   
+   # change prio of dropbear
+   pids=`pidof dropbear`
+   if [ $? -eq 0 ]; then
+      change_prio_by_pid $PRIO $pids
+   fi
+   
+   # change prio of syslogd
+   pids=`pidof syslogd`
+   if [ $? -eq 0 ]; then
+      change_prio_by_pid $PRIO $pids
+   fi
+      
+}
+
+
+trace_off () {
+
+   local PRIO=1
+
+   # change prio of calling shell
+   chrt -p -f $PRIO $PPID 
+
+   # change prio of usersh
+   pids=`pidof usersh`
+   if [ $? -eq 0 ]; then
+      change_prio_by_pid $PRIO $pids
+   fi
+
+   # change prio of telnetd
+   pids=`pidof telnetd`
+   if [ $? -eq 0 ]; then
+      change_prio_by_pid $PRIO $pids
+   fi
+   
+   # change prio of dropbear
+   pids=`pidof dropbear`
+   if [ $? -eq 0 ]; then
+      change_prio_by_pid $PRIO $pids
+   fi
+   
+   # change prio of syslogd
+   pids=`pidof syslogd`
+   if [ $? -eq 0 ]; then
+      change_prio_by_pid $PRIO $pids
+   fi
+      
+}
+
+
+if [ "$#" -ne 1 ]; then
+
+   echo $"Usage: $0 {on|off}"
+
+   exit 1
+fi
+
+
+#
+# do it
+#
+
+ case "$1" in
+   on)
+      trace_on
+   ;;
+   off)
+      trace_off
+   ;;
+   *)
+     echo $"Usage: $0 {on|off}"
+     exit 1
+ esac
+
+ 
+
+

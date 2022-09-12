@@ -1,0 +1,107 @@
+#!/bin/sh
+#
+#
+
+. /etc/rc.functions
+
+		if [ -d /media/usbStick/core ]; then
+			
+			CoreFileSrvUrl=file:///media/usbStick/core
+			
+      elif [ -f /var/run/ip_rfp/CoreFileSrvUrl ]; then
+      	
+          CoreFileSrvUrl=`cat /var/run/ip_rfp/CoreFileSrvUrl`
+      	
+      elif [ -z ${OM_CoreFileSrvUrl} ]; then
+      
+          if [ -z ${OM_CoreFileSrv} ]; then
+             if [ ! -z ${OM_TftpServerIpAddress} ]; then
+                OM_CoreFileSrv=${OM_TftpServerIpAddress}
+             fi
+          fi
+    
+          if [ -z "${OM_CoreFilePath}" ]; then
+             if [ ! -z "${OM_TftpServerBootImage}" ]; then
+                OM_CoreFilePath=`dirname "${OM_TftpServerBootImage}"`
+             fi
+          fi
+          
+          CoreFileSrvUrl=tftp://${OM_CoreFileSrv}/${OM_CoreFilePath}
+      
+      else
+          CoreFileSrvUrl=${OM_CoreFileSrvUrl}
+      fi
+
+################################################################################
+# find core files (but not in /proc) ant send them away 
+################################################################################
+
+   if [ -f /proc/sys/kernel/core_pattern ]; then
+    core_dir=/tmp/core
+   else
+    core_dir=/
+   fi
+
+   for core in `find ${core_dir} -type f -name core\* 2>/dev/null | grep -v "^/proc" | grep -v "^/tmp/coreUpload"`
+   do
+   
+      logger -s -t $0 -p user.emerg "found corefile: $core"
+      
+      count=0
+      while true
+      do
+         LSSTART=`ls -ls $core`
+         sleep 6
+         let count=count+6
+         LSNOW=`ls -ls $core`
+         if [ "$LSSTART" == "$LSNOW" ]
+         then
+            logger -s -t $0 -p user.emerg "found corefile: $core (not growing anymore ($count secs))"
+            break;
+         fi
+         if [ $count -ge 120 ]
+         then
+            logger -s -t $0 -p user.emerg "found corefile: $core (still growing ($count secs timeout))"
+            break;
+         else
+            logger -s -t $0 -p user.emerg "found corefile: $core (still growing ($count secs))"
+         fi
+      done
+      
+      mkdir -p /tmp/coreUpload/
+      local_core=/tmp/coreUpload/`basename ${core}`
+      mv ${core} ${local_core}
+      
+      if [ ! -z "${OM_RfpIpAddress}" -a ! -f /proc/sys/kernel/core_pattern ]; then
+         remote_core=`basename ${local_core}`_"${OM_RfpIpAddress}"
+      else
+         remote_core=`basename ${local_core}`
+      fi
+      
+      if [ "x${OM_CoreDumping}" == "x0" ]; then
+         
+         logger -s -t $0 -p user.emerg "transferring core files disabled"
+         
+         rm -rf ${local_core}
+         
+      elif [ ! -z "${CoreFileSrvUrl}" -a ! -z "${remote_core}" ]; then
+      
+         logger -s -t $0 -p user.emerg "transferring ${local_core} to ${CoreFileSrvUrl}/${remote_core}"
+         ipc "FTS PUT ${local_core} ${CoreFileSrvUrl}/${remote_core} REMOVE"
+      
+      else
+         
+         logger -s -t $0 -p user.emerg "don't know where to send core file"
+         
+         rm -rf ${local_core}
+                        
+      fi
+
+   
+   done
+   
+exit 0
+
+#
+# end of file
+################################################################################

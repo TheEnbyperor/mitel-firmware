@@ -1,0 +1,116 @@
+#!/bin/sh
+#
+# B20network: configure interface
+#
+. /etc/rc.functions
+
+#
+#
+IFCONFIGFILE=/tmp/ifconfig.params
+IFCONFIGFILE2=/tmp/ifconfig2.params
+touch $IFCONFIGFILE
+touch $IFCONFIGFILE2
+
+ROUTERFILE=/tmp/router.params
+touch $ROUTERFILE
+
+case "$1" in
+
+    config)
+    
+        OLDIFCONFIG=`cat $IFCONFIGFILE`
+        OLDIFCONFIG2=`cat $IFCONFIGFILE2`
+        
+        idx=`expr index "${OM_RfpIpAddress}" .`
+ 
+        if [ "${idx}" != 0 ]; then
+          if [ ! -z "${OM_RfpIpBroadcast}" ]; then
+        IFCONFIG="/sbin/ifconfig ${OM_RfpInterface} ${OM_RfpIpAddress} broadcast ${OM_RfpIpBroadCast} netmask ${OM_RfpIpNetMask}"
+          else
+            IFCONFIG="/sbin/ifconfig ${OM_RfpInterface} ${OM_RfpIpAddress} netmask ${OM_RfpIpNetMask}"
+          fi
+        else
+          IFCONFIG="/sbin/ifconfig ${OM_RfpInterface} ${OM_RfpIpAddress}"
+        fi
+
+        if [ ! -z "${OM_RfpIpAddress2}" ]; then
+          idx=`expr index "${OM_RfpIpAddress2}" .`
+          if [ "${idx}" != 0 ]; then
+            if [ ! -z "${OM_RfpIpBroadcast}" ]; then
+              IFCONFIG2="/sbin/ifconfig ${OM_RfpInterface} ${OM_RfpIpAddress2} broadcast ${OM_RfpIpBroadCast} netmask ${OM_RfpIpNetMask}"
+            else
+              IFCONFIG2="/sbin/ifconfig ${OM_RfpInterface} ${OM_RfpIpAddress2} netmask ${OM_RfpIpNetMask}"
+            fi
+          else
+            IFCONFIG2="/sbin/ifconfig ${OM_RfpInterface} ${OM_RfpIpAddress2}"
+          fi
+        fi
+        
+        OLDROUTER=`cat $ROUTERFILE`
+        
+        ROUTER="${OM_RfpRouterIpList}"
+        
+        if [ "$IFCONFIG" != "$OLDIFCONFIG" ]; then
+            $IFCONFIG > /dev/null 2>&1
+            if [ "$?" != 0 ]; then
+               logger -p user.emerg -s -t $0 "failed to configure interface ${OM_RfpInterface}: ${OM_RfpIpAddress} ${OM_RfpIpBroadCast} ${OM_RfpIpNetMask}"
+               rm -f $IFCONFIGFILE
+            else
+               logger -p user.notice -s -t $0 "configured interface ${OM_RfpInterface}: ${OM_RfpIpAddress} ${OM_RfpIpBroadCast} ${OM_RfpIpNetMask}"        
+               # routes are automatically deleted when we run ifconfig
+               DOROUTE=yes
+               echo "$IFCONFIG" > $IFCONFIGFILE
+            fi
+        fi
+            
+        if [ "$IFCONFIG2" != "$OLDIFCONFIG2" ]; then
+            $IFCONFIG2 > /dev/null 2>&1
+            if [ "$?" != 0 ]; then
+               logger -p user.emerg -s -t $0 "failed to configure interface ${OM_RfpInterface}: ${OM_RfpIpAddress2} ${OM_RfpIpBroadCast} ${OM_RfpIpNetMask}"
+               rm -f $IFCONFIGFILE2
+            else
+               logger -p user.notice -s -t $0 "configured interface ${OM_RfpInterface}: ${OM_RfpIpAddress2} ${OM_RfpIpBroadCast} ${OM_RfpIpNetMask}"        
+               # routes are automatically deleted when we run ifconfig
+               DOROUTE=yes
+               echo "$IFCONFIG2" > $IFCONFIGFILE2
+            fi
+        fi
+    
+        if [ "$ROUTER" != "$OLDROUTER" -o -n "$DOROUTE" ]; then
+            while /sbin/route del default gw 0.0.0.0 dev ${OM_RfpInterface} > /dev/null 2>&1
+            do :
+               logger -p user.notice -s -t $0 "deleted default gateway"
+            done
+            for i in $ROUTER
+            do
+                /sbin/route add default gw $i dev ${OM_RfpInterface} > /dev/null 2>&1
+                if [ "$?" != 0 ]; then
+                   logger -p user.emerg -s -t $0 "failed to add default gateway $i: check IP configuration"
+                else
+                   logger -p user.notice -s -t $0 "added default gateway $i"
+                fi
+            done
+            echo "$ROUTER" > $ROUTERFILE
+        fi
+
+    ;;
+    
+    deconfig)
+
+       logger -p user.notice -s -t $0 "deconfiguring the ip interface"
+       sleep 1 
+       /sbin/ifconfig ${OM_RfpInterface} 0.0.0.0
+       rm -f $IFCONFIGFILE
+       rm -f $IFCONFIGFILE2
+
+    ;;
+    
+    *)
+       logger -p user.notice -s -t $0 "unknown parameter $1"
+       exit 1
+       
+    ;;
+    
+esac
+
+exit 0

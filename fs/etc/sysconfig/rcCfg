@@ -1,0 +1,340 @@
+#!/bin/sh
+#
+# rcCfg
+# translates and stored variables from DHCPC and OMCFG to a file and informs
+# RFPM about the configuration
+#
+. /etc/rc.functions
+
+#
+# local vars
+#
+DHCP_CHECK_VLAN_USAGE_DONE=/tmp/dhcp_check_vlan_usage_done
+
+#
+# local functions
+#
+save_env () {
+   if [ $# -eq 2 ]; then
+      echo ${1}=${2} >> ${SAFE_FILE}
+   fi
+}
+
+#
+# code
+#
+
+case "$1" in
+
+    config)
+    
+        if [ "$DrivenBy" == "OMCFG" ]; then
+            ipc "OMCFG CONFIG"
+        elif [ "$DrivenBy" == "DHCP" ]; then
+            ipc "DHCP CONFIG"
+        fi
+    
+    ################################################################################
+    ### VLAN CONFIGURATION
+    ################################################################################
+        if [ "$DrivenBy" == "DHCP" ] && [ ! -f ${DHCP_CHECK_VLAN_USAGE_DONE} ]; then
+        
+            touch ${DHCP_CHECK_VLAN_USAGE_DONE}
+            
+            if [ -n ${vlanid} ] && expr ${vlanid} + 1 - 1 > /dev/null 2>&1 && [ ${vlanid} -ge 1 ] && [ ${vlanid} -le 4094 ]; then
+                VLANID=${vlanid}
+            elif [ -n ${vlanid2} ] && expr ${vlanid2} + 1 - 1 > /dev/null 2>&1 && [ ${vlanid2} -ge 1 ] && [ ${vlanid2} -le 4094 ]; then
+                VLANID=${vlanid2}
+            else
+                VLANID=no
+            fi
+            
+            if [ $VLANID != "no" ]; then
+            
+                ipc "DHCP STOP"
+                
+                ipc "OMCFG STOP"
+                
+                ipc "SYS INTERFACE MRPROPER"
+                
+                ipc "SYS INTERFACE SETUP VLAN $VLANID"
+                
+                ipc "OMCFG START"
+            
+                exit 0
+            fi
+        
+        fi
+    
+    ################################################################################
+    ### BASE_CONFIGURATION
+    ################################################################################
+    
+        rm -f ${RFPM_NET_CFG_FILE}.tmp
+        touch ${RFPM_NET_CFG_FILE}.tmp
+        SAFE_FILE=${RFPM_NET_CFG_FILE}.tmp
+        
+        save_env OM_RfpDrivenBy                "${DrivenBy}"
+        
+        save_env OM_RfpInterface               "${interface}"
+        
+        ################################################
+        # Split $ip into 2 single adresse
+        # $ip may be for example "10.103.111.111 ::1223"
+        set -f; IFS=' '
+        set -- $ip
+        firstAddr=$1; secondAddr=$2
+        set +f; unset IFS
+        
+        save_env OM_RfpIpAddress               "${firstAddr}"
+        save_env OM_RfpIpAddress2              "${secondAddr}"
+        save_env OM_RfpIpNetMask               "${subnet}"
+        save_env OM_RfpIpBroadCast             "${broadcast}"
+        
+        save_env OM_RfpRouterIpList            "${router}"
+        
+        save_env OM_RfpDnsServerIpList         "${dns}"
+        save_env OM_RfpDnsDomain               "${domain}"
+        
+       
+        om_filelock ${RFPM_NET_CFG_FILE} 1
+       
+        diff ${RFPM_NET_CFG_FILE}.tmp ${RFPM_NET_CFG_FILE} >/dev/null 2>&1
+        if [ $? -ne 0 ]; then
+            
+            mv -f ${RFPM_NET_CFG_FILE}.tmp ${RFPM_NET_CFG_FILE}
+                
+        else
+        
+            rm ${RFPM_NET_CFG_FILE}.tmp
+            
+        fi
+        
+        om_filelock ${RFPM_NET_CFG_FILE} 0
+        
+        ipc "IND_NEW_BASE_CFG"
+        
+    ################################################################################
+    ### APPLICATION CONFIGURATION
+    ################################################################################
+    
+        rm -f ${RFPM_APP_CFG_FILE}.tmp
+        touch ${RFPM_APP_CFG_FILE}.tmp
+        SAFE_FILE=${RFPM_APP_CFG_FILE}.tmp
+        
+        save_env OM_RfpDrivenBy                "${DrivenBy}"
+        
+        if [ -n "${siaddr}" ] && [ "${siaddr}" != "0.0.0.0" ]; then
+        save_env OM_TftpServerIpAddress        "${siaddr}"
+        fi
+        save_env OM_TftpServerIpList           "${srvlist}"
+        if [ -n "${boot_file}" ] && [ "${boot_file}" != "none" ]; then
+        save_env OM_TftpServerBootImage        "${boot_file}"
+        fi
+        
+        if [ "${DrivenBy}" == "OMCFG" ]; then
+        # preferred TFTP server
+          val=`local_db_check prefsrv`
+          if [ $? -eq 0 ]; then
+             if [ "x${val}" = "x1" ]; then
+                save_env  OM_TftpServerPreferred     1
+             fi 
+          fi
+        fi
+        
+        if [ "${DrivenBy}" == "DHCP" ]; then
+            save_env OM_DhcpLease                  "${lease}"
+        elif [ "$DrivenBy" == "OMCFG" ]; then
+        		if [ -n "${tftp}" ]; then
+        			cfgurl233rfpm=${tftp}
+        			unset tftp
+        		fi
+        fi
+        
+        # Provisioning URL mode
+        if [ "${provurlmode236}" == "1" ] || [ "${provurlmode236}" == "2" ]; then
+          save_env OM_ProvUrlMode236              "${provurlmode236}"
+        else
+          save_env OM_ProvUrlMode236              ""
+        fi
+
+        # RFPM configuration files
+        if [ -n "${cfgurl233rfpm}" ] && \
+                  echo "${cfgurl233rfpm}" | grep -e "^ftp://" -e "^ftps://"  \
+                                             -e "^http://" -e "^https://"  \
+                                             -e "^sftp://" -e "^scp://"  \
+                                             -e "^tftp://" > /dev/null 2>&1; then
+          save_env OM_ConfigUrlOption233Rfpm                 "${cfgurl233rfpm}"
+        else
+          save_env OM_ConfigUrlOption233Rfpm                 ""
+        fi
+        
+        if [ -n "${cfgurl43rfpm}" ] && \
+                  echo "${cfgurl43rfpm}" | grep -e "^ftp://" -e "^ftps://"  \
+                                             -e "^http://" -e "^https://"  \
+                                             -e "^sftp://" -e "^scp://"  \
+                                             -e "^tftp://" > /dev/null 2>&1; then
+          save_env OM_ConfigUrlOption43Rfpm                 "${cfgurl43rfpm}"
+        else
+          save_env OM_ConfigUrlOption43Rfpm                 ""
+        fi
+          
+        # Provider provisioning
+        if [ -n "${tftp}" ] && \
+                echo "${tftp}" | grep -e "^ftp://"  -e "^ftps://"  \
+                                      -e "^http://" -e "^https://" \
+                                      -e "^sftp://"  -e "^scp://"  \
+                                      -e "^tftp://" > /dev/null 2>&1; then
+          save_env OM_ConfigUrlOption66                  "${tftp}"
+        else
+          save_env OM_ConfigUrlOption66                  ""
+        fi
+        
+        if [ -n "${cfgurl43}" ] && \
+                echo "${cfgurl43}" | grep -e "^ftp://"  -e "^ftps://"  \
+                                         -e "^http://" -e "^https://" \
+                                         -e "^sftp://"  -e "^scp://"  \
+                                         -e "^tftp://" > /dev/null 2>&1; then
+          save_env OM_ConfigUrlOption43                  "${cfgurl43}"
+        else
+          save_env OM_ConfigUrlOption43                  ""
+        fi
+          
+        if [ -n "${cfgurl234}" ] && \
+                  echo "${cfgurl234}" | grep -e "^ftp://" -e "^ftps://"  \
+                                           -e "^http://"  -e "^https://"  \
+                                           -e "^sftp://"  -e "^scp://"  \
+                                           -e "^tftp://" > /dev/null 2>&1; then
+          save_env OM_ConfigUrlOption234                 "${cfgurl234}"
+        else
+          save_env OM_ConfigUrlOption234                 ""
+        fi
+        
+        if [ -n "${rcs}" ]; then
+          if [ "${rcs}" == "1" ]; then
+            save_env OM_ContactRcs                 "1"
+          elif [ "${rcs}" == "0" ]; then
+            save_env OM_ContactRcs                 "0"
+          else
+            save_env OM_ContactRcs                 ""
+          fi
+        fi
+        
+        save_env OM_ManagerIpAddress1          "${ommip1}"
+        save_env OM_ManagerIpAddress2          "${ommip2}"
+        save_env OM_ManagerCountry             "${country}"
+        save_env OM_SyslogIpAddress            "${syslgip}"
+        save_env OM_SyslogPort                 "${syslgport}"
+        save_env OM_NtpServerName              "${ntpsrvname}"
+        save_env OM_NtpServerIPAddress         "${ntpsrv}"
+        #        save_env OM_PbxIpAddress               "${pbxip}"
+        #        save_env OM_PbxPort                    "${pbxport}"
+        #        save_env OM_PbxLc1IpAddress            "${pbxlc1}"
+        if [ "${DrivenBy}" == "DHCP" ]; then
+            if [ -n "${magic_str}" ]; then
+              save_env OM_MagicString                "${magic_str}"
+            elif [ -n "${magic_str2}" ]; then
+              save_env OM_MagicString                "${magic_str2}"
+            elif echo ${boot_file} | grep "ng_ip_rfp.cnt" > /dev/null 2>&1; then
+              save_env OM_MagicString                "OpenMobilityOpenCom"
+            fi
+            # #ifdef USE_SUPPLICANT
+        	  if [ -n "${use_802_1x}" ]; then
+              save_env OM_Use_802_1x                "${use_802_1x}"
+            else
+              save_env OM_Use_802_1x                ""
+            fi
+            # #endif    
+        else
+            if [ -n "${stream}" ]; then
+              save_env OM_MagicString                "OpenMobility${stream}"
+            fi
+            # #ifdef USE_SUPPLICANT
+        	  if [ -n "${use_802_1x}" ]; then
+              save_env OM_Use_802_1x                "${use_802_1x}"
+            else
+              save_env OM_Use_802_1x                ""
+            fi
+        	# #endif   
+        fi
+        
+        # tk 15.11.18:
+        # handling of env OM_Use_802_1x should be possible outside if statement
+		# move it here
+        
+        
+        # testmode, local testmode config wins
+        val=`local_db_check testmode`
+        if [ $? -eq 0 ]; then
+          save_env OM_Testmode                   "${val}"
+        else
+          save_env OM_Testmode                   "${testmode}"
+        fi
+        
+        # done here for historical reason
+        #
+        # core file dumping
+        val=`local_db_check core`
+        if [ $? -eq 0 ]; then
+           if [ "x${val}" == "x1" ] || [ "x${val}" == "xyes" ]; then
+              save_env  OM_CoreDumping            1
+           fi 
+        fi
+        val=`local_db_check core_srv`
+        if [ $? -eq 0 ]; then
+           save_env  OM_CoreFileSrv            "${val}" 
+        fi
+        val=`local_db_check core_path`
+        if [ $? -eq 0 ]; then
+           save_env  OM_CoreFilePath           "${val}" 
+        fi
+        
+        om_filelock ${RFPM_APP_CFG_FILE} 1
+    
+        diff ${RFPM_APP_CFG_FILE}.tmp ${RFPM_APP_CFG_FILE} >/dev/null 2>&1
+        if [ $? -ne 0 ]; then
+            
+            mv -f ${RFPM_APP_CFG_FILE}.tmp ${RFPM_APP_CFG_FILE}
+            
+        else
+        
+            rm ${RFPM_APP_CFG_FILE}.tmp
+            
+        fi
+        
+        om_filelock ${RFPM_APP_CFG_FILE} 0
+        
+        ipc "IND_NEW_APP_CFG"
+    ;;
+    
+    deconfig)
+        ipc "DHCP DECONFIG"    
+    ;;
+    
+    leasefail)
+        om_filelock ${RFPM_NET_CFG_FILE} 1
+        rm ${RFPM_NET_CFG_FILE}
+        touch ${RFPM_NET_CFG_FILE}
+        om_filelock ${RFPM_NET_CFG_FILE} 0
+        
+        om_filelock ${RFPM_APP_CFG_FILE} 1
+        rm ${RFPM_APP_CFG_FILE}
+        touch ${RFPM_APP_CFG_FILE}
+        om_filelock ${RFPM_APP_CFG_FILE} 0
+    
+        ipc "DHCP LEASEFAIL"
+    ;;
+
+    *)
+        logger -s -t $0 "$1 unknown"
+        exit 1
+        
+    ;;
+
+esac
+
+exit 0
+
+#
+# END OF FILE
+#

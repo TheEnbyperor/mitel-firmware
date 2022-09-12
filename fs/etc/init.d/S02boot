@@ -1,0 +1,213 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+#
+# basic mounts
+#
+    print_console "mounting kernel filesystems ..."
+    
+    mkdir -p /proc
+    mount -t proc proc /proc -onodev,noexec,nosuid
+    
+    mkdir -p /sys
+    mount -t sysfs sysfs /sys -onodev,noexec,nosuid
+
+    [ -d /sys/kernel/debug ] || mkdir -p /sys/kernel/debug
+    mount -t debugfs debugfs /sys/kernel/debug
+    
+    [ -d /tmp ] || mkdir -p /tmp
+    mount -t tmpfs tmpfs /tmp -omode=1777,nodev,nosuid,size=16m
+
+#
+# modules
+#
+	[ -x /sbin/depmod ] && /sbin/depmod
+
+#
+# alignment errors
+#
+	[ -f /proc/cpu/alignment ] && echo 5 > /proc/cpu/alignment
+
+#
+# scheduler
+#
+	sysctl -we kernel.sched_rt_period_us=100000
+	sysctl -we kernel.sched_rt_runtime_us=97000
+
+#
+# allow high-power devices on the USB interface
+#
+   [ -f /sys/class/gpio/gpio38/value ] && echo 1 > /sys/class/gpio/gpio38/value
+
+
+#
+# create all devices 
+#
+
+if [ -x /sbin/udevd ]; then
+
+    print_console "saving device nodes ..."
+    rm -rf /lib/udev/devices
+    cp -a -f /dev /lib/udev/devices
+    
+    print_console "mounting /dev as tmpfs ..."
+    mount -t tmpfs udev /dev -o mode=0755,size=1m
+
+    print_console "running udevd ..."
+    echo "" > /proc/sys/kernel/hotplug
+    /sbin/udevd --daemon
+    
+    /sbin/udevadm monitor -e >/dev/.udev.log &
+    /sbin/udevadm trigger --subsystem-nomatch=usb
+    /sbin/udevadm settle
+
+fi
+
+#   
+# mount the ubi filesystems
+#
+if [ -f /proc/mtd ]; then
+
+    grep 'ubifs-' /proc/mtd | while read mtd start size name; do 
+        
+        mtddevnr=`echo $mtd | sed -e 's/://g' -e 's/mtd//g'` 
+        ubifsname=`echo $name | sed -e 's/\"//g' -e 's/ubifs\-//g'`
+        
+        print_console "attaching ubidevice ${mtddevnr}"; usleep 400000
+        /startup/ubiattach /dev/ubi_ctrl -m ${mtddevnr} -d ${mtddevnr}
+        
+        print_console "mounting ubivolume ${mtddevnr} on /${ubifsname}"; usleep 400000
+        mkdir -p /${ubifsname}
+        mount -t ubifs ubi${mtddevnr}:${ubifsname} /${ubifsname}
+        if [ $? -ne 0 ]; then
+        
+            print_console "!!! erasing /dev/mtd${mtddevnr}"; usleep 400000
+            /startup/ubidetach /dev/ubi_ctrl -m ${mtddevnr}
+            /startup/flash_erase /dev/mtd${mtddevnr} 0 0
+          
+            print_console "attaching ubidevice ${mtddevnr}"; usleep 400000
+            /startup/ubiattach /dev/ubi_ctrl -m ${mtddevnr} -d ${mtddevnr}
+        
+            print_console "making ubivolume ${mtddevnr}"; usleep 400000
+            /startup/ubimkvol /dev/ubi${mtddevnr} -N ${ubifsname} -m
+            
+            print_console "mounting ubivolume ${mtddevnr} on /${ubifsname} (freshly formatted filesystem)"; usleep 400000
+            mount -t ubifs ubi${mtddevnr}:${ubifsname} /${ubifsname}
+            
+            if [ $? -eq 0 ]; then
+                bit_write "PARTITION /dev/mtd${mtddevnr} on ${ubifsname}:INITIALIZED"
+            else
+                bit_write "PARTITION /dev/mtd${mtddevnr} on ${ubifsname}:FAILED TO INITIALIZE"
+            fi
+
+        fi
+
+    done
+
+fi
+
+# create directories
+    mkdir -p /var/log
+    mkdir -p /var/tmp
+    
+#
+# mount more filesystems 
+#
+
+    print_console "mounting temporary et alia filesystems ..."
+
+    [ -d /var/lock ] || mkdir -p /var/lock 
+    mount -t tmpfs varlock /var/lock -omode=1777,nodev,noexec,nosuid,size=1m
+    
+    [ -d /var/run ] || mkdir -p /var/run 
+    mount -t tmpfs varrun /var/run -orw,nosuid,mode=0755,size=48m
+    
+    [ -d /dev/shm ] || mkdir -p /dev/shm
+    mount -t tmpfs shmfs /dev/shm -onosuid,nodev
+    
+    [ -d /dev/pts ] || mkdir -p /dev/pts
+    mount -t devpts devpts /dev/pts -orw,gid=5,mode=620
+    
+
+#
+# depmod
+#
+	depmod
+	
+#
+# passwd file is /var/opt/ip_rfp/passwd
+#
+    if [ ! -s /var/opt/ip_rfp/passwd ]; then
+        mkdir -p /var/opt/ip_rfp
+        cp -f /etc/passwd /var/opt/ip_rfp/passwd
+        sync
+    fi
+    mv /etc/passwd /etc/passwd.org
+    ln -sf  /var/opt/ip_rfp/passwd /etc/passwd
+    sync
+
+#
+# files under /etc that need to be writable
+#
+
+    touch /tmp/resolv.conf
+    rm -f /etc/resolv.conf
+    ln -fs /tmp/resolv.conf /etc/resolv.conf
+     
+    rm -f /etc/mtab
+    ln -fs /proc/mounts /etc/mtab
+    
+    ln -fs ${BIT_FILE} /etc/motd
+
+#
+# other files and directories that are needed
+#
+    [ -d /media/usbStick ] || mkdir -p /media/usbStick
+ 
+#    
+# permissions that need to be changed
+#
+chmod   +s /bin/busybox
+chmod  600 /etc/busybox.conf
+ 
+#
+# start wlan if needed
+#
+if rfp_has_wlan_module; then
+    
+    #
+    # GREEN IT: set all Atheros PCIe wlan modules into D3hot power state
+    #
+    which setpci >/dev/null && setpci -d 168c:* 44.l=0x00000003
+    
+fi
+
+#
+# configure corefile dumping
+#
+    mkdir -p /tmp/core
+    sysctl -we kernel.core_pattern="|/bin/core_compressor /tmp/core/core_%h_%e"
+    sysctl -we kernel.core_pipe_limit="1"
+
+#
+# other sysctl
+#
+    sysctl -we net.ipv4.tcp_timestamps=0
+
+#
+# setup the second ethernet interface
+#
+    print_console "setting up eth1"
+    ifconfig eth1 up
+    
+#
+# load the watchdog (first time modprobe fails, do it again anyway)
+#
+if [ ! -f ${OM_WDG_DISABLE_FILE} ]; then
+	modprobe orion_wdt
+	modprobe orion_wdt
+	modprobe orion_wdt
+else
+	print_console "#WARNING: not enabling the watchdog"
+fi

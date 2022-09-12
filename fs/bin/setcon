@@ -1,0 +1,8 @@
+#
+# do not start an shell, conclient -s will terminate when the parent exits
+#
+if [ -x /usr/bin/conclient ]; then
+    exec conclient -s
+else
+    exec logread -f &
+fi

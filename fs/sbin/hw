@@ -1,0 +1,368 @@
+#!/bin/sh
+#
+#
+. /etc/rc.functions
+
+###############################################################################
+
+writeread () {
+
+    # check for mounted filsystem
+    mount | grep `dirname ${1}` > /dev/null 2>&1
+    if [ $? != 0 ]; then
+        echo "FILESYSTEM IS NOT MOUNTED, EXITING"
+        ok=0
+    else
+        ok=1
+    fi
+
+    while [ $ok -eq 1 ]; do
+    
+        dd if=/dev/urandom of=/tmp/writetest bs=1024 count=1024 > /dev/null 2>&1
+        rm -f /tmp/readtest;
+        
+        usleep 10000
+        
+        echo "writing 1 MByte"
+        time sh -c "cp /tmp/writetest ${1} > /dev/null && sync" || exit 1
+        echo "writing 1 MByte DONE"
+        
+        echo "reading what was written"
+        time sh -c "cp ${1} /tmp/readtest > /dev/null && sync" || exit 2
+        echo "reading what was written DONE"
+        
+        diff /tmp/writetest /tmp/readtest > /dev/null 2>&1
+        if [ $? -eq 0 ]; then 
+            ok=1
+        else
+            ok=0
+        fi
+        testreport "WRITE/READ TEST"
+        
+        # check for mounted filsystem
+        mount | grep `dirname ${1}` > /dev/null 2>&1
+        if [ $? != 0 ]; then
+            echo "FILESYSTEM IS NOT MOUNTED, EXITING"
+            ok=0
+        fi
+          
+    done
+
+}
+
+
+testreport () {
+        if [ $ok -eq 1 ]; then
+            echo "PASSED: $1 ====>>>> PASSED"
+        else
+            echo "FAILED: $1 <<<<==== FAILED"
+        fi
+}
+
+###############################################################################
+
+case "$1" in
+
+    bmc)
+        case "$2" in
+            reset|off)
+                if [ 0 -eq `cat /sys/class/gpio/gpio42/value` ]; then
+                    mount -t tmpfs rootfs / -oremount,rw
+                    sed -i s/^null::respawn:\\/opt\\/ip_rfp\\/ip_rfp/#null::respawn:\\/opt\\/ip_rfp\\/ip_rfp/ /etc/inittab
+                    kill -HUP 1
+                    sleep 1
+                    echo 1 > /sys/class/gpio/gpio42/value
+                else
+                    echo "BMC already reset"
+                fi
+            ;;
+            unreset|on)
+                if [ -f /var/opt/ip_rfp/skip_load ]; then
+                    echo "disabling the permanent reset feature"
+                    rm -f /var/opt/ip_rfp/skip_load
+                fi
+                if [ 1 -eq `cat /sys/class/gpio/gpio42/value` ]; then
+                    mount -t tmpfs rootfs / -oremount,rw
+                    sed -i s/^#null::respawn:\\/opt\\/ip_rfp\\/ip_rfp/null::respawn:\\/opt\\/ip_rfp\\/ip_rfp/ /etc/inittab
+                    kill -HUP 1
+                else
+                    echo "BMC already running"
+                fi
+            ;;
+            skip_load|perm_reset)
+                if [ -f /var/opt/ip_rfp/skip_load ]; then
+                    echo "permanent reset feature already activated"
+                else
+                    touch /var/opt/ip_rfp/skip_load
+                    $0 bmc off
+                fi
+            ;;
+            testmode-on)
+                val=`local_db_check testmode`
+                if [ $? -eq 0 ]; then
+                  echo "testmode already on: testmode=$val"
+                else
+                  local_db testmode=RFP43 2>&1
+                  killall ip_rfp
+                fi
+            ;;
+            testmode-off)
+                val=`local_db_check testmode`
+                if [ $? -eq 0 ]; then
+                  local_db testmode= 2>&1
+                  killall ip_rfp
+                else
+                  echo "testmode already off"
+                fi
+            ;;
+            *)
+                echo "Usage: `basename $0` bmc [reset|unreset|perm_reset|testmode-on|testmode-off]"
+                echo "       resets or un-resets the BMC"
+                echo "       activates and deactivates the BMC testmode (this is not the well known DECT testmode)"
+                echo ""
+            ;;
+        esac
+    ;;
+
+    temp)
+        case "$2" in
+            TEMP_ALERT)
+                echo "TEMP_ALERT is `cat /sys/class/gpio/gpio46/value`"
+                echo "       get the level from the TEMP_ALERT gpio"
+            ;;
+            *)
+                    echo "Usage: `basename $0` temp TEMP_ALERT"
+                    echo ""
+            ;;
+        esac
+    ;;
+
+    usb)
+        case "$2" in
+            load)
+                echo "type Ctrl-C to stop execution"
+                writeread /media/usbStick/writereadtest
+            ;;
+            PWR_ON)
+                case "$3" in
+                    0)
+                        echo 0 > /sys/class/gpio/gpio37/value
+                    ;;
+                    1)
+                        echo 1 > /sys/class/gpio/gpio37/value
+                    ;;
+                    *)
+                        echo "Usage: `basename $0` usb PWR_ON [0|1]"
+                        echo ""
+                    ;;
+                esac                
+            ;;
+            PWR_SET)
+                case "$3" in
+                    0)
+                        echo 0 > /sys/class/gpio/gpio38/value
+                    ;;
+                    1)
+                        echo 1 > /sys/class/gpio/gpio38/value
+                    ;;
+                    *)
+                        echo "Usage: `basename $0` usb PWR_SET [0|1]"
+                        echo ""
+                    ;;
+                esac
+            ;;
+            
+            ERROR_FLAG)
+                 echo "USB_ERROR_FLAG is `cat /sys/class/gpio/gpio36/value`"
+            ;;
+            
+            *)
+                echo "Usage: `basename $0` usb load"
+                echo "       perform a write read test"
+                echo ""
+                echo "Usage: `basename $0` usb PWR_ON [0|1]"
+                echo "       set GPIO USB_PWR_ON level"
+                echo ""
+                echo "Usage: `basename $0` usb PWR_SET [0|1]"
+                echo "       set GPIO USB_PWR_SET level"
+                echo ""
+                echo "Usage: `basename $0` usb ERROR_FLAG"
+                echo "       report status of USB_ERROR_FLAG"
+                echo ""
+            ;;
+        esac
+        
+    ;;
+    
+    microsd)
+        case "$2" in
+            load)
+                echo "type Ctrl-C to stop execution"
+                writeread /media/microSD/writereadtest
+            ;;
+            *)
+                echo "Usage: `basename $0` microsd load"
+                echo "       perform a write read test"
+                echo ""
+            ;;
+        esac
+    ;;
+    
+    cpu)
+        case "$2" in
+            load)
+                echo "type Ctrl-C to stop execution"
+                trace on
+                chrt -o -p 0 $$
+                cat /dev/urandom > /dev/null
+                trace off
+            ;;
+            *)
+                echo "Usage: `basename $0` cpu load"
+                echo "       create 100% cpu load, better disable watchdog"
+                echo ""
+            ;;
+        esac
+    ;;
+    
+    wdg|watchdog)
+        case "$2" in
+            off|disable|0)
+                if [ ! -f ${OM_WDG_DISABLE_FILE} ]; then
+                    mkdir -p `dirname ${OM_WDG_DISABLE_FILE}`
+                    touch ${OM_WDG_DISABLE_FILE}
+                    reboot
+                else
+                    echo "watchdog is already disabled"
+                fi
+            ;;
+            on|enable|1)
+                if [ -f ${OM_WDG_DISABLE_FILE} ]; then
+                    rm -f ${OM_WDG_DISABLE_FILE}
+                    reboot
+                else
+                    echo "watchdog is already enabled"
+                fi
+            ;;
+            *)
+                echo "Usage: `basename $0` wdg off"
+                echo "       disable watchdog and reboot"
+                echo ""
+                echo "Usage: `basename $0` wdg on"
+                echo "       enable watchdog and reboot"
+                echo ""
+            ;;
+        esac
+        
+    ;;
+    
+    heater)
+       case "$2" in
+            off|disable|0)
+                echo 0 > /sys/class/gpio/gpio35/value
+            ;;
+            on|enable|1)
+                echo 1 > /sys/class/gpio/gpio35/value
+            ;;
+            "?"|status)
+                if [ 0 -eq `cat /sys/class/gpio/gpio35/value` ]; then
+                    echo "heater if off"
+                else
+                    echo "heater if on"
+                fi
+            ;;
+            *)
+                echo "Usage: `basename $0` heater [on|off|status]"
+                echo "       [en|dis]able the heater"
+                echo ""
+            ;;
+       esac
+    ;;
+    
+    link)
+        case "$2" in
+            "?"|status)
+               ethtool eth0
+            ;;
+            err*)
+               while [ 1 ]; do
+                    ethtool -S eth0 | grep -e err -e bad
+                    echo ""
+                    sleep 3
+               done
+            ;;
+           
+            10)
+               ethtool -s eth0 advertise 0x003
+            ;;
+            10h)
+               ethtool -s eth0 advertise 0x001
+            ;;
+            10f)
+               ethtool -s eth0 advertise 0x002
+            ;;
+            
+            100)
+               ethtool -s eth0 advertise 0x00c
+            ;;
+            100h)
+               ethtool -s eth0 advertise 0x004
+            ;;
+            100f)
+               ethtool -s eth0 advertise 0x008
+            ;;
+          
+            1000f)
+               ethtool -s eth0 advertise 0x020
+            ;;
+               
+            all)
+               ethtool -s eth0 advertise 0x03f
+            ;;
+               
+            *)
+               echo "Usage: `basename $0` link [10|10h|10f|100|100h|100f|1000f|all|error|status]"
+               echo "       ethernet link utility"
+               echo ""
+            ;;
+        esac
+    ;;
+    
+    test)
+        case "$2" in
+            all)
+                $0 test rtc
+            ;;
+            
+            rtc)
+                if [ -c /dev/rtc0 ]; then
+                    ok=1
+                else
+                    ok=0
+                fi
+                testreport "RTC"
+            ;;
+        
+            *)
+                echo "Usage: `basename $0` test all"
+                echo "       basic hw test report"
+            ;;
+            
+       esac
+    ;;
+    
+    *)
+        $0 usb
+        $0 microsd
+        $0 cpu
+        $0 wdg
+        $0 temp
+        $0 bmc
+        $0 heater
+        $0 link
+        $0 test
+    ;;
+
+esac
+
+###############################################################################

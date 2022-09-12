@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ -f /usr/bin/conclient ] ; then
+   if [ $# -ge 1 ]; then
+      conclient -p 8107 -x $@
+   else
+      conclient -p 8107 -s -i "omm# "
+   fi
+else 
+   telnet 127.0.0.1 8107
+fi

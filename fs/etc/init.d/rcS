@@ -1,0 +1,75 @@
+#!/bin/sh
+#
+# rcS
+
+# Start all init scripts in /etc/init.d
+# executing them in numerical order.
+
+# allow scripts to continue running after rcS completes
+trap "" SIGHUP
+
+for i in /etc/init.d/S??* ;do
+    # Ignore dangling symlinks (if any).
+    [ ! -f "$i" ] && continue
+
+    case "$i" in
+       *.sh)
+            # Source shell script for speed.
+            (
+            trap - INT QUIT TSTP
+            set start
+            . $i
+            )
+        ;;
+       *~)
+           # ignore
+        ;;
+       *)
+           # No sh extension, so fork subprocess.
+           $i start
+        ;;
+    esac
+    
+    # remove the startscript
+    if [ ! -d /private ]; then
+        rm -rf $i
+    fi 
+    
+done
+
+# cleanup files that are only needed during startup
+    if [ ! -d /private ]; then
+        rm -rf /startup
+    fi
+
+
+# remount rootfs ro on rfp43
+if [ ! -d /proc/avalanche -a ! -d /private ]; then
+    print_console "re-mounting root filesystem readonly ..."
+    mount -t tmpfs rootfs / -oremount,ro
+fi
+
+# addons may have start scripts as well
+for i in `ls -1 /var/opt/addons/init.d/S??* >/dev/null 2>&1` ; do
+    # Ignore dangling symlinks (if any).
+    [ ! -f "$i" ] && continue
+
+    case "$i" in
+       *.sh)
+            # Source shell script for speed.
+            (
+            trap - INT QUIT TSTP
+            set start
+            . $i
+            )
+        ;;
+       *~)
+           # ignore
+        ;;
+       *)
+           # No sh extension, so fork subprocess.
+           $i start
+        ;;
+    esac
+    
+done

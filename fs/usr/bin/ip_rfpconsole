@@ -1,0 +1,15 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+if [ -f /usr/bin/conclient ] ; then
+   
+   if [ $# -ge 1 ]; then
+      conclient -p 10318 -x $@
+   else
+      conclient -p 10318 -s -i "iprfp# "
+   fi
+   
+else 
+   telnet 127.0.0.1 10318
+fi

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+. /etc/rc.functions
+
+if [ -f /usr/bin/conclient ] ; then
+   if [ $# -ge 1 ]; then
+      conclient -p 10997 -x $@
+   else
+      conclient -p 10997 -s -i "rfpm# "
+   fi
+else
+   telnet 127.0.0.1 10997
+fi
