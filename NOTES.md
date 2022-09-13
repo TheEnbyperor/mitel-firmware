@@ -66,16 +66,26 @@ Under primary RF can
 ## Board chips
 
 AHC595 - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/sn74ahc595.pdf) - 8-bit shift register - Seems to be controlling the LEDS
+
 88E1318S - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/52529f1be34e242f50ea9dc8.pdf) - Gigabit Ethernet PHY
 
 ### DECT RF front end
 Dialog SC14452 - No datasheet - DECT coprocessor
+
 ISSI IS42S16400J - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/42-45s16400j.pdf) - 64Mbit SDRAM - Likely for DECT coprocessor
+
 Lacite LC4064V-75TN-10I (possibly LC4064V-75TN100L) [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/FPGA-DS-02091-23-6-ispMACH4000VBCZ.pdf) - CPLD
+
 MVL3019 - No datasheet - Coprocessor firmware makes reference to Marvell 88E3019 PHY, possibly this
+
 2 x LVC08A - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/sn75lvc08a.pdf) - Quad AND gate
+
 LC112A - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/sn74lvc112a.pdf) - Dual J-K flip flop
+
 LVC157A - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/sn74lvc157a.pdf) - Quad 2-1 multiplexer
+
 2 x LW066A - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/sn74lv4066a.pdf) - Quad analogue switch
+
 2 x LVC14A - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/sn74lvc14a.pdf) - Hex Schmitt trigger Inverter
+
 2 x 34CZ - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/sn74ahc595.pdf) - Triple buffer
