@@ -51,3 +51,31 @@ ASCII cpio archive (SVR4 with no CRC)
 
 initramfs extracted to `fs/`
 addons extracted to `addons/`
+
+## Board images
+
+Board front
+![Board front](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/images/893936BC-288E-4A5D-94DA-3DFBF24B9FDF.jpg)
+
+Board back
+![Board front](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/images/E109B0F7-2564-4DB4-9F3A-D6CF9AB5FBAF.jpg)
+
+Under primary RF can
+![Board front](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/images/D61AE3BC-3796-41AA-B3B4-2DC2688B8BBC.jpg)
+
+## Board chips
+
+AHC595 - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/sn74ahc595.pdf) - 8-bit shift register - Seems to be controlling the LEDS
+88E1318S - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/52529f1be34e242f50ea9dc8.pdf) - Gigabit Ethernet PHY
+
+### DECT RF front end
+Dialog SC14452 - No datasheet - DECT coprocessor
+ISSI IS42S16400J - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/42-45s16400j.pdf) - 64Mbit SDRAM - Likely for DECT coprocessor
+Lacite LC4064V-75TN-10I (possibly LC4064V-75TN100L) [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/FPGA-DS-02091-23-6-ispMACH4000VBCZ.pdf) - CPLD
+MVL3019 - No datasheet - Coprocessor firmware makes reference to Marvell 88E3019 PHY, possibly this
+2 x LVC08A - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/sn75lvc08a.pdf) - Quad AND gate
+LC112A - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/sn74lvc112a.pdf) - Dual J-K flip flop
+LVC157A - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/sn74lvc157a.pdf) - Quad 2-1 multiplexer
+2 x LW066A - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/sn74lv4066a.pdf) - Quad analogue switch
+2 x LVC14A - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/sn74lvc14a.pdf) - Hex Schmitt trigger Inverter
+2 x 34CZ - [Datasheet](https://raw.githubusercontent.com/TheEnbyperor/mitel-firmware/root/datasheets/sn74ahc595.pdf) - Triple buffer
